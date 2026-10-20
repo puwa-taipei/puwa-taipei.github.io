@@ -326,7 +326,14 @@
     const fresh=shuffled(pool.filter(q=>!quizSeen.has(q.id)));
     const older=shuffled(pool.filter(q=>quizSeen.has(q.id)&&!previous.has(q.id)));
     const last=shuffled(pool.filter(q=>quizSeen.has(q.id)&&previous.has(q.id)));
-    const chosen=[...fresh,...older,...last].slice(0,Math.min(QUIZ_ROUND_SIZE,pool.length));
+    const chosen=[],chosenEvents=new Set();
+    const roundSize=Math.min(QUIZ_ROUND_SIZE,new Set(pool.map(q=>q.eventId||q.id)).size);
+    for(const q of [...fresh,...older,...last]){
+      const eventId=q.eventId||q.id;
+      if(chosenEvents.has(eventId))continue;
+      chosen.push(q);chosenEvents.add(eventId);
+      if(chosen.length===roundSize)break;
+    }
     state.quizNewCount=chosen.filter(q=>!quizSeen.has(q.id)).length;
     state.quiz=shuffled(chosen).map(q=>({id:q.id,statement:'「'+q.quote+'」\n這是沈伯洋'+(q.medium==='written'?'寫的':'說的')+'嗎？',answer:true,source:q.url,frontContext:q.frontContext||q.context,meta:q.date+' · '+quoteMedium(q),explanation:q.date+' · '+quoteMedium(q)+' · '+q.venue+'。'+q.context+'〔'+q.sourceType+'〕',limit:q.inferenceLimit||'',locator:q.evidenceLocator||''}));
     state.quizIndex=0;state.quizCorrect=0;state.quizAnswered=false;
