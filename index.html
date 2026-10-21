@@ -19,22 +19,22 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://puwa-taipei.github.io/assets/og-records.png">
   <title>印象，交給紀錄核對。｜國會紀錄觀測</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=21">
   <link rel="stylesheet" href="./network.css?v=17">
   <link rel="stylesheet" href="./comparison.css?v=20">
   <link rel="stylesheet" href="./statements.css">
   <link rel="stylesheet" href="./quiz.css?v=13">
   <link rel="stylesheet" href="./game/quiz-share.css?v=18">
-  <link rel="stylesheet" href="./speech-search.css">
+  <link rel="stylesheet" href="./speech-search.css?v=21-r3">
   <link rel="stylesheet" href="./leaderboard.css">
   <script src="./anchor.js" defer></script>
   <script src="./game/quiz-share-core.js?v=18" defer></script>
   <script src="./game/quiz-share.js?v=18" defer></script>
   <script src="./game/quiz-engine.js?v=18-r3" defer></script>
-  <script src="./app.js?v=18-r3" defer></script>
+  <script src="./app.js?v=21" defer></script>
   <script src="./comparison.js?v=20" defer></script>
   <script src="./statements.js" defer></script>
-  <script src="./speech-search.js" defer></script>
+  <script src="./speech-search.js?v=21-r3" defer></script>
   <script src="./leaderboard.js?v=13" defer></script>
   <script src="./game3d.js" defer></script>
   <link rel="stylesheet" href="./game3d.css">
@@ -73,7 +73,16 @@
 
     <section id="committees" class="section committee-section"><div class="wrap"><div class="section-heading"><div><p class="section-number">02 ／ 案件去了哪裡？</p><h2>主題之外，<br>還要看審議的路徑。</h2></div><p class="section-deck">委員會歸屬描述案件的審議安排。<br>程序進度，則是另一條獨立的軸線。</p></div><p class="scope-banner">目前範圍：<strong id="scope-name">主提案 41 件</strong><span>　共同提案與連署可由進階資訊切換。</span><a href="#advanced-information" id="open-advanced">切換角色 ↗</a></p><div class="committee-grid"><div><div class="subheading"><h3>流程所載委員會</h3><span>可複選</span></div><div id="committee-chart" class="chart-list loading-placeholder">委員會資料載入中…</div><details class="committee-role-detail"><summary>依角色分開看件數與比例 ＋</summary><div id="committee-role-table" class="committee-table-wrap"></div><p class="small-note">每欄分母分別為主提案41、共同提案58、連署1,287。同案可列多委員會，欄內比例可能合計超過100%；委員會是審議管轄，不是語意或意識形態分類。</p></details></div><div class="procedure-panel"><p class="eyebrow">BILL JOURNEY</p><h3>從提出，到實質審議</h3><ol class="process"><li><span>1</span><div><strong>提出議案</strong><p>辨認提案與連署名單</p></div></li><li class="process-highlight"><span>2</span><div><strong>程序委員會／院會</strong><p>編列議程、處理提報與交付</p></div></li><li><span>3</span><div><strong>委員會審查</strong><p>討論、併案、審查與協商</p></div></li><li><span>4</span><div><strong>院會二、三讀</strong><p>實際進度以各案紀錄為準</p></div></li></ol><div class="procedure-stats"><div><strong id="returned-bills">—</strong><span>已收錄退回的案件</span></div><div><strong id="return-events">—</strong><span>已收錄退回流程列數</span></div></div><p id="procedure-note" class="small-note">同案可能多次退回，案件數與事件數分別計算。</p></div></div><div class="status-row"><h3 id="status-title">41 件主提案的審議進度</h3><div id="status-list">正在讀取…</div></div><div class="attendance-note"><span class="outline-icon" aria-hidden="true">↗</span><div><h3>有影片，不一定等於完整出席紀錄。</h3><p id="attendance-summary">iVOD 記錄的是可檢索的會議影片。出席、列席、口頭質詢、書面質詢與聯席會議，必須分別核對；不能以影片段數直接推算出席次數。</p><div id="attendance-links" class="source-links"></div></div></div></div></section>
 
-    <section id="policies" class="section policy-section"><div class="wrap"><div class="section-heading"><div><p class="section-number">03 ／ 換一個職位，提出哪些主張？</p><h2>國會紀錄 ×<br>城市政策想像。</h2></div><p class="section-deck">先完整列出已公布的主張，<br>再問過往紀錄與未來承諾如何對應。</p></div><div class="policy-layout"><div class="policy-intro"><span class="huge-outline" id="policy-total">—</span><p class="policy-count-label">競選官網政策套案頁</p><p>這是一次可重現的官網快照。<br>每個政策頁只計一次，<br>保留候選人自己的 HEART 標籤。</p><a class="light-link" href="https://puma.taipei/policies" target="_blank" rel="noopener noreferrer">前往候選人政策原頁 ↗</a></div><div><div class="subheading"><h3>HEART 政策主軸涵蓋率</h3><span>官方複選標籤</span></div><div id="policy-chart" class="policy-bars loading-placeholder">政策資料載入中…</div><p class="small-note">每頁可有多個標籤，比例相加超過 100%。頁數不是預算、發言量或投入時間比例。</p></div></div><div id="policy-pages" class="policy-pages"></div><details class="policy-limit"><summary>這組比例，可以與法案直接比較嗎？ <span>＋</span></summary><p>市長政策與中央立法的職權、資料單位不同。教育、午餐、通學安全、AI 等內容也會跨頁重複。要比較政策措施與立法主題，仍須逐項去重並使用同一套分類；分布不同本身，無法證明動機或成效。</p></details></div></section>
+    <section id="policies" class="section policy-section policy-evidence"><div class="wrap">
+      <div class="section-heading"><div><p class="section-number">03 ／ 競選說法，拿來對照</p><h2>宣傳說了什麼，<br>紀錄能對上嗎？</h2></div><p class="section-deck">先看提案與政策的對照。<br>需要查核時，再展開原頁。</p></div>
+      <p class="policy-evidence-intro">這次取官網 <strong id="policy-total">—</strong> 頁政策，和立法院的提案紀錄放在一起看。</p>
+      <div class="policy-evidence-actions"><a class="button primary" href="#comparison">看提案與政策對照 <span>↓</span></a><a class="text-link" href="#cmp-temporal">看提名前後的提案 <span>↗</span></a></div>
+      <details class="policy-source-details"><summary>查看比較來源與收錄範圍 <span aria-hidden="true">＋</span></summary><div>
+        <p id="policy-chart" class="policy-source-status" role="status">來源資料載入中…</p><p>每個政策頁只計一次，同頁可能包含多項措施。頁數不是預算、成效或投入時間；後面的對照會使用同一套議題分類。</p>
+        <div id="policy-pages" class="policy-source-pages"></div>
+        <div class="policy-source-links"><a href="./data/policy.json" download>下載政策頁快照 JSON ↓</a><a href="https://puma.taipei/policies" target="_blank" rel="noopener noreferrer nofollow">查核官網政策索引 ↗</a></div>
+      </div></details>
+    </div></section>
 
     <section id="comparison" class="section" aria-label="國會與競選政策的主題分布對照"><p class="small-note">正在載入共同分類與比較方法…</p></section>
 

@@ -192,14 +192,8 @@
   function renderPolicy() {
     const p = state.policy, rows = list(p.policies), total = rows.length || Number(p.selection?.denominator) || 0;
     setText('policy-total',fmt(total));
-    const labels = {H:'空間',E:'培力與機會',A:'陪伴',R:'韌性與安心',T:'時間'};
-    $('policy-chart').classList.remove('loading-placeholder');
-    $('policy-chart').innerHTML = Object.entries(labels).map(([key,label]) => {
-      const count = rows.filter(row => list(row.heart).includes(key)).length;
-      const pct = total ? count/total*100 : 0;
-      return `<div class="policy-bar"><span><span class="heart-letter">${key}</span>${label}</span><span class="chart-track"><span class="policy-bar-fill" style="width:${pct}%"></span></span><span class="policy-bar-value">${pct.toFixed(1)}%<small>${count} ／ ${total} 頁</small></span></div>`;
-    }).join('');
-    $('policy-pages').innerHTML = rows.map(row => `<a class="policy-page" href="${esc(safeUrl(row.url))}" target="_blank" rel="noopener noreferrer" title="${esc(row.summary)}"><span>${esc(row.title)}<small>${list(row.heart).map(esc).join(' · ')}</small></span><span aria-hidden="true">↗</span></a>`).join('');
+    setText('policy-chart',`共收錄 ${fmt(total)} 個政策頁 · 觀測日 ${p.observedDate || '未提供'}。`);
+    $('policy-pages').innerHTML = rows.map(row => `<a class="policy-source-page" href="${esc(safeUrl(row.url))}" target="_blank" rel="noopener noreferrer nofollow"><span>${esc(row.title)}</span><span>原頁 ↗</span></a>`).join('');
   }
 
   function populateFilters() {

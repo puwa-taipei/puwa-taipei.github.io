@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v20",
+  "version": "public-release-v21",
   "date": "2026-10-21",
   "files": [
     {
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 27955,
-      "sha256": "9e8770a2037a8e88505137a04de81a4d89da06fad3422d0c3aa71763d93a5d23"
+      "bytes": 27010,
+      "sha256": "2a392cd9e61c3941eef41fc4bb7bc5afff5298f65c4515b5b157737e82a6ab22"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -269,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26648,
-      "sha256": "06f39f90268a5aab604999026c17f4adb3f4cff3bb82b53e5573ab935464367c"
+      "bytes": 26574,
+      "sha256": "f3dd49745b4da104b8df7411f5f21a254fb6e49a00b15cf159456043d95c2daf"
     },
     {
       "path": "leaderboard.css",
@@ -314,13 +314,13 @@
     },
     {
       "path": "speech-search.css",
-      "bytes": 5923,
-      "sha256": "42de7e9eb05b5727feb78ccfeb8aca198a10de39b9fbd01aea68c3c18c21f7fd"
+      "bytes": 10327,
+      "sha256": "3b0f1522ceb8172f18cbef8f6730bfe127c0c4587b25f8ccb0eca7601f1e6931"
     },
     {
       "path": "speech-search.js",
-      "bytes": 13470,
-      "sha256": "db505bce1df603b3baef8231c9dfdf8cc0d2a01f59b8d48049c27c891a812b95"
+      "bytes": 22586,
+      "sha256": "308e77ce34b44d80cd75b75b729761dcecce1eaebac32a72d34753dd239d3091"
     },
     {
       "path": "statements.css",
@@ -334,8 +334,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 42475,
-      "sha256": "831c19355eb6c346a08cfedeaa4d7594c61d0101a3944610c6164b7e409afa4f"
+      "bytes": 44875,
+      "sha256": "609ca2358aba8ec7c1e6bb9e301ac72e5ec2d087bea0a0cc624a2c1bb083dbb0"
     },
     {
       "path": "typography.css",
