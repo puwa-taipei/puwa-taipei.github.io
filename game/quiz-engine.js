@@ -2,6 +2,13 @@
 (() => {
   'use strict';
   const AUTO_DELAY = 1600;
+  function quizProfile(options = {}, body = {}) {
+    const speakers = {'shen-pao-yang':'沈伯洋','su-chiao-hui':'蘇巧慧'};
+    const subjectId = Object.hasOwn(speakers,options.subjectId || body.subjectId) ? options.subjectId || body.subjectId : 'shen-pao-yang';
+    const proposed = options.nominationDate ?? body.nominationDate ?? (subjectId === 'shen-pao-yang' ? '2026-05-13' : null);
+    const nominationDate = typeof proposed === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(proposed) && Number.isFinite(Date.parse(proposed)) && new Date(proposed).toISOString().slice(0,10) === proposed ? proposed : null;
+    return {subjectId,speaker:speakers[subjectId],pronoun:subjectId === 'su-chiao-hui' ? '她' : '他',nominationDate,seenKey:subjectId === 'shen-pao-yang' ? 'record-quiz-seen-v1' : 'record-quiz-seen-v1-' + subjectId};
+  }
   function createRoundController(options = {}) {
     const schedule = options.schedule || setTimeout, cancel = options.cancel || clearTimeout;
     const onChange = options.onChange || (() => {}), delay = options.delay ?? AUTO_DELAY;
@@ -39,21 +46,23 @@
   }
 
   // Allows focused Node tests of the actual timer/state logic, without a browser or DOM emulator.
-  if (typeof module === 'object' && module.exports) module.exports = {createRoundController, AUTO_DELAY};
+  if (typeof module === 'object' && module.exports) module.exports = {createRoundController, AUTO_DELAY,quizProfile};
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const safeUrl = value => /^https?:\/\//i.test(String(value || '')) ? String(value) : null;
   const randomize = items => { const out = [...items]; for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; } return out; };
-  const seenKey = 'record-quiz-seen-v1', mounted = new WeakMap();
+  const mounted = new WeakMap();
 
   function mount(root = document, options = {}) {
     if (mounted.has(root)) return mounted.get(root);
     const $ = id => root.querySelector('#' + id), card = $('quiz-card'); if (!card) return null;
+    const profile = quizProfile(options,document.body.dataset), seenKey = profile.seenKey, speaker = profile.speaker, pronoun = profile.pronoun;
     const play = card.closest('#play'), game = card.closest('.swipe-game');
     const text = (id, value) => { if ($(id)) $(id).textContent = value; };
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const state = {quotes: Array.isArray(options.quotes) ? options.quotes : [], period: $('game-period')?.value || 'pre', seen: new Set(), drag: null, newCount: 0};
+    if (!profile.nominationDate) { state.period = 'all'; if ($('game-period')) { $('game-period').value = 'all'; $('game-period').disabled = true; } }
     function mergeSeen(raw) {
       try { const stored = JSON.parse(raw ?? localStorage.getItem(seenKey) ?? '[]'); if (Array.isArray(stored)) for (const id of stored) if (typeof id === 'string') state.seen.add(id); } catch {}
     }
@@ -64,7 +73,7 @@
     card.setAttribute('aria-labelledby', 'quiz-question');
     card.setAttribute('aria-describedby', 'quiz-meta quiz-context quiz-swipe-help');
     const help = document.createElement('p'); help.id = 'quiz-swipe-help'; help.className = 'quiz-swipe-help';
-    help.innerHTML = '<span>← 不是他</span><span>拖曳卡片，或按方向鍵</span><span>是他 →</span>'; deck.after(help);
+    help.innerHTML = `<span>← 不是${pronoun}</span><span>拖曳卡片，或按方向鍵</span><span>是${pronoun} →</span>`; deck.after(help);
     const flash = document.createElement('div'); flash.className = 'quiz-answer-flash'; flash.hidden = true; flash.setAttribute('aria-hidden', 'true'); deck.append(flash);
     const dots = document.createElement('div'); dots.className = 'quiz-round-dots'; dots.setAttribute('aria-hidden', 'true'); game.querySelector('.quiz-progress').after(dots);
     const settings = document.createElement('div'); settings.className = 'quiz-autoplay-settings';
@@ -72,15 +81,15 @@
     const autoInput = settings.querySelector('input');
     const results = document.createElement('section'); results.id = 'quiz-results'; results.className = 'quiz-results'; results.hidden = true; results.setAttribute('aria-label', '本輪逐題回顧');
     play.querySelector('.quiz-layout').after(results);
-    $('quiz-no').innerHTML = '<span aria-hidden="true">×</span><b>不是他</b><small>NO · ←</small>';
-    $('quiz-yes').innerHTML = '<span aria-hidden="true">✓</span><b>是他</b><small>YES · →</small>';
-    $('quiz-no').setAttribute('aria-label', '不是沈伯洋的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是沈伯洋的原話，向右選');
-    const pool = () => state.quotes.filter(q => q.quizEligible !== false).filter(q => { const date = String(q.eventDate || q.date).slice(0,10); return state.period === 'all' || (state.period === 'pre' ? date < '2026-05-13' : date >= '2026-05-13'); });
+    $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
+    $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
+    $('quiz-no').setAttribute('aria-label', '不是' + speaker + '的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是' + speaker + '的原話，向右選');
+    const pool = () => state.quotes.filter(q => q.quizEligible !== false).filter(q => { const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || state.period === 'all' || (state.period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate); });
     const announce = message => { const live = $('announcement') || document.getElementById('announcement'); if (live) live.textContent = message; };
     function info() {
       const rows = pool(), seen = rows.filter(q => state.seen.has(q.id)).length, period = {pre:'正式提名前', post:'正式提名起', all:'所有時期'}[state.period];
       text('quiz-pool-count', rows.length); text('quiz-seen-count', seen + ' / ' + rows.length);
-      text('game-period-note', `${period}：${rows.length} 段、${new Set(rows.map(q => q.eventId || q.id)).size} 個事件／文章。正式提名切點 2026-05-13。`);
+      text('game-period-note', `${period}：${rows.length} 段、${new Set(rows.map(q => q.eventId || q.id)).size} 個事件／文章。${profile.nominationDate ? '正式提名切點 ' + profile.nominationDate + '。' : '尚未設定可核對的正式提名切點，目前使用所有已收錄時期。'}`);
       const length = controller.snapshot().round.length;
       text('quiz-round-note', state.newCount ? `本輪 ${length} 題，${state.newCount} 題尚未看過。同一輪不重複事件；換時期會重開一輪。` : '本期都看過了？這輪換個順序，盡量避開上一輪。');
       text('quote-selection', `本範圍精選 ${rows.length} 段本人公開言論／文章，答案均為「是」；這是有意挑選的原話遊戲，不加入虛構的「否」題。媒體引述、官方逐字稿與書面文章逐題標示；最後可看本輪完整來源。`);
@@ -104,10 +113,10 @@
     }
     function renderReview(s) {
       const wrong = s.answers.length - s.correct;
-      results.innerHTML = `<div class="quiz-review-heading"><div><p class="quiz-review-eyebrow">THE ROUND, IN CONTEXT</p><h3>你的選擇，回到每一段原話。</h3><p>答對 ${s.correct} 題${wrong ? ` · ${wrong} 題可以再看一次` : ' · 本輪全部答對'}。點開卡片，讀原文與上下文。</p></div><button type="button" class="quiz-review-restart">再玩一輪 ↻</button></div><div class="quiz-review-list">${s.answers.map((answer,i) => { const q = answer.question; return `<details class="quiz-review-item ${answer.correct ? 'review-correct' : 'review-wrong'}" data-question-id="${esc(q.id)}"><summary><span class="quiz-review-number">${String(i+1).padStart(2,'0')}</span><span class="quiz-review-main"><b>「${esc(q.quote)}」</b><small>你選「${answer.choice ? '是' : '否'}」 · 正解「是」 · ${esc(q.date)}</small></span><span class="quiz-review-badge">${answer.correct ? '✓ 答對' : '× 猜錯'}</span><span class="quiz-review-expand" aria-hidden="true">＋</span></summary><div class="quiz-review-content"><p class="quiz-review-answer">${q.medium === 'written' ? '這是沈伯洋寫的。' : '這是沈伯洋的公開發言。'}${answer.correct ? '你認出這段原話。' : '這段原話與你的第一印象不同。'}</p>${sourceHTML(q)}</div></details>`; }).join('')}</div>`;
+      results.innerHTML = `<div class="quiz-review-heading"><div><p class="quiz-review-eyebrow">THE ROUND, IN CONTEXT</p><h3>你的選擇，回到每一段原話。</h3><p>答對 ${s.correct} 題${wrong ? ` · ${wrong} 題可以再看一次` : ' · 本輪全部答對'}。點開卡片，讀原文與上下文。</p></div><button type="button" class="quiz-review-restart">再玩一輪 ↻</button></div><div class="quiz-review-list">${s.answers.map((answer,i) => { const q = answer.question; return `<details class="quiz-review-item ${answer.correct ? 'review-correct' : 'review-wrong'}" data-question-id="${esc(q.id)}"><summary><span class="quiz-review-number">${String(i+1).padStart(2,'0')}</span><span class="quiz-review-main"><b>「${esc(q.quote)}」</b><small>你選「${answer.choice ? '是' : '否'}」 · 正解「是」 · ${esc(q.date)}</small></span><span class="quiz-review-badge">${answer.correct ? '✓ 答對' : '× 猜錯'}</span><span class="quiz-review-expand" aria-hidden="true">＋</span></summary><div class="quiz-review-content"><p class="quiz-review-answer">${q.medium === 'written' ? '這是' + esc(speaker) + '寫的。' : '這是' + esc(speaker) + '的公開發言。'}${answer.correct ? '你認出這段原話。' : '這段原話與你的第一印象不同。'}</p>${sourceHTML(q)}</div></details>`; }).join('')}</div>`;
       const contribute = document.createElement('p'); contribute.className = 'small-note';
       contribute.append(document.createTextNode('有更完整的原話來源，或發現需要更正的地方？ '));
-      const contributeLink = document.createElement('a'); contributeLink.className = 'text-link'; contributeLink.href = '/contribute/?type=quote'; contributeLink.textContent = '補上來源，交由人工審核 ↗'; contribute.append(contributeLink); results.append(contribute);
+      const contributeLink = document.createElement('a'); contributeLink.className = 'text-link'; contributeLink.href = '/contribute/?type=quote' + (profile.subjectId === 'shen-pao-yang' ? '' : '&subject=' + profile.subjectId); contributeLink.textContent = '補上來源，交由人工審核 ↗'; contribute.append(contributeLink); results.append(contribute);
       results.hidden = false; results.querySelector('.quiz-review-restart').addEventListener('click', () => drawRound(true));
     }
     function focusQuestion() { if (play.contains(document.activeElement)) card.focus({preventScroll:true}); }
@@ -125,7 +134,7 @@
         const answer = s.answers.at(-1), q = answer.question;
         card.classList.add('is-answered', answer.choice ? 'answered-yes' : 'answered-no', 'quiz-answer-leave'); card.dataset.decision = answer.choice ? 'yes' : 'no';
         flash.hidden = false; flash.className = 'quiz-answer-flash ' + (answer.correct ? 'flash-correct' : 'flash-wrong');
-        flash.innerHTML = `<span class="quiz-flash-symbol">${answer.correct ? '✓' : '×'}</span><strong>${answer.correct ? '答對了！' : '猜錯了，原文有答案。'}</strong><span>這${q.medium === 'written' ? '段，確實是他寫的。' : '句，確實是他說的。'}</span><small>目前答對 ${s.correct} / ${s.round.length} 題</small>`;
+        flash.innerHTML = `<span class="quiz-flash-symbol">${answer.correct ? '✓' : '×'}</span><strong>${answer.correct ? '答對了！' : '猜錯了，原文有答案。'}</strong><span>這${q.medium === 'written' ? '段，確實是' + pronoun + '寫的。' : '句，確實是' + pronoun + '說的。'}</span><small>目前答對 ${s.correct} / ${s.round.length} 題</small>`;
         const feedback = $('quiz-feedback'); feedback.hidden = false; feedback.classList.toggle('incorrect', !answer.correct);
         feedback.innerHTML = `<div class="quiz-feedback-topline"><span class="quiz-answer-pill ${answer.correct ? 'pill-correct' : 'pill-wrong'}">${answer.correct ? '✓ 答對' : '× 猜錯'}</span><strong>你選「${answer.choice ? '是' : '否'}」 · 答案是「是」</strong><button type="button" class="quiz-hold-button">停一下，看原文</button></div><p class="quiz-auto-note"></p><span class="quiz-auto-meter" aria-hidden="true"></span><details class="quiz-current-source"><summary>本題原話、影片與上下文</summary><div>${sourceHTML(q)}</div></details>`;
         const holdButton = feedback.querySelector('.quiz-hold-button');
@@ -158,10 +167,10 @@
       card.setAttribute('aria-describedby','quiz-meta quiz-context quiz-swipe-help');
       text('quiz-progress',`${s.index + 1} / ${s.round.length} 題`); text('quiz-meta',`${q.date} · ${q.medium === 'written' ? '書面文章' : '口語發言'}`);
       text('quiz-context',q.frontContext || q.context || '先憑印象回答，最後可以逐題讀原文。');
-      text('quiz-question',`「${q.quote}」\n這是沈伯洋${q.medium === 'written' ? '寫的' : '說的'}嗎？`); card.querySelector('.quiz-foot').textContent = '左滑不是他 ／ 右滑是他 ／ 也可用方向鍵';
+      text('quiz-question',`「${q.quote}」\n這是${speaker}${q.medium === 'written' ? '寫的' : '說的'}嗎？`); card.querySelector('.quiz-foot').textContent = `左滑不是${pronoun} ／ 右滑是${pronoun} ／ 也可用方向鍵`;
       if (reason !== 'round') { card.classList.add('quiz-question-enter'); focusQuestion(); }
       $('quiz-restart').hidden = false; info();
-      announce(`第 ${s.index+1}／${s.round.length} 題。${q.date}，${q.medium === 'written' ? '書面文章' : '口語發言'}。「${q.quote}」。這是沈伯洋${q.medium === 'written' ? '寫的' : '說的'}嗎？`);
+      announce(`第 ${s.index+1}／${s.round.length} 題。${q.date}，${q.medium === 'written' ? '書面文章' : '口語發言'}。「${q.quote}」。這是${speaker}${q.medium === 'written' ? '寫的' : '說的'}嗎？`);
     }
     const controller = createRoundController({onChange:render, delay:AUTO_DELAY});
     function drawRound(focus = false) {
