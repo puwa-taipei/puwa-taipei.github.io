@@ -1,11 +1,16 @@
 {
-  "version": "public-release-v10",
+  "version": "public-release-v12",
   "date": "2026-10-21",
   "files": [
     {
       "path": ".nojekyll",
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4192,
+      "sha256": "64c0ab3cdeb181d2da67479a7d0030aa9725dae4a6b97c2207e886d729599e3d"
     },
     {
       "path": "anchor.js",
@@ -94,8 +99,8 @@
     },
     {
       "path": "data/quotes.json",
-      "bytes": 375483,
-      "sha256": "23b2eac060298e6c21b4ca2c896f37b670349ae8212df2ff865b48a87e2e6647"
+      "bytes": 378457,
+      "sha256": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
     },
     {
       "path": "data/speeches.json",
@@ -114,8 +119,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26124908,
-      "sha256": "dd2a70e4cb73559931362325947467082c70c4a480ecf3f70e827e37d6c6790b"
+      "bytes": 26139158,
+      "sha256": "1120983c9ab6221823309099c599b9c093091901cc84e6d51671909ee5e66fc8"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -124,8 +129,8 @@
     },
     {
       "path": "downloads/quotes.csv",
-      "bytes": 233967,
-      "sha256": "75dc7cd9df2ea57b3a710e054da38b8dd40759439fe338072ea68640d885962b"
+      "bytes": 266709,
+      "sha256": "e77fe26b7e3ecde5ec54e24eedf5d753aa71f358453a91a955e96ba1b9a3eda1"
     },
     {
       "path": "downloads/speech-sources-v10.zip",
@@ -143,14 +148,14 @@
       "sha256": "532577591841ef507eeeb99967536f9c4e67c2c366a42c25ede6e0fc8a8b7548"
     },
     {
-      "path": "game/quiz/index.html",
-      "bytes": 4771,
-      "sha256": "81e7fe3e60acd426e22f2d1c040d79e5b2673938929c1ec1c6d8710b26dfda68"
-    },
-    {
       "path": "game/quiz-engine.js",
       "bytes": 11792,
       "sha256": "8866e76dbf6e4b66bae695632437a2d06e5cc3a12a9027920d7b287082a05770"
+    },
+    {
+      "path": "game/quiz/index.html",
+      "bytes": 4771,
+      "sha256": "81e7fe3e60acd426e22f2d1c040d79e5b2673938929c1ec1c6d8710b26dfda68"
     },
     {
       "path": "game/red-notes/index.html",
@@ -198,11 +203,6 @@
       "sha256": "04fde68b6c06e6c2a52e980d4ff49513f754074b4e4337c56eea8d0699add2df"
     },
     {
-      "path": "README.md",
-      "bytes": 3651,
-      "sha256": "a24f2173b103074559c37370b3f7c3f565219d0768b07232a166c0a0e683db96"
-    },
-    {
       "path": "speech-search.css",
       "bytes": 5923,
       "sha256": "42de7e9eb05b5727feb78ccfeb8aca198a10de39b9fbd01aea68c3c18c21f7fd"
@@ -230,10 +230,17 @@
   ],
   "manifestSelfExcluded": true,
   "quoteCounts": {
-    "segments": 129,
-    "events": 123,
-    "quiz": 73,
-    "advanced": 56
+    "segments": 130,
+    "events": 124,
+    "pre": 114,
+    "post": 16,
+    "quiz": 74,
+    "quizEvents": 68,
+    "quizPre": 65,
+    "quizPost": 9,
+    "advanced": 56,
+    "featured": 22,
+    "featuredEvents": 21
   },
   "speechCounts": {
     "included": 235,
