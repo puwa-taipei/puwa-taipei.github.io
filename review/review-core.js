@@ -4,6 +4,7 @@
   const PKCE_KEY='review-pkce-v15', PKCE_TTL=15*60*1000, SESSION_TTL=15*60*1000;
   const UUID=/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
   const JWT=/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
+  const AUTH_ERRORS=new Set(['signup_disabled','email_not_confirmed','over_email_send_rate_limit','over_request_rate_limit','email_address_not_authorized','email_provider_disabled','validation_failed','otp_disabled','otp_expired','flow_state_expired','flow_state_not_found','bad_code_verifier']);
   class ReviewError extends Error {constructor(code,status=0){super(code);this.name='ReviewError';this.code=code;this.status=status;}}
   function config(input={}) {
     const empty={enabled:false,apiUrl:'',supabaseUrl:'',publishableKey:'',authMode:'magiclink'};
@@ -91,7 +92,8 @@
         if(generation!==this.#generation)throw new ReviewError('stale_request');
         if(!response.ok){
           const allowed=new Set(['version_conflict','not_found','invalid_request','not_approved','approval_required','source_mismatch','already_published','invalid_public_game','rate_limited','repo_verification_failed','repo_verification_unavailable']);
-          const code=response.status===401?'session_expired':response.status===403?'access_denied':response.status===429?'rate_limited':allowed.has(data?.error)?data.error:response.status===409?'version_conflict':'temporarily_unavailable';
+          const authCode=auth?[data?.error_code,data?.code,data?.error].find(value=>typeof value==='string'&&AUTH_ERRORS.has(value)):null;
+          const code=authCode||(token&&response.status===401?'session_expired':token&&response.status===403?'access_denied':response.status===429?'rate_limited':allowed.has(data?.error)?data.error:response.status===409?'version_conflict':'temporarily_unavailable');
           if(token&&(response.status===401||response.status===403))this.clear(code);
           throw new ReviewError(code,response.status);
         }
