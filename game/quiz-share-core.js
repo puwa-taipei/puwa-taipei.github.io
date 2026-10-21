@@ -1,14 +1,54 @@
 /* Bounded, source-versioned quiz challenges. No identities, answers or server scores. */
 (function (global) {
   'use strict';
-  const VERSION = 'v18', SUBJECT = 'shen-pao-yang', ROUND_SIZE = 6;
-  const SOURCE_VERSION = 'abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b';
-  const ORIGIN = 'https://puwa-taipei.github.io', CARD_BASE = '/game/quiz/cards/v18/';
-  const CATALOG_URL = '/data/quiz-share-catalog-v18.json', NOMINATION = '2026-05-13';
-  // Editorial withdrawals are independent of the unchanged archival source.
+  const VERSION = 'v24', SUBJECT = 'shen-pao-yang', ROUND_SIZE = 6;
+  const SOURCE_VERSION = '6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3';
+  const ORIGIN = 'https://puwa-taipei.github.io', CARD_BASE = '/game/quiz/cards/v24/';
+  const CATALOG_URL = '/data/quiz-share-catalog-v24.json', NOMINATION = '2026-05-13';
+  // This reviewed selection is independent of historical archival flags.
+  const CURATED_IDS = Object.freeze([
+    "school-urine-2014",
+    "iq-low-20260122",
+    "adult-preferences-political-inference-20240628",
+    "assistant-law-blind-167396",
+    "name-retort-20241204",
+    "chinese-retort-157804",
+    "read-first-166377",
+    "carnation-law-162993",
+    "ai-corridor-retort-20261013",
+    "ai-land-linkage-20261013",
+    "ai-they-understand-20261015",
+    "death-book-title-2018",
+    "cannabis-legalisation-facebook-20140820",
+    "community-drug-support-2014",
+    "iq-criticism-20260122",
+    "official-2024-bill-explanation-shame-152710",
+    "official-2024-law-cybersecurity-not-understood-151739",
+    "official-2024-daughter-longer-call-152955",
+    "official-2024-let-assistants-speak-152182",
+    "argument-king-20261009",
+    "basic-arithmetic-law-161293",
+    "lu-flight-change-sarcasm-168014",
+    "legislator-iq-satire-2014",
+    "nationality-law-criticism-167742",
+    "official-2024-military-police-comparison-158300",
+    "international-laugh-151099",
+    "official-2025-166698",
+    "official-2024-basic-law-ji-154841",
+    "official-2025-160381",
+    "china-scam-group-156994",
+    "official-2025-158903",
+    "voting-contempt-11437",
+    "official-2024-procedure-shouting-disinformation-155044",
+    "official-2025-158952",
+    "drone-law-committee-route-170532",
+    "temu-defense-bill-167234"
+]);
   const WITHDRAWN_IDS = Object.freeze(['legislature-hypocrite-152732']);
-  const withdrawn = new Set(WITHDRAWN_IDS);
-  const isQuizEligible = q => !!q && q.quizEligible !== false && !withdrawn.has(q.id);
+  const curated = new Set(CURATED_IDS), withdrawn = new Set(WITHDRAWN_IDS);
+  const ranks = new Map(CURATED_IDS.map((id,index) => [id,index + 1]));
+  const isQuizEligible = q => !!q && curated.has(q.id) && !withdrawn.has(q.id);
+  const curatedRank = q => ranks.get(typeof q === 'string' ? q : q?.id) ?? 9999;
   const ID = /^[a-z0-9-]{1,100}$/, PERIODS = new Set(['pre','post','all']), MODES = new Set(['score','quote']);
   const own = (value,key) => Object.prototype.hasOwnProperty.call(value,key);
   const error = reason => ({ok:false,reason});
@@ -40,7 +80,7 @@
     if (parts[1] !== sourceVersion || sourceVersion !== SOURCE_VERSION) return error('stale_source');
     const [,,period,count,joined] = parts, ids = joined.split(',');
     if (!PERIODS.has(period) || !/^[0-6]$/.test(count) || ids.length !== ROUND_SIZE || ids.some(id => !ID.test(id)) || new Set(ids).size !== ROUND_SIZE) return error('invalid_challenge');
-    if (ids.some(id => withdrawn.has(id))) return error('unavailable_question');
+    if (ids.some(id => !curated.has(id) || withdrawn.has(id))) return error('unavailable_question');
     return {ok:true,token,sourceVersion,period,correct:Number(count),total:ROUND_SIZE,ids};
   }
   function resolveChallenge(token,quotes,sourceVersion) {
@@ -70,7 +110,7 @@
     try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password ? u.href : null; } catch { return null; }
   }
   function catalog(value) {
-    if (!value || value.version !== VERSION || value.subjectId !== SUBJECT || value.sourceVersion !== SOURCE_VERSION || value.roundSize !== ROUND_SIZE || value.cardBase !== CARD_BASE || value.cards !== 1022 || value.quoteCount !== 73 || !Array.isArray(value.modes) || value.modes.length !== 2 || !value.modes.every(mode => MODES.has(mode)) || new Set(value.modes).size !== 2 || !Array.isArray(value.quotes) || value.quotes.length !== 73) throw new Error('invalid_share_catalog');
+    if (!value || value.version !== VERSION || value.subjectId !== SUBJECT || value.sourceVersion !== SOURCE_VERSION || value.roundSize !== ROUND_SIZE || value.cardBase !== CARD_BASE || value.cards !== CURATED_IDS.length * 14 || value.quoteCount !== CURATED_IDS.length || !Array.isArray(value.modes) || value.modes.length !== 2 || !value.modes.every(mode => MODES.has(mode)) || new Set(value.modes).size !== 2 || !Array.isArray(value.quotes) || value.quotes.length !== CURATED_IDS.length) throw new Error('invalid_share_catalog');
     const ids = new Set(), quotes = [];
     for (const q of value.quotes) {
       if (!isQuizEligible(q) || !ID.test(q.id || '') || ids.has(q.id) || typeof q.eventId !== 'string' || !q.eventId || typeof q.quote !== 'string' || !q.quote || q.quote.length > 600 || typeof q.date !== 'string' || !dateValue(q) || !['spoken','written'].includes(q.medium) || typeof q.context !== 'string' || !q.context || typeof q.sourceType !== 'string' || !q.sourceType || !https(q.sourceUrl)) throw new Error('invalid_share_catalog');
@@ -91,7 +131,7 @@
   function selectQuote(snapshot) {
     result(snapshot);
     const quality = q => q.verificationLevel === 'official-transcript-fulltext' ? 0 : /官方.*逐字稿/.test(q.sourceType || '') ? 1 : q.medium === 'written' ? 2 : 3;
-    return [...snapshot.answers].sort((a,b) => Number(a.correct) - Number(b.correct) || quality(a.question) - quality(b.question) || [...a.question.quote].length - [...b.question.quote].length || (Number(a.question.editorialRank) || 999) - (Number(b.question.editorialRank) || 999) || a.question.id.localeCompare(b.question.id))[0].question;
+    return [...snapshot.answers].sort((a,b) => Number(a.correct) - Number(b.correct) || curatedRank(a.question) - curatedRank(b.question) || quality(a.question) - quality(b.question) || [...a.question.quote].length - [...b.question.quote].length || (Number(a.question.editorialRank) || 999) - (Number(b.question.editorialRank) || 999) || a.question.id.localeCompare(b.question.id))[0].question;
   }
   function sourceLabel(q) {
     if (q.medium === 'written') return '本人書面文字';
@@ -99,7 +139,7 @@
     return '口語發言，來源與語境見原文';
   }
   function cardPath(id,correct,mode,extension = 'html') {
-    if (!ID.test(id || '') || withdrawn.has(id) || !Number.isInteger(correct) || correct < 0 || correct > ROUND_SIZE || !MODES.has(mode) || !['html','png'].includes(extension)) throw new Error('invalid_card');
+    if (!ID.test(id || '') || !curated.has(id) || withdrawn.has(id) || !Number.isInteger(correct) || correct < 0 || correct > ROUND_SIZE || !MODES.has(mode) || !['html','png'].includes(extension)) throw new Error('invalid_card');
     return CARD_BASE + id + '-' + correct + '-6-' + mode + '.' + extension;
   }
   function buildShare(snapshot,period,sourceCatalog,quoteSourceVersion) {
@@ -134,7 +174,7 @@
     try { if (globalThis.crypto?.subtle) sourceVersion = [...new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',bytes))].map(byte => byte.toString(16).padStart(2,'0')).join(''); } catch {}
     return {data,sourceVersion};
   }
-  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,WITHDRAWN_IDS,isQuizEligible,readSearch,parseChallenge,resolveChallenge,encodeChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
+  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,CURATED_IDS,WITHDRAWN_IDS,isQuizEligible,curatedRank,readSearch,parseChallenge,resolveChallenge,encodeChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (global) global.RecordsQuizShareCore = api;
 })(typeof window === 'undefined' ? null : window);

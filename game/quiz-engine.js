@@ -9,6 +9,26 @@
     const nominationDate = typeof proposed === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(proposed) && Number.isFinite(Date.parse(proposed)) && new Date(proposed).toISOString().slice(0,10) === proposed ? proposed : null;
     return {subjectId,speaker:speakers[subjectId],pronoun:subjectId === 'su-chiao-hui' ? '她' : '他',nominationDate,seenKey:subjectId === 'shen-pao-yang' ? 'record-quiz-seen-v1' : 'record-quiz-seen-v1-' + subjectId};
   }
+  function quizCurationReady(profile, core) {
+    return profile.subjectId !== 'shen-pao-yang' || !!(core?.VERSION === 'v24' && Array.isArray(core.CURATED_IDS) && core.CURATED_IDS.length >= 6 && typeof core.isQuizEligible === 'function');
+  }
+  function quizEligibleForProfile(q, profile, core) {
+    return !!q && (profile.subjectId === 'shen-pao-yang' ? quizCurationReady(profile,core) && core.isQuizEligible(q) : q.quizEligible !== false);
+  }
+  function quizPeriodAvailability(rows, nominationDate, size = 6) {
+    const inPeriod = (q,period) => {
+      if (period === 'all') return true;
+      if (!nominationDate) return false;
+      const raw = String(q?.eventDate || q?.date || ''), full = raw.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
+      if (full && Number.isFinite(Date.parse(full)) && new Date(full).toISOString().slice(0,10) === full) return period === 'pre' ? full < nominationDate : full >= nominationDate;
+      const year = raw.match(/^\d{4}/)?.[0];
+      return !!year && year !== nominationDate.slice(0,4) && (period === 'pre' ? year < nominationDate.slice(0,4) : year > nominationDate.slice(0,4));
+    };
+    return Object.fromEntries(['pre','post','all'].map(period => {
+      const selected = rows.filter(q => inPeriod(q,period)), eventCount = new Set(selected.map(q => q.eventId || q.id)).size;
+      return [period,{questionCount:selected.length,eventCount,available:eventCount >= size}];
+    }));
+  }
   function createRoundController(options = {}) {
     const schedule = options.schedule || setTimeout, cancel = options.cancel || clearTimeout;
     const onChange = options.onChange || (() => {}), delay = options.delay ?? AUTO_DELAY;
@@ -46,7 +66,7 @@
   }
 
   // Allows focused Node tests of the actual timer/state logic, without a browser or DOM emulator.
-  if (typeof module === 'object' && module.exports) module.exports = {createRoundController, AUTO_DELAY,quizProfile};
+  if (typeof module === 'object' && module.exports) module.exports = {createRoundController, AUTO_DELAY,quizProfile,quizCurationReady,quizEligibleForProfile,quizPeriodAvailability};
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -61,7 +81,8 @@
     const play = card.closest('#play'), game = card.closest('.swipe-game');
     const text = (id, value) => { if ($(id)) $(id).textContent = value; };
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    const state = {quotes: Array.isArray(options.quotes) ? options.quotes : [], period: $('game-period')?.value || 'pre', seen: new Set(), drag: null, newCount: 0, challenge: null};
+    const state = {quotes: Array.isArray(options.quotes) ? options.quotes : [], period: profile.subjectId === 'shen-pao-yang' ? 'all' : $('game-period')?.value || 'pre', seen: new Set(), drag: null, newCount: 0, challenge: null};
+    if (profile.subjectId === 'shen-pao-yang' && $('game-period')) $('game-period').value = 'all';
     if (!profile.nominationDate) { state.period = 'all'; if ($('game-period')) { $('game-period').value = 'all'; $('game-period').disabled = true; } }
     function mergeSeen(raw) {
       try { const stored = JSON.parse(raw ?? localStorage.getItem(seenKey) ?? '[]'); if (Array.isArray(stored)) for (const id of stored) if (typeof id === 'string') state.seen.add(id); } catch {}
@@ -81,8 +102,8 @@
     const autoInput = settings.querySelector('input');
     const results = document.createElement('section'); results.id = 'quiz-results'; results.className = 'quiz-results'; results.hidden = true; results.setAttribute('aria-label', '本輪成績單與逐題答案');
     play.querySelector('.quiz-layout').after(results);
-    // Sharing is optional. Old cached HTML and the independent Su profile keep
-    // the complete quiz even if a v18 script, catalogue or card is unavailable.
+    // Sharing is optional, but Shen's reviewed eligibility must be available.
+    // The independent Su profile keeps its own archival membership behavior.
     const shareCore = profile.subjectId === 'shen-pao-yang' ? window.RecordsQuizShareCore : null;
     let shareUI = null, challengeNotice = null;
     if (profile.subjectId === 'shen-pao-yang') {
@@ -109,13 +130,37 @@
     $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
     $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
     $('quiz-no').setAttribute('aria-label', '不是' + speaker + '的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是' + speaker + '的原話，向右選');
-    const eligible = q => window.RecordsQuizShareCore?.isQuizEligible ? window.RecordsQuizShareCore.isQuizEligible(q) : q.quizEligible !== false && q.id !== 'legislature-hypocrite-152732';
-    const pool = () => state.quotes.filter(eligible).filter(q => { const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || state.period === 'all' || (state.period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate); });
+    const curationReady = quizCurationReady(profile,shareCore);
+    const eligible = q => quizEligibleForProfile(q,profile,shareCore);
+    const poolForPeriod = period => state.quotes.filter(eligible).filter(q => {
+      if (profile.subjectId === 'shen-pao-yang') return shareCore.inPeriod(q,period);
+      const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || period === 'all' || (period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate);
+    });
+    const pool = () => poolForPeriod(state.period);
+    const periodStats = () => quizPeriodAvailability(state.quotes.filter(eligible),profile.nominationDate);
+    function syncPeriods() {
+      if (profile.subjectId !== 'shen-pao-yang') return;
+      const select = $('game-period'), stats = periodStats();
+      if (!select) return;
+      for (const option of select.options) {
+        const labels = {pre:'正式提名前',post:'正式提名起',all:'所有時期'}, row = stats[option.value];
+        option.disabled = !curationReady || !row?.available;
+        option.textContent = (labels[option.value] || option.textContent) + (row && !row.available ? '（未滿六個事件）' : '');
+      }
+      if (!stats[state.period]?.available) state.period = stats.pre.available ? 'pre' : 'all';
+      select.value = state.period; select.disabled = !curationReady || !stats.all.available;
+    }
+    function availabilityNote() {
+      if (profile.subjectId !== 'shen-pao-yang') return '';
+      if (!curationReady) return '精選清單暫時無法核對，已停止出題；請重新整理後再試。';
+      const stats = periodStats(), labels = {pre:'提名前',post:'提名後'};
+      return ['pre','post'].filter(period => !stats[period].available).map(period => `${labels[period]}目前 ${stats[period].questionCount} 則、${stats[period].eventCount} 個事件，未滿六個事件；可在「所有時期」看到這些題目。`).join(' ');
+    }
     const announce = message => { const live = $('announcement') || document.getElementById('announcement'); if (live) live.textContent = message; };
     function info() {
       const rows = pool(), seen = rows.filter(q => state.seen.has(q.id)).length, period = {pre:'正式提名前', post:'正式提名起', all:'所有時期'}[state.period];
       text('quiz-pool-count', rows.length); text('quiz-seen-count', seen + ' / ' + rows.length);
-      text('game-period-note', `${period}：${rows.length} 段、${new Set(rows.map(q => q.eventId || q.id)).size} 個事件／文章。${profile.nominationDate ? '正式提名切點 ' + profile.nominationDate + '。' : '尚未設定可核對的正式提名切點，目前使用所有已收錄時期。'}`);
+      text('game-period-note', `${period}：${rows.length} 段、${new Set(rows.map(q => q.eventId || q.id)).size} 個事件／文章。${profile.nominationDate ? '正式提名切點 ' + profile.nominationDate + '。' : '尚未設定可核對的正式提名切點，目前使用所有已收錄時期。'}${availabilityNote() ? ' ' + availabilityNote() : ''}`);
       const length = controller.snapshot().round.length;
       text('quiz-round-note', state.challenge ? '朋友的同一輪六題，題目與順序固定；你的分數從零開始。再玩或切換時期，會離開這輪挑戰。' : state.newCount ? `本輪 ${length} 題，${state.newCount} 題尚未看過。同一輪不重複事件；換時期會重開一輪。` : '本期都看過了？這輪換個順序，盡量避開上一輪。');
       text('quote-selection', `本範圍精選 ${rows.length} 段本人公開言論／文章，答案均為「是」；這是有意挑選的原話遊戲，不加入虛構的「否」題。媒體引述、官方逐字稿與書面文章逐題標示；最後可看本輪完整來源。`);
@@ -188,7 +233,7 @@
         renderReview(s); showShare(s); announce(`本輪完成，${s.score} 分。答對 ${s.correct}／${s.round.length} 題。下方成績單列出每題的選擇、正確答案與來源。`); focusQuestion(); return;
       }
       if (s.phase === 'empty') {
-        card.dataset.questionId = ''; text('quiz-progress','題庫尚未載入'); text('quiz-meta','SOURCE REQUIRED'); text('quiz-context',''); text('quiz-question','題庫暫時無法讀取。\n請重新整理後再試。'); card.querySelector('.quiz-foot').textContent = '每個答案都需要可追溯的來源。'; $('quiz-restart').hidden = true; info(); return;
+        card.dataset.questionId = ''; text('quiz-progress','題庫尚未載入'); text('quiz-meta','SOURCE REQUIRED'); text('quiz-context',''); text('quiz-question',!curationReady ? '精選清單暫時無法核對。\n已停止出題，請重新整理後再試。' : '題庫暫時無法讀取。\n請重新整理後再試。'); card.querySelector('.quiz-foot').textContent = '每個答案都需要可追溯的來源。'; $('quiz-restart').hidden = true; info(); return;
       }
       const q = s.question; remember(q.id); card.dataset.questionId = q.id; card.dataset.eventId = q.eventId || q.id;
       card.setAttribute('aria-describedby','quiz-meta quiz-context quiz-swipe-help');
@@ -202,9 +247,9 @@
     const controller = createRoundController({onChange:render, delay:AUTO_DELAY});
     function drawRound(focus = false, keepNotice = false) {
       clearChallenge(keepNotice);
-      mergeSeen(); const rows = pool(), previous = new Set(controller.snapshot().round.map(q => q.id));
+      syncPeriods(); mergeSeen(); const rows = pool(), previous = new Set(controller.snapshot().round.map(q => q.id));
       const prioritized = items => randomize(items).sort((a,b) => {
-        const tier = q => Number.isFinite(Number(q.editorialRank)) ? Math.floor((Number(q.editorialRank)-1)/12) : Number.isFinite(Number(q.quizPriority)) ? -Math.floor(Number(q.quizPriority)/10) : 999;
+        const tier = q => profile.subjectId === 'shen-pao-yang' && curationReady ? Math.floor((shareCore.curatedRank(q)-1)/12) : Number.isFinite(Number(q.editorialRank)) ? Math.floor((Number(q.editorialRank)-1)/12) : Number.isFinite(Number(q.quizPriority)) ? -Math.floor(Number(q.quizPriority)/10) : 999;
         return tier(a)-tier(b);
       });
       const candidates = [...prioritized(rows.filter(q => !state.seen.has(q.id))), ...prioritized(rows.filter(q => state.seen.has(q.id) && !previous.has(q.id))), ...randomize(rows.filter(q => state.seen.has(q.id) && previous.has(q.id)))];
@@ -214,13 +259,14 @@
     }
     function startInitialRound() {
       if (profile.subjectId !== 'shen-pao-yang') { drawRound(); return; }
+      if (!curationReady) { drawRound(false,true); notice('精選清單暫時無法核對，已停止出題；請重新整理，沒有代入朋友的題目或分數。',true); return; }
       let incoming;
       try { incoming = shareCore ? shareCore.readSearch(location.search) : {present:typeof location.search === 'string' && new URLSearchParams(location.search.slice(0,4096)).has('challenge')}; } catch { incoming = {present:false}; }
       if (!incoming.present) { drawRound(); return; }
       const challenge = shareCore?.resolveChallenge(incoming.token,state.quotes,options.quoteSourceVersion);
       if (!challenge?.ok) {
         drawRound(false,true);
-        notice(shareCore ? '朋友的挑戰資料已過期、題目不完整或時期不符，已開始自己的新一輪；沒有代入對方分數。' : '分享功能目前未完整載入，已先開始自己的新一輪；沒有代入朋友的題目或分數。',true);
+        notice(curationReady ? '朋友的挑戰資料已過期、題目不完整或時期不符，已開始自己的新一輪；沒有代入對方分數。' : '精選清單暫時無法核對，已停止出題；請重新整理，沒有代入朋友的題目或分數。',true);
         return;
       }
       mergeSeen(); state.period = challenge.period; state.challenge = challenge; if ($('game-period')) $('game-period').value = state.period;

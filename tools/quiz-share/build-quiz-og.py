@@ -15,9 +15,9 @@ from PIL import Image, ImageDraw, ImageFont, PngImagePlugin
 
 HERE = Path(__file__).resolve().parent
 ORIGIN = "https://puwa-taipei.github.io"
-VERSION = "v18"
-CARD_BASE = "/game/quiz/cards/v18/"
-CATALOG_PATH = "data/quiz-share-catalog-v18.json"
+VERSION = "v24"
+CARD_BASE = "/game/quiz/cards/v24/"
+CATALOG_PATH = "data/quiz-share-catalog-v24.json"
 SELF_REPORTED = "玩家自行分享，未經伺服器驗證"
 SIZE = (1200, 630)
 MODES = ("score", "quote")
@@ -59,31 +59,61 @@ def public_quote(q: dict) -> dict:
     return item
 
 
+def reviewed_ids(pins: dict, key: str, *, allow_empty=False) -> list[str]:
+    values = pins.get(key)
+    if (not isinstance(values, list) or (not allow_empty and not values)
+            or any(not isinstance(item, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", item) for item in values)
+            or len(set(values)) != len(values)):
+        raise ValueError("Invalid reviewed quote identifiers: " + key)
+    return values
+
+
+def source_quote_ids(pins: dict) -> list[str]:
+    source_ids = reviewed_ids(pins, "sourceQuoteIds")
+    count = pins.get("sourceQuoteCount")
+    if isinstance(count, bool) or not isinstance(count, int) or count != len(source_ids):
+        raise ValueError("Invalid reviewed source count")
+    return source_ids
+
+
+def curated_quote_ids(pins: dict) -> list[str]:
+    source_ids, curated = source_quote_ids(pins), reviewed_ids(pins, "quoteIds")
+    if not set(curated).issubset(source_ids):
+        raise ValueError("Curated quote does not exist in the reviewed source")
+    return curated
+
+
+def excluded_quote_ids(pins: dict) -> list[str]:
+    source_ids, curated = source_quote_ids(pins), set(curated_quote_ids(pins))
+    excluded = reviewed_ids(pins, "excludedQuoteIds", allow_empty=True)
+    if excluded != [item for item in source_ids if item not in curated]:
+        raise ValueError("Editorial exclusions must exactly cover nonselected source records")
+    return excluded
+
+
 def load_source(path: Path, pins: dict) -> tuple[list[dict], str]:
     raw = path.read_bytes()
     digest = sha256(raw)
     if digest != pins["sourceVersion"]:
         raise ValueError("Source bytes changed: publish a new card version after review")
+    if pins.get("version") != VERSION or pins.get("subjectId") != "shen-pao-yang":
+        raise ValueError("Unexpected reviewed source version or subject")
     source = json.loads(raw)
-    quotes = [q for q in source["quotes"] if q.get("quizEligible") is not False]
-    if [q["id"] for q in quotes] != pins["quoteIds"] or len(quotes) != 74:
-        raise ValueError("Pinned quiz membership changed")
-    excluded = set(excluded_quote_ids(pins))
-    return [public_quote(q) for q in quotes if q["id"] not in excluded], digest
-
-
-def excluded_quote_ids(pins: dict) -> list[str]:
-    excluded = pins.get("excludedQuoteIds", [])
-    if (not isinstance(excluded, list)
-            or any(not isinstance(item, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", item)
-                   or item not in pins.get("quoteIds", []) for item in excluded)
-            or len(set(excluded)) != len(excluded)):
-        raise ValueError("Invalid editorial exclusion list")
-    return excluded
+    quotes = source.get("quotes")
+    if not isinstance(quotes, list) or any(not isinstance(q, dict) for q in quotes):
+        raise ValueError("Unsupported source corpus")
+    if [q.get("id") for q in quotes] != source_quote_ids(pins):
+        raise ValueError("Pinned archival membership changed")
+    chosen = curated_quote_ids(pins)
+    excluded_quote_ids(pins)
+    index = {q["id"]: q for q in quotes}
+    # Current editorial membership is explicit; historical quizEligible flags
+    # remain untouched in the archive and cannot silently expand the game.
+    return [public_quote(index[quote_id]) for quote_id in chosen], digest
 
 
 def remove_excluded_cards(output: Path, pins: dict) -> list[str]:
-    """Remove only the 28 named outputs per withdrawn item, never a directory."""
+    """Remove only the 28 named current-version outputs per nonselected item."""
     root = output.resolve()
     target = root / CARD_BASE.lstrip("/")
     if not target.resolve().is_relative_to(root) or target.is_symlink():
@@ -247,7 +277,7 @@ def html_card(q: dict, correct: int, mode: str, source_version: str) -> str:
 <div class="quiz-share-landing-actions"><a id="quiz-share-challenge" class="button primary" href="/game/quiz/">換我挑戰 →</a><a href="{name}.png" download>下載這張卡</a><a href="/game/">回遊樂場 ↗</a></div><p id="quiz-share-status" role="status" aria-live="polite">可以開始一輪原話挑戰。若連結附有完整且有效的同題資料，會使用相同六題。</p>
 <section id="quiz-share-landing-fact" class="quiz-share-landing-context" aria-labelledby="quiz-share-source-title"><h2 id="quiz-share-source-title">把這一則原話，放回來源。</h2><blockquote>{e(q['quote'])}</blockquote><p>{e(q['date'])} · {e(medium_label(q))} · {e(q['venue'])}</p><p>{e(q['sourceType'])}</p>{front}<p>{e(q['context'])}</p>{locator}<ul>{source_links}</ul>{limit}</section>
 <p class="small-note">這是有來源的精選原話遊戲；辨識得分不是支持度、人格或真誠程度的測量。挑戰連結不含玩家姓名、聯絡資料或逐題答案。</p><a href="/">回國會紀錄觀測 ↗</a></main>
-<script src="/game/quiz-share-core.js?v=22" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
+<script src="/game/quiz-share-core.js?v=24" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
 '''
 
 
@@ -268,7 +298,7 @@ def write_catalog(output: Path, catalog: dict):
 
 
 def build(site_dir: Path, source: Path, font: Path, output: Path, *, samples_only=False) -> dict:
-    pins = load_json(HERE / "quiz-share-source-v18.json")
+    pins = load_json(HERE / "quiz-share-source-v24.json")
     font_pins = load_json(HERE / "og-font-v18.json")
     if sha256(font.read_bytes()) != font_pins["font"]["sha256"]:
         raise ValueError("Font digest differs from reviewed open-font pin")
@@ -327,7 +357,7 @@ def main():
     parser.add_argument("--catalog-only", action="store_true", help="Write the pinned public catalog without requiring a font")
     args = parser.parse_args()
     if args.catalog_only:
-        pins = load_json(HERE / "quiz-share-source-v18.json")
+        pins = load_json(HERE / "quiz-share-source-v24.json")
         quotes, source_version = load_source(args.source or args.site_dir / "data/quotes.json", pins)
         removed = remove_excluded_cards(args.output or args.site_dir, pins)
         write_catalog(args.output or args.site_dir, catalog_data(quotes, source_version))
