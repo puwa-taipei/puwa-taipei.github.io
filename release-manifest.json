@@ -140,7 +140,7 @@
     {
       "path": "data/quiz-share-catalog-v18.json",
       "bytes": 125492,
-      "sha256": "d356884b9feee66fd4dfb1e3e2a02b85ba9ed6bb9fdf969314b943dcaded9d53"
+      "sha256": "262ad373030ce3fdb6b138435aac10b29e00d575837015f8e7114d5d60ab5c2e"
     },
     {
       "path": "data/quotes.json",
@@ -220,7 +220,7 @@
     {
       "path": "game/quiz-share-core.js",
       "bytes": 10549,
-      "sha256": "968e25b02c041a611dfa64a8776357cbe3bd390674726f50136b098f52c4ead3"
+      "sha256": "f339367197d6c7bbd4363364571f762973f0465411605a29dfddb5bc73ff01b4"
     },
     {
       "path": "game/quiz-share-landing.js",
