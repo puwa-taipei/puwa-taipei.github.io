@@ -1,11 +1,11 @@
 {
-  "version": "2026-10-21-v9-expanded-corpus",
+  "version": "v10",
   "nominationDate": "2026-05-13",
-  "selection": "收錄128段公開原話，來自122個事件或文章；包含政治批評、反問與政策主張，不把全部語料稱為糟糕言論。精選猜題87段，來源類型逐則標示。這是編輯選集，不是日常語氣的隨機樣本。每輪最多6個不同事件，優先未看過的片段；原聲未核聽者不編造秒數或未確認粗口。",
+  "selection": "全庫129則、123個事件／文章。精選與猜題73則，進階資料56則；預設先看正式提名前的精選發言。21則編輯優先依對人挖苦、強烈措辭與同題政策對照排序，並非統計分數或人格真假評分。每輪優先未看過且不同事件的片段；原聲未核聽者不編造秒數或未確認粗口。",
   "counts": {
-    "segments": 128,
-    "events": 122,
-    "pre": 112,
+    "segments": 129,
+    "events": 123,
+    "pre": 113,
     "post": 16
   },
   "quotes": [
@@ -38,7 +38,19 @@
       "eventDate": "2024-05-21",
       "frontContext": "院會批評國會調查條文時的用語。",
       "quizEligible": true,
-      "inferenceLimit": "可描述為提名前的強烈政治批評；不能由這一例推論人格真假、平日頻率或已證明刻意改人設。"
+      "inferenceLimit": "可描述為提名前的強烈政治批評；不能由這一例推論人格真假、平日頻率或已證明刻意改人設。",
+      "editorialRank": 1,
+      "contrastReason": "直接點名傅崐萁為「真小人」，比普通政策分歧更符合強烈措辭的判準。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 152732,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:19",
+      "recordingClock": "23:13:10–23:16:29",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024051509/details?meetingDate=113%2F05%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=44"
     },
     {
       "id": "iq-criticism-20260122",
@@ -60,7 +72,8 @@
       "topic": "國會程序與政治批評",
       "quizEligible": true,
       "inferenceLimit": "可證明媒體有如此直接引述；尚不能聲稱已聽證他爆粗口，也不能憑此判定其台積電因果論成立或形象欺騙。",
-      "frontContext": "以下由當日採訪報導直接引述，尚未另核原聲。"
+      "frontContext": "以下由當日採訪報導直接引述，尚未另核原聲。",
+      "archiveTier": "featured"
     },
     {
       "id": "read-first-166377",
@@ -84,7 +97,19 @@
       "topic": "國會程序與政治批評",
       "quizEligible": true,
       "inferenceLimit": "不能由一段挖苦判定整個競選形象為造假，也不能把他對規則的指控直接當作法院對當次提案的認定。",
-      "frontContext": "院會討論總統國情報告案時，針對立委理解規則的挖苦。"
+      "frontContext": "院會討論總統國情報告案時，針對立委理解規則的挖苦。",
+      "editorialRank": 6,
+      "contrastReason": "以「要識字」貶抑對手理解能力，有公報及官方影片。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 166377,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:10",
+      "recordingClock": "11:37:31–11:40:41",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025121074/details?meetingDate=114%2F12%2F12",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=13"
     },
     {
       "id": "carnation-law-162993",
@@ -108,7 +133,19 @@
       "topic": "國會程序與政治批評",
       "quizEligible": true,
       "inferenceLimit": "不能當作黃國昌的真實學歷名稱，也不能由此推定沈伯洋所有公共或私人場合都用同樣語氣。",
-      "frontContext": "這是對黃國昌法律能力的諧音挖苦。"
+      "frontContext": "這是對黃國昌法律能力的諧音挖苦。",
+      "editorialRank": 5,
+      "contrastReason": "用康乃爾／康乃馨諧音嘲諷對手法律能力。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 162993,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:11",
+      "recordingClock": "11:42:38–11:45:49",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025070204/details?meetingDate=114%2F07%2F04",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=18"
     },
     {
       "id": "chinese-retort-157804",
@@ -129,7 +166,8 @@
       "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/157804",
       "evidenceLocator": "羅智強12時51分質詢段後半，官方逐字稿靠近結尾的125、133行（行號為web文字擷取，非公報頁碼）。",
       "inferenceLimit": "只能確認他在這次交鋒的用語；對方的原話不能歸給他，也不能據此認定平日頻率。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured"
     },
     {
       "id": "voting-contempt-11437",
@@ -152,7 +190,11 @@
       "quizEligible": true,
       "eventDate": "2025-04-18",
       "frontContext": "這是院會討論不在籍投票公投案時，對藍白立法作法的批評。",
-      "inferenceLimit": "原句是強烈政治批評，本身不是髒話；不能由單一片段判定平日頻率。"
+      "inferenceLimit": "原句是強烈政治批評，本身不是髒話；不能由單一片段判定平日頻率。",
+      "editorialRank": 12,
+      "contrastReason": "以可恥批評不在籍投票公投的立法作法。",
+      "contrastCriterion": "強烈政治批評",
+      "archiveTier": "featured"
     },
     {
       "id": "disinformation-chain-157821",
@@ -173,7 +215,16 @@
       "quizEligible": true,
       "eventDate": "2024-12-04",
       "frontContext": "他認為自己的專訪被錯誤轉述，質詢時提出這項指控。",
-      "inferenceLimit": "這是他對轉述方式的指控；不能把指控本身當作已獨立查明的事實。"
+      "inferenceLimit": "這是他對轉述方式的指控；不能把指控本身當作已獨立查明的事實。",
+      "archiveTier": "featured",
+      "ivodId": 157821,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:54",
+      "recordingClock": "13:24:44–13:34:38",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112921/details?meetingDate=113%2F12%2F04",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=31"
     },
     {
       "id": "school-urine-2014",
@@ -193,7 +244,11 @@
       "url": "https://www.thinkingtaiwan.net/content/3055",
       "evidenceLocator": "『毒品問題。我們可以怎麼做？』段落；網頁文字行 29–43，重點行 42",
       "inferenceLimit": "這段不能用來證明：反對全部校園檢測、反對反毒，或因此證明現在形象虛假。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 19,
+      "contrastReason": "使用噁爛一詞批評當時按疑慮挑選學生、篩後懲罰的驗尿模式；應與今天SBIRT的對象、目的與篩後處置並列。",
+      "contrastCriterion": "措辭與同題政策對照",
+      "archiveTier": "featured"
     },
     {
       "id": "community-drug-support-2014",
@@ -213,7 +268,11 @@
       "url": "https://www.thinkingtaiwan.net/content/3055",
       "evidenceLocator": "『到底什麼才是毒癮？』小標前一段；網頁文字行 45",
       "inferenceLimit": "這段不能用來證明：任意發毒、鼓勵吸毒、現已推動此措施，或可忽略其 2026 年回應。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 20,
+      "contrastReason": "2014本人文章確實提出此條件式選項，不能說字句純由對手捏造；正面須保留除罪化不被部分人接受的條件、針具與社工配套。",
+      "contrastCriterion": "同題政策對照",
+      "archiveTier": "featured"
     },
     {
       "id": "legislator-iq-satire-2014",
@@ -233,7 +292,11 @@
       "url": "https://www.thinkingtaiwan.net/content/3256",
       "evidenceLocator": "全文最後一段；網頁文字行 51",
       "inferenceLimit": "這段不能用來證明：支持砍殺、對所有殺人案一概主張免死，或完整等同本人當時及現在的死刑政策。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 21,
+      "contrastReason": "書面評論以立委智商作反諷，應顯示原文諷刺語境。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured"
     },
     {
       "id": "ai-they-understand-20261015",
@@ -264,7 +327,8 @@
       "frontContext": "這是提名後、回應不懂科技業批評時的反諷。",
       "quizEligible": true,
       "inferenceLimit": "若收進遊戲應標示『媒體現場引述／提名後／反諷』。使用者提供的『對啦，我不懂』不是本次已核實的逐字起首。精確長句宜以原片重新核聽後再刊出。",
-      "timecode": "約02:28–02:40（字幕索引）"
+      "timecode": "約02:28–02:40（字幕索引）",
+      "archiveTier": "featured"
     },
     {
       "id": "argument-king-20261009",
@@ -284,7 +348,8 @@
       "quizEligible": true,
       "eventDate": "2026-10-09",
       "frontContext": "這是提名後致詞的自嘲：請支持者別吵架，吵架交給他。",
-      "inferenceLimit": "不能改述為鼓勵支持者去吵架；精確發言日尚未另以影片核實。"
+      "inferenceLimit": "不能改述為鼓勵支持者去吵架；精確發言日尚未另以影片核實。",
+      "archiveTier": "featured"
     },
     {
       "id": "rats-garbage-20260520",
@@ -304,7 +369,8 @@
       "quizEligible": true,
       "eventDate": "2026-05-20",
       "frontContext": "回應姓名貼宣傳與環境衛生爭議，句中的垃圾指落地廢棄物。",
-      "inferenceLimit": "不能改述成稱市民或對手為垃圾；此句是在正式提名後。"
+      "inferenceLimit": "不能改述成稱市民或對手為垃圾；此句是在正式提名後。",
+      "archiveTier": "featured"
     },
     {
       "id": "assistant-law-blind-167396",
@@ -328,7 +394,19 @@
       "evidenceLocator": "官方逐字稿 20 時 15 分發言末兩行（web 擷取 L23–L24）；官方目錄列 20:15:11–20:18:14，片長 03:03。此為整段發言時鐘時間，非該句影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=167396",
       "inferenceLimit": "可確認這場助理費辯論的挖苦用語；不能把他的動機指控當作已經司法認定，也不能推論所有場合的語氣。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 4,
+      "contrastReason": "連續使用法盲、丟臉等挖苦，官方逐字稿可核。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 167396,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:03",
+      "recordingClock": "20:15:11–20:18:14",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026012847/details?meetingDate=115%2F01%2F30",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=9"
     },
     {
       "id": "basic-arithmetic-law-161293",
@@ -352,7 +430,16 @@
       "evidenceLocator": "官方逐字稿 20 時 31 分發言首段、談第一百六十一及一百六十二條刑度之處（web 擷取 L4–L8）；官方目錄列 20:30:55–20:33:21，片長 02:26。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161293",
       "inferenceLimit": "這是他對刑法條文體系的批評，並非本研究已獨立確認每一個法律比較均正確，也不是對全體選民的評價。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 161293,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:26",
+      "recordingClock": "20:30:55–20:33:21",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025050799/details?meetingDate=114%2F05%2F13",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=23"
     },
     {
       "id": "military-pay-zero-electricity-162424",
@@ -376,7 +463,17 @@
       "evidenceLocator": "官方逐字稿 10 時 19 分發言開頭、軍人待遇段落（web 擷取 L18–L27）；官方目錄列 10:19:48–10:32:17，片長 12:29。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162424",
       "inferenceLimit": "必須保留假設及支持待遇提升的前後文；不能說他提出零電價政策，或僅據此宣稱反對軍人加薪。其違憲看法是發言者主張，並非本研究的法律判決。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 162424,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:12:29",
+      "recordingClock": "10:19:48–10:32:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025060690/details?meetingDate=114%2F06%2F11",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=19"
     },
     {
       "id": "international-laugh-151099",
@@ -400,7 +497,16 @@
       "evidenceLocator": "官方逐字稿最後一段、由民主外交談到法案國際觀感處（web 擷取 L22–L27）；官方目錄列 10:12:02–10:15:22，片長 03:20。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=151099",
       "inferenceLimit": "不能當成國際社會已作出的客觀結論；只能確認他對當時版本的批評及用語。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 151099,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:20",
+      "recordingClock": "10:12:02–10:15:22",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024041225/details?meetingDate=113%2F04%2F15",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=50"
     },
     {
       "id": "china-scam-group-156994",
@@ -424,7 +530,19 @@
       "evidenceLocator": "官方逐字稿 10 時 9 分發言後半、社群回報與深偽烏克蘭外長事例之間（web 擷取 L75–L78）；官方目錄列 10:09:28–10:20:45，片長 11:17。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=156994",
       "inferenceLimit": "這是發言者的政治評價，不是中國所有人民均屬詐騙集團的證據；不能把這句當作全球詐騙規模統計，也不能用它證明他不理解 AI。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 16,
+      "contrastReason": "以最大詐騙集團描述中國的政治評價；不能冒充全球犯罪規模統計。",
+      "contrastCriterion": "強烈政治比喻",
+      "archiveTier": "featured",
+      "ivodId": 156994,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:17",
+      "recordingClock": "10:09:28–10:20:45",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024111410/details?meetingDate=113%2F11%2F18",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=33"
     },
     {
       "id": "death-referendum-scam-159524",
@@ -448,7 +566,16 @@
       "evidenceLocator": "官方逐字稿 11 時 45 分發言第一段（web 擷取 L0–L9）；官方目錄列 11:45:22–11:48:36，片長 03:14。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=159524",
       "inferenceLimit": "必須標示指涉公投宣傳；不能以這一句認定對方構成刑法詐欺，也不能由此完整判定他所有時期的死刑立場。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 159524,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:14",
+      "recordingClock": "11:45:22–11:48:36",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025031951/details?meetingDate=114%2F03%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=26"
     },
     {
       "id": "judge-review-luo-155848",
@@ -472,7 +599,16 @@
       "evidenceLocator": "官方逐字稿 14 時 48 分發言、民意基礎與司法專業段落（web 擷取 L17–L24）；官方目錄列 14:48:33–14:53:13，片長 04:40。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=155848",
       "inferenceLimit": "這是反證式反問，不能改成他真的支持羅智強審核判決；遊戲正面必須先展示這個語境。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 155848,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:04:40",
+      "recordingClock": "14:48:33–14:53:13",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024101725/details?meetingDate=113%2F10%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=36"
     },
     {
       "id": "blocked-laws-security-164128",
@@ -496,7 +632,17 @@
       "evidenceLocator": "官方逐字稿 10 時 28 分發言末段（web 擷取 L85–L93）；官方目錄列 10:28:46–10:39:10，片長 10:24。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=164128",
       "inferenceLimit": "不能由這句單獨推算被擋法案件數或次數，也不能把他主張擴充法律工具改成支持所有國內政治偵防。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 164128,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:24",
+      "recordingClock": "10:28:46–10:39:10",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025100916/details?meetingDate=114%2F10%2F15",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=17"
     },
     {
       "id": "criteria-not-for-china-166997",
@@ -520,7 +666,17 @@
       "evidenceLocator": "官方逐字稿 11 時 24 分發言後半、國安局爭訊及異常帳號統計之後（web 擷取 L66–L74）；官方目錄列 11:24:33–11:34:20，片長 09:47。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166997",
       "inferenceLimit": "其範圍是應對錯假訊息的操作判斷準則；不能改述為一概反對政府透明，也不能據此認定分類或統計造假。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 166997,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:47",
+      "recordingClock": "11:24:33–11:34:20",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026010209/details?meetingDate=115%2F01%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=11"
     },
     {
       "id": "name-retort-20241204",
@@ -540,11 +696,14 @@
       "sourceType": "聯合報當日採訪報導直接引述；官方逐字稿交叉確認同場背景，未核聽原聲",
       "verificationLevel": "contemporaneous-media-direct-quote",
       "url": "https://video.udn.com/news/1298045",
-      "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/157804",
-      "videoLabel": "看同場前段影片",
       "evidenceLocator": "2024-12-04 15:52聯合影音報導，正文末段『羅智強從質詢台下台後』。影片為同場前段參照，未提供這句的句內秒數。",
       "inferenceLimit": "能確認當日媒體如何引述這次姓名嘲諷；不是對所有場合語氣的抽樣。名字的延伸解讀是評論，不是對其他姓名持有人的實際發言。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 3,
+      "contrastReason": "由姓名挖苦對方，與政策內容距離較遠；目前連的iVOD只是同場前段，不能稱精確原句影片。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "videoAvailabilityNote": "同場前段iVOD未包含這句場邊發言；目前以當時報導核對，原句完整影片與秒數待補。"
     },
     {
       "id": "iq-low-20260122",
@@ -566,7 +725,11 @@
       "url": "https://news.tvbs.com.tw/politics/3107480",
       "evidenceLocator": "2026-01-22 11:59報導，『沈伯洋：藍委記憶力不足、應滾出立法院』小標後首段。",
       "inferenceLimit": "與既有同日聯訪共用事件編號，不另算事件。粗口仍待原聲核對；不得把媒體標題的疑似用語當已核實原話。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 2,
+      "contrastReason": "直接評價智商；聯訪報導可核，但「他媽」音節未核，不得加上。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured"
     },
     {
       "id": "avoid-personal-attacks-20260921",
@@ -588,7 +751,8 @@
       "url": "https://news.ttv.com.tw/news/11509210009800A",
       "evidenceLocator": "2026-09-21 11:07報導，正文『至於日前鬍鬚張』段落末句。",
       "inferenceLimit": "本報導是相關近期說法；未證明它與使用者13秒剪輯的首段出自同一次拍攝。不同場合並讀不足以單獨證明刻意改變人格。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced"
     },
     {
       "id": "official-2024-self-consequences-158463",
@@ -616,7 +780,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/158463.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158463；原目錄快照 attendance-official-ivod-page-29.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 11,
+      "contrastReason": "結語直接向對手警告自食惡果。",
+      "contrastCriterion": "強烈政治批評",
+      "archiveTier": "featured",
+      "ivodId": 158463,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:14",
+      "recordingClock": "16:23:36–16:26:50",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024122541/details?meetingDate=113%2F12%2F27",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=29"
     },
     {
       "id": "official-2024-military-police-comparison-158300",
@@ -644,7 +820,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/158300.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158300；原目錄快照 attendance-official-ivod-page-29.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 7,
+      "contrastReason": "以武警、解放軍比喻議場作法；正面必須交代是在批評議事作法，不能改成實際身分指控。",
+      "contrastCriterion": "強烈政治比喻",
+      "archiveTier": "featured",
+      "ivodId": 158300,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:25",
+      "recordingClock": "17:44:33–17:47:58",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024121803/details?meetingDate=113%2F12%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=29"
     },
     {
       "id": "official-2024-passport-not-necessarily-infiltration-158155",
@@ -672,7 +860,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/158155.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158155；原目錄快照 attendance-official-ivod-page-30.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 158155,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:36",
+      "recordingClock": "10:45:42–10:52:18",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024121269/details?meetingDate=113%2F12%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=30"
     },
     {
       "id": "official-2024-kmt-only-own-people-157873",
@@ -700,7 +897,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157873.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157873；原目錄快照 attendance-official-ivod-page-31.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 17,
+      "contrastReason": "直接以只照顧自己人評價國民黨，與中性政策介紹不同。",
+      "contrastCriterion": "強烈政治批評",
+      "archiveTier": "featured",
+      "ivodId": 157873,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:34",
+      "recordingClock": "10:56:52–11:00:26",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112919/details?meetingDate=113%2F12%2F05",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=31"
     },
     {
       "id": "official-2024-indigenous-constitutional-reform-157695",
@@ -728,7 +937,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157695.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157695；原目錄快照 attendance-official-ivod-page-31.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 157695,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:28",
+      "recordingClock": "12:52:25–12:55:53",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112794/details?meetingDate=113%2F11%2F29",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=31"
     },
     {
       "id": "official-2024-us-youth-taiwan-distance-157648",
@@ -756,7 +974,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157648.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157648；原目錄快照 attendance-official-ivod-page-32.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 157648,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:30",
+      "recordingClock": "13:18:25–13:27:55",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112158/details?meetingDate=113%2F11%2F28",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=32"
     },
     {
       "id": "official-2024-china-exchange-political-purpose-157456",
@@ -784,7 +1011,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157456.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157456；原目錄快照 attendance-official-ivod-page-32.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 157456,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:52",
+      "recordingClock": "09:30:01–09:38:53",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112157/details?meetingDate=113%2F11%2F27",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=32"
     },
     {
       "id": "official-2024-constitutional-boundaries-157433",
@@ -812,7 +1048,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157433.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157433；原目錄快照 attendance-official-ivod-page-32.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 157433,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:20:34",
+      "recordingClock": "09:11:51–09:32:25",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024112047/details?meetingDate=113%2F11%2F26",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=32"
     },
     {
       "id": "official-2024-law-degree-irony-157412",
@@ -840,7 +1085,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157412.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157412；原目錄快照 attendance-official-ivod-page-32.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 157412,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:33",
+      "recordingClock": "16:42:35–16:52:08",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024111943/details?meetingDate=113%2F11%2F22",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=32"
     },
     {
       "id": "official-2024-who-humiliates-military-157267",
@@ -868,7 +1123,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157267.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157267；原目錄快照 attendance-official-ivod-page-33.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 157267,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:26",
+      "recordingClock": "09:38:53–09:49:19",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024111413/details?meetingDate=113%2F11%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=33"
     },
     {
       "id": "official-2024-foreign-affairs-conspiracy-warning-157093",
@@ -896,7 +1160,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/157093.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=157093；原目錄快照 attendance-official-ivod-page-33.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 157093,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:45",
+      "recordingClock": "09:29:43–09:39:28",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024111411/details?meetingDate=113%2F11%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=33"
     },
     {
       "id": "official-2024-military-personnel-morale-156762",
@@ -924,7 +1198,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/156762.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=156762；原目錄快照 attendance-official-ivod-page-34.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 156762,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:04",
+      "recordingClock": "10:58:08–11:07:12",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024110874/details?meetingDate=113%2F11%2F13",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=34"
     },
     {
       "id": "official-2024-hongkong-capital-risk-audit-156610",
@@ -952,7 +1235,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/156610.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=156610；原目錄快照 attendance-official-ivod-page-34.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 156610,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:19",
+      "recordingClock": "11:57:10–12:00:29",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024103023/details?meetingDate=113%2F11%2F07",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=34"
     },
     {
       "id": "official-2024-local-finance-false-question-156487",
@@ -980,7 +1272,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/156487.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=156487；原目錄快照 attendance-official-ivod-page-35.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 156487,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:32",
+      "recordingClock": "16:57:49–17:01:21",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024103028/details?meetingDate=113%2F11%2F04",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=35"
     },
     {
       "id": "official-2024-export-list-independent-audit-156338",
@@ -1008,7 +1310,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/156338.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=156338；原目錄快照 attendance-official-ivod-page-35.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 156338,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:05",
+      "recordingClock": "13:13:54–13:19:59",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024102480/details?meetingDate=113%2F10%2F30",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=35"
     },
     {
       "id": "official-2024-east-education-gap-155620",
@@ -1036,7 +1347,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/155620.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=155620；原目錄快照 attendance-official-ivod-page-37.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 155620,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:04:34",
+      "recordingClock": "13:43:18–13:47:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024100990/details?meetingDate=113%2F10%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=37"
     },
     {
       "id": "official-2024-bus-film-law-overreach-155243",
@@ -1064,7 +1384,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/155243.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=155243；原目錄快照 attendance-official-ivod-page-38.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 155243,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:16:17",
+      "recordingClock": "09:16:45–09:33:02",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024100148/details?meetingDate=113%2F10%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=38"
     },
     {
       "id": "official-2024-procedure-shouting-disinformation-155044",
@@ -1092,7 +1421,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/155044.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=155044；原目錄快照 attendance-official-ivod-page-39.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 155044,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:01:55",
+      "recordingClock": "12:23:37–12:25:32",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024092682/details?meetingDate=113%2F10%2F01",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=39"
     },
     {
       "id": "official-2024-basic-law-ji-154841",
@@ -1120,7 +1458,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/154841.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=154841；原目錄快照 attendance-official-ivod-page-39.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 154841,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:18",
+      "recordingClock": "22:37:38–22:40:56",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024071092/details?meetingDate=113%2F07%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=39"
     },
     {
       "id": "official-2024-not-rumor-stage-154554",
@@ -1148,7 +1495,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/154554.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=154554；原目錄快照 attendance-official-ivod-page-40.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 154554,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:51",
+      "recordingClock": "09:16:41–09:27:32",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024070435/details?meetingDate=113%2F07%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=40"
     },
     {
       "id": "official-2024-only-us-hearing-experience-154132",
@@ -1176,7 +1532,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/154132.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=154132；原目錄快照 attendance-official-ivod-page-41.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 154132,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:46",
+      "recordingClock": "15:40:16–15:51:02",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024061871/details?meetingDate=113%2F06%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=41"
     },
     {
       "id": "official-2024-sunlight-not-surveillance-153876",
@@ -1204,7 +1569,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/153876.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=153876；原目錄快照 attendance-official-ivod-page-42.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 153876,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:09",
+      "recordingClock": "12:17:16–12:20:25",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024060731/details?meetingDate=113%2F06%2F12",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=42"
     },
     {
       "id": "official-2024-fifth-column-false-issue-153786",
@@ -1232,7 +1606,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/153786.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=153786；原目錄快照 attendance-official-ivod-page-42.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 153786,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:43",
+      "recordingClock": "11:18:09–11:33:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024060496/details?meetingDate=113%2F06%2F11",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=42"
     },
     {
       "id": "official-2024-communication-data-abuse-153707",
@@ -1260,7 +1644,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/153707.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=153707；原目錄快照 attendance-official-ivod-page-42.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 153707,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:09",
+      "recordingClock": "10:20:48–10:26:57",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024053179/details?meetingDate=113%2F06%2F06",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=42"
     },
     {
       "id": "official-2024-daughter-longer-call-152955",
@@ -1288,7 +1681,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/152955.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=152955；原目錄快照 attendance-official-ivod-page-44.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 152955,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:09",
+      "recordingClock": "13:55:18–13:58:27",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024052281/details?meetingDate=113%2F05%2F24",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=44"
     },
     {
       "id": "official-2024-taiwanese-soul-153155",
@@ -1316,7 +1718,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/153155.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=153155；原目錄快照 attendance-official-ivod-page-44.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 153155,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:42",
+      "recordingClock": "23:01:10–23:03:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024052281/details?meetingDate=113%2F05%2F28",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=44"
     },
     {
       "id": "official-2024-bill-explanation-shame-152710",
@@ -1344,7 +1756,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/152710.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=152710；原目錄快照 attendance-official-ivod-page-44.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 10,
+      "contrastReason": "以丟臉推測對手不願提案說明的原因；需標為他的挖苦，不能把動機推測寫成已證實。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 152710,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:06",
+      "recordingClock": "12:19:05–12:22:11",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024051627/details?meetingDate=113%2F05%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=44"
     },
     {
       "id": "official-2024-come-grill-me-152241",
@@ -1372,7 +1796,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/152241.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=152241；原目錄快照 attendance-official-ivod-page-46.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 152241,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:14",
+      "recordingClock": "12:13:03–12:16:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024050296/details?meetingDate=113%2F05%2F07",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=46"
     },
     {
       "id": "official-2024-let-assistants-speak-152182",
@@ -1400,7 +1833,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/152182.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=152182；原目錄快照 attendance-official-ivod-page-46.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 8,
+      "contrastReason": "挖苦傅崐萁、黃國昌法律論述不如助理。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 152182,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:21",
+      "recordingClock": "09:44:53–09:48:14",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024050323/details?meetingDate=113%2F05%2F06",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=46"
     },
     {
       "id": "official-2024-best-knows-refugee-law-152164",
@@ -1428,7 +1873,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/152164.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=152164；原目錄快照 attendance-official-ivod-page-47.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 152164,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:05:16",
+      "recordingClock": "11:29:48–11:35:04",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024050179/details?meetingDate=113%2F05%2F03",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=47"
     },
     {
       "id": "official-2024-law-cybersecurity-not-understood-151739",
@@ -1456,7 +1910,19 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/151739.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=151739；原目錄快照 attendance-official-ivod-page-48.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 9,
+      "contrastReason": "用造謠、法律與資安搞不清楚連續挖苦其他委員。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 151739,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:50",
+      "recordingClock": "10:37:10–10:44:00",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024042201/details?meetingDate=113%2F04%2F25",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=48"
     },
     {
       "id": "official-2024-electricity-zero-hypothesis-150668",
@@ -1484,7 +1950,17 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/150668.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=150668；原目錄快照 attendance-official-ivod-page-50.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "ivodId": 150668,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:12",
+      "recordingClock": "11:42:43–11:45:55",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024032776/details?meetingDate=113%2F03%2F29",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=50"
     },
     {
       "id": "official-2024-written-question-time-149719",
@@ -1512,7 +1988,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/149719.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=149719；原目錄快照 attendance-official-ivod-page-52.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 149719,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:57",
+      "recordingClock": "11:24:25–11:40:22",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024030695/details?meetingDate=113%2F03%2F12",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=52"
     },
     {
       "id": "official-2024-just-was-there-prediction-149298",
@@ -1540,7 +2025,16 @@
       "rawSourceFile": "research/quotes-v9-sources-2024/149298.html",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=149298；原目錄快照 attendance-official-ivod-page-53.html",
       "inferenceLimit": "這是精選的單場公開發言；可核對原句與指涉，不能推算平日風格比例、支持者知情程度或人格真假。發言中的政治、法律與因果評價，除另有查證外，均為發言者主張。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 149298,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:28",
+      "recordingClock": "14:10:46–14:21:14",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024030188/details?meetingDate=113%2F03%2F04",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=53"
     },
     {
       "id": "official-2025-166698",
@@ -1570,7 +2064,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 13–13 行，沈委員伯洋發言段；以「難道我們要變成北韓法學嗎？」搜尋定位。官方目錄列整段發言 12:23:27–12:26:39、片長 00:03:12。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166698；目錄保存頁 attendance-official-ivod-page-13.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。北韓是他的政治類比，不能當成臺灣法律制度已等同北韓的事實認定。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:12",
+      "recordingClock": "12:23:27–12:26:39",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025122454/details?meetingDate=114%2F12%2F26",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=13"
     },
     {
       "id": "official-2025-166169",
@@ -1600,7 +2102,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 27–27 行，沈委員伯洋發言段；以「中國一直都是境外敵對勢力」搜尋定位。官方目錄列整段發言 14:54:12–14:59:52、片長 00:05:40。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166169；目錄保存頁 attendance-official-ivod-page-14.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是他對法律與國安風險的論述，不能把所有中國配偶都認定為間諜。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:05:40",
+      "recordingClock": "14:54:12–14:59:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025112707/details?meetingDate=114%2F12%2F03",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=14"
     },
     {
       "id": "official-2025-166048",
@@ -1630,7 +2140,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 8–9 行，沈委員伯洋發言段；以「讓這個金錢能夠快速進入災民的口袋，而不是當作地方的宣傳品。」搜尋定位。官方目錄列整段發言 10:07:41–10:09:52、片長 00:02:11。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166048；目錄保存頁 attendance-official-ivod-page-14.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。宣傳品是他對執行偏失的批評，不是這段紀錄已證實特定人侵吞款項。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:11",
+      "recordingClock": "10:07:41–10:09:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025112690/details?meetingDate=114%2F12%2F02",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=14"
     },
     {
       "id": "official-2025-165534",
@@ -1660,7 +2178,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 61–62 行，沈委員伯洋發言段；以「它如果是一個例外狀態，我認為行政院是可以考慮很多學者的建議，然後來做相對應的回擊」搜尋定位。官方目錄列整段發言 11:32:46–11:48:10、片長 00:15:24。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=165534；目錄保存頁 attendance-official-ivod-page-15.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這句不能刪掉前面的條件而改稱他無條件主張行政院違法；後續質詢仍轉回中繼屋、原住民部落溝通及交通重建。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:24",
+      "recordingClock": "11:32:46–11:48:10",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025111293/details?meetingDate=114%2F11%2F18",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=15"
     },
     {
       "id": "official-2025-164981",
@@ -1690,7 +2217,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 29–30 行，沈委員伯洋發言段；以「我們都把這個當作是一個榮譽的標記，表示我們應該都是做對事情。」搜尋定位。官方目錄列整段發言 11:34:39–11:50:31、片長 00:15:52。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=164981；目錄保存頁 attendance-official-ivod-page-16.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是本人對遭懲戒的評價，並非外部驗證其全部行為正確。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:52",
+      "recordingClock": "11:34:39–11:50:31",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025102906/details?meetingDate=114%2F11%2F04",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=16"
     },
     {
       "id": "official-2025-164918",
@@ -1720,7 +2255,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 13–14 行，沈委員伯洋發言段；以「否則如果只是把金錢匡列出來，結果重建遙遙無期，金錢最後只是進到地方政治人物的口袋」搜尋定位。官方目錄列整段發言 11:07:27–11:09:44、片長 00:02:17。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=164918；目錄保存頁 attendance-official-ivod-page-16.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。原句在『否則如果只是把金錢匡列出來，結果重建遙遙無期』的假設警告裡，不能將其剪成已查獲地方政治人物貪污的斷言。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:17",
+      "recordingClock": "11:07:27–11:09:44",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025102906/details?meetingDate=114%2F10%2F31",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=16"
     },
     {
       "id": "official-2025-165564",
@@ -1750,7 +2293,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 69–70 行，沈委員伯洋發言段；以「我們軍隊沒有在效忠蔣中正，蔣中正怎麼會是軍隊效忠的對象？」搜尋定位。官方目錄列整段發言 09:41:56–09:54:56、片長 00:13:00。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=165564；目錄保存頁 attendance-official-ivod-page-15.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。此句是他的原話，但不能省略其對帳號真偽的保留。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:13:00",
+      "recordingClock": "09:41:56–09:54:56",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025111307/details?meetingDate=114%2F11%2F19",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=15"
     },
     {
       "id": "official-2025-164868",
@@ -1780,7 +2331,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 43–44 行，沈委員伯洋發言段；以「這就跟豬瘟的情形一樣，若今天沒有時間宣導，就有可能會導致病毒擴散」搜尋定位。官方目錄列整段發言 10:45:29–10:57:04、片長 00:11:35。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=164868；目錄保存頁 attendance-official-ivod-page-16.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。比較的是預警與宣導的必要性；原文沒有把中國人、臺灣人或特定群體稱為豬或病毒。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:35",
+      "recordingClock": "10:45:29–10:57:04",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025102390/details?meetingDate=114%2F10%2F30",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=16"
     },
     {
       "id": "official-2025-163836",
@@ -1810,7 +2370,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 43–43 行，沈委員伯洋發言段；以「他們因為這樣不會再過去，我覺得這都是國民之福」搜尋定位。官方目錄列整段發言 09:31:21–09:39:21、片長 00:08:00。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=163836；目錄保存頁 attendance-official-ivod-page-17.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。本句指前述特定赴中活動與退休給付規範，不是對所有赴中旅行的一般禁令；末段另談 AI 模擬面試與就業媒合個資。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:00",
+      "recordingClock": "09:31:21–09:39:21",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025100273/details?meetingDate=114%2F10%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=17"
     },
     {
       "id": "official-2025-163490",
@@ -1840,7 +2408,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 26–27 行，沈委員伯洋發言段；以「他們常常會講看得到、吃不到。」搜尋定位。官方目錄列整段發言 10:31:46–10:41:56、片長 00:10:10。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=163490；目錄保存頁 attendance-official-ivod-page-17.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。後段則討論保密協議與經濟安全修法。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:10",
+      "recordingClock": "10:31:46–10:41:56",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025080742/details?meetingDate=114%2F08%2F14",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=17"
     },
     {
       "id": "official-2025-163270",
@@ -1870,7 +2446,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 14–14 行，沈委員伯洋發言段；以「如果是因為操作上的誤失，但是又遠低於平均的話，希望不要有懲處」搜尋定位。官方目錄列整段發言 10:46:56–10:59:21、片長 00:12:25。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=163270；目錄保存頁 attendance-official-ivod-page-18.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。他明確排除酒駕，後面也說嚴重誤失另當別論；這段不能被改成所有軍車肇事都免責，其事故率算法也尚未由本資料庫獨立驗證。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:12:25",
+      "recordingClock": "10:46:56–10:59:21",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025072374/details?meetingDate=114%2F07%2F28",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=18"
     },
     {
       "id": "official-2025-163082",
@@ -1900,7 +2485,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 23–23 行，沈委員伯洋發言段；以「對於信任崩解，政策買票是沒有用的」搜尋定位。官方目錄列整段發言 15:00:55–15:04:11、片長 00:03:16。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=163082；目錄保存頁 attendance-official-ivod-page-18.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。『買票』是政治批評用語，這段不是刑事賄選已成立的司法證據，也未獨立證明其通膨推論。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:16",
+      "recordingClock": "15:00:55–15:04:11",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025070915/details?meetingDate=114%2F07%2F11",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=18"
     },
     {
       "id": "official-2025-162919",
@@ -1930,7 +2523,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 19–20 行，沈委員伯洋發言段；以「請問我要不要要求我的手術做全國的直播？」搜尋定位。官方目錄列整段發言 15:49:54–15:53:07、片長 00:03:13。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162919；目錄保存頁 attendance-official-ivod-page-19.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是其反對當時法案設計的類比，不能改稱反對一切司法公開。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:13",
+      "recordingClock": "15:49:54–15:53:07",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025062580/details?meetingDate=114%2F06%2F27",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=19"
     },
     {
       "id": "official-2025-162815",
@@ -1960,7 +2561,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 50–50 行，沈委員伯洋發言段；以「其實很多次的變更設計，都是跟安全有關係」搜尋定位。官方目錄列整段發言 09:56:01–10:04:20、片長 00:08:19。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162815；目錄保存頁 attendance-official-ivod-page-19.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是他考察後的說明，不等同獨立工程鑑定已證明所有變更合理。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:19",
+      "recordingClock": "09:56:01–10:04:20",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025062063/details?meetingDate=114%2F06%2F25",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=19"
     },
     {
       "id": "official-2025-162706",
@@ -1990,7 +2599,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 46–47 行，沈委員伯洋發言段；以「其實我認為小編的地位應該要提升」搜尋定位。官方目錄列整段發言 10:13:23–10:24:38、片長 00:11:15。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162706；目錄保存頁 attendance-official-ivod-page-19.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。他沒有在此直接判定個別回文一定對或錯；同場也談民主基金會、臺日 NGO 交流與中國外交論述。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:15",
+      "recordingClock": "10:13:23–10:24:38",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025061210/details?meetingDate=114%2F06%2F19",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=19"
     },
     {
       "id": "official-2025-162387",
@@ -2020,7 +2637,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 2–2 行，沈委員伯洋發言段；以「連最基本的法制 ABC 都沒有遵守」搜尋定位。官方目錄列整段發言 12:41:09–12:44:26、片長 00:03:17。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162387；目錄保存頁 attendance-official-ivod-page-20.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。不能把他對前案的這句批評錯接成對所有軍人或其子女的辱罵。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:17",
+      "recordingClock": "12:41:09–12:44:26",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025060456/details?meetingDate=114%2F06%2F10",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=20"
     },
     {
       "id": "official-2025-162071",
@@ -2050,7 +2675,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 15–16 行，沈委員伯洋發言段；以「立法委員去中國根本就不是職權的行使，去敵國通敵也不是職權的行使」搜尋定位。官方目錄列整段發言 09:08:59–09:12:00、片長 00:03:01。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=162071；目錄保存頁 attendance-official-ivod-page-20.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是回應管制的權限爭議，不能斷章成『任何赴中國者都已通敵』的法律認定。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:01",
+      "recordingClock": "09:08:59–09:12:00",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025052301/details?meetingDate=114%2F05%2F29",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=20"
     },
     {
       "id": "official-2025-161905",
@@ -2080,7 +2713,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 58–58 行，沈委員伯洋發言段；以「我們都知道今年休不完的假累積到明年，明年一定也休不完」搜尋定位。官方目錄列整段發言 10:01:54–10:10:53、片長 00:08:59。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161905；目錄保存頁 attendance-official-ivod-page-21.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。他不是主張取消官兵休假，也沒有在此獨立證明每名軍人都無法休假。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:59",
+      "recordingClock": "10:01:54–10:10:53",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025052314/details?meetingDate=114%2F05%2F26",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=21"
     },
     {
       "id": "official-2025-161674",
@@ -2110,7 +2751,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 59–59 行，沈委員伯洋發言段；以「但如果不是真實的，也更應該要啟動」搜尋定位。官方目錄列整段發言 09:49:22–09:59:46、片長 00:10:24。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161674；目錄保存頁 attendance-official-ivod-page-21.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。他沒有在這段確認傳言屬實，也不是主張只憑國籍將一般人逮捕。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:24",
+      "recordingClock": "09:49:22–09:59:46",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025051672/details?meetingDate=114%2F05%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=21"
     },
     {
       "id": "official-2025-161627",
@@ -2140,7 +2790,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 17–17 行，沈委員伯洋發言段；以「不但是不認真就算了，現在人也都不在」搜尋定位。官方目錄列整段發言 15:19:21–15:21:39、片長 00:02:18。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161627；目錄保存頁 attendance-official-ivod-page-21.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這句是其對當時在野委員及議程安排的批評，不能用來推定每位藍白立委全年出勤或實際工作量。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:18",
+      "recordingClock": "15:19:21–15:21:39",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025051441/details?meetingDate=114%2F05%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=21"
     },
     {
       "id": "official-2025-161470",
@@ -2170,7 +2828,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 2–2 行，沈委員伯洋發言段；以「我覺得應該把它叫做反憲法公投。」搜尋定位。官方目錄列整段發言 11:35:27–11:38:36、片長 00:03:09。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161470；目錄保存頁 attendance-official-ivod-page-22.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。此句是對該公投的憲政批評，單靠它不能當作他本人是否贊成全面廢死的完整答案。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:09",
+      "recordingClock": "11:35:27–11:38:36",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025051441/details?meetingDate=114%2F05%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=22"
     },
     {
       "id": "official-2025-161378",
@@ -2200,7 +2866,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 25–26 行，沈委員伯洋發言段；以「如果哪一個地區的數據比較多，可能就要重兵防守等等」搜尋定位。官方目錄列整段發言 12:53:06–12:55:59、片長 00:02:53。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161378；目錄保存頁 attendance-official-ivod-page-22.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。『重兵防守』前有『哪一個地區的數據比較多』的條件，語境指警力與維安部署，不能改說他要求軍隊介入罷免或鎮壓反對者。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:53",
+      "recordingClock": "12:53:06–12:55:59",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025050934/details?meetingDate=114%2F05%2F14",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=22"
     },
     {
       "id": "official-2025-161308",
@@ -2230,7 +2905,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 43–44 行，沈委員伯洋發言段；以「如果這個標準過度嚴格，比如什麼東西完全都不能夠有中國製的時候，其實說真的廠商也很難做」搜尋定位。官方目錄列整段發言 09:28:49–09:35:43、片長 00:06:54。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161308；目錄保存頁 attendance-official-ivod-page-23.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這不是贊成敏感國防裝備可任意用中國晶片，也不宜剪成其反對非紅供應鏈。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:54",
+      "recordingClock": "09:28:49–09:35:43",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025051238/details?meetingDate=114%2F05%2F14",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=23"
     },
     {
       "id": "official-2025-161059",
@@ -2260,7 +2943,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 65–65 行，沈委員伯洋發言段；以「NGO 的動能雖然可能只占當地社會不到 1%，但是它能夠常常上街頭」搜尋定位。官方目錄列整段發言 10:22:59–10:34:44、片長 00:11:45。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161059；目錄保存頁 attendance-official-ivod-page-23.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。不到 1% 是他的概括估計，本資料庫沒有將其當作各國 NGO 人口占比統計，也不能從這句推定存在非法境外政治資助。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:45",
+      "recordingClock": "10:22:59–10:34:44",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025050167/details?meetingDate=114%2F05%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=23"
     },
     {
       "id": "official-2025-161028",
@@ -2290,7 +2981,16 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 62–62 行，沈委員伯洋發言段；以「今天廢死跟戒嚴的狀態，在臺灣不存在嘛！」搜尋定位。官方目錄列整段發言 12:46:51–12:54:43、片長 00:07:52。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=161028；目錄保存頁 attendance-official-ivod-page-23.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這句描述他認為當時的制度現況，不是自白他在其他時間支持或反對廢死，也不是要求恢復戒嚴。",
-      "quizEligible": true
+      "quizEligible": false,
+      "advancedReason": "政策陳述、條件推演或補充脈絡，留在進階資料。",
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:07:52",
+      "recordingClock": "12:46:51–12:54:43",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025050174/details?meetingDate=114%2F05%2F07",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=23"
     },
     {
       "id": "official-2025-160989",
@@ -2320,7 +3020,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 54–54 行，沈委員伯洋發言段；以「廠商自己的利益跟國家利益有時候不一定會 align」搜尋定位。官方目錄列整段發言 10:09:30–10:19:17、片長 00:09:47。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=160989；目錄保存頁 attendance-official-ivod-page-24.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這句是討論制度設計的理由，不能直接認定特定廠商有背叛或違法行為。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:47",
+      "recordingClock": "10:09:30–10:19:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025050166/details?meetingDate=114%2F05%2F07",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=24"
     },
     {
       "id": "official-2025-160844",
@@ -2350,7 +3058,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 32–32 行，沈委員伯洋發言段；以「是不是應該把這些有損軍譽或妨礙國家尊嚴的行為納入」搜尋定位。官方目錄列整段發言 09:07:57–09:12:40、片長 00:04:43。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=160844；目錄保存頁 attendance-official-ivod-page-24.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。原文是『是不是應該』的修法討論，並非宣告現行法已可對任何言論直接沒收退休金。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:04:43",
+      "recordingClock": "09:07:57–09:12:40",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025042548/details?meetingDate=114%2F05%2F01",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=24"
     },
     {
       "id": "official-2025-160490",
@@ -2380,7 +3096,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 92–93 行，沈委員伯洋發言段；以「至少針對立法委員本人應該要做到最基本程度的揭露」搜尋定位。官方目錄列整段發言 10:27:24–10:38:58、片長 00:11:34。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=160490；目錄保存頁 attendance-official-ivod-page-24.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這不是將所有助理視為間諜，也不等於已證明未揭露者犯罪。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:34",
+      "recordingClock": "10:27:24–10:38:58",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025041796/details?meetingDate=114%2F04%2F23",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=24"
     },
     {
       "id": "official-2025-160429",
@@ -2410,7 +3134,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 4–4 行，沈委員伯洋發言段；以「我不知道這邊可以問那麼多個案」搜尋定位。官方目錄列整段發言 11:05:53–11:13:12、片長 00:07:19。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=160429；目錄保存頁 attendance-official-ivod-page-24.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是對國會質詢分際的批評；他對個案數字與動機的主張未在這份摘錄中另行獨立驗證。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:07:19",
+      "recordingClock": "11:05:53–11:13:12",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025041794/details?meetingDate=114%2F04%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=24"
     },
     {
       "id": "official-2025-160381",
@@ -2443,7 +3175,15 @@
       "quizEligible": true,
       "sameEventAsExisting": [
         "voting-contempt-11437"
-      ]
+      ],
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:08",
+      "recordingClock": "13:31:28–13:34:36",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025041686/details?meetingDate=114%2F04%2F18",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=25"
     },
     {
       "id": "official-2025-160067",
@@ -2473,7 +3213,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 16–16 行，沈委員伯洋發言段；以「選錯的人關稅 125 嘛！」搜尋定位。官方目錄列整段發言 10:26:28–10:39:36、片長 00:13:08。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=160067；目錄保存頁 attendance-official-ivod-page-26.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。後面另問洗產地及離島建設條例。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:13:08",
+      "recordingClock": "10:26:28–10:39:36",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025040113/details?meetingDate=114%2F04%2F10",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=26"
     },
     {
       "id": "official-2025-159843",
@@ -2503,7 +3251,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 53–53 行，沈委員伯洋發言段；以「退休軍官很容易成為所謂的中間人」搜尋定位。官方目錄列整段發言 09:59:05–10:08:07、片長 00:09:02。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=159843；目錄保存頁 attendance-official-ivod-page-26.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是他提出的風險類型，不能將所有退休軍官或旅遊從業者都標記為共諜。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:02",
+      "recordingClock": "09:59:05–10:08:07",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025032788/details?meetingDate=114%2F04%2F02",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=26"
     },
     {
       "id": "official-2025-159313",
@@ -2533,7 +3289,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 115–116 行，沈委員伯洋發言段；以「那你不是通過一個法在幫助中國來蒐集全臺灣人民的個資嗎？」搜尋定位。官方目錄列整段發言 17:01:41–17:17:57、片長 00:16:16。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=159313；目錄保存頁 attendance-official-ivod-page-27.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。此句是他的指控及反問，不能僅靠發言就確認該網站確有中國 APT 攻擊或全臺個資已遭竊。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:16:16",
+      "recordingClock": "17:01:41–17:17:57",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025031211/details?meetingDate=114%2F03%2F18",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=27"
     },
     {
       "id": "official-2025-159222",
@@ -2563,7 +3327,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 70–70 行，沈委員伯洋發言段；以「我看他們當時可能也只是忘記砍而已」搜尋定位。官方目錄列整段發言 10:28:58–10:39:19、片長 00:10:21。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=159222；目錄保存頁 attendance-official-ivod-page-27.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。後續也談海外識讀教育與僑生仲介查核。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:21",
+      "recordingClock": "10:28:58–10:39:19",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025031215/details?meetingDate=114%2F03%2F17",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=27"
     },
     {
       "id": "official-2025-159084",
@@ -2593,7 +3365,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 46–46 行，沈委員伯洋發言段；以「如果遠端可以抹除的話可能更快」搜尋定位。官方目錄列整段發言 10:15:13–10:25:17、片長 00:10:04。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=159084；目錄保存頁 attendance-official-ivod-page-27.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是詢問軍事裝置管理方案，不能說政府當時已具備對所有民眾手機任意清除的權力或能力。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:04",
+      "recordingClock": "10:15:13–10:25:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025030702/details?meetingDate=114%2F03%2F13",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=27"
     },
     {
       "id": "official-2025-158952",
@@ -2623,7 +3403,18 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 12–12 行，沈委員伯洋發言段；以「你們的手段是赤裸裸的暴力跟傲慢。」搜尋定位。官方目錄列整段發言 10:54:09–10:59:33、片長 00:05:24。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158952；目錄保存頁 attendance-official-ivod-page-28.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。他的『暴力』指這些議事與政治作法，不能剪成此段已證明個別委員有刑法暴力犯罪。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 14,
+      "contrastReason": "用赤裸裸的暴力與傲慢描述選罷法修法作法，屬議事評價。",
+      "contrastCriterion": "強烈政治批評",
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:05:24",
+      "recordingClock": "10:54:09–10:59:33",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025021054/details?meetingDate=114%2F02%2F11",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=28"
     },
     {
       "id": "official-2025-158903",
@@ -2653,7 +3444,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 12–13 行，沈委員伯洋發言段；以「因為都是中國嘛，全部都是中國做的。」搜尋定位。官方目錄列整段發言 09:41:23–09:52:05、片長 00:10:42。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158903；目錄保存頁 attendance-official-ivod-page-28.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這份紀錄能證明他如此斷言，不能據此認定各件斷纜都已經調查證實由中國政府蓄意破壞；個案事故原因、涉案船籍與國家指揮需另證。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:42",
+      "recordingClock": "09:41:23–09:52:05",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025011024/details?meetingDate=114%2F01%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=28"
     },
     {
       "id": "official-2025-158604",
@@ -2683,7 +3482,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 27–27 行，沈委員伯洋發言段；以「對他們來講永遠就是挑釁」搜尋定位。官方目錄列整段發言 09:48:38–10:00:05、片長 00:11:27。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=158604；目錄保存頁 attendance-official-ivod-page-28.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。後面也談外交部與陸委會分工。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:27",
+      "recordingClock": "09:48:38–10:00:05",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2024122546/details?meetingDate=114%2F01%2F02",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=28"
     },
     {
       "id": "official-2025-166619",
@@ -2713,7 +3520,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 54–54 行，沈委員伯洋發言段；以「一對十、一對七，對我來講這個比例都是太高了」搜尋定位。官方目錄列整段發言 10:04:19–10:15:32、片長 00:11:13。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166619；目錄保存頁 attendance-official-ivod-page-13.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。這是照護政策主張，不宜因資料庫編輯目的把它也稱作失言或辱罵。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:13",
+      "recordingClock": "10:04:19–10:15:32",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025121933/details?meetingDate=114%2F12%2F24",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=13"
     },
     {
       "id": "official-2025-166476",
@@ -2743,7 +3558,15 @@
       "evidenceLocator": "官方全文發言紀錄，保存純文字第 29–29 行，沈委員伯洋發言段；以「這個有可能是法律戰的一個前哨戰」搜尋定位。官方目錄列整段發言 10:54:19–11:06:09、片長 00:11:50。此為會議時鐘起迄，未核句內影片秒數。",
       "localDateEvidence": "research/attendance-official-ivod-directory.json，ivod_id=166476；目錄保存頁 attendance-official-ivod-page-13.html",
       "inferenceLimit": "本卡能核對公開發言歸屬及完整語境；政治批評、類比與風險研判不等於已被獨立證明的事實，精選語料亦不能推算平日言論比例或人格真假。『有可能』是風險研判，這段沒有獨立證實每個境外使用者都會遭中國起訴。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:50",
+      "recordingClock": "10:54:19–11:06:09",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2025121186/details?meetingDate=114%2F12%2F17",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=13"
     },
     {
       "id": "control-yuan-investigation-capacity-171089",
@@ -2772,7 +3595,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/171089.txt",
       "sourceSHA256": "f53ffdfc29679e5707072b6a4da3de1346c91c3f9f2bc56b07d256ecf100774c",
       "inferenceLimit": "這是對制度替代方案與部分立委能力的評價；不能改寫成所有立委都無能力，或認定監察院必須永遠保留。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 171089,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:42",
+      "recordingClock": "09:06:44–09:17:26",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026080662/details?meetingDate=115%2F08%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=1"
     },
     {
       "id": "diplomacy-budget-cuts-171056",
@@ -2801,7 +3633,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/171056.txt",
       "sourceSHA256": "26bcebb7a7f78386a2b0f365d77d2355ef0786892701bb5f65ab1a4fa9b748c5",
       "inferenceLimit": "精準打擊是發言者的政治判斷；此引文未獨立證實刪預算者有破壞外交的主觀動機。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 171056,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:32",
+      "recordingClock": "10:43:24–10:54:56",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026081385/details?meetingDate=115%2F08%2F19",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=1"
     },
     {
       "id": "drug-driving-criminal-law-170937",
@@ -2830,7 +3671,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170937.txt",
       "sourceSHA256": "52e12a5bd57bebc8f8305f85ad8867dd88c7e73353f1caa800d09356c4bdb802",
       "inferenceLimit": "不能由此聲稱他反對全部驗毒，亦不能把他提出的風險問題改成已被證實的全部檢測失準。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 170937,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:15",
+      "recordingClock": "10:25:24–10:35:39",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026080549/details?meetingDate=115%2F08%2F12",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=2"
     },
     {
       "id": "food-testing-reporting-170854",
@@ -2859,7 +3709,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170854.txt",
       "sourceSHA256": "ea43b8110d2b2dfb2121e05901b6e4d5d71b06dae955bf3736e85563a1a9dbc1",
       "inferenceLimit": "這段不等於已證明某一食品事件無風險，也不是對特定受害者的指責。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 170854,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:46",
+      "recordingClock": "15:12:03–15:18:49",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026073134/details?meetingDate=115%2F08%2F05",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=2"
     },
     {
       "id": "han-kuang-disinformation-170816",
@@ -2888,7 +3747,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170816.txt",
       "sourceSHA256": "596f093c8690fee74a8a5476115fc97439348fb47acf377145cef84f34af8b00",
       "inferenceLimit": "這是對中國官方敘事的挖苦，不是承認自己犯罪，也不能將官員或中國全體民眾混為一談。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 170816,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:01",
+      "recordingClock": "09:59:27–10:08:28",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026073015/details?meetingDate=115%2F08%2F05",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=2"
     },
     {
       "id": "drone-law-committee-route-170532",
@@ -2917,7 +3785,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170532.txt",
       "sourceSHA256": "a78e455a3251aefea33bf5484a917a3a7748b548e08616162371f518e6bb937d",
       "inferenceLimit": "不能只憑這個形容詞認定相關法案違法或提案人犯罪；應連同條文爭議閱讀。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 170532,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:41",
+      "recordingClock": "12:14:45–12:24:26",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070904/details?meetingDate=115%2F07%2F16",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=3"
     },
     {
       "id": "military-leave-childcare-170344",
@@ -2946,7 +3823,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170344.txt",
       "sourceSHA256": "be9c8cb5914327a06abe3952780e36b856f3c228a5c99db40d56e88e4b0c6bfb",
       "inferenceLimit": "屬一般政策提問；不能作為不關心育兒的反證，也不能等同相關政策已全數落實。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 170344,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:13:24",
+      "recordingClock": "10:42:47–10:56:11",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070149/details?meetingDate=115%2F07%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=3"
     },
     {
       "id": "school-drug-prevention-170271",
@@ -2975,7 +3861,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170271.txt",
       "sourceSHA256": "4ae02b4d631df831a74143e00acdd05ae449cbdda61163f736bb5246bb06f023",
       "inferenceLimit": "這段明確有反毒與校園保護主張；不能改述成贊成發毒，也不能藉此概括全部校園驗毒制度的立場。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 170271,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:12:25",
+      "recordingClock": "09:21:14–09:33:39",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026070147/details?meetingDate=115%2F07%2F06",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=3"
     },
     {
       "id": "coastguard-legal-definitions-170210",
@@ -3004,7 +3899,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/170210.txt",
       "sourceSHA256": "561072b1f261365efdc79267ac52518c0678c298c409b4387618fcdf9bc60ddf",
       "inferenceLimit": "不能去掉海域管轄與中國船舶的前提，剪成他主張可以任意捏造所有事實。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 170210,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:45",
+      "recordingClock": "10:26:26–10:35:11",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026062411/details?meetingDate=115%2F07%2F01",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=3"
     },
     {
       "id": "injury-benefit-notification-169869",
@@ -3033,7 +3937,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/169869.txt",
       "sourceSHA256": "4f86904204d215901b83077f79836b438759f51914baa0178b8ae4be132e8cdd",
       "inferenceLimit": "這是權益提醒及行政流程提問，並未僅憑個案證實所有退伍者都沒有被告知。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 169869,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:14",
+      "recordingClock": "10:51:03–11:02:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026060379/details?meetingDate=115%2F06%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=4"
     },
     {
       "id": "cross-strait-cyber-literacy-169586",
@@ -3062,7 +3975,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/169586.txt",
       "sourceSHA256": "d968179a9d21621c8ae06648b7c2caca443c28575e69eb062408c94e52570af2",
       "inferenceLimit": "不是對全民資安能力的調查，也不能把這句當作受評者都確實違反資安規範的證據。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 169586,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:52",
+      "recordingClock": "09:28:35–09:37:27",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026052085/details?meetingDate=115%2F05%2F25",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=4"
     },
     {
       "id": "defense-budget-double-standard-169429",
@@ -3091,7 +4013,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/169429.txt",
       "sourceSHA256": "e466ca7bd7c32b78bd05f3cf7e48ea4e0e32ac72ebb905da1cad2b2062ea1de6",
       "inferenceLimit": "必須保留針對兩種預算處理方式的指涉，不能改成法院已認定任何人詐欺。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 169429,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:38",
+      "recordingClock": "16:00:28–16:16:06",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026051351/details?meetingDate=115%2F05%2F19",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=5"
     },
     {
       "id": "rongbang-industry-criticism-169326",
@@ -3120,7 +4051,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/169326.txt",
       "sourceSHA256": "33566ab8409365256547e602f3f32f7dc7ce0534fd11b716675f72d610cf493f",
       "inferenceLimit": "此句不能證明所有圖利疑慮都不實，也不能以他的稱呼代替對各具體計畫的查核。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 169326,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:55",
+      "recordingClock": "11:01:31–11:13:26",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026050723/details?meetingDate=115%2F05%2F11",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=5"
     },
     {
       "id": "military-purchase-bill-floor-169278",
@@ -3149,7 +4089,19 @@
       "sourceFile": "research/quotes-v9-sources-2026/169278.txt",
       "sourceSHA256": "5f8bfd47207b0f6d4eae48d43931a406c6d3c038229fd8fff07fa90588b99467",
       "inferenceLimit": "不能將政治上的「騙人」直接改述為刑法詐欺定罪，亦不能省去爭論的採購項目。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 15,
+      "contrastReason": "軍購辯論中以騙人指控對手，不是詐欺罪的司法結論。",
+      "contrastCriterion": "強烈政治批評",
+      "archiveTier": "featured",
+      "ivodId": 169278,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:15",
+      "recordingClock": "15:04:33–15:07:48",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026050618/details?meetingDate=115%2F05%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=5"
     },
     {
       "id": "zuoying-highrise-security-169142",
@@ -3178,7 +4130,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/169142.txt",
       "sourceSHA256": "d41645b23264f456f98a3c74e00724f691ce3e5d081fdacf43e8bcdf52375c3c",
       "inferenceLimit": "不能把他詢問風險改成已證明具體住戶或建商犯罪，也不是對都市開發的一概反對。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 169142,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:20",
+      "recordingClock": "11:20:57–11:27:17",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026042866/details?meetingDate=115%2F05%2F06",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=6"
     },
     {
       "id": "military-disclosure-criticism-168855",
@@ -3207,7 +4168,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168855.txt",
       "sourceSHA256": "27d99369ea8fab6ba065875d74f25cebc81c7b0579f5283d6f0aa4a90160238b",
       "inferenceLimit": "惡意造謠是發言者對特定聲音的定性；不能推論所有採購透明度質疑皆不實或有惡意。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 168855,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:13:37",
+      "recordingClock": "09:56:24–10:10:01",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026042348/details?meetingDate=115%2F04%2F27",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=6"
     },
     {
       "id": "veteran-care-capacity-168696",
@@ -3236,7 +4206,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168696.txt",
       "sourceSHA256": "9febc0f9759572e5485354e6d90026f84183640d4ee59c803918df561a5ede00",
       "inferenceLimit": "不能把他詢問是否資料錯誤改成已查出造假，也不能由一句推算全國長照實際供給。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 168696,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:29",
+      "recordingClock": "10:19:14–10:25:43",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026041698/details?meetingDate=115%2F04%2F22",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=6"
     },
     {
       "id": "korea-entry-card-china-pressure-168550",
@@ -3265,7 +4244,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168550.txt",
       "sourceSHA256": "aa48a19f697f1538f4828f34f6cd67fc58429e9c3428784b9a9cb71466364f00",
       "inferenceLimit": "不能去掉韓國入境卡與交流的語境，改成他主張所有問題均應怪中國；中國施壓的具體因果需另核。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 168550,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:09:20",
+      "recordingClock": "10:37:26–10:46:46",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026040943/details?meetingDate=115%2F04%2F15",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=6"
     },
     {
       "id": "cross-strait-tourism-risk-168490",
@@ -3294,7 +4282,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168490.txt",
       "sourceSHA256": "322539ebad6ce920a0d3c98e3fbdfaa6b2b8ede2d64337bfe999b698171ee9e7",
       "inferenceLimit": "不能把風險論直接改成已證實所有中國觀光客犯罪，也不能省去雙方審核與協商的背景。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 168490,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:42",
+      "recordingClock": "12:10:52–12:22:34",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026040944/details?meetingDate=115%2F04%2F13",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=6"
     },
     {
       "id": "healthcare-face-recognition-168315",
@@ -3323,7 +4320,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168315.txt",
       "sourceSHA256": "ac273f621c266a30cdf7b290434aba8da7d9b59bb76606f54d2fd417c015f31f",
       "inferenceLimit": "這是隱私風險提醒，不表示已證實榮總外洩資料，亦不是反對所有智慧照護科技。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 168315,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:06:36",
+      "recordingClock": "09:25:42–09:32:18",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026033104/details?meetingDate=115%2F04%2F09",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=7"
     },
     {
       "id": "party-leaders-china-review-168194",
@@ -3352,7 +4358,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168194.txt",
       "sourceSHA256": "81a73d5529e03e7c7e14b31b82959d4886618d5b745a65f58247123ffbdf6700",
       "inferenceLimit": "不能把他提出的預防性修法主張，改成已證實鄭麗文接受不法指示；也不是針對所有一般國民赴中。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 168194,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:15:42",
+      "recordingClock": "09:00:46–09:16:28",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026032551/details?meetingDate=115%2F04%2F07",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=7"
     },
     {
       "id": "budget-needle-metaphor-168141",
@@ -3381,7 +4396,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168141.txt",
       "sourceSHA256": "d9d45bf83299b16dee687f734af783d1877b5f74cf97b4100f9894fd5d67b4eb",
       "inferenceLimit": "不能字面化為暴力或特定採購，也不能把被他稱為謊言的全部主張當作已獨立查核。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 168141,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:11:42",
+      "recordingClock": "11:37:10–11:48:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026032672/details?meetingDate=115%2F04%2F01",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=7"
     },
     {
       "id": "lu-flight-change-sarcasm-168014",
@@ -3410,7 +4434,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/168014.txt",
       "sourceSHA256": "5893f608ab489a88b376bbdf604b34d67a1406ba3032f157151551caaf80a6d1",
       "inferenceLimit": "不是已查出班機或電影造成態度改變，也不能省略他對支持軍購表態的正面期待。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 168014,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:12:07",
+      "recordingClock": "10:18:07–10:30:14",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026032671/details?meetingDate=115%2F03%2F30",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=7"
     },
     {
       "id": "military-bill-election-motive-167795",
@@ -3439,7 +4472,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/167795.txt",
       "sourceSHA256": "de9d47d196af6856b428e77f7fe64aac79850431ada4f2a645a0d0683ce4a0db",
       "inferenceLimit": "不能把選舉動機當成已證實事實；機密會議出席與各項軍售數字仍應分別查核。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 167795,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:08:27",
+      "recordingClock": "12:05:30–12:13:57",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026031817/details?meetingDate=115%2F03%2F23",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=8"
     },
     {
       "id": "nationality-law-criticism-167742",
@@ -3468,7 +4510,19 @@
       "sourceFile": "research/quotes-v9-sources-2026/167742.txt",
       "sourceSHA256": "8f466438f611970978c645652d8ee6bf1fcf965a4790513155348edfb79ee8b6",
       "inferenceLimit": "不能擴大為批評全部新住民或全體選民，也不能將其法律見解當作終局司法結論。",
-      "quizEligible": true
+      "quizEligible": true,
+      "editorialRank": 13,
+      "contrastReason": "直接批評不懂法律，已有整段官方發言。",
+      "contrastCriterion": "對人貶抑",
+      "archiveTier": "featured",
+      "ivodId": 167742,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:03:17",
+      "recordingClock": "11:43:47–11:47:04",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026031818/details?meetingDate=115%2F03%2F20",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=8"
     },
     {
       "id": "ill-gotten-assets-floor-167362",
@@ -3497,7 +4551,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/167362.txt",
       "sourceSHA256": "af4de7c89d6ead0d3f27ab63b2ad20351558120441fb83aea98b0fce955ba014",
       "inferenceLimit": "選舉動機與財產處分效果是其指控；不能僅憑發言認定提案人侵占或圖利的法律責任。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 167362,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:02:15",
+      "recordingClock": "16:36:24–16:38:39",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026012847/details?meetingDate=115%2F01%2F30",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=9"
     },
     {
       "id": "temu-defense-bill-167234",
@@ -3526,7 +4589,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/167234.txt",
       "sourceSHA256": "c917801270ab564d4ae212ef998b87f373fdcf1f06c8f8cf55b33a78929785b1",
       "inferenceLimit": "這是挖苦縮減或拼湊版本的比喻，不代表任何提案真從購物網站買武器，也不是採購弊案證據。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 167234,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:50",
+      "recordingClock": "10:18:04–10:28:54",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026012317/details?meetingDate=115%2F01%2F26",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=10"
     },
     {
       "id": "presidential-impeachment-floor-167204",
@@ -3555,7 +4627,16 @@
       "sourceFile": "research/quotes-v9-sources-2026/167204.txt",
       "sourceSHA256": "7b26f054d8c40a51aeacb2fc3beaf2587a163736c1e1888ed99e364fc7e640fa",
       "inferenceLimit": "不能當成已證實任何政黨所有成員都希望台灣不好，亦不取代對彈劾理由的逐項法律檢驗。",
-      "quizEligible": true
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "ivodId": 167204,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:10:19",
+      "recordingClock": "10:20:14–10:30:33",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026011472/details?meetingDate=115%2F01%2F21",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=10"
     },
     {
       "id": "surrogacy-patriarchy-166968",
@@ -3584,13 +4665,58 @@
       "sourceFile": "research/quotes-v9-sources-2026/166968.txt",
       "sourceSHA256": "c2ae43eb7674f1d627bca4c1dd4f742d96ba188264ab76a8206ad7548241f8be",
       "inferenceLimit": "不能剪成他反對所有人工生殖或女同志生育，也不能以這一句證明任何具體家庭確有強迫代孕。",
-      "quizEligible": false
+      "quizEligible": false,
+      "archiveTier": "advanced",
+      "ivodId": 166968,
+      "videoLabel": "完整發言片段",
+      "videoDuration": "00:05:42",
+      "recordingClock": "09:41:10–09:46:52",
+      "recordingClockNote": "整段發言的會議時鐘起訖，不是句內秒數。",
+      "meetingInfoUrl": "https://ppg.ly.gov.tw/ppg/sittings/2026010533/details?meetingDate=115%2F01%2F08",
+      "fullVideoUrl": null,
+      "videoLocatorSource": "https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049?page=11"
+    },
+    {
+      "id": "death-book-title-2018",
+      "eventId": "book-talk-death-penalty-2018",
+      "title": "介紹《死刑肯定論》時說書名帶諷刺",
+      "speaker": "沈伯洋",
+      "quote": "原則上算是一個詐欺的一本書名",
+      "date": "2018（原片上架：2018-11-26）",
+      "eventDate": "2018",
+      "datePrecision": "year-event;day-video-upload",
+      "nominationPhase": "before",
+      "medium": "spoken",
+      "topic": "死刑與書籍解讀",
+      "venue": "法律扶助基金會「逍遙法外」跨界講座，介紹《死刑肯定論》",
+      "frontContext": "他正在解讀書名、作者與論證。這句的來源是ETtoday直接引述，不是本次已逐句核聽。",
+      "context": "2018書介中，他先以詐欺書名開玩笑，接著談支持與反對死刑理論如何被作者逐一檢討，以及把執行基礎放在被害人感情會遇到的難題。2026受訪則強調作者最後支持保留死刑，並說與自己當前立場較近；同一本書的不同介紹重點可並列。書／作者的論證與沈伯洋本人完整立場需分開。",
+      "sourceType": "ETtoday直接引述已讀全文；法扶官方原片與頻道已核，句子原音未逐句聽校",
+      "verificationLevel": "media-direct-quotation-plus-primary-video-metadata",
+      "url": "https://www.ettoday.net/news/20261007/3250848.htm",
+      "supportingUrls": [
+        "https://tw.news.yahoo.com/沈伯洋參與審定-死刑肯定論-遭挖出自認是-詐欺的書名-100639513.html"
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=ZxGS-DdNt-Q&t=72s",
+      "videoLabel": "媒體所指段落",
+      "timecode": "01:12起（媒體播放定位）",
+      "fullVideoUrl": "https://www.youtube.com/watch?v=ZxGS-DdNt-Q",
+      "fullVideoLabel": "法扶完整講座（約67分鐘）",
+      "videoDuration": "約67分鐘",
+      "evidenceLocator": "ETtoday 2026-10-07 17:38郭運興報導，介紹2018講座的段落；內嵌官方YouTube明載start=72。01:12是媒體指定播放起點，不是本輪核聽的句子精確起點。",
+      "videoAvailabilityNote": "已看原片01:12沈本人持麥畫面；無可用字幕，未逐句核聽，不宣稱本次核過原音。",
+      "inferenceLimit": "可確認其書介用語有當日媒體直接引述；不能把書名詐欺改成承認選舉詐欺，也不能只用審定這本書推定任何時期完整死刑立場。",
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "editorialRank": 18,
+      "contrastCriterion": "同題政策對照",
+      "contrastReason": "2018介紹同一本書強調反諷，2026受訪強調作者保留死刑；應直接對照兩次介紹的重點與自我定位。"
     }
   ],
   "comparisons": [
     {
       "id": "community-text-and-response",
-      "title": "社區供應：早期條件句與今天的回應",
+      "title": "2014確實提出社區供應選項，2026如何說明？",
       "earlier": {
         "date": "2014-09-01",
         "url": "https://www.thinkingtaiwan.net/content/3055",
@@ -3599,14 +4725,20 @@
       "later": {
         "date": "2026-10-06",
         "url": "https://puma.taipei/fact-checks/fact-check-21",
-        "summary": "競選官網否認社區發毒的指控，稱早期文字是在談減害，並以台北既有美沙冬與針具措施說明。"
+        "summary": "競選官網否認社區發毒的指控，稱早期文字是在談減害，並以台北既有美沙冬與針具措施說明。",
+        "additionalSources": [
+          {
+            "url": "https://www.ftnn.com.tw/news/588757",
+            "title": "2026-10-20節目方報導：本人解釋替代療法，並明說反對加拿大安全注射計畫。"
+          }
+        ]
       },
-      "finding": "早期原文確實有這段條件式建議，並非只由對手創造的字句；近期競辦則給出減害解釋。",
-      "limit": "原文未寫明藥物、取得程序與監督方式，無法只靠該句判定是否等同現行制度；也不是他實際發放毒品的行為紀錄。"
+      "finding": "本人2014文章確實出現這項條件式建議，字句不是對手憑空創造。2026回應則把它解釋為減害措施；應逐項對照藥物種類、取得程序及監督方式。",
+      "limit": "原文未寫明藥名或實施程序；不能直接等同任意發毒，也不能只憑今天的解釋就認定當年與現行制度完全相同。"
     },
     {
       "id": "school-screening",
-      "title": "校園篩檢：先核對處理模式，再談有沒有轉變",
+      "title": "當年用「噁爛」批評驗尿，今天提出什麼篩檢？",
       "earlier": {
         "date": "2014-09-01",
         "url": "https://www.thinkingtaiwan.net/content/3055",
@@ -3617,24 +4749,56 @@
         "url": "https://puma.taipei/policies/%E6%95%99%E8%82%B2%E6%94%BF%E7%AD%96",
         "summary": "官網教育政策提出篩檢、簡短處遇與轉介治療（SBIRT），優先治療及輔導。"
       },
-      "finding": "早年批評特定驗尿模式，今天確實提出篩檢及醫療轉介；兩份紀錄都可直接查閱。",
-      "limit": "模式與篩後處理不同，不能把反對當年的做法改述成反對所有校園篩檢，或單憑篩檢二字認定矛盾。"
+      "finding": "當年對校園驗尿模式的措辭強烈；今天政策確實納入篩檢。兩者對象、篩後處理與是否導向懲罰，應直接列出比較。",
+      "limit": "若處理制度不同，不能省略差別後判定完全自相矛盾。"
     },
     {
       "id": "death-penalty-scope",
-      "title": "死刑：早年評論與「未提廢死修法」回答的是同一題嗎？",
+      "title": "「沒提修法」沒有回答全部立場；同一本書的兩次說法呢？",
       "earlier": {
-        "date": "2014-10-14",
-        "url": "https://www.thinkingtaiwan.net/content/3256",
-        "summary": "本人文章質疑精神障礙死刑的認定標準、司法偏見與形式法律討論，並挖苦支持死刑的政治人物。"
+        "date": "2018（原片上架2018-11-26）",
+        "url": "https://www.ettoday.net/news/20261007/3250848.htm",
+        "quote": "原則上算是一個詐欺的一本書名",
+        "summary": "2018書介以反諷解讀書名與作者，並討論被害人感情作為執行根據的難題。原句目前以媒體直接引述核對，未逐句核聽。",
+        "videoUrl": "https://www.youtube.com/watch?v=ZxGS-DdNt-Q&t=72s",
+        "videoLabel": "法扶完整講座，媒體所指01:12起",
+        "timecode": "媒體定位，未逐句核聽"
       },
       "later": {
         "date": "2026-10-07",
         "url": "https://puma.taipei/fact-checks/fact-check-22",
-        "summary": "競選官網表示從未提出廢除死刑的修法主張，並提到曾審定《死刑肯定論》及預防犯罪。"
+        "summary": "競選官網表示從未提出廢除死刑的修法主張，並提到曾審定《死刑肯定論》及預防犯罪。",
+        "additionalSources": [
+          {
+            "url": "https://www.youtube.com/watch?v=awX7tVlEWxU&t=3095s",
+            "title": "2026-10-07完整專訪：51:35起談該書與目前立場（英文自動字幕定位，中文逐句待核）。"
+          }
+        ]
       },
-      "finding": "早期價值評論與後來是否提出修法，是兩個可分開追問的問題；新說法沒有抹去早期文章。",
-      "limit": "這些材料不足以完整判定其死刑立場如何演變；2012貼文及2018書介仍列待核，不把審定一本書直接等同贊同其全部立場。"
+      "finding": "未提廢死法案只回答立法行動，審定一本書也不足替代價值表態。2018書介強調反諷，2026受訪強調作者選擇死刑且與當前立場相近，兩種介紹重點值得並列追問。",
+      "limit": "須將書／作者與本人立場分開；目前材料不能直接證明本人自承刻意說謊。"
+    },
+    {
+      "id": "cannabis-conditions",
+      "title": "大麻合法化：反對本身，還是目前沒有配套？",
+      "earlier": {
+        "date": "2014-08-20（依2026報導引述，完整本人原貼仍待核）",
+        "url": "https://www.cna.com.tw/news/aipl/202610060230.aspx",
+        "summary": "羅智強引用舊貼文，稱問題需要用合法化解決；此輪未取得本人完整原貼。"
+      },
+      "later": {
+        "date": "2026-10-07",
+        "url": "https://www.youtube.com/watch?v=awX7tVlEWxU&t=606s",
+        "quote": "我認為台灣現在沒有辦法走大麻合法化",
+        "locator": "10:11連續燒錄字幕；從10:06看前文",
+        "summary": "先說不主張除罪化、不贊成大麻合法化；後說配套、污名與顧慮未解下，台灣現在沒有辦法走大麻合法化。",
+        "videoUrl": "https://www.youtube.com/watch?v=awX7tVlEWxU&t=606s",
+        "videoLabel": "完整專訪，從10:06看上下文",
+        "timecode": "10:11（畫面字幕已核）",
+        "verification": "影片燒錄字幕逐格核對，未另獨立聽校原音。"
+      },
+      "finding": "近期專訪同時有不主張推動的明示回答，以及配套措施、污名與顧慮未解的條件式理由。這些理由值得具體追問：若條件改變，是否仍反對？",
+      "limit": "不能把條件式理由改成已承諾未來推動，也不能省略目前明示不主張的回答。"
     }
   ],
   "pending": [
@@ -3644,14 +4808,6 @@
       "reason": "目前取得媒體引述，尚未核到本人完整原貼；不收進確證題庫。",
       "missing": "本人 Facebook 原始貼文、完整前後文及精確日期",
       "url": "https://www.cna.com.tw/news/aipl/202610070274.aspx"
-    },
-    {
-      "id": "death-penalty-book-talk-2018",
-      "title": "2018法扶講座的書名說法",
-      "reason": "媒體稱他介紹書中作者的論證及反諷，不宜將書介直接當成本人完整死刑主張。2026 報導他再以該書說明目前立場，值得核對完整兩段。",
-      "missing": "2018 發言精確時間碼及核聽、2026 完整受訪影片",
-      "url": "https://tw.wa01.com/a/chen-bo-yang-2018ceng-shuo-si-xing-ken-ding-lun-shi-zha-qi-shu-ming-rang-da-jia-zhi-dao-si-xing-shi-qi-guai-de-shi-qing.html",
-      "videoUrl": "https://www.youtube.com/watch?v=ZxGS-DdNt-Q"
     },
     {
       "id": "cannabis-facebook-20140820",
@@ -3682,9 +4838,9 @@
   },
   "updatedAt": "2026-10-21",
   "quizCounts": {
-    "segments": 87,
-    "events": 81,
-    "pre": 78,
+    "segments": 73,
+    "events": 67,
+    "pre": 64,
     "post": 9
   },
   "expansion": {
@@ -3695,5 +4851,70 @@
     "dateEvidence": "2026-10-20 official directory snapshot",
     "sourceCutoffUnchangedForLegislation": true,
     "facebookLead": "https://www.facebook.com/reel/1108599725382775/"
+  },
+  "advancedCounts": {
+    "segments": 56,
+    "events": 56,
+    "pre": 49,
+    "post": 7
+  },
+  "featuredCounts": {
+    "segments": 21,
+    "events": 20,
+    "pre": 21,
+    "post": 0
+  },
+  "editorial": {
+    "version": 10,
+    "updatedAt": "2026-10-21",
+    "defaultPeriod": "pre",
+    "defaultSort": "editorial",
+    "rankedIds": [
+      "legislature-hypocrite-152732",
+      "iq-low-20260122",
+      "name-retort-20241204",
+      "assistant-law-blind-167396",
+      "carnation-law-162993",
+      "read-first-166377",
+      "official-2024-military-police-comparison-158300",
+      "official-2024-let-assistants-speak-152182",
+      "official-2024-law-cybersecurity-not-understood-151739",
+      "official-2024-bill-explanation-shame-152710",
+      "official-2024-self-consequences-158463",
+      "voting-contempt-11437",
+      "nationality-law-criticism-167742",
+      "official-2025-158952",
+      "military-purchase-bill-floor-169278",
+      "china-scam-group-156994",
+      "official-2024-kmt-only-own-people-157873",
+      "death-book-title-2018",
+      "school-urine-2014",
+      "community-drug-support-2014",
+      "legislator-iq-satire-2014"
+    ],
+    "advancedPolicyIds": [
+      "blocked-laws-security-164128",
+      "criteria-not-for-china-166997",
+      "military-pay-zero-electricity-162424",
+      "official-2024-law-degree-irony-157412",
+      "official-2024-foreign-affairs-conspiracy-warning-157093",
+      "official-2024-local-finance-false-question-156487",
+      "official-2024-taiwanese-soul-153155",
+      "official-2024-electricity-zero-hypothesis-150668",
+      "official-2025-165534",
+      "official-2025-164868",
+      "official-2025-163270",
+      "official-2025-161674",
+      "official-2025-161378",
+      "official-2025-161028",
+      "official-2024-fifth-column-false-issue-153786"
+    ],
+    "criteria": [
+      "對人貶抑：姓名、智商、識字或專業能力的挖苦",
+      "強烈政治批評：可恥、騙人、傲慢等，保留被批評對象與議題",
+      "強烈政治比喻：武警、解放軍、詐騙集團等比喻，保留非字面意義",
+      "同題政策對照：比較相同問題、適用條件及制度；未提修法與價值立場分開問"
+    ],
+    "method": "人工編輯排序，優先正式提名前、措辭明確、來源可追、對人挖苦或同題可對照的句子。這不是統計學量表，也不是人格真假評分。"
   }
 }
