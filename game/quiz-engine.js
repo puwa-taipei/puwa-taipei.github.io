@@ -109,7 +109,8 @@
     $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
     $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
     $('quiz-no').setAttribute('aria-label', '不是' + speaker + '的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是' + speaker + '的原話，向右選');
-    const pool = () => state.quotes.filter(q => q.quizEligible !== false).filter(q => { const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || state.period === 'all' || (state.period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate); });
+    const eligible = q => window.RecordsQuizShareCore?.isQuizEligible ? window.RecordsQuizShareCore.isQuizEligible(q) : q.quizEligible !== false && q.id !== 'legislature-hypocrite-152732';
+    const pool = () => state.quotes.filter(eligible).filter(q => { const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || state.period === 'all' || (state.period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate); });
     const announce = message => { const live = $('announcement') || document.getElementById('announcement'); if (live) live.textContent = message; };
     function info() {
       const rows = pool(), seen = rows.filter(q => state.seen.has(q.id)).length, period = {pre:'正式提名前', post:'正式提名起', all:'所有時期'}[state.period];

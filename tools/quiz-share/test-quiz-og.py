@@ -92,7 +92,7 @@ class ContractTests(unittest.TestCase):
         self.assertIn(q["date"], "".join(parsed.text))
         self.assertIn(q["sourceType"], "".join(parsed.text))
         self.assertEqual(parsed.body["data-source-version"], "a" * 64)
-        self.assertEqual(parsed.scripts, ["/game/quiz-share-core.js?v=18", "/game/quiz-share-landing.js?v=18"])
+        self.assertEqual(parsed.scripts, ["/game/quiz-share-core.js?v=22", "/game/quiz-share-landing.js?v=18"])
         self.assertIn(G.SELF_REPORTED, "".join(parsed.text))
         self.assertTrue(any(link.get("id") == "quiz-share-challenge" for link in parsed.links))
 
@@ -112,6 +112,46 @@ class ContractTests(unittest.TestCase):
             source.write_bytes(b'{"quotes": []}\n')
             with self.assertRaises(ValueError):
                 G.load_source(source, {"sourceVersion": "0" * 64, "quoteIds": []})
+
+    def test_editorial_exclusion_preserves_source_bytes_and_original_membership_pin(self):
+        with temp_directory() as temp:
+            path = Path(temp) / "quotes.json"
+            raw_quotes = [{**fixture_quote(), "id": f"quote-{i}", "url": "https://example.org/source", "quizEligible": True}
+                          for i in range(74)]
+            raw = (json.dumps({"quotes": raw_quotes}, ensure_ascii=False) + "\n").encode("utf-8")
+            path.write_bytes(raw)
+            pins = {"sourceVersion": hashlib.sha256(raw).hexdigest(), "quoteIds": [q["id"] for q in raw_quotes],
+                    "excludedQuoteIds": ["quote-0"]}
+            active, source_version = G.load_source(path, pins)
+            self.assertEqual(len(active), 73)
+            self.assertNotIn("quote-0", [q["id"] for q in active])
+            self.assertEqual(len(pins["quoteIds"]), 74)
+            self.assertEqual(source_version, pins["sourceVersion"])
+            self.assertEqual(path.read_bytes(), raw)
+            self.assertEqual(G.catalog_data(active, source_version)["cards"], 1022)
+
+    def test_excluded_card_cleanup_removes_only_28_named_outputs(self):
+        with temp_directory() as temp:
+            output = Path(temp)
+            folder = output / G.CARD_BASE.lstrip("/")
+            folder.mkdir(parents=True)
+            kept = folder / "other-quote-4-6-quote.png"
+            kept.write_bytes(b"unchanged-other-card")
+            for correct in G.OUTCOMES:
+                for mode in G.MODES:
+                    for extension in ("html", "png"):
+                        (folder / f"withdrawn-quote-{correct}-6-{mode}.{extension}").write_bytes(b"withdrawn")
+            pins = {"quoteIds": ["withdrawn-quote", "other-quote"], "excludedQuoteIds": ["withdrawn-quote"]}
+            removed = G.remove_excluded_cards(output, pins)
+            self.assertEqual(len(removed), 28)
+            self.assertEqual(list(folder.iterdir()), [kept])
+            self.assertEqual(kept.read_bytes(), b"unchanged-other-card")
+            self.assertEqual(G.remove_excluded_cards(output, pins), [])
+
+    def test_exclusion_list_rejects_unknown_ids_and_path_traversal(self):
+        for excluded in (["../escape"], ["unknown"], ["known", "known"], [[]], "known"):
+            with self.assertRaises(ValueError):
+                G.excluded_quote_ids({"quoteIds": ["known"], "excludedQuoteIds": excluded})
 
     def test_allowlist_copies_only_verified_public_payload(self):
         with temp_directory() as temp:
@@ -153,8 +193,15 @@ def verify_site(site: Path) -> dict:
         raise AssertionError("Served catalog differs from exact reviewed public corpus")
     folder = site / G.CARD_BASE.lstrip("/")
     manifest = G.load_json(folder / "build-manifest.json")
-    if manifest["cardCount"] != 1036 or manifest["fileCount"] != 2072 or not manifest["allTextBoxesComplete"]:
+    card_count = len(quotes) * len(G.OUTCOMES) * len(G.MODES)
+    if manifest["cardCount"] != card_count or manifest["fileCount"] != card_count * 2 or not manifest["allTextBoxesComplete"]:
         raise AssertionError("Incomplete generated card set")
+    for quote_id in G.excluded_quote_ids(G.load_json(HERE / "quiz-share-source-v18.json")):
+        for correct in G.OUTCOMES:
+            for mode in G.MODES:
+                for extension in ("html", "png"):
+                    if (folder / f"{quote_id}-{correct}-6-{mode}.{extension}").exists():
+                        raise AssertionError("Withdrawn card is still present in the generated artifact")
     expected = {}
     for q in quotes:
         for correct in range(7):
@@ -168,6 +215,8 @@ def verify_site(site: Path) -> dict:
                     raise AssertionError("Initial OG identity mismatch")
                 if page.body.get("data-quote-id") != q["id"] or page.body.get("data-correct") != str(correct) or page.body.get("data-source-version") != source_version:
                     raise AssertionError("Landing data contract mismatch")
+                if page.scripts != ["/game/quiz-share-core.js?v=22", "/game/quiz-share-landing.js?v=18"]:
+                    raise AssertionError("Landing page does not load the current withdrawal policy")
                 text = "".join(page.text)
                 if any(value not in text for value in (q["quote"], q["date"], q["sourceType"], q["context"], q["inferenceLimit"], G.SELF_REPORTED)):
                     raise AssertionError("Source qualifiers missing from human landing page")
@@ -182,9 +231,10 @@ def verify_site(site: Path) -> dict:
                     raw = path.read_bytes()
                     expected[path.relative_to(site).as_posix()] = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
     rows = {row["path"]: {"bytes": row["bytes"], "sha256": row["sha256"]} for row in manifest["files"]}
-    if expected != rows or len(rows) != 2072:
+    if expected != rows or len(rows) != card_count * 2:
         raise AssertionError("Generated artifact manifest does not match all card bytes")
-    return {"cardsVerified": 1036, "pngsVerified": 1036, "initialHtmlOgVerified": 1036, "sourceQuotesVerified": 74,
+    return {"cardsVerified": card_count, "pngsVerified": card_count, "initialHtmlOgVerified": card_count, "sourceQuotesVerified": len(quotes),
+            "excludedQuoteIds": G.excluded_quote_ids(G.load_json(HERE / "quiz-share-source-v18.json")),
             "allPngCrcPassed": True, "allSourceQualifiersPreserved": True, "sourceVersion": source_version}
 
 

@@ -21,6 +21,7 @@ CATALOG_PATH = "data/quiz-share-catalog-v18.json"
 SELF_REPORTED = "玩家自行分享，未經伺服器驗證"
 SIZE = (1200, 630)
 MODES = ("score", "quote")
+OUTCOMES = range(7)
 
 
 def sha256(data: bytes) -> str:
@@ -67,7 +68,61 @@ def load_source(path: Path, pins: dict) -> tuple[list[dict], str]:
     quotes = [q for q in source["quotes"] if q.get("quizEligible") is not False]
     if [q["id"] for q in quotes] != pins["quoteIds"] or len(quotes) != 74:
         raise ValueError("Pinned quiz membership changed")
-    return [public_quote(q) for q in quotes], digest
+    excluded = set(excluded_quote_ids(pins))
+    return [public_quote(q) for q in quotes if q["id"] not in excluded], digest
+
+
+def excluded_quote_ids(pins: dict) -> list[str]:
+    excluded = pins.get("excludedQuoteIds", [])
+    if (not isinstance(excluded, list)
+            or any(not isinstance(item, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", item)
+                   or item not in pins.get("quoteIds", []) for item in excluded)
+            or len(set(excluded)) != len(excluded)):
+        raise ValueError("Invalid editorial exclusion list")
+    return excluded
+
+
+def remove_excluded_cards(output: Path, pins: dict) -> list[str]:
+    """Remove only the 28 named outputs per withdrawn item, never a directory."""
+    root = output.resolve()
+    target = root / CARD_BASE.lstrip("/")
+    if not target.resolve().is_relative_to(root) or target.is_symlink():
+        raise ValueError("Card target must remain inside the output root")
+    removed = []
+    for quote_id in excluded_quote_ids(pins):
+        for correct in OUTCOMES:
+            for mode in MODES:
+                for extension in ("html", "png"):
+                    path = target / f"{quote_id}-{correct}-6-{mode}.{extension}"
+                    if path.resolve().parent != target.resolve():
+                        raise ValueError("Excluded card path escaped its target")
+                    if path.exists():
+                        if not path.is_file():
+                            raise ValueError("Excluded card output is not a file")
+                        path.unlink()
+                        removed.append(path.relative_to(root).as_posix())
+    return removed
+
+
+def image_metadata(q: dict, correct: int, mode: str, source_version: str) -> dict:
+    return {"Quote": q["quote"], "SourceVersion": source_version, "SourceUrl": q["sourceUrl"], "Mode": mode,
+            "Correct": str(correct), "Total": "6", "SelfReported": SELF_REPORTED,
+            "Context": q["frontContext"] or q["context"], "SourceType": q["sourceType"], "Date": q["date"]}
+
+
+def existing_image_matches(path: Path, q: dict, correct: int, mode: str, source_version: str) -> bool:
+    if not path.is_file() or path.is_symlink():
+        return False
+    try:
+        with Image.open(path) as picture:
+            if picture.size != SIZE or picture.mode != "RGB":
+                return False
+            if any(picture.info.get(key) != value for key, value in image_metadata(q, correct, mode, source_version).items()):
+                return False
+            picture.verify()
+        return True
+    except (OSError, ValueError, SyntaxError):
+        return False
 
 
 def stem(q: dict, correct: int, mode: str) -> str:
@@ -192,14 +247,14 @@ def html_card(q: dict, correct: int, mode: str, source_version: str) -> str:
 <div class="quiz-share-landing-actions"><a id="quiz-share-challenge" class="button primary" href="/game/quiz/">換我挑戰 →</a><a href="{name}.png" download>下載這張卡</a><a href="/game/">回遊樂場 ↗</a></div><p id="quiz-share-status" role="status" aria-live="polite">可以開始一輪原話挑戰。若連結附有完整且有效的同題資料，會使用相同六題。</p>
 <section id="quiz-share-landing-fact" class="quiz-share-landing-context" aria-labelledby="quiz-share-source-title"><h2 id="quiz-share-source-title">把這一則原話，放回來源。</h2><blockquote>{e(q['quote'])}</blockquote><p>{e(q['date'])} · {e(medium_label(q))} · {e(q['venue'])}</p><p>{e(q['sourceType'])}</p>{front}<p>{e(q['context'])}</p>{locator}<ul>{source_links}</ul>{limit}</section>
 <p class="small-note">這是有來源的精選原話遊戲；辨識得分不是支持度、人格或真誠程度的測量。挑戰連結不含玩家姓名、聯絡資料或逐題答案。</p><a href="/">回國會紀錄觀測 ↗</a></main>
-<script src="/game/quiz-share-core.js?v=18" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
+<script src="/game/quiz-share-core.js?v=22" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
 '''
 
 
 def catalog_data(quotes: list[dict], source_version: str) -> dict:
     return {"version": VERSION, "subjectId": "shen-pao-yang", "sourceVersion": source_version, "roundSize": 6, "modes": list(MODES),
             "cardBase": CARD_BASE, "imageWidth": 1200, "imageHeight": 630, "selfReportedLabel": SELF_REPORTED,
-            "quoteCount": len(quotes), "cards": 1036, "quotes": quotes}
+            "quoteCount": len(quotes), "cards": len(quotes) * len(OUTCOMES) * len(MODES), "quotes": quotes}
 
 
 def write_catalog(output: Path, catalog: dict):
@@ -225,20 +280,24 @@ def build(site_dir: Path, source: Path, font: Path, output: Path, *, samples_onl
         if old.get("version") != VERSION or old.get("sourceVersion") != source_version:
             raise ValueError("Immutable card version already exists with other source bytes")
     target.mkdir(parents=True, exist_ok=True)
+    removed = remove_excluded_cards(output, pins)
     painter = Painter(font)
     chosen = quotes[:1] if samples_only else quotes
-    corrects = (4,) if samples_only else range(7)
-    files, total_bytes = [], 0
+    corrects = (4,) if samples_only else OUTCOMES
+    files, total_bytes, preserved_pngs = [], 0, 0
     for q in chosen:
         for correct in corrects:
             for mode in MODES:
                 name = stem(q, correct, mode)
                 png = target / (name + ".png")
                 picture = painter.image(q, correct, mode, source_version)
-                metadata = PngImagePlugin.PngInfo()
-                for key, value in picture.info.pop("metadata").items():
-                    metadata.add_itxt(key, value)
-                picture.save(png, format="PNG", optimize=True, pnginfo=metadata)
+                if existing_image_matches(png, q, correct, mode, source_version):
+                    preserved_pngs += 1
+                else:
+                    metadata = PngImagePlugin.PngInfo()
+                    for key, value in picture.info.pop("metadata").items():
+                        metadata.add_itxt(key, value)
+                    picture.save(png, format="PNG", optimize=True, pnginfo=metadata)
                 page = target / (name + ".html")
                 page.write_text(html_card(q, correct, mode, source_version), encoding="utf-8", newline="\n")
                 for file in (page, png):
@@ -254,6 +313,7 @@ def build(site_dir: Path, source: Path, font: Path, output: Path, *, samples_onl
         (target / "build-manifest.json").write_text(json.dumps(build_receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return {"version": VERSION, "sourceVersion": source_version, "quoteCount": len(chosen), "cardCount": len(files) // 2,
             "fileCount": len(files), "totalCardBytes": total_bytes, "allTextBoxesComplete": all(row["complete"] for row in painter.bounds),
+            "excludedQuoteIds": excluded_quote_ids(pins), "removedExcludedFiles": len(removed), "preservedExistingPngs": preserved_pngs,
             "maxContextLines": max(row["lines"] for row in painter.bounds if row["label"] == "full-front-context")}
 
 
@@ -267,9 +327,12 @@ def main():
     parser.add_argument("--catalog-only", action="store_true", help="Write the pinned public catalog without requiring a font")
     args = parser.parse_args()
     if args.catalog_only:
-        quotes, source_version = load_source(args.source or args.site_dir / "data/quotes.json", load_json(HERE / "quiz-share-source-v18.json"))
+        pins = load_json(HERE / "quiz-share-source-v18.json")
+        quotes, source_version = load_source(args.source or args.site_dir / "data/quotes.json", pins)
+        removed = remove_excluded_cards(args.output or args.site_dir, pins)
         write_catalog(args.output or args.site_dir, catalog_data(quotes, source_version))
-        result = {"version": VERSION, "sourceVersion": source_version, "quoteCount": len(quotes), "cards": 1036, "catalogOnly": True}
+        result = {"version": VERSION, "sourceVersion": source_version, "quoteCount": len(quotes), "cards": len(quotes) * len(OUTCOMES) * len(MODES), "catalogOnly": True,
+                  "excludedQuoteIds": excluded_quote_ids(pins), "removedExcludedFiles": len(removed)}
     else:
         if not args.font:
             parser.error("--font is required unless --catalog-only is selected")
