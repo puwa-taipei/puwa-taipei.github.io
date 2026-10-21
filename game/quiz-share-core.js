@@ -2,7 +2,7 @@
 (function (global) {
   'use strict';
   const VERSION = 'v18', SUBJECT = 'shen-pao-yang', ROUND_SIZE = 6;
-  const SOURCE_VERSION = 'f6f6c77f1428c19770e6dd8f64de78cdb93776e414dea65f0efc0a68289d5397';
+  const SOURCE_VERSION = 'abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b';
   const ORIGIN = 'https://puwa-taipei.github.io', CARD_BASE = '/game/quiz/cards/v18/';
   const CATALOG_URL = '/data/quiz-share-catalog-v18.json', NOMINATION = '2026-05-13';
   const ID = /^[a-z0-9-]{1,100}$/, PERIODS = new Set(['pre','post','all']), MODES = new Set(['score','quote']);
