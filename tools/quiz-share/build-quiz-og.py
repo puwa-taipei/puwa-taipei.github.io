@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 from PIL import Image, ImageDraw, ImageFont, PngImagePlugin
 
 HERE = Path(__file__).resolve().parent
-ORIGIN = "https://puwa-taipei.github.io"
+ORIGIN = "https://puwa.taipei"
 VERSION = "v24"
 CARD_BASE = "/game/quiz/cards/v24/"
 CATALOG_PATH = "data/quiz-share-catalog-v24.json"
@@ -277,7 +277,7 @@ def html_card(q: dict, correct: int, mode: str, source_version: str) -> str:
 <div class="quiz-share-landing-actions"><a id="quiz-share-challenge" class="button primary" href="/game/quiz/">換我挑戰 →</a><a href="{name}.png" download>下載這張卡</a><a href="/game/">回遊樂場 ↗</a></div><p id="quiz-share-status" role="status" aria-live="polite">可以開始一輪原話挑戰。若連結附有完整且有效的同題資料，會使用相同六題。</p>
 <section id="quiz-share-landing-fact" class="quiz-share-landing-context" aria-labelledby="quiz-share-source-title"><h2 id="quiz-share-source-title">把這一則原話，放回來源。</h2><blockquote>{e(q['quote'])}</blockquote><p>{e(q['date'])} · {e(medium_label(q))} · {e(q['venue'])}</p><p>{e(q['sourceType'])}</p>{front}<p>{e(q['context'])}</p>{locator}<ul>{source_links}</ul>{limit}</section>
 <p class="small-note">這是有來源的精選原話遊戲；辨識得分不是支持度、人格或真誠程度的測量。挑戰連結不含玩家姓名、聯絡資料或逐題答案。</p><a href="/">回國會紀錄觀測 ↗</a></main>
-<script src="/game/quiz-share-core.js?v=24" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
+<script src="/game/quiz-share-core.js?v=28" defer></script><script src="/game/quiz-share-landing.js?v=18" defer></script></body></html>
 '''
 
 
