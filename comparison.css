@@ -19,6 +19,47 @@
 
 .cmp-axis-tabs{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap}.cmp-axis-tabs button{border:1px solid #c4cfb8;background:transparent;padding:9px 13px;font-size:11px;color:#173e36}.cmp-axis-tabs button[aria-pressed=true]{background:#173e36;color:#fff7e4}
 
+/* v20: explain the comparison before asking readers to learn the method. */
+body .cmp-reading-help{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;max-width:940px;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+body .cmp-reading-help summary{cursor:pointer;display:flex;justify-content:space-between;gap:16px;font-weight:600;color:var(--ink);list-style:none;min-height:36px;align-items:center}
+body .cmp-reading-help summary::-webkit-details-marker{display:none}
+body .cmp-reading-help summary span{color:var(--orange)}
+body .cmp-reading-help[open] summary span{transform:rotate(45deg)}
+body .cmp-reading-help p{margin:12px 0;font-size:16px;line-height:1.8}
+body .cmp-temporal-card{grid-template-columns:minmax(0,1fr) 190px;gap:18px 32px;scroll-margin-top:24px}
+body .cmp-temporal-card h3{font-size:clamp(26px,3vw,34px);line-height:1.45;margin:12px 0 18px}
+body .cmp-story-intro{font-size:17px;line-height:1.85;max-width:670px;color:var(--ink-soft)}
+body .cmp-story-intro strong{font-weight:650;color:var(--ink)}
+body .cmp-temporal-score{display:block;text-align:right;white-space:normal}
+body .cmp-temporal-score>strong{font-size:64px;display:block;white-space:nowrap}
+body .cmp-temporal-score>strong>span{font-size:24px;margin-left:4px}
+body .cmp-temporal-score>span{font-size:16px;margin-top:9px}
+body .cmp-score-explainer{grid-column:1/-1;font-size:17px;line-height:1.8;padding:15px 0;border-top:1px solid var(--line);color:var(--ink)}
+body .cmp-score-explainer>span{display:block;font-size:14px;color:var(--ink-soft);margin-top:5px}
+body .cmp-axis-tabs{margin-top:0;gap:10px}
+body .cmp-axis-tabs button{min-height:48px;padding:11px 18px;line-height:1.65}
+body .cmp-axis-example{grid-column:1/-1;font-size:16px;line-height:1.8;color:var(--ink-soft);margin-top:-5px}
+body .cmp-focus-pair{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+body .cmp-focus-pair>p{border-left:3px solid var(--orange);padding:3px 0 3px 17px;font-size:17px;line-height:1.8;color:var(--ink)}
+body .cmp-focus-pair>p>span{display:block;font-size:14px;color:var(--ink-soft);margin-bottom:7px}
+body .cmp-pie-date{font-size:14px;line-height:1.7;color:var(--ink-soft);text-align:center;margin-top:5px}
+body .cmp-story-method>div{padding-top:15px;max-width:880px}
+body .cmp-story-method p{font-size:16px;line-height:1.8;margin-bottom:12px;color:var(--ink-soft)}
+body .cmp-temporal-card>details{border-top:1px solid var(--line);padding-top:17px}
+@media(max-width:760px){
+  body .cmp-temporal-card{grid-template-columns:minmax(0,1fr)}
+  body .cmp-temporal-score{display:flex;text-align:left;align-items:baseline;gap:16px}
+  body .cmp-temporal-score>strong{font-size:56px}
+  body .cmp-temporal-score>span{margin:0}
+  body .cmp-temporal-card h3{font-size:28px}
+}
+@media(max-width:580px){
+  body .cmp-focus-pair{grid-template-columns:minmax(0,1fr);gap:18px}
+  body .cmp-temporal-card{padding:22px 18px}
+  body .cmp-axis-tabs{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
+  body .cmp-axis-tabs button{text-align:left;white-space:normal}
+}
+
 .cmp-original-score{font-size:10px;color:#61725d;margin-top:15px}.cmp-original-score summary{cursor:pointer}.cmp-original-score p{margin-top:8px;line-height:1.8}.cmp-temporal-score>small{display:block;font-size:10px;color:#71816b;margin-top:6px}
 
 .cmp-policy-rings-card{margin-top:30px;border:1px solid #bfccb4;background:#f7f5eb;padding:30px}

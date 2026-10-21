@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v19",
+  "version": "public-release-v20",
   "date": "2026-10-21",
   "files": [
     {
@@ -64,13 +64,13 @@
     },
     {
       "path": "comparison.css",
-      "bytes": 21387,
-      "sha256": "83480c1ccfc48941f36f5882f3e2d0db1d389a214b684af169ff65c9d8ac77cf"
+      "bytes": 24470,
+      "sha256": "1eec54594565968f25d1b524f9b28aaf19df57a18faeec111d6c2bc513741a78"
     },
     {
       "path": "comparison.js",
-      "bytes": 33493,
-      "sha256": "6d2a97a8136eaa78420b9977256efb21057591b4805e099f8e2d3d0eeca23fff"
+      "bytes": 36248,
+      "sha256": "99a4ed044f367445c9af4548a1bb7589d7f785ccf7ab286d286a1e77684d6d3b"
     },
     {
       "path": "contribute/catalog.css",
@@ -269,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26739,
-      "sha256": "9d234f11fb683b4621e17aabcbbf3cf525f235077eb0546523e424ca15188d99"
+      "bytes": 26648,
+      "sha256": "06f39f90268a5aab604999026c17f4adb3f4cff3bb82b53e5573ab935464367c"
     },
     {
       "path": "leaderboard.css",
