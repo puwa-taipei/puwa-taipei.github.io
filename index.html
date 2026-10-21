@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://puwa-taipei.github.io/assets/og-records.png">
   <title>印象，交給紀錄核對。｜國會紀錄觀測</title>
-  <link rel="stylesheet" href="./style.css?v=21">
+  <link rel="stylesheet" href="./style.css?v=25">
   <link rel="stylesheet" href="./network.css?v=17">
   <link rel="stylesheet" href="./comparison.css?v=20">
   <link rel="stylesheet" href="./statements.css">
@@ -30,11 +30,11 @@
   <script src="./anchor.js" defer></script>
   <script src="./game/quiz-share-core.js?v=24" defer></script>
   <script src="./game/quiz-share.js?v=18" defer></script>
-  <script src="./game/quiz-engine.js?v=24" defer></script>
-  <script src="./app.js?v=24" defer></script>
+  <script src="./game/quiz-engine.js?v=25" defer></script>
+  <script src="./app.js?v=25" defer></script>
   <script src="./comparison.js?v=20" defer></script>
-  <script src="./statements.js?v=24" defer></script>
-  <script src="./speech-search.js?v=21-r3" defer></script>
+  <script src="./statements.js?v=25" defer></script>
+  <script src="./speech-search.js?v=25" defer></script>
   <script src="./leaderboard.js?v=13" defer></script>
   <script src="./game3d.js" defer></script>
   <link rel="stylesheet" href="./game3d.css">
@@ -88,7 +88,7 @@
 
     <section id="keywords" class="section wrap" aria-label="本人發言全文搜尋"><p>讀取本人質詢、發言與討論文字…</p></section>
 
-    <section id="explorer" class="section explorer-section"><div class="wrap"><div class="section-heading"><div><p class="section-number">05 ／ 所有數字，回到每一案</p><h2>把放大鏡，<br>交到你手上。</h2></div><div class="download-links"><a href="./downloads/primary-bills.csv" download>41 件主提案 CSV ↓</a></div></div><div class="explorer-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="bill-search" type="search" placeholder="搜尋案名、提案人、內文…" aria-label="搜尋法案"></label><details class="explorer-role-advanced"><summary>進階：切換角色 ＋</summary><label class="select-field"><span>參與角色</span><select id="role-filter"><option value="">全部角色</option><option value="primary" selected>主提案</option><option value="joint">共同提案</option><option value="cosign">連署</option></select></label></details><label class="select-field"><span>排序</span><select id="sort-select"><option value="date-desc">日期：新到舊</option><option value="date-asc">日期：舊到新</option><option value="title">案名</option><option value="china-desc">「中國」出現次數</option></select></label></div><div class="filter-row"><label><span class="sr-only">主題篩選</span><select id="topic-filter"><option value="">所有主題</option></select></label><label><span class="sr-only">委員會篩選</span><select id="committee-filter"><option value="">所有委員會</option></select></label><label><span class="sr-only">進度篩選</span><select id="status-filter"><option value="">所有進度</option></select></label><button id="reset-filters">清除篩選 ↺</button></div><div class="result-meta"><p id="result-count" aria-live="polite">正在讀取法案…</p><span>點開案名查看理由與來源</span></div><div id="bill-list" class="bill-list" aria-live="polite"><div class="empty-state">紀錄載入中…</div></div><div class="pagination"><button id="prev-page" disabled aria-label="上一頁">← 上一頁</button><span id="page-info">—</span><button id="next-page" disabled aria-label="下一頁">下一頁 →</button></div></div></section>
+    <section id="explorer" class="section explorer-section"><div class="wrap"><div class="section-heading"><div><p class="section-number">05 ／ 所有數字，回到每一案</p><h2>把放大鏡，<br>交到你手上。</h2></div><div class="download-links"><a href="./downloads/primary-bills.csv" download>41 件主提案 CSV ↓</a></div></div><div class="explorer-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="bill-search" type="search" placeholder="搜尋案名、提案人、內文…" aria-label="搜尋法案"></label><details class="explorer-role-advanced"><summary>進階：切換角色 ＋</summary><label class="select-field"><span>參與角色</span><select id="role-filter"><option value="">全部角色</option><option value="primary" selected>主提案</option><option value="joint">共同提案</option><option value="cosign">連署</option></select></label></details><label class="select-field"><span>排序</span><select id="sort-select"><option value="date-desc">日期：新到舊</option><option value="date-asc">日期：舊到新</option><option value="title">案名</option><option value="china-desc">「中國」出現次數</option></select></label></div><div class="filter-row"><label><span class="sr-only">主題篩選</span><select id="topic-filter"><option value="">所有主題</option></select></label><label><span class="sr-only">委員會篩選</span><select id="committee-filter"><option value="">所有委員會</option></select></label><label><span class="sr-only">進度篩選</span><select id="status-filter"><option value="">所有進度</option></select></label><button id="reset-filters">清除篩選 ↺</button></div><div class="result-meta"><p id="result-count" aria-live="polite">正在讀取法案…</p><span>點開案名查看理由與來源</span></div><details id="bill-results-panel" class="bill-results-disclosure" open><summary id="bill-results-toggle"><span>逐案清單</span><span id="bill-results-summary">正在讀取…</span><span class="list-state-expanded">收起 −</span><span class="list-state-collapsed">展開 ＋</span></summary><div id="bill-list" class="bill-list" aria-live="polite"><div class="empty-state">紀錄載入中…</div></div><div id="bill-mobile-controls" class="compact-list-controls" hidden><button id="bill-more" type="button" hidden>再顯示 4 件 ↓</button><button id="bill-reset-window" type="button" hidden>收回前 4 件 ↑</button></div><div id="bill-pagination" class="pagination"><button id="prev-page" disabled aria-label="上一頁">← 上一頁</button><span id="page-info">—</span><button id="next-page" disabled aria-label="下一頁">下一頁 →</button></div></details></div></section>
 
     <section id="statements" class="section statements-section"></section>
     <div class="wrap"><p class="small-note">有更完整的影片、前後文，或發現需要更正的地方？<a class="text-link" href="/contribute/?type=quote">提供原話來源 ↗</a>　所有投稿先經人工審核。</p></div>

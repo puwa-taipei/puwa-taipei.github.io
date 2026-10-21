@@ -7,7 +7,8 @@
   const safeUrl = value => /^(https?:\/\/|\.\/)/i.test(String(value || '')) ? String(value) : '#method';
   const list = value => Array.isArray(value) ? value : value ? [value] : [];
   const roleNames = {primary:'主提案', joint:'共同提案', cosign:'連署'};
-  const state = {data:null,policy:null,page:1,pageSize:12,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],quoteSourceVersion:null,gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
+  const compactLists = matchMedia('(max-width:700px)');
+  const state = {data:null,policy:null,page:1,pageSize:12,mobileShown:4,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],quoteSourceVersion:null,gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
   let searchable = new Map();
   let keywordText = new Map();
   let searchTimer;
@@ -216,7 +217,7 @@
     $('role-filter').value=state.role;
     state[key] = value;
     if(key==='role'){state.scopeRole=value;Object.assign(state,{search:'',topic:'',committee:'',status:'',exactKeyword:''});['bill-search','topic-filter','committee-filter','status-filter'].forEach(id=>$(id).value='');if($('advanced-information')&&value!=='primary')$('advanced-information').open=true;renderScope();}
-    state.page = 1;
+    resetBillWindow();
     const ids = {role:'role-filter',topic:'topic-filter',committee:'committee-filter',status:'status-filter',sort:'sort-select'};
     if (ids[key]) $(ids[key]).value = value;
     if (key === 'topic' && (value.startsWith('manual:')||value.startsWith('target:'))) { state.role='primary';state.scopeRole='primary';$('role-filter').value='primary';renderScope(); }
@@ -247,8 +248,16 @@
     if (!state.data) return;
     const rows = filteredBills(), totalPages = Math.max(1,Math.ceil(rows.length/state.pageSize));
     state.page = Math.min(state.page,totalPages);
-    const start = (state.page-1)*state.pageSize, page = rows.slice(start,start+state.pageSize);
+    const compact = compactLists.matches;
+    const start = compact ? 0 : (state.page-1)*state.pageSize;
+    const page = rows.slice(start,compact ? state.mobileShown : start+state.pageSize);
     $('result-count').innerHTML = `找到 <strong>${fmt(rows.length)}</strong> 件 ／ ${state.role?roleNames[state.role]:'全部角色'} ${fmt(state.role?state.data.totals[state.role]:state.data.totals.unique)} 件${state.exactKeyword ? ` · 內文含「${esc(state.exactKeyword)}」` : ''}`;
+    setText('bill-results-summary',`已載入 ${fmt(page.length)}／${fmt(rows.length)} 件`);
+    $('bill-pagination').hidden = compact;
+    $('bill-mobile-controls').hidden = !compact || !rows.length;
+    $('bill-more').hidden = !compact || page.length >= rows.length;
+    $('bill-more').textContent = `再顯示 ${fmt(Math.min(4,Math.max(0,rows.length-page.length)))} 件 ↓`;
+    $('bill-reset-window').hidden = !compact || page.length <= 4;
     setText('page-info',`${state.page} ／ ${totalPages} 頁`);
     $('prev-page').disabled = state.page <= 1;
     $('next-page').disabled = state.page >= totalPages;
@@ -268,6 +277,12 @@
       $(button.getAttribute('aria-controls')).hidden = !open;
       button.querySelector('.bill-toggle').textContent = open ? '－' : '＋';
     }));
+  }
+
+  function resetBillWindow() {
+    state.page = 1;
+    state.mobileShown = 4;
+    if ($('bill-results-panel')) $('bill-results-panel').open = true;
   }
 
   let quizEngineLoading;
@@ -290,10 +305,13 @@
     $('primary-axis')?.addEventListener('change',e=>{state.axis=e.target.value;renderPrimaryTopics();});
     $('open-advanced')?.addEventListener('click',()=>{$('advanced-information').open=true;});
     document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>setFilter('role',button.dataset.role,true)));
-    $('bill-search').addEventListener('input',event=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.search=event.target.value;state.page=1;renderBills();},200);});
+    $('bill-search').addEventListener('input',event=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.search=event.target.value;resetBillWindow();renderBills();},200);});
     [['role-filter','role'],['topic-filter','topic'],['committee-filter','committee'],['status-filter','status'],['sort-select','sort']].forEach(([id,key])=>$(id).addEventListener('change',event=>setFilter(key,event.target.value,false)));
-    $('reset-filters').addEventListener('click',()=>{Object.assign(state,{page:1,search:'',role:'primary',scopeRole:'primary',topic:'',committee:'',status:'',exactKeyword:'',sort:'date-desc'});['bill-search','role-filter','topic-filter','committee-filter','status-filter'].forEach(id=>$(id).value='');$('sort-select').value='date-desc';$('role-filter').value='primary';renderScope();renderBills();});
+    $('reset-filters').addEventListener('click',()=>{Object.assign(state,{search:'',role:'primary',scopeRole:'primary',topic:'',committee:'',status:'',exactKeyword:'',sort:'date-desc'});resetBillWindow();['bill-search','role-filter','topic-filter','committee-filter','status-filter'].forEach(id=>$(id).value='');$('sort-select').value='date-desc';$('role-filter').value='primary';renderScope();renderBills();});
     [['prev-page',-1],['next-page',1]].forEach(([id,direction])=>$(id).addEventListener('click',()=>{state.page+=direction;renderBills();$('explorer').scrollIntoView({behavior:'smooth'});}));
+    $('bill-more').addEventListener('click',()=>{state.mobileShown+=4;renderBills();});
+    $('bill-reset-window').addEventListener('click',()=>{resetBillWindow();renderBills();$('bill-results-toggle').focus({preventScroll:true});$('bill-results-panel').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});});
+    compactLists.addEventListener('change',()=>{resetBillWindow();renderBills();});
 
   }
 

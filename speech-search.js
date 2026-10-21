@@ -7,7 +7,9 @@
   const dataURL = new URL('./data/speeches.json', scriptURL).href;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const format = value => Number(value || 0).toLocaleString('zh-TW');
-  const state = {data:null,word:'中國',committee:'',from:'2024-02-01',to:'2026-10-20',limit:8,cloudMode:'cloud',cloudIndex:null,cloudScope:null,cloudUnsupported:false};
+  const compactLists = matchMedia('(max-width:700px)');
+  const batchSize = () => compactLists.matches ? 2 : 8;
+  const state = {data:null,word:'中國',committee:'',from:'2024-02-01',to:'2026-10-20',limit:batchSize(),resultsExpanded:true,cloudMode:'cloud',cloudIndex:null,cloudScope:null,cloudUnsupported:false};
   const $ = id => document.getElementById(`speech-${id}`);
   let timer;
 
@@ -30,7 +32,7 @@
       <div class="quick-keywords speech-quick"><button type="button" data-speech-word="中國">中國</button><button type="button" data-speech-word="第五縱隊">第五縱隊</button><button type="button" data-speech-word="兒童">兒童</button><button type="button" data-speech-word="教育">教育</button><button type="button" data-speech-word="幼兒園">幼兒園</button><button type="button" data-speech-word="中共">中共</button></div>
       <p id="speech-count-rule" class="small-note">精確字串、逐輪次計數；「中共」不併入「中國」。不含官員回答、其他委員或法案文本。</p></div>
       <div class="speech-metrics" aria-live="polite"><div><span>本人說過</span><strong id="speech-occurrences">—</strong><span>次精確字串</span></div><div><span>至少出現一次</span><strong id="speech-hits">—</strong><span>個發言片段</span></div></div></div>
-      <div class="speech-result-heading"><h3 id="speech-result-title" tabindex="-1">命中上下文</h3><span id="speech-result-meta"></span></div><div id="speech-results"></div><button id="speech-more" class="speech-more" type="button" hidden>再顯示 8 個發言片段 ＋</button>
+      <div class="speech-result-heading"><h3 id="speech-result-title" tabindex="-1">命中上下文</h3><span id="speech-result-meta"></span><button id="speech-toggle-results" class="speech-list-toggle" type="button" aria-expanded="true" aria-controls="speech-results-panel">收起上下文 −</button></div><div id="speech-results-panel"><div id="speech-results"></div><div class="compact-list-controls speech-result-actions"><button id="speech-more" class="speech-more" type="button" hidden>載入更多片段 ↓</button><button id="speech-reset-results" type="button" hidden>收回前幾個片段 ↑</button></div></div>
       <details class="speech-method"><summary>語料覆蓋與計數方法 <span>＋</span></summary><div><p id="speech-coverage"></p><p>以立法院具名 iVOD 目錄為範圍，納入全部可取得、可歸屬本人的逐字稿，普通政策發言也在分母裡。這不是他所有院內外發言，片段數也不等於出席天數；缺漏不以零次發言推定。</p><p>只擷取明確署名「沈委員伯洋」及「主席（沈委員伯洋）」的輪次；未具名主席、官員、別位委員和書面附錄不計入。出現次數包含本人引述他人、反問、機關或政黨名稱，需讀上下文判斷立場。</p><p>字數為本人文字的 Unicode 字元數，含標點及英文、排除空白。命中計數為區分字形、連續精確字串、非重疊，不跨發言輪次接詞。影片時間顯示整段發言的會議時鐘起訖，未逐句對時。</p><div class="speech-coverage-scroll"><table class="speech-coverage-table"><thead><tr><th>單位</th><th>可收錄</th><th>目錄片段</th><th>缺漏</th></tr></thead><tbody id="speech-coverage-table"></tbody></table></div><details class="speech-missing"><summary>檢視未計入的片段與原因</summary><ul id="speech-missing-list"></ul></details><div class="speech-source-links"><a href="https://ivod.ly.gov.tw/Demand/ListLgltVideo/7049" target="_blank" rel="noopener noreferrer">官方具名影片目錄 ↗</a><a id="speech-download" download="shen-speeches.json">下載完整本人語料 JSON ↓</a></div></div></details>
     </div>`;
 
@@ -142,7 +144,7 @@
 
   function card(speech) {
     const clock = speech.clockStart ? `${escape(speech.clockStart)}–${escape(speech.clockEnd)}` : '未提供';
-    return `<article class="speech-card" data-speech-id="${escape(speech.id)}"><div class="speech-card-meta"><time datetime="${escape(speech.date)}">${escape(speech.date)}</time><span>${escape(speech.committee)}</span><span>${escape(speech.kind)}</span><strong>${state.word ? `命中 ${format(speech.hits)} 次` : `${format(speech.characters)} 字`}</strong></div><h4>${escape(speech.meetingTitle)}</h4><div class="speech-snippets">${snippets(speech)}</div><p class="speech-clock">官方發言起迄 ${clock} · 片段長度 ${escape(speech.duration)}<span>此為整段發言時間，非命中句的逐秒定位</span></p><div class="speech-source-links"><a href="${escape(speech.videoUrl)}" target="_blank" rel="noopener noreferrer">看完整發言影片 ↗</a><a href="${escape(speech.transcriptUrl)}" target="_blank" rel="noopener noreferrer">官方逐字稿 ↗</a></div><details class="speech-full"><summary>讀本人全文 · ${format(speech.turns.length)} 個輪次 <span>＋</span></summary><div>${speech.turns.map((turn,index)=>`<p><span class="speech-turn-label">${index+1} ／ ${escape(turn.speaker)}${turn.role==='chair' ? '（主持議事）' : ''}</span>${highlight(turn.text,state.word)}</p>`).join('')}</div></details></article>`;
+    return `<article class="speech-card" data-speech-id="${escape(speech.id)}"><div class="speech-card-meta"><time datetime="${escape(speech.date)}">${escape(speech.date)}</time><span>${escape(speech.committee)}</span><span>${escape(speech.kind)}</span><strong>${state.word ? `命中 ${format(speech.hits)} 次` : `${format(speech.characters)} 字`}</strong></div><details class="speech-meeting-title"${compactLists.matches?'':' open'}><summary><h4><span class="speech-meeting-name">${escape(speech.meetingTitle)}</span><small class="speech-title-action"><span class="list-state-collapsed">看完整會議名稱 ＋</span><span class="list-state-expanded">收起會議名稱 −</span></small></h4></summary></details><div class="speech-snippets">${snippets(speech)}</div><p class="speech-clock">官方發言起迄 ${clock} · 片段長度 ${escape(speech.duration)}<span>此為整段發言時間，非命中句的逐秒定位</span></p><div class="speech-source-links"><a href="${escape(speech.videoUrl)}" target="_blank" rel="noopener noreferrer">看完整發言影片 ↗</a><a href="${escape(speech.transcriptUrl)}" target="_blank" rel="noopener noreferrer">官方逐字稿 ↗</a></div><details class="speech-full"><summary>讀本人全文 · ${format(speech.turns.length)} 個輪次 <span>＋</span></summary><div>${speech.turns.map((turn,index)=>`<p><span class="speech-turn-label">${index+1} ／ ${escape(turn.speaker)}${turn.role==='chair' ? '（主持議事）' : ''}</span>${highlight(turn.text,state.word)}</p>`).join('')}</div></details></article>`;
   }
 
   function render() {
@@ -160,9 +162,16 @@
     $('scope').textContent = `${state.from}—${state.to} · ${state.committee || '全部單位'}：可計數 ${format(selected.length)}／目錄 ${format(selected.length+missing.length)} 個片段；${format(missing.length)} 個缺漏未計數。`;
     $('chars').textContent = `本人全文 ${format(characters)} 字`;
     $('result-title').textContent = state.word ? `「${state.word}」命中上下文` : '全部本人發言';
-    $('result-meta').textContent = `顯示 ${format(Math.min(state.limit,matched.length))}／${format(matched.length)} 個片段 · 日期由新到舊`;
+    $('result-meta').textContent = state.resultsExpanded ? `顯示 ${format(Math.min(state.limit,matched.length))}／${format(matched.length)} 個片段 · 日期由新到舊` : `已收起 · 共 ${format(matched.length)} 個片段 · 日期由新到舊`;
+    $('results-panel').hidden = !state.resultsExpanded;
+    $('toggle-results').hidden = !matched.length;
+    $('toggle-results').textContent = state.resultsExpanded ? '收起上下文 −' : '展開上下文 ＋';
+    $('toggle-results').setAttribute('aria-expanded',String(state.resultsExpanded));
     $('results').innerHTML = matched.length ? matched.slice(0,state.limit).map(card).join('') : `<p class="speech-empty">${valid ? '這個範圍的可收錄本人逐字稿沒有精確命中。可換詞或調整期間；缺漏影片尚未計入。' : '請先調整日期範圍。'}</p>`;
     $('more').hidden = matched.length <= state.limit;
+    $('more').textContent = `再顯示 ${format(Math.min(batchSize(),Math.max(0,matched.length-state.limit)))} 個片段 ↓`;
+    $('reset-results').hidden = Math.min(state.limit,matched.length) <= batchSize();
+    $('reset-results').textContent = `收回前 ${format(batchSize())} 個片段 ↑`;
     host.querySelectorAll('[data-speech-word]').forEach(button=>{const active=button.dataset.speechWord===state.word;button.classList.toggle('active',active);if(button.classList.contains('speech-word-button'))button.setAttribute('aria-pressed',String(active));});
   }
 
@@ -171,7 +180,8 @@
     state.committee = $('committee').value;
     state.from = $('from').value || state.data.period.start;
     state.to = $('to').value || state.data.period.end;
-    state.limit = 8;
+    state.limit = batchSize();
+    state.resultsExpanded = true;
     render();
   }
 
@@ -208,7 +218,10 @@
         }
       }
     });
-    $('more').addEventListener('click',()=>{state.limit+=8;render();});
+    $('more').addEventListener('click',()=>{state.limit+=batchSize();render();});
+    $('toggle-results').addEventListener('click',()=>{state.resultsExpanded=!state.resultsExpanded;render();});
+    $('reset-results').addEventListener('click',()=>{state.limit=batchSize();state.resultsExpanded=true;render();$('result-title').focus({preventScroll:true});host.querySelector('.speech-result-heading').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});});
+    compactLists.addEventListener('change',()=>{state.limit=batchSize();state.resultsExpanded=true;render();});
     render();
     host.dispatchEvent(new CustomEvent('speech-corpus-ready',{detail:{included:data.stats.includedSpeeches,listed:data.stats.listedClips}}));
     setTimeout(()=>{try{prepareCloudIndex(data);}catch{state.cloudUnsupported=true;renderCloud([],true);}},0);

@@ -42,3 +42,44 @@ body .policy-source-links a{text-decoration:underline;text-underline-offset:4px}
 .primary-lead{display:flex;align-items:center;justify-content:space-between;gap:35px;padding:35px 0 45px}.primary-lead strong{display:block;font-size:110px;line-height:1.1;letter-spacing:-.08em}.primary-lead small{font-size:18px;letter-spacing:0;margin-left:18px}.primary-lead p{line-height:2;color:#657064}.advanced-information,.explorer-role-advanced{border:1px solid #ccd2c4;padding:16px 20px;border-radius:8px}.advanced-information>summary,.explorer-role-advanced>summary{cursor:pointer;font-weight:650}.advanced-information .roles-layout{margin-top:25px}.scope-label{display:flex;gap:15px;align-items:center;margin-top:22px}.scope-banner{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px;color:#667360}.scope-banner strong{color:#173e36}.scope-banner a{margin-left:auto}.explorer-role-advanced{padding:12px;position:relative}.explorer-role-advanced[open] .select-field{padding-top:15px}.quote-selection{margin-top:25px;max-width:900px}#primary-axis,#scope-filter{padding:9px;background:#fffdf5;border:1px solid #bac7b4;border-radius:5px;color:#173e36}@media(max-width:700px){.primary-lead{flex-wrap:wrap;gap:20px}.primary-lead strong{font-size:90px}.primary-lead p{font-size:13px}.scope-banner span{display:none}.scope-banner a{margin-left:0}.subheading{flex-wrap:wrap}}
 
 .flip-board{grid-template-columns:repeat(2,1fr)}.evidence-card{aspect-ratio:.86}.flip-back strong{font-size:12px}.flip-back p{font-size:10px}.flip-back a{font-size:10px;flex-shrink:0}.flip-back small{flex-shrink:0}#play .section-heading .text-link{margin-top:18px}
+
+/* v25: shorter mobile lists; all matching records remain accessible. */
+body .compact-list-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+body .compact-list-controls>button{min-height:44px;padding:11px 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;font-size:16px;line-height:1.5;cursor:pointer}
+body .compact-list-controls>button:hover{background:var(--ink);color:var(--paper)}
+body .compact-list-controls[hidden],body .compact-list-controls>button[hidden],body #bill-pagination[hidden],body #speech-results-panel[hidden],body #speech-toggle-results[hidden]{display:none!important}
+body .compact-list-controls>button:focus-visible,body .speech-list-toggle:focus-visible,body #bill-results-toggle:focus-visible,body .speech-meeting-title>summary:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+body #bill-results-panel{border:0;padding:0;margin:0;scroll-margin-top:24px}
+body #bill-results-panel>summary{display:none}
+body #bill-results-panel:not([open]) .list-state-expanded,body .speech-meeting-title:not([open]) .list-state-expanded{display:none}
+body #bill-results-panel[open] .list-state-collapsed,body .speech-meeting-title[open] .list-state-collapsed{display:none}
+body #keywords .speech-result-heading{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px}
+body #keywords #speech-result-title{flex:1;min-width:0}
+body #keywords #speech-result-meta{margin-left:auto}
+body #keywords .speech-list-toggle{min-height:44px;padding:8px 0;border:0;border-bottom:1px solid currentColor;background:transparent;color:var(--orange);font:inherit;font-size:16px;cursor:pointer}
+body #keywords .speech-result-actions .speech-more{width:auto;flex:1;margin:0;font-size:16px}
+body #keywords .speech-result-actions>button{flex:1}
+body #keywords .speech-meeting-title{margin:12px 0}
+body #keywords .speech-meeting-title>summary{list-style:none}
+body #keywords .speech-meeting-title>summary::-webkit-details-marker{display:none}
+body #keywords .speech-meeting-title h4{margin:0}
+body #keywords .speech-title-action{display:none}
+body #statements .stmt-editorial-update{display:inline-block;margin:12px 0 0;padding:4px 9px;background:#f6e5d5;border:1px solid #d8ac88;color:#874b2b;font-size:14px;font-weight:650}
+body #statements .stmt-editorial-comment{border-left:3px solid var(--orange);padding-left:12px;margin-top:16px;line-height:1.85}
+body #statements .stmt-editorial-sources{display:flex;flex-wrap:wrap;gap:8px 18px;margin:12px 0 18px}
+body #statements .stmt-editorial-sources a{font-size:14px;line-height:1.8}
+@media(max-width:700px){
+ body #bill-results-panel>summary{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;list-style:none;min-height:48px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:16px;cursor:pointer}
+ body #bill-results-panel>summary::-webkit-details-marker{display:none}
+ body #bill-results-summary{font-size:14px;color:var(--ink-soft);margin-right:auto}
+ body #bill-results-panel>summary .list-state-expanded,body #bill-results-panel>summary .list-state-collapsed{color:var(--orange);font-size:14px}
+ body .compact-list-controls>button{flex:1 1 100%}
+ body #keywords #speech-result-title{order:1}
+ body #keywords .speech-list-toggle{order:2;margin-left:auto}
+ body #keywords #speech-result-meta{order:3;flex-basis:100%;margin-left:0}
+ body #keywords .speech-result-actions>button{flex-basis:100%}
+ body #keywords .speech-meeting-title>summary{cursor:pointer}
+ body #keywords .speech-meeting-title:not([open]) .speech-meeting-name{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ body #keywords .speech-meeting-title[open] .speech-meeting-name{display:block}
+ body #keywords .speech-title-action{display:block;margin-top:5px;color:var(--orange);font-size:14px;font-weight:500}
+}

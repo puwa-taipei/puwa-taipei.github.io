@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v24",
+  "version": "public-release-v25",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9368,
-      "sha256": "2fe599d89bb717d5ae00ceb2316e5ef6e53298c4f8b53e2c9551f8a1d40660cb"
+      "bytes": 10575,
+      "sha256": "b6351a1336f1cc7aa9fbe94f93bbabb4c3e96e12fbd87cd96e70ea981880eed1"
     },
     {
       "path": "anchor.js",
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 27007,
-      "sha256": "bcbf31fd3cb30fcc111505862e309a3796e9fd159b8e59912ab928d1d6c0d1fa"
+      "bytes": 28246,
+      "sha256": "b9cebea68d1cef8034013ee3b62187ac14e696950379143a056257b4c9842b07"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -224,8 +224,8 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 32592,
-      "sha256": "8e32425c3d58b708ec55b4db764fffca149a3e55300c3d0235795a614a31d5e5"
+      "bytes": 33631,
+      "sha256": "4e62396b5b35f0633b0dbb8f2d7f4f928f3aa46e62a245631972e64c451ceb5e"
     },
     {
       "path": "game/quiz-share-core.js",
@@ -249,8 +249,8 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5322,
-      "sha256": "3782305e056a2f0cd1e2b1da5abbb1204a90539b9de1d9805802435d012498ab"
+      "bytes": 5327,
+      "sha256": "fefbd6dde150218c84d4c3dad1811a8ccb3e1037f2e7b2aa363483e0ccb4a57d"
     },
     {
       "path": "game/red-notes/index.html",
@@ -279,8 +279,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26576,
-      "sha256": "642f296079f534e0b0d0c477a549ae60dbe1cfe1fd286987a40c5d6f651730da"
+      "bytes": 27126,
+      "sha256": "c91250dc9b97cb5abf99f0e6ca4f3d44d5bf34da4be8a4f19b72a120ff5e17cc"
     },
     {
       "path": "leaderboard.css",
@@ -329,8 +329,8 @@
     },
     {
       "path": "speech-search.js",
-      "bytes": 22586,
-      "sha256": "308e77ce34b44d80cd75b75b729761dcecce1eaebac32a72d34753dd239d3091"
+      "bytes": 24686,
+      "sha256": "635d103d82d4d35ff6e7b23c3ed1b789bf4657087dd429200f1711280b7c84f0"
     },
     {
       "path": "statements.css",
@@ -339,13 +339,13 @@
     },
     {
       "path": "statements.js",
-      "bytes": 12712,
-      "sha256": "e4541e002de163eaf08204e52fdad67eb9b81523a82223cba9a33413d1a780dc"
+      "bytes": 13243,
+      "sha256": "c636f152ee5cf7c1a96369a598d1d9ca1b4b03bdeb6489661f758a2bbcb4a03b"
     },
     {
       "path": "style.css",
-      "bytes": 44875,
-      "sha256": "609ca2358aba8ec7c1e6bb9e301ac72e5ec2d087bea0a0cc624a2c1bb083dbb0"
+      "bytes": 48746,
+      "sha256": "e1d960e090e04f92396b955a5b14807a85cb19cb7472db24be13fa99f8000975"
     },
     {
       "path": "typography.css",
