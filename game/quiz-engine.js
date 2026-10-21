@@ -165,7 +165,14 @@
       text('quiz-round-note', state.challenge ? '朋友的同一輪六題，題目與順序固定；你的分數從零開始。再玩或切換時期，會離開這輪挑戰。' : state.newCount ? `本輪 ${length} 題，${state.newCount} 題尚未看過。同一輪不重複事件；換時期會重開一輪。` : '本期都看過了？這輪換個順序，盡量避開上一輪。');
       text('quote-selection', `本範圍精選 ${rows.length} 段本人公開言論／文章，答案均為「是」；這是有意挑選的原話遊戲，不加入虛構的「否」題。媒體引述、官方逐字稿與書面文章逐題標示；最後可看本輪完整來源。`);
     }
-    function clearDrag() { state.drag = null; card.classList.remove('is-dragging','is-left','is-right'); card.style.transform = ''; card.style.setProperty('--swipe-yes','0'); card.style.setProperty('--swipe-no','0'); }
+    function finishQuestionEntry() { card.classList.remove('quiz-question-enter'); }
+    function clearDrag() {
+      const pointerId = state.drag?.id;
+      state.drag = null;
+      card.classList.remove('is-dragging','is-left','is-right'); card.style.transform = ''; card.style.setProperty('--swipe-yes','0'); card.style.setProperty('--swipe-no','0');
+      // Clear state before release: capture-loss events can be delivered later.
+      try { if (pointerId !== undefined && card.hasPointerCapture(pointerId)) card.releasePointerCapture(pointerId); } catch {}
+    }
     function sourceHTML(q) {
       const links = [], primary = safeUrl(q.url || q.sourceURL), video = safeUrl(q.videoUrl), full = safeUrl(q.fullVideoUrl || q.fullMeetingVideoUrl);
       if (primary) links.push(`<a href="${esc(primary)}" target="_blank" rel="noopener noreferrer">讀原文與上下文 ↗</a>`);
@@ -199,7 +206,7 @@
       // Preserve a Tab/Enter player's landing point before disabled/hidden controls lose focus.
       // An unrelated field or link elsewhere on the page never has its focus taken here.
       if (focusInChangingControls) card.focus({preventScroll:true});
-      clearDrag(); renderDots(s); autoInput.checked = s.automatic; card.dataset.phase = s.phase;
+      clearDrag(); finishQuestionEntry(); renderDots(s); autoInput.checked = s.automatic; card.dataset.phase = s.phase;
       $('quiz-no').disabled = $('quiz-yes').disabled = s.phase !== 'asking';
       text('quiz-score', s.round.length ? `答對 ${s.correct} / ${s.round.length} 題` : '—');
       if (s.phase === 'feedback') {
@@ -279,9 +286,15 @@
     autoInput.addEventListener('change', () => controller.setAutomatic(autoInput.checked));
     $('game-period')?.addEventListener('change', event => { state.period = event.target.value; drawRound(); });
     $('quiz-feedback').addEventListener('focusin', () => controller.hold()); $('quiz-feedback').addEventListener('pointerdown', () => controller.hold());
+    // A fill-mode:both entry animation otherwise keeps ownership of transform,
+    // overriding the next card's inline drag transform after the first swipe.
+    const endQuestionEntry = event => { if (event.target === card && event.animationName === 'quiz-question-arrive') finishQuestionEntry(); };
+    card.addEventListener('animationend', endQuestionEntry); card.addEventListener('animationcancel', endQuestionEntry);
     card.addEventListener('keydown', event => { if (['ArrowLeft','ArrowRight','a','A','d','D'].includes(event.key)) { event.preventDefault(); if (!event.repeat) controller.answer(['ArrowRight','d','D'].includes(event.key)); } });
     card.addEventListener('pointerdown', event => {
       if (controller.snapshot().phase !== 'asking' || !event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0) || event.target.closest('a,button,input,select,details')) return;
+      // Also retire an in-flight entry before an immediate/reduced-motion drag.
+      finishQuestionEntry(); clearDrag();
       state.drag = {id:event.pointerId,x:event.clientX,y:event.clientY,lastX:event.clientX,lastAt:performance.now(),velocity:0,locked:false};
     });
     card.addEventListener('pointermove', event => {
@@ -296,9 +309,14 @@
     card.addEventListener('pointerup', event => {
       const d=state.drag; if (!d || d.id!==event.pointerId) return;
       const dx=event.clientX-d.x,threshold=Math.min(125,Math.max(68,card.offsetWidth*.22)),commit=d.locked && (Math.abs(dx)>=threshold || (Math.abs(dx)>42 && Math.abs(d.velocity)>.65 && Math.sign(d.velocity)===Math.sign(dx)));
-      clearDrag(); if (card.hasPointerCapture(event.pointerId)) card.releasePointerCapture(event.pointerId); if (commit) controller.answer(dx>0);
+      clearDrag(); if (commit) controller.answer(dx>0);
     });
-    card.addEventListener('pointercancel',clearDrag); card.addEventListener('lostpointercapture',()=>{if(state.drag)clearDrag();});
+    card.addEventListener('pointercancel',event=>{if(state.drag?.id === event.pointerId)clearDrag();});
+    card.addEventListener('lostpointercapture',event=>{
+      const d=state.drag; if(!d || d.id !== event.pointerId || !d.locked)return;
+      try { if(card.hasPointerCapture(event.pointerId))return; } catch {}
+      clearDrag();
+    });
     window.addEventListener('blur',()=>{clearDrag();controller.hold();}); document.addEventListener('visibilitychange',()=>{if(document.hidden)controller.hold();});
     window.addEventListener('storage',event=>{if(event.key===seenKey){mergeSeen(event.newValue);info();}});
     const api={setQuotes(quotes){state.quotes=Array.isArray(quotes)?quotes:[];drawRound();},reset(){drawRound();}}; mounted.set(root,api); startInitialRound(); return api;
