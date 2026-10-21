@@ -4,7 +4,13 @@
   const core = window.ContributionCore; if (!core) return;
   let apiUrl = '', activeKind = 'quote';
   const forms = [...document.querySelectorAll('form[data-kind]')], sessions = new Map();
-  const storageKey = kind => 'record-contribution-draft-v1-' + kind;
+  const legacyStorageKey = kind => 'record-contribution-draft-v1-' + kind;
+  const querySubject = core.subjectId(new URLSearchParams(location.search).get('subject'));
+  const defaultSubject = querySubject || core.subjectId(document.body.dataset.subjectId) || 'shen-pao-yang';
+  const targetOf = form => core.subjectId(form.elements.namedItem('subjectId').value) || defaultSubject;
+  const storageKey = form => core.draftStorageKey(form.dataset.kind,targetOf(form));
+  const clearDraft = form => { localStorage.removeItem(storageKey(form)); if (targetOf(form) === 'shen-pao-yang') localStorage.removeItem(legacyStorageKey(form.dataset.kind)); };
+  for (const form of forms) { const field = form.elements.namedItem('subjectId'); field.value = defaultSubject; for (const option of field.options) option.defaultSelected = option.value === defaultSubject; }
   const status = document.getElementById('connection-status');
   const node = (tag, text, className) => { const out = document.createElement(tag); if (text !== undefined) out.textContent = text; if (className) out.className = className; return out; };
   function readValues(form) {
@@ -34,7 +40,7 @@
     activeKind = kind;
     for (const k of ['quote','game']) { const tab = document.getElementById('tab-' + k); tab.setAttribute('aria-selected', String(k === kind)); tab.tabIndex = k === kind ? 0 : -1; document.getElementById('panel-' + k).hidden = k !== kind; }
     if (focus) document.getElementById('tab-' + kind).focus();
-    const query = new URL(location.href); query.searchParams.set('type', kind); history.replaceState(null, '', query.pathname + query.search);
+    const query = new URL(location.href); query.searchParams.set('type', kind); query.searchParams.set('subject',targetOf(document.querySelector('form[data-kind="' + kind + '"]'))); history.replaceState(null, '', query.pathname + query.search);
   }
   for (const kind of ['quote','game']) {
     const tab = document.getElementById('tab-' + kind);
@@ -75,6 +81,7 @@
   function receipt(form, result) {
     const box = form.querySelector('.submission-status'); box.className = 'submission-status';
     box.replaceChildren(node('h3',result.duplicate ? '這份內容已有收件紀錄。' : '已收件，謝謝你補上來源。'), node('p','接下來由審稿團隊人工核對。收件不代表通過，也不會立即加入網站或題庫。'), node('p','收件編號'), node('p',result.receiptId,'receipt-id'));
+    box.append(node('p','投稿對象：' + core.SUBJECTS[targetOf(form)]));
     if (typeof result.createdAt === 'string' && !Number.isNaN(Date.parse(result.createdAt))) box.append(node('p','收件時間：' + new Date(result.createdAt).toLocaleString('zh-TW')));
     box.append(node('p',result.duplicate ? '重複送出不會覆寫先前的聯絡資料。請保存這個編號，本站沒有公開查稿頁。' : result.contactSaved ? '你提供的聯絡方式已私下交給審稿團隊，不會公開。請保存收件編號。' : '本次沒有保存私人聯絡方式。請保存收件編號。'));
     const copy = node('button','複製收件編號'); copy.type = 'button'; copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(result.receiptId); copy.textContent = '已複製'; } catch { copy.textContent = '請選取上方編號後複製'; } }); box.append(copy); box.hidden = false; box.focus();
@@ -85,8 +92,11 @@
     resetOptionalDetails(form);
     const draftStatus = form.querySelector('.draft-status');
     try {
-      const saved = JSON.parse(localStorage.getItem(storageKey(kind)) || 'null');
+      let saved = JSON.parse(localStorage.getItem(storageKey(form)) || 'null');
+      if (!saved && targetOf(form) === 'shen-pao-yang') saved = JSON.parse(localStorage.getItem(legacyStorageKey(kind)) || 'null');
       if (saved && saved.kind === kind && saved.fields && typeof saved.fields === 'object') {
+        const savedSubject = core.subjectId(saved.fields.subjectId) || 'shen-pao-yang';
+        if (savedSubject !== targetOf(form)) throw new Error('draft_target_mismatch');
         const fields = core.sanitizeDraft(kind,saved.fields);
         for (const [key,value] of Object.entries(fields)) { const field = form.elements.namedItem(key); if (field) { if (field.type === 'checkbox') field.checked = value === true; else field.value = value; } }
         draftStatus.textContent = '已恢復你手動保存的本機草稿；聯絡方式與同意勾選需重新填寫。';
@@ -99,16 +109,17 @@
       setReady(form);
     };
     form.addEventListener('input',changed); form.addEventListener('change',changed);
+    form.elements.namedItem('subjectId').addEventListener('change', () => { draftStatus.textContent = '投稿對象已改為' + core.SUBJECTS[targetOf(form)] + '，現有文字保留。送出前請確認內容與人物一致；草稿按人物分開保存。'; if (activeKind === kind) changeKind(kind); });
     form.addEventListener('reset', event => {
       if (session.busy) { event.preventDefault(); return; }
       queueMicrotask(() => { clearErrors(form); resetOptionalDetails(form); session.success = false; session.nonces.reset(); form.querySelector('.submission-status').hidden = true; setReady(form); });
     });
     form.querySelector('[data-action=save]').addEventListener('click', () => {
-      try { localStorage.setItem(storageKey(kind),JSON.stringify({kind,savedAt:new Date().toISOString(),fields:core.sanitizeDraft(kind,readValues(form))})); draftStatus.textContent = '草稿已存到這台瀏覽器。聯絡方式與同意勾選沒有保存；其他使用同一瀏覽器的人可能讀到內容。'; }
+      try { localStorage.setItem(storageKey(form),JSON.stringify({kind,savedAt:new Date().toISOString(),fields:core.sanitizeDraft(kind,readValues(form))})); draftStatus.textContent = core.SUBJECTS[targetOf(form)] + '的草稿已存到這台瀏覽器。聯絡方式與同意勾選沒有保存；其他使用同一瀏覽器的人可能讀到內容。'; }
       catch { draftStatus.textContent = '無法保存草稿，可能是瀏覽器限制或空間不足。請先自行複製內容，離開後可能遺失。'; }
     });
     form.querySelector('[data-action=clear]').addEventListener('click', () => {
-      try { localStorage.removeItem(storageKey(kind)); draftStatus.textContent = '這一類型的本機草稿已清除。表單目前內容保留；已送出的投稿不會因此撤回。'; }
+      try { clearDraft(form); draftStatus.textContent = '這個人物與類型的本機草稿已清除。表單目前內容保留；其他人物草稿與已送出的投稿不受影響。'; }
       catch { draftStatus.textContent = '瀏覽器無法清除草稿。請在瀏覽器的網站資料設定中移除本站資料。'; }
     });
     form.addEventListener('submit', async event => {
@@ -139,7 +150,7 @@
         }
         session.success = true; session.nonces.reset(); receipt(form,data);
         form.elements.namedItem('contactValue').value = ''; form.elements.namedItem('contactConsent').checked = false;
-        try { localStorage.removeItem(storageKey(kind)); draftStatus.textContent = '已收件，這一類型的本機草稿已清除。若繼續修改，可再另存草稿。'; } catch { draftStatus.textContent = '已收件，但瀏覽器未能清除舊草稿。請自行清除本站資料。'; }
+        try { clearDraft(form); draftStatus.textContent = '已收件，這個人物與類型的本機草稿已清除。若繼續修改，可再另存草稿。'; } catch { draftStatus.textContent = '已收件，但瀏覽器未能清除舊草稿。請自行清除本站資料。'; }
       } catch {
         failure(form,'連線中斷，尚無法確認是否收件。','表單內容保留，可能已收件。請在不修改內容的情況下再試，這次請求編號會沿用；私人聯絡方式不會存入草稿。');
       } finally {
@@ -149,7 +160,7 @@
   }
   (async () => {
     try {
-      const response = await fetch('/contribute/config.json?v=16',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
+      const response = await fetch('/contribute/config.json?v=17',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
       if (!response.ok) throw new Error('config');
       const raw = await response.text(); if (raw.length > 8000) throw new Error('config');
       const config = JSON.parse(raw), candidate = core.publicHttps(config.apiUrl);

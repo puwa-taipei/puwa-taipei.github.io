@@ -1,6 +1,9 @@
 /* Shared validation for contribution forms. No network, storage, or secrets. */
 (function (global) {
   'use strict';
+  const SUBJECTS = Object.freeze({'shen-pao-yang':'沈伯洋','su-chiao-hui':'蘇巧慧'});
+  const subjectId = value => typeof value === 'string' && Object.prototype.hasOwnProperty.call(SUBJECTS,value) ? value : null;
+  function draftStorageKey(kind,subject) { if (!['quote','game'].includes(kind) || !subjectId(subject)) throw new Error('invalid_draft_target'); return 'record-contribution-draft-v2-' + kind + '-' + subject; }
   const LIMITS = Object.freeze({quote:600,sourceUrl:2048,locator:240,context:2000,note:1000,title:100,summary:1200,repoUrl:2048,commitSha:40,gameUrl:2048,screenshotUrl:2048,license:120,assetRights:1200,externalServices:1000,creditName:60,contactValue:2048});
   const forbidden = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u200b\u200e\u200f\u202a-\u202e\u2066-\u2069\ud800-\udfff]/u;
   const clean = value => typeof value === 'string' ? value.trim() : '';
@@ -32,6 +35,8 @@
   function validate(kind, values) {
     const errors = {}, payload = {};
     if (!['quote','game'].includes(kind)) return {ok:false,errors:{kind:'請選擇投稿類型。'}};
+    const target = subjectId(values.subjectId === undefined ? 'shen-pao-yang' : values.subjectId);
+    if (!target) errors.subjectId = '請選擇這份投稿主要關於的人物。'; else payload.subjectId = target;
     function text(key, label, required = true) {
       const value = clean(values[key]);
       if (required && !value) errors[key] = '請填寫' + label + '。';
@@ -90,11 +95,12 @@
     if (!Object.keys(errors).length && new TextEncoder().encode(JSON.stringify({kind,payload})).length > 16000) errors.note = '整份投稿篇幅過長，請縮短補充、背景或網址，總內容需小於 16 KB。';
     return {ok:Object.keys(errors).length === 0,errors,payload,contact};
   }
-  const draftFields = {quote:['quote','sourceUrl','sourceDate','dateUnknown','locator','context','note','creditName'],game:['title','summary','repoUrl','commitSha','gameUrl','screenshotUrl','license','assetRights','externalServices','note','creditName']};
+  const draftFields = {quote:['subjectId','quote','sourceUrl','sourceDate','dateUnknown','locator','context','note','creditName'],game:['subjectId','title','summary','repoUrl','commitSha','gameUrl','screenshotUrl','license','assetRights','externalServices','note','creditName']};
   function sanitizeDraft(kind, values) {
     const result = {};
     for (const key of draftFields[kind] || []) {
-      if (key === 'dateUnknown') result[key] = values[key] === true;
+      if (key === 'subjectId') { if (subjectId(values[key])) result[key] = values[key]; }
+      else if (key === 'dateUnknown') result[key] = values[key] === true;
       else if (typeof values[key] === 'string') result[key] = values[key].slice(0, LIMITS[key] || 10);
     }
     return result;
@@ -111,7 +117,7 @@
     };
   }
   function localCover(value) { return typeof value === 'string' && /^\/assets\/community\/[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}\.(?:png|jpe?g)$/.test(value) ? value : null; }
-  const api = {LIMITS,publicHttps,repository,cover,calendarDate,validate,sanitizeDraft,nonceTracker,localCover};
+  const api = {SUBJECTS,subjectId,draftStorageKey,LIMITS,publicHttps,repository,cover,calendarDate,validate,sanitizeDraft,nonceTracker,localCover};
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (global) global.ContributionCore = api;
 })(typeof window === 'undefined' ? null : window);

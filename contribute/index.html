@@ -14,11 +14,11 @@
   <meta property="og:url" content="https://puwa-taipei.github.io/contribute/">
   <meta property="og:image" content="https://puwa-taipei.github.io/assets/og-records.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/contribute/contribute.css?v=16">
-  <script src="/contribute/core.js?v=16" defer></script>
-  <script src="/contribute/form.js?v=16" defer></script>
+  <link rel="stylesheet" href="/contribute/contribute.css?v=17">
+  <script src="/contribute/core.js?v=17" defer></script>
+  <script src="/contribute/form.js?v=17" defer></script>
 </head>
-<body>
+<body data-subject-id="shen-pao-yang">
 <a class="skip" href="#contribution">直接填寫投稿</a>
 <header class="intake-header"><a class="wordmark" href="/"><span aria-hidden="true">◎</span><span>國會紀錄觀測<small>THE RECORD, IN CONTEXT</small></span></a><nav aria-label="主要導覽"><a href="/#statements">原話檔案 ↗</a><a href="/game/">遊戲庫 ↗</a><a href="/">回首頁 ↗</a></nav></header>
 <main class="intake-shell">
@@ -32,6 +32,7 @@
       <form id="quote-form" data-kind="quote" novalidate>
         <div class="form-head"><p class="eyebrow">SOURCE FIRST</p><h2>讓原話找得到出處。</h2><p>先填原話和主要來源即可。若知道日期、時間點或背景，歡迎展開進階內容補充，不必猜日期或秒數。</p></div>
         <div class="error-summary" tabindex="-1" role="alert" hidden></div>
+        <div class="field"><label for="quote-subjectId">這份投稿主要關於誰？</label><select id="quote-subjectId" name="subjectId" aria-describedby="quote-subjectId-hint"><option value="shen-pao-yang">沈伯洋</option><option value="su-chiao-hui">蘇巧慧</option></select><p id="quote-subjectId-hint" class="hint">請核對對象再送出。原話按人物分開收錄；遊戲可在人工發布時另加相關人物標籤。</p></div>
         <div class="field"><label for="quote-quote">原話內容 <span>必填</span></label><textarea id="quote-quote" name="quote" rows="4" maxlength="600" required aria-describedby="quote-quote-hint"></textarea><p id="quote-quote-hint" class="hint">盡量照原文抄錄，保留標點；請勿把自己的評論寫成引言。<span class="count" data-count="quote">0 / 600</span></p></div>
         <div class="field"><label for="quote-sourceUrl">主要原始來源網址 <span>必填</span></label><input id="quote-sourceUrl" name="sourceUrl" type="url" inputmode="url" maxlength="2048" placeholder="https://…" required aria-describedby="quote-sourceUrl-hint"><p id="quote-sourceUrl-hint" class="hint">公開 HTTPS 影片、文章或官方紀錄。其他佐證連結可放在前後文或補充欄；私人、限時或需授權來源可能無法核對。</p></div>
         <details class="optional-details" data-section="quote-info"><summary><span>進階內容／告訴我們更多</span><small>選填 · 日期、時間點與前後文</small></summary><div class="optional-content">
@@ -52,6 +53,7 @@
       <form id="game-form" data-kind="game" novalidate>
         <div class="form-head"><p class="eyebrow">BUILD SOMETHING PLAYABLE</p><h2>把你的網頁遊戲，<br>放進下一個空位。</h2><p>填上名稱、簡介與公開原始碼，就能送出投稿。其他資訊可選填；這裡不會載入遠端遊戲或圖片。</p></div>
         <div class="error-summary" tabindex="-1" role="alert" hidden></div>
+        <div class="field"><label for="game-subjectId">這份投稿主要關於誰？</label><select id="game-subjectId" name="subjectId" aria-describedby="game-subjectId-hint"><option value="shen-pao-yang">沈伯洋</option><option value="su-chiao-hui">蘇巧慧</option></select><p id="game-subjectId-hint" class="hint">請核對對象再送出。原話按人物分開收錄；遊戲可在人工發布時另加相關人物標籤。</p></div>
         <div class="field"><label for="game-title">遊戲名稱 <span>必填</span></label><input id="game-title" name="title" type="text" maxlength="100" required></div>
         <div class="field"><label for="game-summary">遊戲簡介與玩法 <span>必填</span></label><textarea id="game-summary" name="summary" rows="4" maxlength="1200" required aria-describedby="game-summary-hint"></textarea><p id="game-summary-hint" class="hint">玩家要做什麼、如何操作？若引用現實言論，請附上可核對來源。<span class="count" data-count="summary">0 / 1200</span></p></div>
         <div class="field"><label for="game-repoUrl">公開 GitHub 原始碼儲存庫 <span>必填</span></label><input id="game-repoUrl" name="repoUrl" type="url" inputmode="url" maxlength="2048" required placeholder="https://github.com/owner/repository" aria-describedby="game-repoUrl-hint"><p id="game-repoUrl-hint" class="hint">必須能在未登入時閱讀原始碼。請填專案首頁；私有儲存庫、壓縮檔或只有試玩頁不符合條件。審稿時會另行確認公開性。</p></div>
