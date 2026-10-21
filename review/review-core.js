@@ -43,6 +43,17 @@
     if(u.hostname!=='github.com'||u.search||u.hash||!match||['.','..'].includes(match[2])||match[2].endsWith('.git'))throw new ReviewError('invalid_public_game');
     return 'https://github.com/'+match[1]+'/'+match[2];
   }
+  function sourceCommit(detail) {
+    const value=detail?.payload?.commitSha;
+    return typeof value==='string'&&value.trim()?value.trim().toLowerCase():null;
+  }
+  function reviewEvidence(detail,values={}) {
+    if(detail?.kind!=='game'||detail.status!=='approved')throw new ReviewError('not_approved');
+    if(!values||typeof values!=='object'||Array.isArray(values)||Object.keys(values).length!==2||!Object.hasOwn(values,'assetRights')||!Object.hasOwn(values,'rightsConfirmed')||typeof values.assetRights!=='string'||typeof values.rightsConfirmed!=='boolean')throw new ReviewError('invalid_request');
+    if(!values.assetRights.trim()||values.rightsConfirmed!==true)throw new ReviewError('publication_incomplete');
+    let assetRights;try{assetRights=publicText(values.assetRights,1,1200);}catch{throw new ReviewError('invalid_request');}
+    return {assetRights,rightsConfirmed:true};
+  }
   function publicGame(detail,values={}) {
     if(detail?.kind!=='game'||detail.status!=='approved')throw new ReviewError('not_approved');
     const title=publicText(values.title,1,100),summary=publicText(values.summary,1,1200),license=publicText(values.license,1,120);
@@ -51,7 +62,8 @@
     const externalServices=publicText(values.externalServices,1,1000);
     const coverPath=values.coverPath===undefined||values.coverPath===null||values.coverPath===''?null:publicText(values.coverPath,1,120);
     if(coverPath&&!/^\/assets\/community\/[A-Za-z0-9][A-Za-z0-9_-]{0,79}\.(?:png|jpg|jpeg)$/.test(coverPath))throw new ReviewError('invalid_public_game');
-    if(detail.payload?.repoUrl!==undefined&&(repoUrl!==detail.payload.repoUrl||commitSha!==detail.payload.commitSha))throw new ReviewError('source_mismatch');
+    if(detail.payload?.repoUrl!==undefined&&repoUrl!==detail.payload.repoUrl)throw new ReviewError('source_mismatch');
+    const fixedCommit=sourceCommit(detail);if(fixedCommit!==null&&commitSha!==fixedCommit)throw new ReviewError('source_mismatch');
     // Contact, private notes, and unconsented attribution cannot enter this allowlisted projection.
     return {title,summary,repoUrl,commitSha,gameUrl,license,externalServices,coverPath};
   }
@@ -91,7 +103,7 @@
         const data=await response.json().catch(()=>null);
         if(generation!==this.#generation)throw new ReviewError('stale_request');
         if(!response.ok){
-          const allowed=new Set(['version_conflict','not_found','invalid_request','not_approved','approval_required','source_mismatch','already_published','invalid_public_game','rate_limited','repo_verification_failed','repo_verification_unavailable']);
+          const allowed=new Set(['version_conflict','not_found','invalid_request','not_approved','approval_required','source_mismatch','already_published','invalid_public_game','rate_limited','repo_verification_failed','repo_verification_unavailable','publication_incomplete']);
           const authCode=auth?[data?.error_code,data?.code,data?.error].find(value=>typeof value==='string'&&AUTH_ERRORS.has(value)):null;
           const code=authCode||(token&&response.status===401?'session_expired':token&&response.status===403?'access_denied':response.status===429?'rate_limited':allowed.has(data?.error)?data.error:response.status===409?'version_conflict':'temporarily_unavailable');
           if(token&&(response.status===401||response.status===403))this.clear(code);
@@ -145,5 +157,5 @@
     }
     async signOut(){const token=this.#token;this.clear('signed_out');if(token&&this.enabled){try{await this.#request(`${this.#config.supabaseUrl}/auth/v1/logout?scope=local`,{token,auth:true});}catch{}}}
   }
-  globalThis.RecordsReview=Object.freeze({Client,ReviewError,config,callback,publicGame,publicPreview,takeVerifier,UUID,PKCE_KEY,PKCE_TTL,SESSION_TTL});
+  globalThis.RecordsReview=Object.freeze({Client,ReviewError,config,callback,publicGame,publicPreview,sourceCommit,reviewEvidence,takeVerifier,UUID,PKCE_KEY,PKCE_TTL,SESSION_TTL});
 })();

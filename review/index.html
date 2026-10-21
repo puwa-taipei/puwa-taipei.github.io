@@ -9,8 +9,8 @@
 <script id="auth-callback">(()=>{'use strict';const u=new URL(location.href),q=u.searchParams,h=new URLSearchParams(u.hash.slice(1));if(['code','error','error_code','error_description','access_token','refresh_token','token_hash','token'].some(k=>q.has(k)||h.has(k))){const v={};if(q.has('code'))v.code=q.get('code');if(q.has('error')||q.has('error_code')||h.has('error')||h.has('error_code'))v.error=true;if(h.has('access_token')){v.accessToken=h.get('access_token');v.tokenType=h.get('token_type');v.expiresIn=h.get('expires_in');v.expiresAt=h.get('expires_at');}history.replaceState(null,'',u.pathname);globalThis.__reviewCallback=v;}})();</script>
 <title>投稿審核工作台｜原話與紀錄</title>
 <link rel="stylesheet" href="/review/review.css?v=15">
-<script src="/review/review-core.js?v=15" defer></script>
-<script src="/review/review.js?v=15" defer></script>
+<script src="/review/review-core.js?v=16" defer></script>
+<script src="/review/review.js?v=16" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到工作台</a>

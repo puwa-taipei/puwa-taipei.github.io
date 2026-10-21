@@ -4,7 +4,7 @@
   const callback=globalThis.__reviewCallback;delete globalThis.__reviewCallback;
   const R=globalThis.RecordsReview,$=id=>document.getElementById(id);
   const statusText={pending:'待審核',needs_info:'待補資料',approved:'已核准',rejected:'未採用'};
-  const errors={not_configured:'工作台尚未連線。管理員資料庫與登入設定完成後才會開放；目前沒有讀取任何投稿。',access_denied:'這個帳號沒有管理員權限。私人內容已清空。',session_expired:'登入已到期，私人內容已清空。請重新登入。',login_link_invalid:'登入連結無效或已過期，請重新寄送。',verifier_missing:'找不到原分頁的登入驗證資料。請回到寄信的分頁，重新寄送並在同一分頁開啟郵件連結。',storage_unavailable:'瀏覽器未允許暫存登入驗證資料，無法安全完成登入。請允許此分頁的暫存功能後重試。',invalid_email:'請輸入有效的 Email。',invalid_public_game:'請檢查公開標題、簡介、GitHub 儲存庫、完整提交編號與授權；封面只接受本站已檢核圖檔路徑。',not_approved:'請先把遊戲設為「已核准」，再建立公開預覽。',approval_required:'請先核准遊戲並勾選人工檢核確認，再發布。',source_mismatch:'公開的儲存庫與指定提交必須和原投稿一致；如需更換程式版本，請另建新投稿。',version_conflict:'另一位管理員已更新這則投稿。已重新讀取最新版本，請核對後再操作；你的修改沒有覆蓋其他人的變更。',rate_limited:'請稍候至少 60 秒再試；郵件服務也可能有寄送額度限制。',repo_verification_failed:'無法確認這是公開 GitHub 儲存庫中的指定完整提交，尚未發布。請核對儲存庫與提交編號。',repo_verification_unavailable:'GitHub 核對服務目前無法使用，尚未發布。請稍後重試。',not_found:'這則投稿已不存在或無法讀取。',invalid_response:'伺服器回覆無法核對，請重新讀取。',request_timeout:'連線逾時，請稍後重新讀取。',signup_disabled:'帳號尚未完成信箱邀請確認。請先開啟原邀請或確認郵件，完成後再寄送登入連結；這裡不開放自行註冊。',email_not_confirmed:'信箱尚未確認。請先完成原邀請或確認郵件，再回來登入。',over_email_send_rate_limit:'郵件寄送已達服務限制。請稍後再試；必要時請管理員檢查寄信額度。',over_request_rate_limit:'登入請求已達服務限制，請稍候再試。',email_address_not_authorized:'目前寄信服務不允許此收件地址。請管理員確認收件權限或寄信服務設定。',email_provider_disabled:'郵件登入目前未啟用，請管理員檢查登入服務設定。',validation_failed:'登入資料未通過驗證。請檢查 Email 格式；若仍失敗，請管理員核對登入設定。',otp_disabled:'這個工作台不建立新帳號。請先由管理員完成帳號建立、邀請與授權，再回來登入。',otp_expired:'登入連結已失效，請重新寄送並在原分頁開啟。',flow_state_expired:'登入驗證已逾時，請重新寄送連結。',flow_state_not_found:'找不到這次登入驗證，請重新寄送並在原分頁開啟。',bad_code_verifier:'登入驗證與原分頁不符，請重新寄送並在同一分頁開啟。',temporarily_unavailable:'目前無法完成操作。請稍後重試；本頁不顯示私人錯誤細節。'};
+  const errors={not_configured:'工作台尚未連線。管理員資料庫與登入設定完成後才會開放；目前沒有讀取任何投稿。',access_denied:'這個帳號沒有管理員權限。私人內容已清空。',session_expired:'登入已到期，私人內容已清空。請重新登入。',login_link_invalid:'登入連結無效或已過期，請重新寄送。',verifier_missing:'找不到原分頁的登入驗證資料。請回到寄信的分頁，重新寄送並在同一分頁開啟郵件連結。',storage_unavailable:'瀏覽器未允許暫存登入驗證資料，無法安全完成登入。請允許此分頁的暫存功能後重試。',invalid_email:'請輸入有效的 Email。',invalid_public_game:'請檢查公開標題、簡介、GitHub 儲存庫、完整提交編號與授權；封面只接受本站已檢核圖檔路徑。',not_approved:'請先把遊戲設為「已核准」，再建立公開預覽。',approval_required:'請先核准遊戲並勾選人工檢核確認，再發布。',source_mismatch:'儲存庫必須和原投稿一致；原稿已有完整提交編號時也不能更換，未提供時才可補齊已核對的完整編號。',publication_incomplete:'請補齊素材權利說明，並勾選已人工核對權利，再重新建立公開預覽。',version_conflict:'另一位管理員已更新這則投稿。已重新讀取最新版本，請核對後再操作；你的修改沒有覆蓋其他人的變更。',rate_limited:'請稍候至少 60 秒再試；郵件服務也可能有寄送額度限制。',repo_verification_failed:'無法確認這是公開 GitHub 儲存庫中的指定完整提交，尚未發布。請核對儲存庫與提交編號。',repo_verification_unavailable:'GitHub 核對服務目前無法使用，尚未發布。請稍後重試。',not_found:'這則投稿已不存在或無法讀取。',invalid_response:'伺服器回覆無法核對，請重新讀取。',invalid_request:'資料格式無法核對，尚未發布。請重新讀取投稿並檢查補齊內容。',request_timeout:'連線逾時，請稍後重新讀取。',signup_disabled:'帳號尚未完成信箱邀請確認。請先開啟原邀請或確認郵件，完成後再寄送登入連結；這裡不開放自行註冊。',email_not_confirmed:'信箱尚未確認。請先完成原邀請或確認郵件，再回來登入。',over_email_send_rate_limit:'郵件寄送已達服務限制。請稍後再試；必要時請管理員檢查寄信額度。',over_request_rate_limit:'登入請求已達服務限制，請稍候再試。',email_address_not_authorized:'目前寄信服務不允許此收件地址。請管理員確認收件權限或寄信服務設定。',email_provider_disabled:'郵件登入目前未啟用，請管理員檢查登入服務設定。',validation_failed:'登入資料未通過驗證。請檢查 Email 格式；若仍失敗，請管理員核對登入設定。',otp_disabled:'這個工作台不建立新帳號。請先由管理員完成帳號建立、邀請與授權，再回來登入。',otp_expired:'登入連結已失效，請重新寄送並在原分頁開啟。',flow_state_expired:'登入驗證已逾時，請重新寄送連結。',flow_state_not_found:'找不到這次登入驗證，請重新寄送並在原分頁開啟。',bad_code_verifier:'登入驗證與原分頁不符，請重新寄送並在同一分頁開啟。',temporarily_unavailable:'目前無法完成操作。請稍後重試；本頁不顯示私人錯誤細節。'};
   let client=null,uiGeneration=0,listGeneration=0,detailGeneration=0,mutationTicket=0,items=[],nextOffset=0,current=null,mutationBusy=false,mailUntil=0,preview=null;
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
   const message=text=>{$('message').textContent=text;$('message').hidden=!text;};
@@ -13,8 +13,9 @@
   const showError=error=>{if(error?.code!=='stale_request')message(errors[error?.code]||errors.temporarily_unavailable);};
   function clearPrivate(){uiGeneration++;listGeneration++;detailGeneration++;mutationTicket++;items=[];current=null;preview=null;nextOffset=0;mutationBusy=false;$('items').replaceChildren();$('detail').replaceChildren(el('p','選一則投稿，查看來源與審核紀錄。','empty'));$('list-count').textContent='';$('more').hidden=true;$('desk').hidden=true;$('login').hidden=false;$('email').value='';}
   function sessionChanged(state){if(!state.authorized){clearPrivate();if(state.reason&&state.reason!=='checking_access')message(errors[state.reason]||'已登出，此頁的私人內容已清空。');}else{$('login').hidden=true;$('desk').hidden=false;$('session-hint').textContent=`管理員權限已核對 · 本分頁登入最晚 ${date(state.expiresAt)} 到期`;}}
-  function link(value,label){const url=safeURL(value);if(!url)return el('span',value||'未提供');const a=el('a',label||url);a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';return a;}
-  function field(list,label,value,{url=false}={}){list.append(el('dt',label));const dd=el('dd');dd.append(url?link(value):el('span',value===true?'是':value===false?'否':value??'未提供'));list.append(dd);}
+  const provided=value=>value===undefined||value===null||typeof value==='string'&&!value.trim()?'未提供／待核對':value;
+  function link(value,label){const url=safeURL(value);if(!url)return el('span',provided(value));const a=el('a',label||url);a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';return a;}
+  function field(list,label,value,{url=false}={}){list.append(el('dt',label));const dd=el('dd');dd.append(url?link(value):el('span',value===true?'是':value===false?'否':provided(value)));list.append(dd);}
   function active(){return client?.checkExpiry()===true;}
   function renderItems(){
     const holder=$('items');holder.replaceChildren();$('list-count').textContent=`已載入 ${items.length} 則`;
@@ -42,7 +43,7 @@
     if(item.kind==='quote'){
       field(list,'投稿原話',p.quote);field(list,'來源',p.sourceUrl,{url:true});field(list,'來源日期',p.dateUnknown?'日期不確定':p.sourceDate);field(list,'原文位置',p.locator);field(list,'前後文',p.context);
     }else{
-      field(list,'遊戲名稱',p.title);field(list,'遊戲簡介',p.summary);field(list,'GitHub',p.repoUrl,{url:true});field(list,'指定提交',p.commitSha);field(list,'第三方試玩',p.gameUrl,{url:true});field(list,'截圖（手動開啟）',p.screenshotUrl,{url:true});field(list,'程式授權',p.license);field(list,'素材權利說明',p.assetRights);field(list,'外部服務',p.externalServices||'未使用');field(list,'權利確認',p.rightsConfirmed);
+      field(list,'遊戲名稱',p.title);field(list,'遊戲簡介',p.summary);field(list,'GitHub',p.repoUrl,{url:true});field(list,'指定提交',p.commitSha);field(list,'第三方試玩',p.gameUrl,{url:true});field(list,'截圖（手動開啟）',p.screenshotUrl,{url:true});field(list,'程式授權',p.license);field(list,'素材權利說明',p.assetRights);field(list,'外部服務',p.externalServices);field(list,'權利確認',p.rightsConfirmed);
     }
     field(list,'補充說明',p.note);field(list,'署名同意',p.creditConsent===true?'同意公開署名':'未同意；不公開署名');if(p.creditConsent===true)field(list,'同意公開名稱',p.creditName||'未填');box.append(list);
     const privacy=el('section',undefined,'section private');privacy.append(el('h3','私人聯絡方式 · 不會出現在公開預覽'));
@@ -65,19 +66,38 @@
     if(item.published){section.append(el('p',`目前已公開 · ${date(item.published.publishedAt)} · 發布版本 ${item.published.version}`,'notice'));const retractLabel=el('label','撤下原因（私人紀錄）'),retractNote=el('textarea');retractNote.maxLength=1000;retractLabel.append(retractNote);section.append(retractLabel);const retract=el('button','確認撤下公開遊戲','danger');retract.type='button';retract.disabled=mutationBusy;retract.addEventListener('click',()=>{if(!retractNote.value.trim()){message('請填寫撤下原因，再確認操作。');return;}if(confirm('確定撤下公開遊戲？私人投稿與審核紀錄仍保留。'))mutate('admin_retract',{note:retractNote.value.trim()});});section.append(retract);}
     if(item.status!=='approved'){section.append(el('p','這則遊戲尚未核准。完成上方審核後，才能建立公開預覽。','notice'));box.append(section);return;}
     if(item.published){section.append(el('p','若需更新公開內容，請先撤下，重新核對後再發布。','notice'));box.append(section);return;}
-    section.append(el('p','請先人工檢查原始碼、指定提交、素材權利、外部服務與畫面。發布時伺服器會再核對公開 GitHub 儲存庫與指定提交；這不代表程式已通過完整安全審查。試玩只會開啟第三方網站。','notice'));
-    const fields=el('div',undefined,'publish-fields'),inputs={},p=item.payload;
-    const defs=[['title','公開名稱',p.title,100],['license','公開授權名稱',p.license,120],['summary','公開簡介',p.summary,1200,true],['repoUrl','投稿指定 GitHub 儲存庫（不可改）',p.repoUrl,2048],['commitSha','投稿指定完整提交編號（不可改）',p.commitSha,40],['gameUrl','第三方試玩網址（可留白）',p.gameUrl,2048],['coverPath','本站已檢核封面路徑（可留白）','',120],['externalServices','會使用的外部服務（必填；未使用請填無）',p.externalServices,1000,true]];
-    for(const [key,title,value,max,wide]of defs){const label=el('label',title,wide?'wide':undefined),input=el(wide?'textarea':'input');input.value=value||'';input.maxLength=max;input.dataset.field=key;input.autocomplete='off';if(['repoUrl','commitSha'].includes(key))input.readOnly=true;input.addEventListener('input',()=>{preview=null;previewHolder.replaceChildren();});label.append(input);fields.append(label);inputs[key]=input;}
-    section.append(fields,el('p','封面只能使用 /assets/community/ 中已人工加入的 PNG／JPG 圖檔；留白時使用預設畫面。投稿截圖不會自動複製或載入。','notice'));
-    const previewButton=el('button','建立公開預覽','secondary');previewButton.type='button';const previewHolder=el('div');
+    section.append(el('p','請補齊並人工核對固定程式版本、授權、素材權利與外部服務。原稿未提供的資料仍是待核對；填寫並不代表原投稿本來已具備。發布時伺服器會再核對公開 GitHub 儲存庫與指定提交，這不代表程式已通過完整安全審查。','notice'));
+    const fields=el('div',undefined,'publish-fields'),inputs={},p=item.payload,previewHolder=el('div');
+    const invalidate=()=>{preview=null;previewHolder.replaceChildren();};
+    const fixedCommit=R.sourceCommit(item)!==null;
+    const defs=[['title','公開名稱',p.title,100],['license','公開授權名稱（必填）',p.license,120],['summary','公開簡介',p.summary,1200,true],['repoUrl','投稿指定 GitHub 儲存庫（不可改）',p.repoUrl,2048],['commitSha',fixedCommit?'投稿指定完整提交編號（不可改）':'補齊已核對的完整提交編號（必填）',p.commitSha,40],['gameUrl','第三方試玩網址（可留白）',p.gameUrl,2048],['coverPath','本站已檢核封面路徑（可留白）','',120],['externalServices','會使用的外部服務（必填；已確認未使用請填無）',p.externalServices,1000,true]];
+    for(const [key,title,value,max,wide]of defs){const label=el('label',title,wide?'wide':undefined),input=el(wide?'textarea':'input');input.value=value||'';input.maxLength=max;input.dataset.field=key;input.autocomplete='off';if(key==='repoUrl'||key==='commitSha'&&fixedCommit)input.readOnly=true;for(const event of ['input','change'])input.addEventListener(event,invalidate);label.append(input);fields.append(label);inputs[key]=input;}
+    section.append(fields,el('p','原稿有提交編號時不得更換；未提供時可補齊已核對的 40 字元編號。封面只能使用 /assets/community/ 中已人工加入的 PNG／JPG 圖檔；留白使用預設畫面，不自動載入投稿截圖。','notice'));
+    const evidence=el('div',undefined,'section private');evidence.append(el('h3','私人素材權利核對 · 不會放進公開預覽'));
+    const rightsLabel=el('label','素材權利說明（必填，最多 1,200 字）'),rightsText=el('textarea');rightsText.dataset.evidence='assetRights';rightsText.maxLength=1200;rightsText.value=p.assetRights||'';rightsText.autocomplete='off';rightsLabel.append(rightsText);evidence.append(rightsLabel);
+    const rightsConfirm=el('label',undefined,'confirm'),rightsCheck=el('input');rightsCheck.type='checkbox';rightsCheck.dataset.evidence='rightsConfirmed';rightsCheck.checked=false;rightsConfirm.append(rightsCheck,document.createTextNode('我已人工核對素材權利，並確認上方說明完整。'));evidence.append(rightsConfirm,el('p','可參考投稿者已提供的說明，但仍需重新人工確認。這份核對快照由伺服器私人保存，不改寫原稿，也不放進公開清單。','notice'));
+    for(const input of [rightsText,rightsCheck])for(const event of ['input','change'])input.addEventListener(event,invalidate);
+    section.append(evidence);
+    // Unsaved moderation edits must also discard the old publication decision.
+    for(const event of ['input','change'])$('moderation-form').addEventListener(event,invalidate);
+    const snapshot=()=>{
+      const values=Object.fromEntries(Object.entries(inputs).map(([key,input])=>[key,input.value]));
+      return {values:R.publicGame(item,values),evidence:R.reviewEvidence(item,{assetRights:rightsText.value,rightsConfirmed:rightsCheck.checked})};
+    };
+    const previewButton=el('button','建立公開預覽','secondary');previewButton.type='button';
     previewButton.addEventListener('click',()=>{
       try{
-        const values=Object.fromEntries(Object.entries(inputs).map(([key,input])=>[key,input.value]));const view=R.publicPreview(item,values);preview={id:item.id,version:item.version,values:R.publicGame(item,values)};previewHolder.replaceChildren();const card=el('div',undefined,'preview');card.append(el('h3',view.title),el('p',view.summary),el('small',view.creditName?`作者同意公開署名：${view.creditName}`:'未公開作者署名'));
-        const list=el('ul');for(const text of [`授權：${view.license}`,`原始碼：${view.repoUrl}`,`提交：${view.commitSha}`,`試玩：${view.gameUrl||'尚未提供'}`,`外部服務：${view.externalServices||'未使用'}`,`封面：${view.coverPath||'預設畫面'}`])list.append(el('li',text));card.append(list,el('small','以上是會公開的欄位；不包含私人聯絡方式、投稿補充說明或審核備註。'));
+        const draft=snapshot(),view=R.publicPreview(item,draft.values);preview={id:item.id,version:item.version,values:draft.values,reviewEvidence:draft.evidence};previewHolder.replaceChildren();const card=el('div',undefined,'preview');card.append(el('h3',view.title),el('p',view.summary),el('small',view.creditName?`作者同意公開署名：${view.creditName}`:'未公開作者署名'));
+        const list=el('ul');for(const text of [`授權：${view.license}`,`原始碼：${view.repoUrl}`,`提交：${view.commitSha}`,`試玩：${view.gameUrl||'尚未提供'}`,`外部服務：${view.externalServices}`,`封面：${view.coverPath||'預設畫面'}`])list.append(el('li',text));card.append(list,el('small','以上是會公開的欄位；不包含素材權利核對快照、私人聯絡方式、投稿補充說明或審核備註。'));
         const label=el('label',undefined,'confirm'),check=el('input');check.type='checkbox';label.append(check,document.createTextNode('我已人工核對指定程式版本、內容、素材與外部服務，並確認以上欄位可以公開。'));card.append(label);
-        const publish=el('button','正式發布遊戲','danger');publish.type='button';publish.disabled=true;check.addEventListener('change',()=>{publish.disabled=!check.checked||mutationBusy;});publish.addEventListener('click',()=>{if(check.checked&&preview?.id===current?.id&&preview.version===current.version)mutate('admin_publish',{reviewConfirmed:true,publicGame:preview.values});});card.append(publish);previewHolder.append(card);message('公開預覽已建立。核對內容並勾選確認後，才可正式發布。');
-      }catch(error){preview=null;previewHolder.replaceChildren();showError(error);}
+        const publish=el('button','正式發布遊戲','danger');publish.type='button';publish.disabled=true;check.addEventListener('change',()=>{publish.disabled=!check.checked||mutationBusy;});publish.addEventListener('click',()=>{
+          if(!check.checked||preview?.id!==current?.id||preview.version!==current.version)return;
+          try{
+            const latest=snapshot();if(JSON.stringify(latest.values)!==JSON.stringify(preview.values)||JSON.stringify(latest.evidence)!==JSON.stringify(preview.reviewEvidence)){invalidate();message('補齊資料已變更，請重新建立公開預覽並確認。');return;}
+            mutate('admin_publish',{reviewConfirmed:true,publicGame:preview.values,reviewEvidence:preview.reviewEvidence});
+          }catch(error){invalidate();showError(error);}
+        });card.append(publish);previewHolder.append(card);message('公開預覽已建立。核對內容並勾選確認後，才可正式發布；修改資料會使這份預覽失效。');
+      }catch(error){invalidate();showError(error);}
     });section.append(previewButton,previewHolder);box.append(section);
   }
   async function mutate(action,extra){
