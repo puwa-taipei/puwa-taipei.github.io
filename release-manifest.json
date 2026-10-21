@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v14",
+  "version": "public-release-v15",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5187,
-      "sha256": "59fdbb7796f18285729b343438f5b07560e979287cbaa81f7af5e63390186d77"
+      "bytes": 6269,
+      "sha256": "a54d07ac1702431d7277d39d86211e83d3ba6e69ca65bece04fe81a62d04e786"
     },
     {
       "path": "anchor.js",
@@ -73,6 +73,41 @@
       "sha256": "6d2a97a8136eaa78420b9977256efb21057591b4805e099f8e2d3d0eeca23fff"
     },
     {
+      "path": "contribute/catalog.css",
+      "bytes": 3514,
+      "sha256": "66b5db776a9f278e669e0617a0dac61f5bdc0ed5fab87c15b98d078b5ac99f4d"
+    },
+    {
+      "path": "contribute/catalog.js",
+      "bytes": 5907,
+      "sha256": "6ca7b0962674d8b06ecbf5efaf443869df4c185b5f485ca7f7c0fd7b86b27beb"
+    },
+    {
+      "path": "contribute/config.json",
+      "bytes": 241,
+      "sha256": "612eb01b520d7eaffc75ee39f59efec566674906ef011e25aa81dbcabf3c49ae"
+    },
+    {
+      "path": "contribute/contribute.css",
+      "bytes": 10451,
+      "sha256": "3d423d1148b571519f1a34c5b1088cc5fb962b6598d99772c5c6cd34e29f06db"
+    },
+    {
+      "path": "contribute/core.js",
+      "bytes": 7992,
+      "sha256": "216d96d4314d71f4bcce18133faf05a5c676b93946e7f387bec67400c983b72e"
+    },
+    {
+      "path": "contribute/form.js",
+      "bytes": 13022,
+      "sha256": "2e673e15a72730da2e910675f72eaec697f776cc684c7854ebe957dbfeb3497c"
+    },
+    {
+      "path": "contribute/index.html",
+      "bytes": 17737,
+      "sha256": "9d19b99794882d2c6e79c996af28716106ede9d77b67419676d40e4f4e710104"
+    },
+    {
       "path": "data/analysis.json",
       "bytes": 15681186,
       "sha256": "6eca63051c52cbc6bc3f5440631f48ebcad04e44392970fb0cd7b321d0d0b0e4"
@@ -119,8 +154,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26142720,
-      "sha256": "d45b56d3f8f0e29ef2e4068c76d61974e97b8e7d98a81885ac03a39f0f8db4b9"
+      "bytes": 26148372,
+      "sha256": "299fcaa21a9594535e6803f2d676a2e4dc340bad4c606abc0b232ded2aeb595a"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -154,18 +189,18 @@
     },
     {
       "path": "game/index.html",
-      "bytes": 4346,
-      "sha256": "b3efb40dd7e7e69860e9d340f548e302c2692db6475d335dea2ce04c1b54e823"
+      "bytes": 5408,
+      "sha256": "f844c0c83b2a93a5f898d32f7c698faaba0a67afc36683466f5b2c8dd8c5b6d5"
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 23181,
-      "sha256": "7cb983eb2b67c94de6e75b5c31fbbf9e0bb7577a524e4b3e0dec0dfe4837616b"
+      "bytes": 23879,
+      "sha256": "90ab30e25f33bb8da3b34f336e5fa9e709b091567e0a76b3b97fb561cc47f275"
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 4918,
-      "sha256": "9bb2b44e05cb9aace603f76154006e3d0bbfd40a0ac8498f4185e90f6d845b2b"
+      "bytes": 5039,
+      "sha256": "91b086d42b03e22f0442667c5dc4577c0b7700bb227ac485730e8fdc7710f434"
     },
     {
       "path": "game/red-notes/index.html",
@@ -194,8 +229,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 25680,
-      "sha256": "cd2fd8e8fa343c67fc86451623788b226eb91c01d2d361e9251106e4a7d7b0c8"
+      "bytes": 26014,
+      "sha256": "1d840faa0b0217168f0eb76ab94053e4039040540bdf426cb0b34760720a63d0"
     },
     {
       "path": "leaderboard.css",
@@ -211,6 +246,26 @@
       "path": "quiz.css",
       "bytes": 42,
       "sha256": "0d404c536bf86e3fa900937253b4974ef9490094218831ca9494a426d9d2ee27"
+    },
+    {
+      "path": "review/index.html",
+      "bytes": 4433,
+      "sha256": "7bae467cb03ee56bf3a043269fed0109af2337db0058740ba101df67d24b5330"
+    },
+    {
+      "path": "review/review-core.js",
+      "bytes": 13660,
+      "sha256": "da49aa30b27d7bfab6145714f8874b2a100b5844f1a7658788de24e7e0bd0a68"
+    },
+    {
+      "path": "review/review.css",
+      "bytes": 5734,
+      "sha256": "4a997c3ec13d0c1785e17d95a2cbe5e46680acb3cd1e8774d4c03b4b911f5436"
+    },
+    {
+      "path": "review/review.js",
+      "bytes": 20419,
+      "sha256": "a7dfb59424df4ff3297f1e0bdcd12d44b14f013269a0617de441cd469b0b4219"
     },
     {
       "path": "speech-search.css",
@@ -260,5 +315,9 @@
   "globalLeaderboard": "not-connected",
   "personalizedOg": false,
   "datasetVersion": "v12",
-  "leaderboardFrontendPrepared": true
+  "leaderboardFrontendPrepared": true,
+  "communityIntake": "remote-checked",
+  "privateModeration": "server-auth-required",
+  "adminEmailLoginChecked": false,
+  "submissionAutoPublication": false
 }
