@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v18",
+  "version": "public-release-v19",
   "date": "2026-10-21",
   "files": [
     {
@@ -104,8 +104,8 @@
     },
     {
       "path": "contribute/index.html",
-      "bytes": 19790,
-      "sha256": "35622aae22c7b9374c627d9d577a173ad49043de71cb394f1cc0d671fa9bd1bb"
+      "bytes": 19841,
+      "sha256": "9157ea83e0d64f571dcf0fb49457eb77bf92972506b24cec9a9dfa4c4076b83d"
     },
     {
       "path": "data/analysis.json",
@@ -199,8 +199,8 @@
     },
     {
       "path": "game/index.html",
-      "bytes": 5136,
-      "sha256": "d413a109fa116bb6cd6223cc093ad372ccf3563a5973bb7b83754da41c472cd0"
+      "bytes": 5187,
+      "sha256": "a0396e88ee148bbe4c17d3482c4f153f31cae812ca869124f362fbac5660abff"
     },
     {
       "path": "game/library-core.js",
@@ -239,18 +239,18 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5279,
-      "sha256": "83f26b499fe7a5f3dc926dc7b2ed61078dba8bb2a31cdb926659d4dbf13fbd3a"
+      "bytes": 5330,
+      "sha256": "78b8c07f4b73392590aa42cef334ba795f4aa9f15736de2e2c7ac2bc7831e52e"
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2508,
-      "sha256": "ee06ba95aa50337e9c91aeb0e0bbeafb922c33490f3a74092297a869c177f0e0"
+      "bytes": 2559,
+      "sha256": "8368a937ccea39183d9f3ec6b4216d8753507cf0d4c63fc61433fe2df6a24f8d"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2569,
-      "sha256": "6684b38a97f124217be6bfeae8b7b1f259c0686fad55e96163666d09ee9d9416"
+      "bytes": 2620,
+      "sha256": "8394018ea7f8dee21cf2d0292f0178a05da319b65d2b76b737edf7db1c6b55c6"
     },
     {
       "path": "game/swipe-ui.css",
@@ -269,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26688,
-      "sha256": "253c28f486e68349f07c2c249a4943b3330171ae387373cf8a354bf68b3f2cc8"
+      "bytes": 26739,
+      "sha256": "9d234f11fb683b4621e17aabcbbf3cf525f235077eb0546523e424ca15188d99"
     },
     {
       "path": "leaderboard.css",
@@ -294,8 +294,8 @@
     },
     {
       "path": "review/index.html",
-      "bytes": 4478,
-      "sha256": "e87a5bd8718b40b005c6c8b98f9e89ec76804659939d3776bb8b4c68fe0d2df6"
+      "bytes": 4529,
+      "sha256": "86be4037b4e4816520f1f81d3d4665b88b27966dcfa923cbf021e267f2cf62f2"
     },
     {
       "path": "review/review-core.js",
@@ -336,6 +336,11 @@
       "path": "style.css",
       "bytes": 42475,
       "sha256": "831c19355eb6c346a08cfedeaa4d7594c61d0101a3944610c6164b7e409afa4f"
+    },
+    {
+      "path": "typography.css",
+      "bytes": 14414,
+      "sha256": "0d468632a382e208c77c538149ae80b672c1181ff54b495124b21759b34b9885"
     }
   ],
   "manifestSelfExcluded": true,

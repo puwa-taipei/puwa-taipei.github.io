@@ -1,0 +1,210 @@
+/* v19 reading scale: native system type, readable source notes and flexible rows. */
+:root {
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
+  --reading-copy: 1.0625rem;
+  --reading-meta: .875rem;
+  --reading-control: 1rem;
+}
+body {font-family:var(--sans);font-size:18px;line-height:1.75;letter-spacing:normal;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body :is(button,input,select,textarea) {font-family:var(--sans)}
+body :is(h1,h2,h3,h4) {font-family:var(--sans);font-weight:650;letter-spacing:-.02em}
+body :is(.hero-description,.section-deck,.primary-lead p,.explain-line p,.attendance-note p,
+  .policy-intro>p:not(.policy-count-label),.policy-limit p,.procedure-example,
+  .method-grid details>div,.bill-title,.bill-detail,.cmp-intro,.cmp-reading>p:nth-child(2),
+  .cmp-ledger-rationale,.cmp-method-content,.cmp-codebook p,.stmt-intro,.stmt-front-context,
+  .stmt-pair-grid p,.stmt-finding,.stmt-pending p,.stmt-method,.stmt-pair-limits,
+  .speech-card h4,.speech-snippets,.speech-full>div,.speech-method>div,.speech-missing ul,
+  .arcade-hero p:not(.arcade-eyebrow),.arcade-card-copy p,.community-description,
+  .community-heading p:not(.arcade-eyebrow),.quiz-intro p,.quiz-feedback,
+  .quiz-review-content,.quiz-share-intro,.quiz-share-comparison,
+  .intake-hero>div>p:last-child,.process-card ol,.form-head>p:last-child,
+  .privacy-note>p:last-child,.privacy-note>div>p,.privacy-terms p,.optional-intro,
+  .hero p,.notice,.message,.fields,.preview p,.preview ul,.private p) {
+  font-size:var(--reading-copy);line-height:1.8;
+}
+body :is(.small-note,.eyebrow,.section-number,.hero-meta,.art-note,.strip-label,
+  .brand small,.hero-strip strong small,.hero-strip>div>span:last-child,
+  .donut-center span,.role-index,.role-description,.role-description em,
+  .subheading>span,.chart-label,.chart-value small,.chart-legend,
+  .committee-grid .chart-label,.committee-grid .chart-value small,.procedure-stats span,
+  .process li p,.status-pill,.attendance-metrics span,.attendance-meetings span,
+  .attendance-meetings p,.attendance-meetings a,.source-links,.policy-count-label,
+  .policy-bar,.policy-bar-value small,.policy-page,.policy-page>span:last-child,
+  .policy-page small,.input-label,.keyword-numbers>div>span,.download-links,
+  .select-field>span,.result-meta,.bill-date,.tag,.bill-role,.bill-detail .reason-label,
+  .pagination,.empty-state,.game-no,.game-heading p,.quiz-kind,.quiz-foot,
+  .site-footer p,.site-footer p span,.site-footer .brand small,.loading-placeholder,.load-error,
+  .chart-list .primary-topic-row .chart-value small,.speech-evidence small,.speech-evidence a,
+  .committee-role-detail,.committee-table-wrap table,
+  .cmp-coding-note,.cmp-controls label>span,.cmp-period-note,.cmp-note,.cmp-kicker,
+  .cmp-score>span,.cmp-score-scale,.cmp-view-label,.cmp-chart-head p,.cmp-chart-key,
+  .cmp-chart-labels,.cmp-chart-labels>span,.cmp-chart-labels>span small,
+  .cmp-bar-cell>span,.cmp-delta small,.cmp-chart-foot,.cmp-zero-note,
+  .cmp-scenario>span,.cmp-scenario strong small,.cmp-range-grid strong small,.cmp-range-grid p,
+  .cmp-temporal-score>span,.cmp-temporal-score>small,.cmp-temporal-caution,
+  .cmp-temporal-row,.cmp-temporal-head,.cmp-ledger-meta,.cmp-record-role,.cmp-ledger-meta code,
+  .cmp-ledger-tags>span,.cmp-ledger-group,.cmp-ledger-group code,.cmp-record-source,
+  .cmp-original-score,.cmp-pie-panel li,.cmp-pie-panel li small,.cmp-pie-panel li strong,
+  .cmp-rings-score>span,.cmp-rings-guide p,.cmp-rings-panel-heading>span,
+  .cmp-rings-panel-heading p,.cmp-rings-fill>span,.cmp-rings-panel-note,
+  .cmp-rings-caption,.cmp-rings-legend-row,.cmp-rings-legend-head,.cmp-rings-legend-head small,
+  .cmp-rings-axis-note,.stmt-card-meta,.stmt-venue,.stmt-card .stmt-locator,
+  .stmt-links,.stmt-source,.stmt-pair-grid span,.stmt-pair-grid a,.stmt-pending a,
+  .stmt-library-summary,.stmt-library-summary a,.stmt-search-label,.stmt-contrast,
+  .stmt-contrast span,.stmt-clock,.stmt-advanced>summary span:last-child,
+  .speech-corpus .speech-scope-label,.speech-metrics>div,.speech-filters label,
+  .speech-denominator,.speech-result-heading>span,.speech-card-meta,.speech-clock,
+  .speech-clock>span,.speech-source-links,.speech-turn-label,.speech-empty,
+  .speech-coverage-table,.speech-loading,.speech-error,.arcade-card-tags span,
+  .arcade-footer,.arcade-breadcrumb,.arcade-status-line,.arcade-wordmark small,
+  .arcade-eyebrow,.arcade-library-head span,.community-status,.community-copy .community-tag,
+  .community-credit,.community-copy dl,.community-no-demo,.library-count,.library-source,
+  .library-empty,.arcade-shared-art span,.arcade-shared-art small,
+  .quiz-autoplay-settings,.quiz-swipe-help,.quiz-progress,.quiz-card-context,
+  .quiz-card-meta,.quiz-review-main small,.quiz-review-badge,.quiz-review-heading p,
+  .quiz-review-number,.quiz-review-eyebrow,.quiz-review-contribute,.quiz-result-note,
+  .quiz-share-card-label small,.quiz-share-fact,.quiz-share-source,.quiz-share-status,
+  .quiz-share-privacy,.quiz-share-link-fallback,.quiz-challenge-notice,
+  .connection-status,.hint,.field-error,.field label span,.check,.consent-block p,
+  .optional-details>summary>small,.type-tabs button span,.privacy-terms,.intake-footer,
+  .header a,label small,.session-row p,.item small,.badge,.detail-top small,
+  .private h3,.preview small,.confirm,.history,.footer,.empty) {
+  font-size:var(--reading-meta);line-height:1.7;
+}
+body :is(.button,.text-link,.hero-actions .text-link,.hero-actions .button,
+  .site-header nav,.header-download,.light-link,.policy-intro .light-link,
+  .search-field input,.select-field select,.filter-row select,.filter-row button,
+  .quick-keywords button,.pagination button,.method-grid summary,.full-topics>summary,
+  .joint-attendance summary,.role-name,.process li strong,.source-list a,.source-list span,
+  .speech-evidence>span,.speech-evidence p,.committee-role-detail summary,
+  .cmp-controls select,.cmp-topic-button,.cmp-topic-button>span,.cmp-detail>summary,
+  .cmp-scenario p,.cmp-range-grid h4,.cmp-temporal-card summary,
+  .cmp-ledger-controls input,.cmp-ledger-controls select,.cmp-ledger-item h4,
+  .cmp-ledger-item h4>a>span,.cmp-more,.cmp-codebook h4,.cmp-role-advanced summary,
+  .cmp-axis-tabs button,.cmp-rings-legend-row button,.cmp-pie-panel h4,
+  .cmp-rings-panel h4,.stmt-controls label,.stmt-controls select,.stmt-card summary,
+  .stmt-search,.stmt-more,.stmt-advanced>summary,.speech-filters select,.speech-filters input,
+  .speech-full summary,.speech-more,.speech-method>summary,.speech-missing summary,
+  .arcade-nav,.game-hub .arcade-nav,.arcade-play-row,.community-contribute,
+  .game-hub .community-contribute,.game-hub .community-play,.community-more,.library-filter,
+  .library-filter select,.quiz-review-main b,.quiz-review-restart,.quiz-next,.quiz-restart,
+  .quiz-share-card-label b,.quiz-share-actions button,.quiz-share-retry,
+  .quiz-share-actions .quiz-share-primary,.quiz-share-actions .quiz-share-copy,
+  .quiz-share-actions .quiz-share-download,.intake-header nav,.type-tabs button,
+  .field label,.field input,.field select,.field textarea,.identity-fields legend,
+  .optional-content .identity-fields legend,.optional-details>summary>span,
+  .form-actions button,.form-actions .submit-button,.submission-status p,
+  .submission-status button,label,input,select,textarea,.queue-header,
+  .moderation label,.actions button,.item strong) {
+  font-size:var(--reading-control);line-height:1.65;
+}
+body :is(.attendance-note h3,.attendance-evidence h4,.subheading h3,.status-row h3,
+  .speech-result-heading h3,.quiz-review-heading h3,.quiz-share-panel h3) {
+  font-size:clamp(20px,1.7vw,24px);line-height:1.5;font-weight:650;
+}
+body .quiz-review-answer {font-size:var(--reading-copy)!important;line-height:1.8}
+body .quiz-inference-limit {font-size:var(--reading-meta)!important;line-height:1.75}
+#play :is(.quiz-front-context,.quiz-foot,.quiz-source-type,.quiz-locator,.quiz-evidence-detail,
+  .quiz-evidence-detail summary,.quiz-source-actions a,.quiz-pool-stats span,
+  .quiz-swipe-help,.quiz-swipe-help span,.quiz-autoplay-settings span,.quiz-answer-pill,
+  .quiz-feedback .quiz-auto-note,.quiz-answer-flash small,.quiz-final-score small,.quote-selection) {
+  font-size:var(--reading-meta);line-height:1.7;letter-spacing:normal;
+}
+#play :is(.quiz-about>p:not(.eyebrow),.quiz-current-source p,.quiz-feedback) {font-size:var(--reading-copy);line-height:1.8}
+#play :is(.quiz-about label,.quiz-current-source>summary,.quiz-reroll,
+  .quiz-controls button b,.quiz-autoplay-settings label,.quiz-feedback-topline strong,.quiz-hold-button) {font-size:16px;line-height:1.6}
+#play .quiz-controls button small {font-size:14px;letter-spacing:.04em}
+#play .quiz-card.quiz-complete .quiz-foot {font-size:14px!important;line-height:1.8}
+#play .quiz-autoplay-settings {flex-wrap:wrap;gap:10px 18px}
+#play .quiz-autoplay-settings span {max-width:none;text-align:left}
+#play .quiz-round-dots span {font-size:14px}
+body :is(.g3-hud small,.g3-intro-keys span,.g3-controlbar p,.g3-touch>span,
+  .g3-touch #g3-fire small,.g3-livebar,.g3-retro-corner) {font-size:14px;line-height:1.6;letter-spacing:.03em}
+body :is(.g3-maincontrols button,#g3-start) {font-size:16px;line-height:1.6}
+body :is(#g3-overlay-copy,#g3-notice) {font-size:16px;line-height:1.75}
+body :is(.g3-overlay-note,.g3-kicker) {font-size:14px!important;line-height:1.6;letter-spacing:.04em}
+body :is(.arcade-score-section p,.arcade-score-summary span,.arcade-score-eyebrow,
+  .arcade-score-global-heading>span,.arcade-score-top small,.arcade-score-unverified,
+  .arcade-shared-state) {font-size:14px!important;line-height:1.75}
+body :is(.arcade-score-share-main>p,.arcade-share-challenge,.arcade-score-top-name,
+  .arcade-score-global-heading h4,.arcade-score-global strong) {font-size:16px;line-height:1.65}
+body .observation-network {font-size:14px;line-height:1.6;gap:.65rem 1.25rem}
+body .observation-network>span {font-size:14px}
+body .attendance-meetings strong {font-family:var(--sans);font-size:17px;line-height:1.6;font-weight:600}
+body .attendance-meetings li {gap:24px;padding:22px 0}
+body .attendance-meetings li>div {min-width:0}
+body .attendance-meetings a {white-space:normal;flex-shrink:0}
+body .attendance-note {align-items:flex-start}
+body .bill-main {min-height:72px}
+body .bill-title {font-size:17px;line-height:1.7}
+body .quiz-review-item summary {min-height:92px;gap:16px;padding:20px}
+body .quiz-review-main {min-width:0}
+body .quiz-review-main small {display:block;margin-top:7px}
+body .quiz-review-badge {white-space:nowrap}
+body .quiz-share-actions {flex-wrap:wrap}
+body .quiz-share-actions button {min-height:48px}
+body :is(.cmp-chart-head,.section-heading,.subheading,.status-row,.arcade-library-head) {flex-wrap:wrap}
+body :is(.cmp-chart-key,.status-pill,.source-links,.arcade-nav) {white-space:normal}
+body :is(.cmp-rings-legend-head>span,.cmp-rings-legend-row>span) {white-space:normal}
+body .cmp-rings-legend-row {grid-template-columns:minmax(180px,1fr) repeat(3,minmax(80px,.5fr));gap:16px;padding:16px 0}
+body .cmp-rings-panel-heading {min-height:110px}
+body .cmp-rings-panel-note {min-height:48px}
+body :is(.stmt-controls,.speech-filters,.filter-row,.scope-label,.form-actions) {flex-wrap:wrap}
+body :is(.stmt-controls label,.speech-filters label,.select-field,.cmp-controls label) {min-width:0}
+body :is(.stmt-links a,.speech-source-links a,.source-links a,.source-list a) {overflow-wrap:anywhere}
+body :is(.hint,.small-note,.cmp-note,.stmt-source,.speech-denominator,.quiz-share-privacy) {overflow-wrap:anywhere}
+@media(max-width:1000px) {
+  body .cmp-rings-legend-row {grid-template-columns:minmax(145px,1fr) repeat(3,minmax(66px,.5fr));gap:12px}
+  body .committee-grid {gap:32px}
+}
+@media(max-width:800px) {
+  body .hero-art {min-width:0;overflow:hidden}
+}
+@media(max-width:760px) {
+  body {font-size:17px}
+  body .hero-description {font-size:17px}
+  body :is(.cmp-controls,.cmp-ledger-controls) {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body .cmp-rings-pair {grid-template-columns:minmax(0,1fr);gap:20px}
+  body .cmp-pair {gap:24px}
+  body .cmp-rings-legend-row {grid-template-columns:minmax(0,1fr) repeat(3,minmax(55px,.6fr));gap:10px}
+  body .cmp-rings-panel-heading {min-height:0}
+  body .cmp-rings-panel-note {min-height:0}
+  body .attendance-metrics {gap:16px}
+  body .site-header {height:auto;min-height:78px;padding-top:14px;padding-bottom:14px}
+  body .arcade-nav {flex-wrap:wrap;gap:12px 18px}
+  body .intake-header {flex-wrap:wrap;gap:18px}
+}
+@media(max-width:580px) {
+  body .wrap {padding-left:22px;padding-right:22px}
+  body .hero-art {min-width:0;overflow:hidden}
+  body .hero-strip {gap:16px}
+  body .hero-strip>div {padding-left:12px}
+  body .hero-strip strong.strip-principle {font-size:18px;line-height:1.6}
+  body .hero-strip>div>span:last-child {margin-top:5px}
+  body .attendance-meetings li {display:block;padding:20px 0}
+  body .attendance-meetings a {display:inline-block;margin-top:12px}
+  body .attendance-metrics {gap:10px}
+  body .attendance-metrics strong {font-size:34px}
+  body .cmp-chart-row {grid-template-columns:minmax(95px,1fr) minmax(0,.7fr) minmax(0,.7fr) 46px;gap:9px}
+  body .cmp-bar-cell {min-width:0}
+  body .cmp-chart-labels {align-items:start}
+  body .cmp-chart-labels>span {overflow-wrap:anywhere}
+  body .cmp-delta {font-size:18px}
+  body .cmp-rings-legend-row {grid-template-columns:minmax(0,1fr) repeat(3,46px);gap:7px}
+  body .cmp-rings-legend-head small {overflow-wrap:anywhere}
+  body .cmp-pair {grid-template-columns:minmax(0,1fr)}
+  body .cmp-temporal-row {grid-template-columns:minmax(0,1fr) 60px 60px;gap:10px}
+  body .cmp-controls {grid-template-columns:minmax(0,1fr)}
+  body .quiz-review-item summary {grid-template-columns:24px minmax(0,1fr) 18px;gap:10px;padding:17px 14px}
+  body .quiz-review-badge {grid-column:2;grid-row:2;justify-self:start}
+  body .quiz-review-expand {grid-column:3;grid-row:1}
+  body .quiz-review-main b {font-size:17px;line-height:1.65}
+  body .quiz-share-card-label {flex-wrap:wrap;gap:8px}
+  body .quiz-share-card-label small {font-size:14px}
+  body .arcade-wordmark small {letter-spacing:.1em}
+  body .brand small {letter-spacing:.12em}
+}
+@media print {
+  body {font-size:12pt}
+  body :is(.small-note,.attendance-meetings p,.attendance-meetings span,.source-links) {font-size:10pt}
+}
