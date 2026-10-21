@@ -7,7 +7,7 @@
   const safeUrl = value => /^(https?:\/\/|\.\/)/i.test(String(value || '')) ? String(value) : '#method';
   const list = value => Array.isArray(value) ? value : value ? [value] : [];
   const roleNames = {primary:'主提案', joint:'共同提案', cosign:'連署'};
-  const state = {data:null,policy:null,page:1,pageSize:12,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
+  const state = {data:null,policy:null,page:1,pageSize:12,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],quoteSourceVersion:null,gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
   let searchable = new Map();
   let keywordText = new Map();
   let searchTimer;
@@ -28,10 +28,15 @@
     if (!response.ok) throw new Error(`${url} (${response.status})`);
     return response.json();
   }
+  async function fetchQuizJSON(url) {
+    const response = await fetch(url,{cache:'no-cache'});
+    if (!response.ok) throw new Error(`${url} (${response.status})`);
+    return window.RecordsQuizShareCore?.readQuoteResponse ? window.RecordsQuizShareCore.readQuoteResponse(response) : {data:await response.json(),sourceVersion:null};
+  }
 
   async function init() {
     bindEvents();
-    const results = await Promise.allSettled([fetchJSON('./data/analysis.json'), fetchJSON('./data/policy.json'),fetchJSON('./data/quotes.json')]);
+    const results = await Promise.allSettled([fetchJSON('./data/analysis.json'), fetchJSON('./data/policy.json'),fetchQuizJSON('./data/quotes.json')]);
     if (results[0].status === 'fulfilled') {
       state.data = results[0].value;
       prepareData();
@@ -50,7 +55,7 @@
     } else {
       setText('policy-chart','政策資料暫時無法讀取，可點下方官方來源查看。');
     }
-    if(results[2].status==='fulfilled')state.quotes=list(results[2].value.quotes);
+    if(results[2].status==='fulfilled'){state.quotes=list(results[2].value.data.quotes);state.quoteSourceVersion=results[2].value.sourceVersion;}
     await buildGames();
   }
 
@@ -277,13 +282,13 @@
     if (!window.RecordsQuiz) {
       quizEngineLoading ||= new Promise((resolve,reject) => {
         const script=document.createElement('script');
-        script.src=new URL('./game/quiz-engine.js',location.href).href;
+        script.src=new URL('./game/quiz-engine.js?v=18',location.href).href;
         script.onload=resolve;script.onerror=()=>reject(new Error('猜題介面暫時無法讀取'));
         document.head.append(script);
       });
       await quizEngineLoading;
     }
-    window.RecordsQuiz.mount(document,{quotes:state.quotes});
+    window.RecordsQuiz.mount(document,{quotes:state.quotes,quoteSourceVersion:state.quoteSourceVersion});
   }
 
   function bindEvents() {

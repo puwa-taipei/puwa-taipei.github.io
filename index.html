@@ -24,10 +24,13 @@
   <link rel="stylesheet" href="./comparison.css">
   <link rel="stylesheet" href="./statements.css">
   <link rel="stylesheet" href="./quiz.css?v=13">
+  <link rel="stylesheet" href="./game/quiz-share.css?v=18">
   <link rel="stylesheet" href="./speech-search.css">
   <link rel="stylesheet" href="./leaderboard.css">
   <script src="./anchor.js" defer></script>
-  <script src="./game/quiz-engine.js?v=17" defer></script>
+  <script src="./game/quiz-share-core.js?v=18" defer></script>
+  <script src="./game/quiz-share.js?v=18" defer></script>
+  <script src="./game/quiz-engine.js?v=18" defer></script>
   <script src="./app.js" defer></script>
   <script src="./comparison.js" defer></script>
   <script src="./statements.js" defer></script>
@@ -83,7 +86,7 @@
 
     <section id="play" class="section play-section wrap">
       <div class="section-heading"><div><p class="section-number">GAME 01 ／ 別急著選答案</p><h2>這是沈伯洋<br>說的嗎？</h2></div><p class="section-deck">一句話，可能和你的印象不同。<br>滑完，再看原文。</p></div>
-      <div class="quiz-layout"><aside class="quiz-about"><p class="eyebrow">A FRESH ROUND, EVERY TIME</p><h3>每輪六題。<br>再玩，就換一批。</h3><p>作答立刻揭曉，接著換下一張；六題結束，再看逐題原文。優先抽出你還沒看過的題目。</p><div class="quiz-pool-stats"><div><strong id="quiz-pool-count">—</strong><span>本期題庫</span></div><div><strong id="quiz-seen-count">—</strong><span>已看過</span></div></div><label for="game-period">想猜哪個時期？</label><select id="game-period"><option value="pre" selected>正式提名前</option><option value="post">正式提名起</option><option value="all">所有時期</option></select><p id="game-period-note" class="small-note" aria-live="polite"></p><p id="quiz-round-note" class="small-note" aria-live="polite"></p><a class="text-link" href="#game3d">或者，直接來一場面具破防戰 →</a></aside>
+      <div class="quiz-layout"><aside class="quiz-about"><p class="eyebrow">A FRESH ROUND, EVERY TIME</p><h3>每輪六題。<br>再玩，就換一批。</h3><p>作答立刻揭曉，接著換下一張；六題結束，再看逐題原文。優先抽出你還沒看過的題目。玩完可分享成績或原話卡，邀朋友挑戰同一輪。</p><div class="quiz-pool-stats"><div><strong id="quiz-pool-count">—</strong><span>本期題庫</span></div><div><strong id="quiz-seen-count">—</strong><span>已看過</span></div></div><label for="game-period">想猜哪個時期？</label><select id="game-period"><option value="pre" selected>正式提名前</option><option value="post">正式提名起</option><option value="all">所有時期</option></select><p id="game-period-note" class="small-note" aria-live="polite"></p><p id="quiz-round-note" class="small-note" aria-live="polite"></p><a class="text-link" href="#game3d">或者，直接來一場面具破防戰 →</a></aside>
       <div class="swipe-game"><div class="quiz-progress"><span id="quiz-progress">準備中</span><span id="quiz-score">—</span></div><article id="quiz-card" class="quiz-card" tabindex="0" aria-label="本人原話判斷題"><span class="quiz-kind">WHO SAID / WROTE IT?</span><p id="quiz-meta" class="quiz-source-meta"></p><p id="quiz-context" class="quiz-front-context"></p><span class="swipe-stamp stamp-no" aria-hidden="true">NO</span><span class="swipe-stamp stamp-yes" aria-hidden="true">YES</span><h4 id="quiz-question">正在整理有來源的題目…</h4><span class="quiz-foot">左滑否 ／ 右滑是</span></article><div id="quiz-feedback" class="quiz-feedback" hidden aria-live="polite"></div><div id="quiz-controls" class="quiz-controls"><button id="quiz-no" class="answer-no" disabled><span>×</span>否</button><span>← ／ →</span><button id="quiz-yes" class="answer-yes" disabled>是<span>✓</span></button></div><button id="quiz-next" class="button primary quiz-next" hidden>下一題 →</button><button id="quiz-restart" class="text-link quiz-reroll">再玩一輪 · 隨機抽題 ↻</button></div></div><p id="quote-selection" class="small-note quote-selection"></p>
     </section>
 

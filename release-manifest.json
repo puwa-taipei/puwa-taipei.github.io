@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v17",
+  "version": "public-release-v18",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7046,
-      "sha256": "9ea2063dd18dd6b5df845f0112119d90beb3eb43ef5bf50712968a7528a3da90"
+      "bytes": 7729,
+      "sha256": "6534484e416cb7e46a74836e3dbe40460e4538ffde386343c14e8f06968d717d"
     },
     {
       "path": "anchor.js",
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 27470,
-      "sha256": "ab59ad0539d9b8df459039d646a1af41da3f8d989fa1590b1f43759ce64c0e02"
+      "bytes": 27952,
+      "sha256": "d7b2921352c292315fd4d535f5ad263b118410dde058e805c4df4515d0a315f5"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -138,6 +138,11 @@
       "sha256": "6917354de8bfaa2d2e7de7f803c0128c664c74aae383a07d64676bef259867a1"
     },
     {
+      "path": "data/quiz-share-catalog-v18.json",
+      "bytes": 125492,
+      "sha256": "d356884b9feee66fd4dfb1e3e2a02b85ba9ed6bb9fdf969314b943dcaded9d53"
+    },
+    {
       "path": "data/quotes.json",
       "bytes": 378457,
       "sha256": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
@@ -159,8 +164,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26151106,
-      "sha256": "26b04eeda2861ea4f40f5ff2f4fb1c6a6bfa13962d2fc894becf6451d6304aa0"
+      "bytes": 26152651,
+      "sha256": "b56b09bc0918e5e894e78ce6ac37997d1b4e27d9f1d4407da2c7c7bd3373e049"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -209,13 +214,33 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 25362,
-      "sha256": "69841227e69189c2f47df6f6cb9e27a891e0edf0a7fc33ec5e34fde9bc476ec0"
+      "bytes": 28797,
+      "sha256": "c413a8666c697728e2e5b2ae88fad0304fb7b0b1c929a5c5d114ab5dd24fc9a7"
+    },
+    {
+      "path": "game/quiz-share-core.js",
+      "bytes": 10549,
+      "sha256": "968e25b02c041a611dfa64a8776357cbe3bd390674726f50136b098f52c4ead3"
+    },
+    {
+      "path": "game/quiz-share-landing.js",
+      "bytes": 2294,
+      "sha256": "209f68623f50d639f7ed94a0741829ba4b0656fd818535943ca33be1f3a7a816"
+    },
+    {
+      "path": "game/quiz-share.css",
+      "bytes": 6368,
+      "sha256": "5a164acd4702a9f78a8189b440fb5d9b40a94e2e82e529fc2d63929d1f8bdd76"
+    },
+    {
+      "path": "game/quiz-share.js",
+      "bytes": 9505,
+      "sha256": "84ed2306fc9c5b9c935952dc8a8da75062730f8ac7cd6c98c05819b5372c914a"
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5044,
-      "sha256": "f8d68ff8e8ef8409b640d6161b1c91ff675a8340c9c4c704a6ad2277f6a1d13a"
+      "bytes": 5276,
+      "sha256": "eadb77150b338a3c769f9e65b36c31e091c3b36150f1bcca63c89b3d8e885de1"
     },
     {
       "path": "game/red-notes/index.html",
@@ -244,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26430,
-      "sha256": "8e1db19714265be34ab5d85377d19d95c364b4f17ecaddccd59680755257ad54"
+      "bytes": 26677,
+      "sha256": "73acfb0dcce0495523707519619aa6bd0a746d892f23c9b9cd4b2fd904ccd17a"
     },
     {
       "path": "leaderboard.css",
@@ -346,5 +371,18 @@
   "subjects": [
     "shen-pao-yang",
     "su-chiao-hui"
-  ]
+  ],
+  "manifestScope": "base-static-payload",
+  "generatedAssets": {
+    "directory": "game/quiz/cards/v18/",
+    "layouts": [
+      "score",
+      "quote"
+    ],
+    "eligibleQuotes": 74,
+    "roundSize": 6,
+    "cards": 1036,
+    "scoreVerification": "player-self-reported",
+    "runtimeServiceRequired": false
+  }
 }
