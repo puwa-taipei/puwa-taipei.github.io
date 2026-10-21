@@ -38,8 +38,10 @@
   }
   function changeKind(kind, focus = false) {
     activeKind = kind;
-    for (const k of ['quote','game']) { const tab = document.getElementById('tab-' + k); tab.setAttribute('aria-selected', String(k === kind)); tab.tabIndex = k === kind ? 0 : -1; document.getElementById('panel-' + k).hidden = k !== kind; }
-    if (focus) document.getElementById('tab-' + kind).focus();
+    for (const k of ['quote','game']) { const tab = document.getElementById('tab-' + k); tab.setAttribute('aria-selected', String(k === (kind === 'idea' ? 'game' : kind))); tab.tabIndex = k === (kind === 'idea' ? 'game' : kind) ? 0 : -1; document.getElementById('panel-' + k).hidden = k !== (kind === 'idea' ? 'game' : kind); }
+    document.getElementById('game-form').hidden = kind === 'idea'; document.getElementById('idea-form').hidden = kind !== 'idea';
+    for (const button of document.querySelectorAll('[data-game-mode]')) button.setAttribute('aria-pressed',String(button.dataset.gameMode === kind));
+    if (focus) document.getElementById('tab-' + (kind === 'idea' ? 'game' : kind)).focus();
     const query = new URL(location.href); query.searchParams.set('type', kind); query.searchParams.set('subject',targetOf(document.querySelector('form[data-kind="' + kind + '"]'))); history.replaceState(null, '', query.pathname + query.search);
   }
   for (const kind of ['quote','game']) {
@@ -47,7 +49,8 @@
     tab.addEventListener('click', () => changeKind(kind));
     tab.addEventListener('keydown', event => { if (['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) { event.preventDefault(); changeKind(event.key === 'Home' ? 'quote' : event.key === 'End' ? 'game' : activeKind === 'quote' ? 'game' : 'quote', true); } });
   }
-  const initialKind = new URLSearchParams(location.search).get('type'); if (['quote','game'].includes(initialKind)) changeKind(initialKind);
+  for (const button of document.querySelectorAll('[data-game-mode]')) button.addEventListener('click',() => changeKind(button.dataset.gameMode));
+  const initialKind = new URLSearchParams(location.search).get('type'); if (['quote','game','idea'].includes(initialKind)) changeKind(initialKind);
   function clearErrors(form) {
     form.querySelector('.error-summary').hidden = true;
     for (const message of form.querySelectorAll('.field-error')) message.remove();
@@ -80,7 +83,7 @@
   }
   function receipt(form, result) {
     const box = form.querySelector('.submission-status'); box.className = 'submission-status';
-    box.replaceChildren(node('h3',result.duplicate ? '這份內容已有收件紀錄。' : '已收件，謝謝你補上來源。'), node('p','接下來由審稿團隊人工核對。收件不代表通過，也不會立即加入網站或題庫。'), node('p','收件編號'), node('p',result.receiptId,'receipt-id'));
+    box.replaceChildren(node('h3',result.duplicate ? '這份內容已有收件紀錄。' : form.dataset.kind === 'idea' ? '點子已收到！' : '已收件，謝謝你補上來源。'), node('p',form.dataset.kind === 'idea' ? '接下來由團隊精選點子、評估製作。收件不代表已獲選，也不保證製作或上架。' : '接下來由審稿團隊人工核對。收件不代表通過，也不會立即加入網站或題庫。'), node('p','收件編號'), node('p',result.receiptId,'receipt-id'));
     box.append(node('p','投稿對象：' + core.SUBJECTS[targetOf(form)]));
     if (typeof result.createdAt === 'string' && !Number.isNaN(Date.parse(result.createdAt))) box.append(node('p','收件時間：' + new Date(result.createdAt).toLocaleString('zh-TW')));
     box.append(node('p',result.duplicate ? '重複送出不會覆寫先前的聯絡資料。請保存這個編號，本站沒有公開查稿頁。' : result.contactSaved ? '你提供的聯絡方式已私下交給審稿團隊，不會公開。請保存收件編號。' : '本次沒有保存私人聯絡方式。請保存收件編號。'));
@@ -160,7 +163,7 @@
   }
   (async () => {
     try {
-      const response = await fetch('/contribute/config.json?v=17',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
+      const response = await fetch('/contribute/config.json?v=30',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
       if (!response.ok) throw new Error('config');
       const raw = await response.text(); if (raw.length > 8000) throw new Error('config');
       const config = JSON.parse(raw), candidate = core.publicHttps(config.apiUrl);
