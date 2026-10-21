@@ -3,7 +3,7 @@
   'use strict';
   const VERSION = 'v24', SUBJECT = 'shen-pao-yang', ROUND_SIZE = 6;
   const SOURCE_VERSION = '6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3';
-  const ORIGIN = 'https://puwa-taipei.github.io', CARD_BASE = '/game/quiz/cards/v24/';
+  const ORIGIN = 'https://puwa.taipei', CARD_BASE = '/game/quiz/cards/v24/';
   const CATALOG_URL = '/data/quiz-share-catalog-v24.json', NOMINATION = '2026-05-13';
   // This reviewed selection is independent of historical archival flags.
   const CURATED_IDS = Object.freeze([

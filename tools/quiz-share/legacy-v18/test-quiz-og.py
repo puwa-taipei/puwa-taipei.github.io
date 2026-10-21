@@ -92,7 +92,7 @@ class ContractTests(unittest.TestCase):
         self.assertIn(q["date"], "".join(parsed.text))
         self.assertIn(q["sourceType"], "".join(parsed.text))
         self.assertEqual(parsed.body["data-source-version"], "a" * 64)
-        self.assertEqual(parsed.scripts, ["/game/quiz-share-core.js?v=22", "/game/quiz-share-landing.js?v=18"])
+        self.assertEqual(parsed.scripts, ["/game/quiz-share-core.js?v=28", "/game/quiz-share-landing.js?v=18"])
         self.assertIn(G.SELF_REPORTED, "".join(parsed.text))
         self.assertTrue(any(link.get("id") == "quiz-share-challenge" for link in parsed.links))
 
@@ -215,7 +215,7 @@ def verify_site(site: Path) -> dict:
                     raise AssertionError("Initial OG identity mismatch")
                 if page.body.get("data-quote-id") != q["id"] or page.body.get("data-correct") != str(correct) or page.body.get("data-source-version") != source_version:
                     raise AssertionError("Landing data contract mismatch")
-                if page.scripts != ["/game/quiz-share-core.js?v=22", "/game/quiz-share-landing.js?v=18"]:
+                if page.scripts != ["/game/quiz-share-core.js?v=28", "/game/quiz-share-landing.js?v=18"]:
                     raise AssertionError("Landing page does not load the current withdrawal policy")
                 text = "".join(page.text)
                 if any(value not in text for value in (q["quote"], q["date"], q["sourceType"], q["context"], q["inferenceLimit"], G.SELF_REPORTED)):
