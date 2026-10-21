@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v22",
+  "version": "public-release-v24",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8350,
-      "sha256": "af2dc16270576272891eba413d4a3dbf895ad1ba002e3a21d62164395faf5c8e"
+      "bytes": 9368,
+      "sha256": "2fe599d89bb717d5ae00ceb2316e5ef6e53298c4f8b53e2c9551f8a1d40660cb"
     },
     {
       "path": "anchor.js",
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 27010,
-      "sha256": "2a392cd9e61c3941eef41fc4bb7bc5afff5298f65c4515b5b157737e82a6ab22"
+      "bytes": 27007,
+      "sha256": "bcbf31fd3cb30fcc111505862e309a3796e9fd159b8e59912ab928d1d6c0d1fa"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -143,9 +143,19 @@
       "sha256": "0fdb0b80b0f948ded9656511c863ae6753d79e3695f64498df77d59178cb3aec"
     },
     {
-      "path": "data/quotes.json",
+      "path": "data/quiz-share-catalog-v24.json",
+      "bytes": 56993,
+      "sha256": "872c7966a630567eaadafd1a6002c53ad4eda5df6e8d99a19bb4b486fa803b73"
+    },
+    {
+      "path": "data/quotes-v18-archive.json",
       "bytes": 378457,
       "sha256": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
+    },
+    {
+      "path": "data/quotes.json",
+      "bytes": 391459,
+      "sha256": "6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3"
     },
     {
       "path": "data/speeches.json",
@@ -174,8 +184,8 @@
     },
     {
       "path": "downloads/quotes.csv",
-      "bytes": 266709,
-      "sha256": "e77fe26b7e3ecde5ec54e24eedf5d753aa71f358453a91a955e96ba1b9a3eda1"
+      "bytes": 273866,
+      "sha256": "350daaea687af39bb81583d6fbb9b7f267cb0793688def37fed80cbfee8ad3f7"
     },
     {
       "path": "downloads/speech-sources-v10.zip",
@@ -214,13 +224,13 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 29267,
-      "sha256": "ffaae57bce9673a9a1207c71b17f5313b0825e74ae2d1205a4346399e93bb93d"
+      "bytes": 32592,
+      "sha256": "8e32425c3d58b708ec55b4db764fffca149a3e55300c3d0235795a614a31d5e5"
     },
     {
       "path": "game/quiz-share-core.js",
-      "bytes": 11087,
-      "sha256": "ded4b68f06cb840b0e3c753ddd6e8d4336fc75b59ba490dabd8b6bc5078260a6"
+      "bytes": 12782,
+      "sha256": "dfc4112d8ccb012f3388db296736175d7e3b8650843b2fac0153fe1db0ed32e9"
     },
     {
       "path": "game/quiz-share-landing.js",
@@ -239,8 +249,8 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5327,
-      "sha256": "3a3cc4d63825141041823e5a82d8b82f89da7b687645fd81270d3c084c3d94c4"
+      "bytes": 5322,
+      "sha256": "3782305e056a2f0cd1e2b1da5abbb1204a90539b9de1d9805802435d012498ab"
     },
     {
       "path": "game/red-notes/index.html",
@@ -270,7 +280,7 @@
     {
       "path": "index.html",
       "bytes": 26576,
-      "sha256": "0e9e54e44ee8aa7368b17bd8dc2a7ade018266df113be96aad004c054edb2b6d"
+      "sha256": "642f296079f534e0b0d0c477a549ae60dbe1cfe1fd286987a40c5d6f651730da"
     },
     {
       "path": "leaderboard.css",
@@ -329,8 +339,8 @@
     },
     {
       "path": "statements.js",
-      "bytes": 12275,
-      "sha256": "126e7d43f23558e1ac552f3076f7cb31b59198dd21f407d7a3b567810c8fb0a4"
+      "bytes": 12712,
+      "sha256": "e4541e002de163eaf08204e52fdad67eb9b81523a82223cba9a33413d1a780dc"
     },
     {
       "path": "style.css",
@@ -345,17 +355,17 @@
   ],
   "manifestSelfExcluded": true,
   "quoteCounts": {
-    "segments": 130,
-    "events": 124,
-    "pre": 114,
-    "post": 16,
-    "quiz": 74,
-    "quizEvents": 68,
-    "quizPre": 65,
-    "quizPost": 9,
-    "advanced": 56,
-    "featured": 22,
-    "featuredEvents": 21
+    "segments": 133,
+    "events": 126,
+    "pre": 115,
+    "post": 18,
+    "quiz": 36,
+    "quizEvents": 31,
+    "quizPre": 31,
+    "quizPost": 5,
+    "advanced": 97,
+    "featured": 36,
+    "featuredEvents": 31
   },
   "speechCounts": {
     "included": 235,
@@ -379,6 +389,60 @@
   ],
   "manifestScope": "base-static-payload",
   "generatedAssets": {
+    "directory": "game/quiz/cards/v24/",
+    "layouts": [
+      "score",
+      "quote"
+    ],
+    "eligibleQuotes": 36,
+    "roundSize": 6,
+    "cards": 504,
+    "scoreVerification": "player-self-reported",
+    "runtimeServiceRequired": false,
+    "version": "v24",
+    "generatedFiles": 1008,
+    "sourceVersion": "6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3"
+  },
+  "quoteCountsScope": "raw-archive-counts-plus-explicit-v24-editorial-selection",
+  "activeQuizCatalog": {
+    "quoteCount": 36,
+    "events": 31,
+    "pre": 31,
+    "post": 5,
+    "eventsByPeriod": {
+      "all": 31,
+      "pre": 27,
+      "post": 4
+    },
+    "advancedSegments": 97,
+    "roundSize": 6,
+    "cards": 504,
+    "generatedFiles": 1008,
+    "defaultPeriod": "all",
+    "disabledPeriods": [
+      "post"
+    ],
+    "withdrawnQuoteIds": [
+      "legislature-hypocrite-152732"
+    ],
+    "sourceVersion": "6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3",
+    "version": "v24",
+    "selectionCaveat": "精選題庫是編輯選題，不代表全部發言的頻率或主題比例；保留條件、指涉對象和來源品質。"
+  },
+  "legacyQuoteCountsV18": {
+    "segments": 130,
+    "events": 124,
+    "pre": 114,
+    "post": 16,
+    "quiz": 74,
+    "quizEvents": 68,
+    "quizPre": 65,
+    "quizPost": 9,
+    "advanced": 56,
+    "featured": 22,
+    "featuredEvents": 21
+  },
+  "legacyGeneratedAssets": {
     "directory": "game/quiz/cards/v18/",
     "layouts": [
       "score",
@@ -388,20 +452,15 @@
     "roundSize": 6,
     "cards": 1022,
     "scoreVerification": "player-self-reported",
-    "runtimeServiceRequired": false
-  },
-  "quoteCountsScope": "raw-archive-before-editorial-exclusions",
-  "activeQuizCatalog": {
-    "quoteCount": 73,
-    "events": 67,
-    "pre": 64,
-    "post": 9,
-    "roundSize": 6,
-    "cards": 1022,
-    "advancedSegments": 57,
-    "withdrawnQuoteIds": [
+    "runtimeServiceRequired": false,
+    "version": "v18",
+    "sourceVersion": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b",
+    "generatedFiles": 2044,
+    "sourceArchive": "data/quotes-v18-archive.json",
+    "catalog": "data/quiz-share-catalog-v18.json",
+    "immutablePngsPreserved": true,
+    "priorWithdrawnQuoteIds": [
       "legislature-hypocrite-152732"
-    ],
-    "sourceVersion": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
+    ]
   }
 }
