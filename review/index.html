@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uFE3vjU8qIfn1zO/cFEm7yT5+eoeMzf9YA51jsWF85Q='; style-src 'self'; img-src 'self'; connect-src 'self' https://*.supabase.co; font-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+<script id="auth-callback">(()=>{'use strict';const u=new URL(location.href),q=u.searchParams,h=new URLSearchParams(u.hash.slice(1));if(['code','error','error_code','error_description','access_token','refresh_token','token_hash','token'].some(k=>q.has(k)||h.has(k))){const v={};if(q.has('code'))v.code=q.get('code');if(q.has('error')||q.has('error_code')||h.has('error')||h.has('error_code'))v.error=true;if(h.has('access_token')){v.accessToken=h.get('access_token');v.tokenType=h.get('token_type');v.expiresIn=h.get('expires_in');v.expiresAt=h.get('expires_at');}history.replaceState(null,'',u.pathname);globalThis.__reviewCallback=v;}})();</script>
+<title>投稿審核工作台｜原話與紀錄</title>
+<link rel="stylesheet" href="/review/review.css?v=15">
+<script src="/review/review-core.js?v=15" defer></script>
+<script src="/review/review.js?v=15" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到工作台</a>
+<header class="header wrap"><strong>原話與紀錄 · 投稿審核</strong><a href="/">返回公開網站 ↗</a></header>
+<main class="wrap" id="main">
+  <section class="hero"><div class="eyebrow">PRIVATE REVIEW DESK</div><h1>先核對，再公開。</h1><p>這是管理員工作台。登入後仍須通過管理員名單核對，才能讀取投稿。聯絡方式只供私人核對；核准原話不會自動改動題庫，遊戲也須另外確認發布。</p></section>
+  <p id="message" class="message" role="status" aria-live="polite">正在讀取連線設定…</p>
+  <section id="login" class="panel login" aria-labelledby="login-title">
+    <h2 id="login-title">管理員登入</h2>
+    <p class="notice">只接受已建立且已授權的帳號，這裡不提供註冊。登入狀態僅保留在目前分頁記憶體，最長 15 分鐘；重新整理後須再登入。</p>
+    <form id="login-form">
+      <label for="email">管理員 Email<input id="email" type="email" autocomplete="email" maxlength="254" required disabled></label>
+      <button id="send-link" type="submit" disabled>寄送一次性登入連結</button>
+    </form>
+    <p class="notice" id="login-hint">請在寄信的原分頁開啟郵件連結，並使用同一瀏覽器。可先複製郵件連結，再貼到原分頁網址列。登入驗證資料只暫存在原分頁，15 分鐘內有效；不儲存存取憑證或投稿草稿。</p>
+  </section>
+  <section id="desk" hidden aria-label="私人投稿工作台">
+    <div class="session-row"><p id="session-hint"></p><button id="logout" class="secondary" type="button">登出並清空此頁</button></div>
+    <div class="toolbar panel">
+      <label for="filter-status">審核狀態<select id="filter-status"><option value="pending">待審核</option><option value="needs_info">待補資料</option><option value="approved">已核准</option><option value="rejected">未採用</option><option value="all">全部</option></select></label>
+      <label for="filter-kind">投稿種類<select id="filter-kind"><option value="all">全部</option><option value="quote">原話線索</option><option value="game">社群遊戲</option></select></label>
+      <button id="refresh" class="secondary" type="button">重新讀取</button>
+    </div>
+    <div class="workspace">
+      <section class="panel queue" aria-label="投稿列表"><div class="queue-header"><span>私人投稿</span><span id="list-count"></span></div><div id="items" class="items"></div><button id="more" class="secondary" type="button" hidden>載入更多</button></section>
+      <section id="detail" class="panel details" aria-label="投稿詳情"><p class="empty">選一則投稿，查看來源與審核紀錄。</p></section>
+    </div>
+  </section>
+</main>
+<footer class="footer wrap">私人聯絡資料請勿轉傳。所有外部連結都須由你手動開啟；本頁不載入投稿圖片、影片或第三方遊戲。</footer>
+</body>
+</html>
