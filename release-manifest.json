@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v13",
+  "version": "public-release-v14",
   "date": "2026-10-21",
   "files": [
     {
@@ -149,13 +149,13 @@
     },
     {
       "path": "game/hub.css",
-      "bytes": 9125,
-      "sha256": "e5b2ff8be36aa082d1e86dac48b7894dce4f181fd418b275644e2ded761fbda5"
+      "bytes": 9142,
+      "sha256": "1b517600e9c8d6f4c35c0e04eaf0c193a6bf2ebcc4e1166e92676cc6fb4dc0e9"
     },
     {
       "path": "game/index.html",
-      "bytes": 4341,
-      "sha256": "532577591841ef507eeeb99967536f9c4e67c2c366a42c25ede6e0fc8a8b7548"
+      "bytes": 4346,
+      "sha256": "b3efb40dd7e7e69860e9d340f548e302c2692db6475d335dea2ce04c1b54e823"
     },
     {
       "path": "game/quiz-engine.js",
