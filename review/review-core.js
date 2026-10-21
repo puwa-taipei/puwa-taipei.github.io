@@ -1,6 +1,18 @@
 /* Private moderation client. Credentials and submission details are never persisted. */
 (() => {
   'use strict';
+  const SUBJECTS=Object.freeze({'shen-pao-yang':'沈伯洋','su-chiao-hui':'蘇巧慧'});
+  function subjectId(detail={}) {
+    const value=detail.subjectId ?? detail.payload?.subjectId ?? 'shen-pao-yang';
+    if(!Object.hasOwn(SUBJECTS,value)||(detail.subjectId!==undefined&&detail.payload?.subjectId!==undefined&&detail.subjectId!==detail.payload.subjectId))throw new ReviewError('invalid_response');
+    return value;
+  }
+  function subjectIds(detail,values) {
+    const original=subjectId(detail),ids=values===undefined?[original]:values;
+    if(!Array.isArray(ids)||ids.length<1||ids.length>2||ids.some(id=>typeof id!=='string'||!Object.hasOwn(SUBJECTS,id))||new Set(ids).size!==ids.length)throw new ReviewError('invalid_public_game');
+    if(!ids.includes(original))throw new ReviewError('source_mismatch');
+    return Object.keys(SUBJECTS).filter(id=>ids.includes(id));
+  }
   const PKCE_KEY='review-pkce-v15', PKCE_TTL=15*60*1000, SESSION_TTL=15*60*1000;
   const UUID=/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i;
   const JWT=/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
@@ -65,7 +77,7 @@
     if(detail.payload?.repoUrl!==undefined&&repoUrl!==detail.payload.repoUrl)throw new ReviewError('source_mismatch');
     const fixedCommit=sourceCommit(detail);if(fixedCommit!==null&&commitSha!==fixedCommit)throw new ReviewError('source_mismatch');
     // Contact, private notes, and unconsented attribution cannot enter this allowlisted projection.
-    return {title,summary,repoUrl,commitSha,gameUrl,license,externalServices,coverPath};
+    return {title,summary,repoUrl,commitSha,gameUrl,license,externalServices,coverPath,subjectIds:subjectIds(detail,values.subjectIds)};
   }
   function publicPreview(detail,values) {
     const output=publicGame(detail,values),p=detail.payload||{};
@@ -157,5 +169,5 @@
     }
     async signOut(){const token=this.#token;this.clear('signed_out');if(token&&this.enabled){try{await this.#request(`${this.#config.supabaseUrl}/auth/v1/logout?scope=local`,{token,auth:true});}catch{}}}
   }
-  globalThis.RecordsReview=Object.freeze({Client,ReviewError,config,callback,publicGame,publicPreview,sourceCommit,reviewEvidence,takeVerifier,UUID,PKCE_KEY,PKCE_TTL,SESSION_TTL});
+  globalThis.RecordsReview=Object.freeze({Client,ReviewError,SUBJECTS,subjectId,subjectIds,config,callback,publicGame,publicPreview,sourceCommit,reviewEvidence,takeVerifier,UUID,PKCE_KEY,PKCE_TTL,SESSION_TTL});
 })();
