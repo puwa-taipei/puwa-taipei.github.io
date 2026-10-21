@@ -105,6 +105,9 @@
     function renderReview(s) {
       const wrong = s.answers.length - s.correct;
       results.innerHTML = `<div class="quiz-review-heading"><div><p class="quiz-review-eyebrow">THE ROUND, IN CONTEXT</p><h3>你的選擇，回到每一段原話。</h3><p>答對 ${s.correct} 題${wrong ? ` · ${wrong} 題可以再看一次` : ' · 本輪全部答對'}。點開卡片，讀原文與上下文。</p></div><button type="button" class="quiz-review-restart">再玩一輪 ↻</button></div><div class="quiz-review-list">${s.answers.map((answer,i) => { const q = answer.question; return `<details class="quiz-review-item ${answer.correct ? 'review-correct' : 'review-wrong'}" data-question-id="${esc(q.id)}"><summary><span class="quiz-review-number">${String(i+1).padStart(2,'0')}</span><span class="quiz-review-main"><b>「${esc(q.quote)}」</b><small>你選「${answer.choice ? '是' : '否'}」 · 正解「是」 · ${esc(q.date)}</small></span><span class="quiz-review-badge">${answer.correct ? '✓ 答對' : '× 猜錯'}</span><span class="quiz-review-expand" aria-hidden="true">＋</span></summary><div class="quiz-review-content"><p class="quiz-review-answer">${q.medium === 'written' ? '這是沈伯洋寫的。' : '這是沈伯洋的公開發言。'}${answer.correct ? '你認出這段原話。' : '這段原話與你的第一印象不同。'}</p>${sourceHTML(q)}</div></details>`; }).join('')}</div>`;
+      const contribute = document.createElement('p'); contribute.className = 'small-note';
+      contribute.append(document.createTextNode('有更完整的原話來源，或發現需要更正的地方？ '));
+      const contributeLink = document.createElement('a'); contributeLink.className = 'text-link'; contributeLink.href = '/contribute/?type=quote'; contributeLink.textContent = '補上來源，交由人工審核 ↗'; contribute.append(contributeLink); results.append(contribute);
       results.hidden = false; results.querySelector('.quiz-review-restart').addEventListener('click', () => drawRound(true));
     }
     function focusQuestion() { if (play.contains(document.activeElement)) card.focus({preventScroll:true}); }
