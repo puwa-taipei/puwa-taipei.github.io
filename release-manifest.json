@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v12",
+  "version": "public-release-v13",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4192,
-      "sha256": "64c0ab3cdeb181d2da67479a7d0030aa9725dae4a6b97c2207e886d729599e3d"
+      "bytes": 5187,
+      "sha256": "59fdbb7796f18285729b343438f5b07560e979287cbaa81f7af5e63390186d77"
     },
     {
       "path": "anchor.js",
@@ -119,8 +119,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26139158,
-      "sha256": "1120983c9ab6221823309099c599b9c093091901cc84e6d51671909ee5e66fc8"
+      "bytes": 26142720,
+      "sha256": "d45b56d3f8f0e29ef2e4068c76d61974e97b8e7d98a81885ac03a39f0f8db4b9"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -138,6 +138,16 @@
       "sha256": "abe690f8b95270b66a198d1bd8b8a4fee20938618abd3920f020706e2f32a189"
     },
     {
+      "path": "game/arcade-config.json",
+      "bytes": 19,
+      "sha256": "54df7efeba3e42db270a0d6a6883fa9d4a731cabecaa736fbcb304f386bbbfdf"
+    },
+    {
+      "path": "game/arcade-network.js",
+      "bytes": 7967,
+      "sha256": "8a5cfbf9a1a4dd9702ac34776620fd75c8e02cf283573b5e7a66792f697e6703"
+    },
+    {
       "path": "game/hub.css",
       "bytes": 9125,
       "sha256": "e5b2ff8be36aa082d1e86dac48b7894dce4f181fd418b275644e2ded761fbda5"
@@ -149,28 +159,28 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 11792,
-      "sha256": "8866e76dbf6e4b66bae695632437a2d06e5cc3a12a9027920d7b287082a05770"
+      "bytes": 23181,
+      "sha256": "7cb983eb2b67c94de6e75b5c31fbbf9e0bb7577a524e4b3e0dec0dfe4837616b"
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 4771,
-      "sha256": "81e7fe3e60acd426e22f2d1c040d79e5b2673938929c1ec1c6d8710b26dfda68"
+      "bytes": 4918,
+      "sha256": "9bb2b44e05cb9aace603f76154006e3d0bbfd40a0ac8498f4185e90f6d845b2b"
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2503,
-      "sha256": "18e0190a61f2cad20ce5107d37cb2d03dbdafd7e0424db371a37d6819682d7e6"
+      "bytes": 2508,
+      "sha256": "ee06ba95aa50337e9c91aeb0e0bbeafb922c33490f3a74092297a869c177f0e0"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2495,
-      "sha256": "ee89326dda83531a6fdad9314e93f51603ae648b15c6e1c9eb63f7796c21bce1"
+      "bytes": 2569,
+      "sha256": "6684b38a97f124217be6bfeae8b7b1f259c0686fad55e96163666d09ee9d9416"
     },
     {
       "path": "game/swipe-ui.css",
-      "bytes": 8388,
-      "sha256": "f2d5e73b66a5fd682f2ce3ba2c0844f910e252a5fbd51aca9d218e993dd25594"
+      "bytes": 18739,
+      "sha256": "44b0b492877fa68e14558c6524dd211cdfa765ac51c0410da75eb18ceb33bc28"
     },
     {
       "path": "game3d.css",
@@ -184,23 +194,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 25647,
-      "sha256": "5d7b4d2c25c5da5931e7a922f20ea06a776129adc5a31bc270fe70a957195b4c"
+      "bytes": 25680,
+      "sha256": "cd2fd8e8fa343c67fc86451623788b226eb91c01d2d361e9251106e4a7d7b0c8"
     },
     {
       "path": "leaderboard.css",
-      "bytes": 4419,
-      "sha256": "772dbe52eea6e6173f2bee0188d5ac947f5c30948a0a4d794fb9143c1ea6ae84"
+      "bytes": 6904,
+      "sha256": "40c2f6ae59ee79dc0425af170b52e42ea7ab27bda89035254af7f02c255b5bd7"
     },
     {
       "path": "leaderboard.js",
-      "bytes": 13595,
-      "sha256": "9d05e30a405c4791acbc743003f833999a415fcb67ba5be42dd56c39def63e43"
+      "bytes": 23177,
+      "sha256": "217e159a787210d881bbfb3b88ffee1ad4892f0c295220aa6047fac3f858aabc"
     },
     {
       "path": "quiz.css",
-      "bytes": 37,
-      "sha256": "04fde68b6c06e6c2a52e980d4ff49513f754074b4e4337c56eea8d0699add2df"
+      "bytes": 42,
+      "sha256": "0d404c536bf86e3fa900937253b4974ef9490094218831ca9494a426d9d2ee27"
     },
     {
       "path": "speech-search.css",
@@ -248,5 +258,7 @@
     "characters": 385704
   },
   "globalLeaderboard": "not-connected",
-  "personalizedOg": false
+  "personalizedOg": false,
+  "datasetVersion": "v12",
+  "leaderboardFrontendPrepared": true
 }
