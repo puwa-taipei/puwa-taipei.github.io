@@ -77,3 +77,8 @@ normal Pages and OIDC deployment permissions. It changes no Supabase settings.
 Platform preview caches and the user's share target control the final preview.
 The build validates crawler-visible initial HTML and PNG bytes; it does not claim
 that a post was sent to Facebook/LINE or that a platform's cache was refreshed.
+
+
+## v24 reviewed selection
+
+The current builder reads `quiz-share-source-v24.json`, binds the complete archival corpus by SHA-256, count and ordered source IDs, then selects the explicit ordered `quoteIds` list. Historical `quizEligible` flags are retained as archival metadata and do not expand current membership. Nonselected IDs are exactly enumerated for bounded current-version cleanup. New source bytes use `/game/quiz/cards/v24/` and `data/quiz-share-catalog-v24.json`; v18 has its own frozen source and builder and is not modified by this builder. Each active item creates fourteen PNGs and fourteen HTML pages. Source qualifiers, contextual conditions and self-reported scores remain visible.
