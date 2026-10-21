@@ -28,6 +28,7 @@
   <div class="section-heading"><div><p class="section-number">原話檔案 ／ 強烈用語與爭議說法</p><h2>溫和形象之外，<br>回頭看他的原話。</h2></div><p class="section-deck">姓名挖苦、智商批評、強烈反問。<br>按下來源，讀完整前後文。</p></div>
   <p class="stmt-intro">先看直接辱罵、對人挖苦、強烈反問與具爭議的說法，預設全部時期，與猜題使用同一批精選。完整原話與補充脈絡仍保留於資料下載。</p>
   <div class="stmt-library-summary"><p id="stmt-total" aria-live="polite">讀取語料總覽…</p><a href="./downloads/quotes.csv" download>下載全部原話 CSV ↓</a></div>
+  <div class="stmt-collection"><strong data-statement-collection aria-live="polite">本期原話閃卡</strong><p id="statement-collection-note">開啟紀錄僅存本機，不代表已觀看或查證。</p></div>
   <label class="stmt-search-label" for="stmt-search">搜尋原話、人物或議題</label><input id="stmt-search" class="stmt-search" type="search" placeholder="例如：智商、名字、教育、AI" autocomplete="off">
   <div class="stmt-controls">
    <label>時間<select id="stmt-period"><option value="pre">正式提名前</option><option value="post">正式提名起</option><option value="all" selected>全部時期</option></select></label>
@@ -69,7 +70,7 @@
   if(q.fullVideoUrl&&q.fullVideoUrl!==q.videoUrl)videos.push(`<a href="${esc(url(q.fullVideoUrl))}" target="_blank" rel="noopener noreferrer">${esc(q.fullVideoLabel||'完整影片')} ↗</a>`);
   return `<article class="stmt-card" data-quote-id="${esc(q.id)}">
    <div class="stmt-card-meta"><span>${esc(q.date)}</span><span>${spoken(q)?'口語發言':'本人文章'}</span><span>${esc(q.topic||'政治言論')}</span><span>${'精選 '+String(window.RecordsQuizShareCore.curatedRank(q)).padStart(2,'0')}</span></div>
-   <h3>${esc(q.title)}</h3>${q.frontContext?`<p class="stmt-front-context">${esc(q.frontContext)}</p>`:''}
+   <div class="stmt-card-head"><h3>${esc(q.title)}</h3>${window.RecordsStatementCards?.entry(q)||''}</div>${q.frontContext?`<p class="stmt-front-context">${esc(q.frontContext)}</p>`:''}
    <blockquote>「${esc(q.quote)}」</blockquote>${q.contrastReason?`<p class="stmt-contrast"><span>${esc(q.contrastCriterion||'精選理由')}</span>${esc(q.contrastReason)}</p>`:''}
    <p class="stmt-venue">${esc(q.venue)}</p>
    <details><summary>看完整背景與證據位置 ＋</summary><p>${esc(q.context)}</p><p class="stmt-locator">${esc(q.evidenceLocator)}</p>${q.recordingClock?`<p class="stmt-clock">會議時鐘：${esc(q.recordingClock)}${q.videoDuration?' · 整段 '+esc(q.videoDuration):''}<br>${esc(q.recordingClockNote||'整段發言起訖，不是句內秒數。')}</p>`:''}${q.videoAvailabilityNote?`<p class="stmt-locator">${esc(q.videoAvailabilityNote)}</p>`:''}${q.meetingInfoUrl?`<p><a href="${esc(url(q.meetingInfoUrl))}" target="_blank" rel="noopener noreferrer">官方會議資料 ↗</a></p>`:''}${q.inferenceLimit?`<p class="stmt-limit">判讀範圍：${esc(q.inferenceLimit)}</p>`:''}</details>
@@ -84,6 +85,7 @@
   document.getElementById('stmt-count').textContent=`精選 ${selected.length} 則，來自 ${events.size} 個事件／文章；顯示 ${Math.min(shown,selected.length)} 則。${period==='pre'?'均早於正式提名。':period==='post'?'均為正式提名起。':'含提名前後。'}`;
   document.getElementById('stmt-list').innerHTML=selected.length?selected.slice(0,shown).map(q=>card(q)).join(''):'<p class="empty-state">'+(curationReady()?'精選中沒有符合紀錄；可改條件，或下載完整原話資料核對。':'精選清單暫時無法核對，已停止展示精選；請重新整理，或下載完整原話資料核對。')+'</p>';
   updateMore('stmt-more',selected.length,shown);
+  window.RecordsStatementCards?.hydrate(document.getElementById('stmt-list'));
  }
  function pairSide(v,i,comparisonId){
   const update=i===1?comparisonEditorialUpdates[comparisonId]:null;
@@ -98,6 +100,7 @@
  }
  fetch('./data/quotes.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('quotes');return r.json();}).then(d=>{
   data=d;
+  window.RecordsStatementCards?.register({subjectId:document.body.dataset.subjectId,sourceVersion:window.RecordsQuizShareCore?.SOURCE_VERSION,quotes:d.quotes});
   const selected=d.quotes.filter(eligible).length;
   document.getElementById('stmt-total').textContent=`全庫 ${d.quotes.length} 則 · ${new Set(d.quotes.map(q=>q.eventId||q.id)).size} 個事件／文章 · 精選猜題 ${selected} 則 · 完整原文可下載`;
   document.getElementById('stmt-selection').textContent=`目前精選與猜題 ${selected} 則，完整資料共 ${d.quotes.length} 則。一般政策與程序說明保留在下載資料，不列入本期題庫；先前版本的分享卡保留作歷史連結，舊挑戰會重新開局。原始來源仍保留供查核。每輪優先抽出尚未看過、來自不同事件的片段；口語與書面分開標示，未核實的時間點不編造。`;
