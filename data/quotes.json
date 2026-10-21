@@ -1,11 +1,11 @@
 {
-  "version": "v10",
+  "version": "v12",
   "nominationDate": "2026-05-13",
-  "selection": "全庫129則、123個事件／文章。精選與猜題73則，進階資料56則；預設先看正式提名前的精選發言。21則編輯優先依對人挖苦、強烈措辭與同題政策對照排序，並非統計分數或人格真假評分。每輪優先未看過且不同事件的片段；原聲未核聽者不編造秒數或未確認粗口。",
+  "selection": "全庫130則、124個事件／文章。精選與猜題74則，進階資料56則；預設先看正式提名前的精選。22則編輯優先依對人挖苦、強烈措辭與同題政策對照排序，並非統計分數或人格真假評分。每輪優先未看過且不同事件的片段；口語與書面分開標示，來源未核處不編造時間點。",
   "counts": {
-    "segments": 129,
-    "events": 123,
-    "pre": 113,
+    "segments": 130,
+    "events": 124,
+    "pre": 114,
     "post": 16
   },
   "quotes": [
@@ -245,7 +245,7 @@
       "evidenceLocator": "『毒品問題。我們可以怎麼做？』段落；網頁文字行 29–43，重點行 42",
       "inferenceLimit": "這段不能用來證明：反對全部校園檢測、反對反毒，或因此證明現在形象虛假。",
       "quizEligible": true,
-      "editorialRank": 19,
+      "editorialRank": 20,
       "contrastReason": "使用噁爛一詞批評當時按疑慮挑選學生、篩後懲罰的驗尿模式；應與今天SBIRT的對象、目的與篩後處置並列。",
       "contrastCriterion": "措辭與同題政策對照",
       "archiveTier": "featured"
@@ -269,7 +269,7 @@
       "evidenceLocator": "『到底什麼才是毒癮？』小標前一段；網頁文字行 45",
       "inferenceLimit": "這段不能用來證明：任意發毒、鼓勵吸毒、現已推動此措施，或可忽略其 2026 年回應。",
       "quizEligible": true,
-      "editorialRank": 20,
+      "editorialRank": 21,
       "contrastReason": "2014本人文章確實提出此條件式選項，不能說字句純由對手捏造；正面須保留除罪化不被部分人接受的條件、針具與社工配套。",
       "contrastCriterion": "同題政策對照",
       "archiveTier": "featured"
@@ -293,7 +293,7 @@
       "evidenceLocator": "全文最後一段；網頁文字行 51",
       "inferenceLimit": "這段不能用來證明：支持砍殺、對所有殺人案一概主張免死，或完整等同本人當時及現在的死刑政策。",
       "quizEligible": true,
-      "editorialRank": 21,
+      "editorialRank": 22,
       "contrastReason": "書面評論以立委智商作反諷，應顯示原文諷刺語境。",
       "contrastCriterion": "對人貶抑",
       "archiveTier": "featured"
@@ -4711,6 +4711,32 @@
       "editorialRank": 18,
       "contrastCriterion": "同題政策對照",
       "contrastReason": "2018介紹同一本書強調反諷，2026受訪強調作者保留死刑；應直接對照兩次介紹的重點與自我定位。"
+    },
+    {
+      "id": "cannabis-legalisation-facebook-20140820",
+      "eventId": "facebook-pumashen-10154472554225654",
+      "title": "本人按語提出以合法化解決大麻背後問題",
+      "speaker": "沈伯洋",
+      "quote": "大麻背後真正的問題其實是需要用合法化解決的",
+      "date": "2014-08-20",
+      "eventDate": "2014-08-20",
+      "datePrecision": "day-facebook-displayed-publication",
+      "medium": "written",
+      "topic": "毒品政策與大麻管制",
+      "venue": "本人 Facebook 公開貼文的分享按語",
+      "frontContext": "2014 年分享別人的文章時，他在自己的按語批評單從成癮性與犯罪性討論大麻，並提出合法化作為解決途徑。",
+      "context": "他批評網路上只從成癮性討論大麻，忽略毒品與階級、族群及歷史執法關係。他自述犯罪學專業，反對單一向度的分析，並以帶有批評的措辭回應相關論述。他分享另一篇評論時，在自己的按語提出合法化作為解決途徑，認為只談成癮性與犯罪性未處理根本問題，末尾表示暫時擱下討論。 下方被分享的 Hao Chuang 長文另有作者標示，與上方本人按語分開。",
+      "sourceType": "本人 Facebook 原貼正文、作者與日期已直接核對；書面按語，非口語發言",
+      "url": "https://www.facebook.com/pumashen/posts/10154472554225654",
+      "evidenceLocator": "沈伯洋姓名與日期下方、第 3 段本人按語；位置在 Hao Chuang 的被分享文章上方",
+      "inferenceLimit": "可確認當時在本人按語提出合法化解決途徑；原貼未給具體制度、修法方案或時程。下方 Hao Chuang 文章及其標籤不當作他的親筆全文。",
+      "quizEligible": true,
+      "archiveTier": "featured",
+      "contrastCriterion": "同題政策對照",
+      "contrastReason": "對照 2026 年專訪的現階段不支持與配套理由：當年本人按語確有提出合法化作為解決途徑，應釐清立場是否及何時改變。",
+      "verificationLevel": "primary-facebook-post-direct",
+      "checkedAt": "2026-10-21",
+      "editorialRank": 19
     }
   ],
   "comparisons": [
@@ -4780,11 +4806,23 @@
     },
     {
       "id": "cannabis-conditions",
-      "title": "大麻合法化：反對本身，還是目前沒有配套？",
+      "title": "大麻合法化：2014 年本人按語，對照 2026 年專訪",
       "earlier": {
-        "date": "2014-08-20（依2026報導引述，完整本人原貼仍待核）",
-        "url": "https://www.cna.com.tw/news/aipl/202610060230.aspx",
-        "summary": "羅智強引用舊貼文，稱問題需要用合法化解決；此輪未取得本人完整原貼。"
+        "date": "2014-08-20",
+        "url": "https://www.facebook.com/pumashen/posts/10154472554225654",
+        "quote": "大麻背後真正的問題其實是需要用合法化解決的",
+        "summary": "本人分享 Hao Chuang 的文章時，在自己的按語討論毒品與階級、族群及執法脈絡，提出以合法化解決大麻背後問題。已直接核對本人原貼，不再僅依羅智強轉引。",
+        "locator": "原貼第 3 段本人按語；下方 Hao Chuang 的文章另列作者，兩者分開閱讀。",
+        "additionalSources": [
+          {
+            "url": "https://www.cna.com.tw/news/aipl/202610060230.aspx",
+            "title": "中央社：2026 年批評與競辦回應"
+          },
+          {
+            "url": "https://www.facebook.com/debatelo/posts/pfbid02HugvsZQwL9SHpT7ZVY9zTZRmVApwu2srxra8q6aZDw1scxBkDbKtuCLiqmZ7Puy3l",
+            "title": "羅智強 2026-10-06 公開批評貼文"
+          }
+        ]
       },
       "later": {
         "date": "2026-10-07",
@@ -4797,8 +4835,8 @@
         "timecode": "10:11（畫面字幕已核）",
         "verification": "影片燒錄字幕逐格核對，未另獨立聽校原音。"
       },
-      "finding": "近期專訪同時有不主張推動的明示回答，以及配套措施、污名與顧慮未解的條件式理由。這些理由值得具體追問：若條件改變，是否仍反對？",
-      "limit": "不能把條件式理由改成已承諾未來推動，也不能省略目前明示不主張的回答。"
+      "finding": "2014 年本人按語明確把合法化列為解決途徑，並非只有轉貼他人的說法；2026 年專訪則明示目前不支持，並談配套不足。這是可核對的前後表述差異，應追問他是否改變立場、何時改變及理由。",
+      "limit": "2014 原貼未列具體合法化範圍、實施時程或修法條文；2026 專訪的明示回答與條件式理由都需保留，不能據此推定當選後一定推動。"
     }
   ],
   "pending": [
@@ -4808,13 +4846,6 @@
       "reason": "目前取得媒體引述，尚未核到本人完整原貼；不收進確證題庫。",
       "missing": "本人 Facebook 原始貼文、完整前後文及精確日期",
       "url": "https://www.cna.com.tw/news/aipl/202610070274.aspx"
-    },
-    {
-      "id": "cannabis-facebook-20140820",
-      "title": "2014大麻Facebook另文",
-      "reason": "目前取得媒體引述，尚未核到本人完整原貼；不收進確證題庫。",
-      "missing": "本人 Facebook 原始連結、轉貼文章及自己的完整評論",
-      "url": "https://news.nextapple.com/politics/20261006/E4ED4696BAD2ADBE0856559F386CB89D"
     },
     {
       "id": "pre-pending-0",
@@ -4838,9 +4869,9 @@
   },
   "updatedAt": "2026-10-21",
   "quizCounts": {
-    "segments": 73,
-    "events": 67,
-    "pre": 64,
+    "segments": 74,
+    "events": 68,
+    "pre": 65,
     "post": 9
   },
   "expansion": {
@@ -4859,13 +4890,13 @@
     "post": 7
   },
   "featuredCounts": {
-    "segments": 21,
-    "events": 20,
-    "pre": 21,
+    "segments": 22,
+    "events": 21,
+    "pre": 22,
     "post": 0
   },
   "editorial": {
-    "version": 10,
+    "version": 12,
     "updatedAt": "2026-10-21",
     "defaultPeriod": "pre",
     "defaultSort": "editorial",
@@ -4888,6 +4919,7 @@
       "china-scam-group-156994",
       "official-2024-kmt-only-own-people-157873",
       "death-book-title-2018",
+      "cannabis-legalisation-facebook-20140820",
       "school-urine-2014",
       "community-drug-support-2014",
       "legislator-iq-satire-2014"
@@ -4916,5 +4948,16 @@
       "同題政策對照：比較相同問題、適用條件及制度；未提修法與價值立場分開問"
     ],
     "method": "人工編輯排序，優先正式提名前、措辭明確、來源可追、對人挖苦或同題可對照的句子。這不是統計學量表，也不是人格真假評分。"
-  }
+  },
+  "releaseUpdates": [
+    {
+      "version": "v12",
+      "date": "2026-10-21",
+      "previousSegments": 129,
+      "addedSegments": 1,
+      "source": "primary-facebook-post",
+      "quoteId": "cannabis-legalisation-facebook-20140820",
+      "resolvedPendingId": "cannabis-facebook-20140820"
+    }
+  ]
 }
