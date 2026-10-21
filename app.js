@@ -282,7 +282,7 @@
     if (!window.RecordsQuiz) {
       quizEngineLoading ||= new Promise((resolve,reject) => {
         const script=document.createElement('script');
-        script.src=new URL('./game/quiz-engine.js?v=18',location.href).href;
+        script.src=new URL('./game/quiz-engine.js?v=18-r3',location.href).href;
         script.onload=resolve;script.onerror=()=>reject(new Error('猜題介面暫時無法讀取'));
         document.head.append(script);
       });

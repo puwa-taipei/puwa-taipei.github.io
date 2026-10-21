@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 27952,
-      "sha256": "d7b2921352c292315fd4d535f5ad263b118410dde058e805c4df4515d0a315f5"
+      "bytes": 27955,
+      "sha256": "9e8770a2037a8e88505137a04de81a4d89da06fad3422d0c3aa71763d93a5d23"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -214,8 +214,8 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 28797,
-      "sha256": "c413a8666c697728e2e5b2ae88fad0304fb7b0b1c929a5c5d114ab5dd24fc9a7"
+      "bytes": 29098,
+      "sha256": "6d36bdfbc43cd0d4fa27bd1407234da6397e96f83e82b404f8dc510995e84c17"
     },
     {
       "path": "game/quiz-share-core.js",
@@ -239,8 +239,8 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5276,
-      "sha256": "eadb77150b338a3c769f9e65b36c31e091c3b36150f1bcca63c89b3d8e885de1"
+      "bytes": 5279,
+      "sha256": "83f26b499fe7a5f3dc926dc7b2ed61078dba8bb2a31cdb926659d4dbf13fbd3a"
     },
     {
       "path": "game/red-notes/index.html",
@@ -269,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26677,
-      "sha256": "73acfb0dcce0495523707519619aa6bd0a746d892f23c9b9cd4b2fd904ccd17a"
+      "bytes": 26688,
+      "sha256": "253c28f486e68349f07c2c249a4943b3330171ae387373cf8a354bf68b3f2cc8"
     },
     {
       "path": "leaderboard.css",
