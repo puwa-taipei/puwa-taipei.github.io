@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173f36">
+  <title>百分之幾的沈委員？｜原話接招室</title>
+  <meta name="description" content="如果這段對話換你接，你會選哪一句？從三句有來源的沈伯洋原話中，挑出與真實議題相符的一句。六題一輪，玩完看你的原話配對得分。">
+  <link rel="canonical" href="https://puwa.taipei/game/dialogue/">
+  <meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:title" content="百分之幾的沈委員？｜原話接招室">
+  <meta property="og:description" content="把三句原話放在你面前。這一回，換你接話。六個虛構情境，玩完逐題看真實來源。">
+  <meta property="og:url" content="https://puwa.taipei/game/dialogue/"><meta property="og:image" content="https://puwa.taipei/game/dialogue/cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="原話接招室：三句原話，這一回換你接話。">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://puwa.taipei/game/dialogue/cover.png">
+  <link rel="stylesheet" href="./dialogue.css?v=30"><script src="./core.js?v=30" defer></script><script src="./dialogue.js?v=30" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">直接進入遊戲</a>
+  <header class="site-head"><a href="/game/" class="brand"><span aria-hidden="true">◎</span> 紀錄遊樂場 <small>THE RECORD / ARCADE</small></a><nav aria-label="遊戲導覽"><a href="/game/">所有遊戲 ↗</a><a href="/#statements">原話檔案 ↗</a></nav></header>
+  <main id="main">
+    <section id="intro" class="intro">
+      <div class="intro-copy"><p class="eyebrow">GAME 03 / YOUR TURN TO REPLY</p><h1>這句，<br><em>我來回。</em></h1><p class="intro-lead">當一段對話丟過來，<br>哪一句才是沈委員用過的回應？</p><p class="intro-small">三句都是真原話。找出曾用在相近議題的一句，<br class="desktop-only">六題之後，看看你是「百分之幾的沈委員」。</p><button id="start" class="button primary" type="button" disabled>正在整理原話…</button><p id="load-status" class="load-status" role="status">讀取已收錄的來源與情境題庫。</p></div>
+      <div class="intro-art" aria-hidden="true"><div class="art-label">THE QUOTE / REPLY ROOM <i></i></div><div class="demo-message">如果這一題，換你接話？<span>遊戲情境</span></div><div class="demo-options"><div><b>A</b><span>先看原話。</span></div><div><b>B</b><span>再選你的回應。</span></div><div><b>C</b><span>最後，回到來源。</span></div></div><div class="demo-bottom"><span>3 句原話</span><b>6 個情境</b><span>換你上場 ↗</span></div></div>
+    </section>
+    <aside id="fiction-note" class="fiction-note"><span aria-hidden="true">＊</span><p><strong>情境是虛構的，原話有來源。</strong>角色與提問為遊戲創作；選句來自不同日期的真實發言，並不表示他真的在這段對話中這樣回答。配對依原始議題判定。</p></aside>
+    <section id="play" class="play" hidden aria-labelledby="round-heading">
+      <div class="round-toolbar"><div><p class="eyebrow" id="round-number">ROUND 01 / 06</p><h1 id="round-heading" tabindex="-1">換你接話。</h1></div><div class="round-score"><span>本輪接中</span><strong id="live-score">0 <small>/ 6</small></strong></div></div>
+      <div id="progress" class="progress" aria-label="本輪進度"></div>
+      <div class="chat-layout"><div class="conversation"><div class="room-header"><span class="room-icon" aria-hidden="true">↳</span><div><b>原話接招室</b><span>角色模擬 · 虛構對話</span></div><span id="topic" class="topic"></span></div><div class="chat-body"><p class="day-label">情境已開啟，輪到你了。</p><div class="message-row"><div class="avatar other" aria-hidden="true">？</div><div class="message-group"><span id="speaker" class="sender"></span><p id="prompt" class="bubble incoming"></p></div></div><div id="sent-message" class="message-row own" hidden><div class="message-group"><span class="sender">你選的原話</span><p id="reply" class="bubble outgoing"></p></div><div class="avatar self" aria-hidden="true">沈</div></div><div id="typing" class="typing" aria-hidden="true"><i></i><i></i><i></i><span>等你接話</span></div></div></div>
+      <div class="choice-panel"><div class="choice-heading"><p class="eyebrow">PICK A REAL QUOTE</p><h2>你會選哪一句？</h2><p id="cue"></p></div><div id="choices" class="choices" aria-label="三句原話選項"></div><p id="choice-hint" class="choice-hint">三句都來自沈伯洋。依原始議題選最相符的一句。</p></div></div>
+      <section id="feedback" class="feedback" hidden aria-labelledby="feedback-heading"><div class="feedback-mark" id="feedback-mark" aria-hidden="true"></div><div class="feedback-copy"><p id="feedback-tag" class="eyebrow"></p><h2 id="feedback-heading" tabindex="-1"></h2><p id="feedback-quote" class="feedback-quote"></p><p id="feedback-context"></p><p id="feedback-meta" class="source-meta"></p><div id="feedback-links" class="source-links"></div><details class="all-sources"><summary>三句原話，都能查來源 <span aria-hidden="true">＋</span></summary><div id="all-sources"></div></details></div><button id="next" class="button primary" type="button">下一段對話 →</button></section>
+      <button id="restart-in-round" class="quiet-button" type="button">重新抽一輪 ↻</button>
+    </section>
+    <section id="result" class="result" hidden aria-labelledby="result-heading"><div class="result-hero"><div><p class="eyebrow">ROUND COMPLETE / 六段對話已完成</p><h1 id="result-heading" tabindex="-1">這一輪，<br>你是 <em><span id="result-percent">0</span>%</em><br>的沈委員。</h1><p id="result-caption" class="result-caption"></p><p class="score-note">趣味分數＝配對成功題數 ÷ 6 × 100，四捨五入。<br>這是本輪原話配對成績，不是人格或政治立場測驗。</p><div class="result-actions"><button id="share" class="button primary" type="button">分享成績，換朋友接話 ↗</button><button id="replay" class="button secondary" type="button">再抽六段對話 ↻</button></div><p id="share-status" class="share-status" role="status"></p></div><div class="result-ticket"><span>THE REPLY ROOM</span><div id="ticket-score">0<small>/ 6</small></div><p>句原話對上議題</p><div id="result-dots" class="result-dots"></div><small>一張成績單，六個原文入口。</small></div></div><div class="review-head"><div><p class="eyebrow">REPLAY THE RECORD</p><h2>你剛才接的每一句。</h2></div><p>選了什麼、正解是什麼，<br>連同前後文一起看。</p></div><div id="review" class="review"></div></section>
+    <section id="error" class="error" hidden><h1>這輪暫時沒接上。</h1><p id="error-message">原話資料未能載入，請稍後重新開啟。</p><button id="retry" class="button primary" type="button">重新載入</button><a href="/game/">回遊戲庫</a></section>
+    <section class="idea-callout"><div><p class="eyebrow">THE NEXT GAME COULD BE YOUR IDEA</p><h2>不會寫程式，也有一個好玩法？</h2><p>把你的想法告訴我們。經人工挑選後，再安排製作。</p></div><a href="/contribute/?type=idea" class="text-link">我有一個遊戲想法 ↗</a></section>
+  </main>
+  <footer><span>原話接招室 ／ 紀錄遊樂場<br>虛構情境 × 有來源的原話。六題一輪，選完回到原文。</span><a href="/game/dialogue/README.md">遊戲與原始碼說明 ↗</a><a href="/game/">回遊戲庫 ↗</a></footer>
+  <div id="announcement" class="sr-only" aria-live="polite"></div>
+  <noscript><p class="noscript">這款遊戲需要 JavaScript。你仍可前往<a href="/#statements">原話檔案</a>查看來源。</p></noscript>
+</body></html>

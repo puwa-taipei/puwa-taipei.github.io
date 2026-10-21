@@ -1,0 +1,28 @@
+{
+  "version": "v30",
+  "sourceVersion": "v24",
+  "sourceSha256": "6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3",
+  "roundSize": 6,
+  "scenarios": [
+    {"id":"reading","targetId":"read-first-166377","topic":"規則與閱讀","speaker":"另一位委員","prompt":"國情報告的規則，我的理解跟你不一樣。你會怎麼回？","cue":"找出他談立委理解國情報告規則時，用過的那一句。"},
+    {"id":"chinese","targetId":"chinese-retort-157804","topic":"委員會交鋒","speaker":"另一位委員","prompt":"你剛才那段中文，我讀出來是另一個意思。","cue":"找出他與羅智強在委員會交鋒時，用過的反問。"},
+    {"id":"assistant-law","targetId":"assistant-law-blind-167396","topic":"助理費修法","speaker":"旁聽席","prompt":"台下有人為助理費修法鼓掌。你想接哪一句？","cue":"找出他批評修法混淆立委與助理費用時，用過的那一句。"},
+    {"id":"carnation","targetId":"carnation-law-162993","topic":"法律能力","speaker":"主持人","prompt":"你怎麼評價黃國昌這一次的法律論述？","cue":"找出他拿博士頭銜做諧音挖苦的那一句。"},
+    {"id":"corridor","targetId":"ai-corridor-retort-20261013","topic":"科技廊帶","speaker":"論壇主持人","prompt":"把北士科、內科、南軟和松山機場串成科技廊帶，怎麼樣？","cue":"找出他在科技廊帶論壇，用過的短句反問。"},
+    {"id":"tech-retort","targetId":"ai-they-understand-20261015","topic":"科技業爭論","speaker":"採訪記者","prompt":"有人批評你不懂科技業，你想怎麼回？","cue":"找出他回應這類批評時，使用的反諷句。"},
+    {"id":"argument","targetId":"argument-king-20261009","topic":"與支持者談吵架","speaker":"支持者","prompt":"網路上吵得好兇，我也想加入回嘴。","cue":"找出他致詞時，請支持者別吵架、交給他的那一句。"},
+    {"id":"daughter","targetId":"official-2024-daughter-longer-call-152955","topic":"發言長度","speaker":"另一位委員","prompt":"逐條討論和協商，我已經說明過了。","cue":"找出他挖苦黃國昌說明不足時，使用的家庭電話比喻。"},
+    {"id":"assistants-speak","targetId":"official-2024-let-assistants-speak-152182","topic":"發言與助理","speaker":"議場","prompt":"對剛才傅崐萁和黃國昌的法律論述，你還有什麼意見？","cue":"找出他以請助理代為發言來挖苦的那一句。"},
+    {"id":"cyber-law","targetId":"official-2024-law-cybersecurity-not-understood-151739","topic":"法律與資安","speaker":"議場","prompt":"今天的程序和資安法案，大家各有說法。你怎麼形容？","cue":"找出他在委員會回應程序與法案論述時，用過的排比句。"},
+    {"id":"basic-law","targetId":"official-2024-basic-law-ji-154841","topic":"基本法","speaker":"另一位委員","prompt":"法案就叫做新住民基本法，這個名字有什麼問題？","cue":"找出他質疑條文與基本法名稱矛盾時，用過的那一句。"},
+    {"id":"international","targetId":"international-laugh-151099","topic":"國會改革","speaker":"議場","prompt":"這一版國會改革，可以繼續推進嗎？","cue":"找出他批評混淆質詢、調查、調閱與聽證時，用過的比喻。"},
+    {"id":"nationality","targetId":"nationality-law-criticism-167742","topic":"國籍資格","speaker":"議場","prompt":"國籍資格爭議，大家正在輪流發言。你想怎麼開場？","cue":"找出他談情、理、法之前，批評部分發言者的那一句。"},
+    {"id":"military-shopping","targetId":"temu-defense-bill-167234","topic":"軍購版本","speaker":"採訪記者","prompt":"軍購條例卡住了，也有人提議縮減版本。你怎麼看？","cue":"找出他拿購物平台來比喻軍購的那一句。"},
+    {"id":"drone","targetId":"drone-law-committee-route-170532","topic":"無人機審查","speaker":"委員會","prompt":"涉及國防採購的無人機條例，交到經濟委員會來審。","cue":"找出他質疑交付委員會與另訂條例必要性時，用過的那一句。"},
+    {"id":"voting","targetId":"voting-contempt-11437","topic":"不在籍投票","speaker":"議場","prompt":"不在籍投票的公投案，要往下討論了。你想接什麼？","cue":"找出他在該案院會討論中，批評藍白立法作法的那一句。"},
+    {"id":"scam","targetId":"china-scam-group-156994","topic":"資訊操作","speaker":"質詢現場","prompt":"深偽冒名、社群回報機制和中國資訊操作，可以一起談嗎？","cue":"找出他在這次質詢中，作出的政治評價。"},
+    {"id":"flight","targetId":"lu-flight-change-sarcasm-168014","topic":"國防預算態度","speaker":"採訪記者","prompt":"盧秀燕受訪支持較高的國防預算。你怎麼看這個變化？","cue":"找出他拿搭飛機、看電影來挖苦態度轉變的那一句。"},
+    {"id":"viewing","targetId":"adult-preferences-political-inference-20240628","topic":"偏好與政治傾向","speaker":"節目主持人","prompt":"知道一個人的看片偏好，真的能推測政治傾向嗎？","cue":"找出媒體引述他談成人影片偏好與自由派、保守派關係的那一句。"},
+    {"id":"book","targetId":"death-book-title-2018","topic":"解讀書名","speaker":"講座主持人","prompt":"《死刑肯定論》這個書名，跟它實際的論證是一回事嗎？","cue":"找出他解讀這本書的書名時，媒體直接引述的那一句。"}
+  ]
+}
