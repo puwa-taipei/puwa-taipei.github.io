@@ -79,7 +79,7 @@
     const settings = document.createElement('div'); settings.className = 'quiz-autoplay-settings';
     settings.innerHTML = '<label><input id="quiz-auto-next" type="checkbox" checked> 自動換下一張</label><span>揭曉約 1.6 秒後換題，可隨時暫停</span>'; dots.after(settings);
     const autoInput = settings.querySelector('input');
-    const results = document.createElement('section'); results.id = 'quiz-results'; results.className = 'quiz-results'; results.hidden = true; results.setAttribute('aria-label', '本輪逐題回顧');
+    const results = document.createElement('section'); results.id = 'quiz-results'; results.className = 'quiz-results'; results.hidden = true; results.setAttribute('aria-label', '本輪成績單與逐題答案');
     play.querySelector('.quiz-layout').after(results);
     // Sharing is optional. Old cached HTML and the independent Su profile keep
     // the complete quiz even if a v18 script, catalogue or card is unavailable.
@@ -90,6 +90,9 @@
       play.querySelector('.quiz-layout').before(challengeNotice);
       try { shareUI = window.RecordsQuizShare?.mount({profile,results}) || null; } catch {}
     }
+    // Put every choice and its answer immediately after the completed game;
+    // the optional share panel mounts before results, so restore this order.
+    play.querySelector('.quiz-layout').after(results);
     function clearShare() { try { shareUI?.clear(); } catch {} }
     function showShare(snapshot) {
       try { Promise.resolve(shareUI?.show(snapshot,{period:state.period,challenge:state.challenge,sourceVersion:options.quoteSourceVersion})).catch(() => {}); } catch {}
@@ -135,7 +138,7 @@
     }
     function renderReview(s) {
       const wrong = s.answers.length - s.correct;
-      results.innerHTML = `<div class="quiz-review-heading"><div><p class="quiz-review-eyebrow">THE ROUND, IN CONTEXT</p><h3>你的選擇，回到每一段原話。</h3><p>答對 ${s.correct} 題${wrong ? ` · ${wrong} 題可以再看一次` : ' · 本輪全部答對'}。點開卡片，讀原文與上下文。</p></div><button type="button" class="quiz-review-restart">再玩一輪 ↻</button></div><div class="quiz-review-list">${s.answers.map((answer,i) => { const q = answer.question; return `<details class="quiz-review-item ${answer.correct ? 'review-correct' : 'review-wrong'}" data-question-id="${esc(q.id)}"><summary><span class="quiz-review-number">${String(i+1).padStart(2,'0')}</span><span class="quiz-review-main"><b>「${esc(q.quote)}」</b><small>你選「${answer.choice ? '是' : '否'}」 · 正解「是」 · ${esc(q.date)}</small></span><span class="quiz-review-badge">${answer.correct ? '✓ 答對' : '× 猜錯'}</span><span class="quiz-review-expand" aria-hidden="true">＋</span></summary><div class="quiz-review-content"><p class="quiz-review-answer">${q.medium === 'written' ? '這是' + esc(speaker) + '寫的。' : '這是' + esc(speaker) + '的公開發言。'}${answer.correct ? '你認出這段原話。' : '這段原話與你的第一印象不同。'}</p>${sourceHTML(q)}</div></details>`; }).join('')}</div>`;
+      results.innerHTML = `<div class="quiz-review-heading"><div><p class="quiz-review-eyebrow">THE ROUND, IN CONTEXT</p><h3>本輪成績單：你的選擇與正確答案</h3><p>答對 ${s.correct} 題 · 答錯 ${wrong} 題 · 共 ${s.answers.length} 題。點開各題，讀完整原話、上下文與來源。</p></div><button type="button" class="quiz-review-restart">再玩一輪 ↻</button></div><div class="quiz-review-list">${s.answers.map((answer,i) => { const q = answer.question; return `<details class="quiz-review-item ${answer.correct ? 'review-correct' : 'review-wrong'}" data-question-id="${esc(q.id)}"><summary><span class="quiz-review-number">${String(i+1).padStart(2,'0')}</span><span class="quiz-review-main"><b>「${esc(q.quote)}」</b><small>你選「${answer.choice ? '是' : '不是'}」 · 正確答案「${answer.answer ? '是' : '不是'}」 · ${esc(q.date)}</small></span><span class="quiz-review-badge">${answer.correct ? '✓ 答對' : '✕ 答錯'}</span><span class="quiz-review-expand" aria-hidden="true">＋</span></summary><div class="quiz-review-content"><p class="quiz-review-answer">${q.medium === 'written' ? '這是' + esc(speaker) + '寫的。' : '這是' + esc(speaker) + '的公開發言。'}${answer.correct ? '你認出這段原話。' : '這段原話與你的第一印象不同。'}</p>${sourceHTML(q)}</div></details>`; }).join('')}</div>`;
       const contribute = document.createElement('p'); contribute.className = 'small-note';
       contribute.append(document.createTextNode('有更完整的原話來源，或發現需要更正的地方？ '));
       const contributeLink = document.createElement('a'); contributeLink.className = 'text-link'; contributeLink.href = '/contribute/?type=quote' + (profile.subjectId === 'shen-pao-yang' ? '' : '&subject=' + profile.subjectId); contributeLink.textContent = '補上來源，交由人工審核 ↗'; contribute.append(contributeLink); results.append(contribute);
@@ -181,7 +184,7 @@
         text('quiz-progress','本輪完成'); text('quiz-score',`${s.score} / 100 分`); text('quiz-meta',`答對 ${s.correct} / ${s.round.length} 題`); text('quiz-context','');
         $('quiz-question').innerHTML = `<span class="quiz-final-score" style="--quiz-score-angle:${s.score * 3.6}deg"><b>${s.score}</b><small>分 / 100</small></span><span class="quiz-final-message">${high ? '恭喜，你把原話認出來了！' : low ? '別被印象的洋流帶走，從答錯的幾題回頭看原文。' : '有幾句出乎意料？回頭看本輪原文。'}</span>`;
         card.querySelector('.quiz-foot').textContent = `本輪等權計分：答對題數 ÷ ${s.round.length} × 100，四捨五入。這是原話辨識得分。`;
-        renderReview(s); showShare(s); announce(`本輪完成，${s.score} 分。答對 ${s.correct}／${s.round.length} 題。下方可逐題回顧來源。`); focusQuestion(); return;
+        renderReview(s); showShare(s); announce(`本輪完成，${s.score} 分。答對 ${s.correct}／${s.round.length} 題。下方成績單列出每題的選擇、正確答案與來源。`); focusQuestion(); return;
       }
       if (s.phase === 'empty') {
         card.dataset.questionId = ''; text('quiz-progress','題庫尚未載入'); text('quiz-meta','SOURCE REQUIRED'); text('quiz-context',''); text('quiz-question','題庫暫時無法讀取。\n請重新整理後再試。'); card.querySelector('.quiz-foot').textContent = '每個答案都需要可追溯的來源。'; $('quiz-restart').hidden = true; info(); return;
