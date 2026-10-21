@@ -74,7 +74,7 @@
     ctx.fillStyle='#ed8b51';ctx.beginPath();ctx.moveTo(906,357);ctx.lineTo(968,387);ctx.lineTo(1030,357);ctx.lineTo(989,425);ctx.lineTo(964,407);ctx.lineTo(946,452);ctx.closePath();ctx.fill();
     for(const [x,y,angle] of [[810,150,-.2],[1054,359,.2],[812,434,-.1]]){ctx.save();ctx.translate(x,y);ctx.rotate(angle);round(0,0,112,62,4,'#b7394a','#f1ad90');ctx.strokeStyle='#f1ad90';ctx.strokeRect(9,9,94,44);ctx.font='800 30px system-ui';ctx.fillStyle='#f8d4b3';ctx.fillText('?',44,11);ctx.restore();}
     ctx.fillStyle='#101e29';ctx.fillRect(0,527,1200,103);ctx.strokeStyle='#4a6265';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(60,528);ctx.lineTo(1140,528);ctx.stroke();
-    ctx.fillStyle='#d3dfd4';ctx.font='750 21px "Microsoft JhengHei",system-ui';ctx.fillText('你能超過我嗎？',62,556);ctx.font='600 15px system-ui';ctx.fillStyle='#9fb9ae';ctx.fillText('PUWA-TAIPEI.GITHUB.IO/GAME',744,563);
+    ctx.fillStyle='#d3dfd4';ctx.font='750 21px "Microsoft JhengHei",system-ui';ctx.fillText('你能超過我嗎？',62,556);ctx.font='600 15px system-ui';ctx.fillStyle='#9fb9ae';ctx.fillText('PUWA.TAIPEI/GAME',744,563);
     canvas.setAttribute('aria-label',result?`${name}的紅紙鈔掉面具成績：${result.score}分，最高${result.maxCombo}連擊。${registeredItem?'伺服器已登錄，僅時間與規則基本檢核。':'玩家分享，未經排行榜檢核。'}`:'紅紙鈔掉面具：完成遊戲後產生成績卡。');
     const serial=++renderNumber;blob=null;
     canvas.toBlob(value=>{if(serial!==renderNumber)return;blob=value;updateButtons();},'image/png');
@@ -82,7 +82,7 @@
   }
   function updateButtons(){const enabled=Boolean(current&&blob&&validName(cleanName(input.value)));share.disabled=download.disabled=copy.disabled=!enabled;}
   function summaryValues(){recentValue.textContent=stored.recent?stored.recent.score.toLocaleString('zh-TW'):'—';bestValue.textContent=stored.best?stored.best.score.toLocaleString('zh-TW'):'—';}
-  function challengeURL(){const link=new URL('/game/share/','https://puwa-taipei.github.io');if(registeredItem){link.searchParams.set('id',registeredItem.id);}else{link.searchParams.set('name',cleanName(input.value));link.searchParams.set('score',String(current.score));link.searchParams.set('combo',String(current.maxCombo));}return link.href;}
+  function challengeURL(){const link=new URL('/game/share/','https://puwa.taipei');if(registeredItem){link.searchParams.set('id',registeredItem.id);}else{link.searchParams.set('name',cleanName(input.value));link.searchParams.set('score',String(current.score));link.searchParams.set('combo',String(current.maxCombo));}return link.href;}
   function saveImage(){if(!blob)return;const objectURL=URL.createObjectURL(blob),a=node('a');a.href=objectURL;a.download='red-notes-'+current.score+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(objectURL),60000);}
   async function copyChallenge(){const link=challengeURL();try{await navigator.clipboard.writeText(link);status.textContent='挑戰連結已複製。個人成績圖可另外下載或分享。';}catch{fallback.hidden=false;fallback.value=link;fallback.focus();fallback.select();status.textContent='請複製下方挑戰連結。';}}
   input.addEventListener('input',()=>{const clean=cleanName(input.value);if([...input.value].length>16)input.value=clean;nickname=clean;if(validName(clean)){try{localStorage.setItem(nameKey,clean);}catch{storageAvailable=false;}status.textContent=current?'暱稱已放進圖片，現在可以分享。':'先完成一局，再把成績做成卡片。';}else status.textContent='暱稱需要 2–16 個字，請使用一般文字。';fallback.hidden=true;draw();updatePublic();});

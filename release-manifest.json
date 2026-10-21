@@ -1,6 +1,6 @@
 {
-  "version": "public-release-v26",
-  "date": "2026-10-21",
+  "version": "public-release-v28",
+  "date": "2026-10-22",
   "files": [
     {
       "path": ".nojekyll",
@@ -104,8 +104,8 @@
     },
     {
       "path": "contribute/index.html",
-      "bytes": 19841,
-      "sha256": "9157ea83e0d64f571dcf0fb49457eb77bf92972506b24cec9a9dfa4c4076b83d"
+      "bytes": 19811,
+      "sha256": "7c826485d099dc69b82c9a3eba39d5afaaa7a6e077cd781089b61b87e2d612dc"
     },
     {
       "path": "data/analysis.json",
@@ -214,8 +214,8 @@
     },
     {
       "path": "game/index.html",
-      "bytes": 5187,
-      "sha256": "a0396e88ee148bbe4c17d3482c4f153f31cae812ca869124f362fbac5660abff"
+      "bytes": 5117,
+      "sha256": "06ccc2ac35282958ed96dbaa2bb352f974f2cba15d15cca1bd1075492102fe17"
     },
     {
       "path": "game/library-core.js",
@@ -234,8 +234,8 @@
     },
     {
       "path": "game/quiz-share-core.js",
-      "bytes": 12782,
-      "sha256": "dfc4112d8ccb012f3388db296736175d7e3b8650843b2fac0153fe1db0ed32e9"
+      "bytes": 12772,
+      "sha256": "15fd30f39b285567870342499fec3d61e0cfa903177f64467788360b4075f6be"
     },
     {
       "path": "game/quiz-share-landing.js",
@@ -254,18 +254,18 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5327,
-      "sha256": "fefbd6dde150218c84d4c3dad1811a8ccb3e1037f2e7b2aa363483e0ccb4a57d"
+      "bytes": 5287,
+      "sha256": "4d91ae36c01c2a17e3a17bc04c9d6e43f63673e6003c30254d4691fa896b7338"
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2558,
-      "sha256": "d0a96e48ceafc15d5616053ec0ca64099fd9f2c7b09bd0c209645db42ab48557"
+      "bytes": 2518,
+      "sha256": "ba0b8d17e4cf3f537a4e3397cef0ccda6e77923eb53c12803f5124d0cc1f04a7"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2619,
-      "sha256": "f62081bd8881b824b16b7eb0f0fddb539aaf7206790b7c2d14ec1b75878b348d"
+      "bytes": 2579,
+      "sha256": "8de46c24847a8a74fd7543091180c886dd636fd513f63e7c52307d5db2115b1e"
     },
     {
       "path": "game/swipe-ui.css",
@@ -284,8 +284,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 27244,
-      "sha256": "fc97c79e7ffa1e5d9e1accc74da1b8dd9eca7da92a91e180a4d93cef07408bc2"
+      "bytes": 27194,
+      "sha256": "41811ac9371ce9644d44ad10193ecaffc1097fc03ea5a2abcb27dc2a9409646a"
     },
     {
       "path": "leaderboard.css",
@@ -294,8 +294,8 @@
     },
     {
       "path": "leaderboard.js",
-      "bytes": 23000,
-      "sha256": "0a5b16db8f447855b6f0d56a330c8b4ca902f7a9c177433e35d86d4e06200ae0"
+      "bytes": 22980,
+      "sha256": "4507f7adb89e38737c46c1ab3c452dbce43d83cbc3585905a283ae19a629bc2d"
     },
     {
       "path": "network.css",
@@ -339,13 +339,13 @@
     },
     {
       "path": "statement-cards.css",
-      "bytes": 10268,
-      "sha256": "3a5ba3c20a4b1da1e2519e708dba59bab18380a2ca9914a91c43dd571fee5e33"
+      "bytes": 15582,
+      "sha256": "80eef86c095b654b6b36900051cf44df7a6c6ce8d2e361646adf4bf78b5db8c1"
     },
     {
       "path": "statement-cards.js",
-      "bytes": 34812,
-      "sha256": "3ffa8086afdad46b21c6e0f38d7df4aef5e16cf1485d68fa1105d3f570336728"
+      "bytes": 36835,
+      "sha256": "042f696c7caf94ab39a72d74a60e1d9cbad57e40ead3ae00254040c1db54635b"
     },
     {
       "path": "statements.css",

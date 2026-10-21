@@ -126,6 +126,7 @@
     const contribute=document.createElement('a');contribute.className='stmt-flash-contribute';contribute.href='/contribute/?type=quote';contribute.textContent='補充影片／申請發現者署名';footer.append(contribute);
     const contributionNote=document.createElement('p');contributionNote.textContent='補上原始影片與時間點，經人工核對採用後，可標註自願公開署名的發現者。聯絡方式不公開。';footer.append(contributionNote);
     document.body.append(overlay);panel=overlay.querySelector('.stmt-flash-panel');tilt=overlay.querySelector('.stmt-flash-tilt');
+    decorateTilt();resetTilt();
     overlay.querySelector('[data-flash-close]').addEventListener('click',close);
     overlay.addEventListener('cancel',event => {event.preventDefault();if(expanded)toggleFullscreen();else close();});
     overlay.addEventListener('click',event => { if (event.target === overlay) close(); });
@@ -137,16 +138,25 @@
     });
     overlay.querySelector('[data-flash-fullscreen]').addEventListener('click',toggleFullscreen);
     overlay.querySelector('[data-flash-sensor]').addEventListener('click',enableSensor);
-    const handle=overlay.querySelector('.stmt-flash-drag');
-    handle.addEventListener('pointerdown',event => { if (reduceMotion.matches || lowPower()) return; lastPointer={id:event.pointerId,x:event.clientX,y:event.clientY};handle.setPointerCapture?.(event.pointerId); });
+    bindTiltControls(overlay.querySelector('.stmt-flash-drag'));
+  }
+  function decorateTilt() {
+    const layers=['stmt-flash-foil','stmt-flash-glare'].map(name=>{const layer=document.createElement('span');layer.className=name;layer.setAttribute('aria-hidden','true');return layer;});
+    tilt.prepend(...layers);
+  }
+  function bindTiltControls(handle) {
+    handle.addEventListener('pointerdown',event => { if (!activeQuote || expanded || reduceMotion.matches || lowPower()) {resetTilt();return;} lastPointer={id:event.pointerId,x:event.clientX,y:event.clientY,handle};handle.setPointerCapture?.(event.pointerId); });
     handle.addEventListener('pointermove',event => { if (lastPointer?.id !== event.pointerId) return;queueTilt((event.clientY-lastPointer.y)/12,(event.clientX-lastPointer.x)/12); });
-    const release=() => {lastPointer=null;queueTilt(0,0);};
+    const release=() => resetTilt();
     handle.addEventListener('pointerup',release);handle.addEventListener('pointercancel',release);handle.addEventListener('lostpointercapture',release);
+    handle.addEventListener('blur',release);
     handle.addEventListener('keydown',event => {
+      if(event.key==='Home'){event.preventDefault();resetTilt();return;}
       const delta={ArrowUp:[-3,0],ArrowDown:[3,0],ArrowLeft:[0,-3],ArrowRight:[0,3]}[event.key];
       if (!delta || reduceMotion.matches || lowPower()) return;
       event.preventDefault();queueTilt(lastTilt.x+delta[0],lastTilt.y+delta[1]);
     });
+    handle.addEventListener('keyup',event=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key))resetTilt();});
   }
   function updateMuteButton() {
     const button=overlay.querySelector('[data-flash-mute]');button.textContent=muted?'開啟聲音':'靜音';button.setAttribute('aria-pressed',String(muted));button.setAttribute('aria-label',muted?'目前靜音，按下開啟聲音':'目前有聲音，按下靜音');
@@ -155,7 +165,8 @@
     expanded=Boolean(value);if(!overlay)return;
     overlay.dataset.expanded=String(expanded);
     const button=overlay.querySelector('[data-flash-fullscreen]');button.textContent=expanded?'回到卡片':'放大影片';button.setAttribute('aria-pressed',String(expanded));
-    if(expanded){animation?.cancel();animation=null;cancelAnimationFrame(frame);frame=0;if(tilt)tilt.style.transform='';}
+    resetTilt(true);
+    if(expanded){animation?.cancel();animation=null;}
   }
   async function toggleFullscreen() {
     if(!activeQuote)return;
@@ -192,7 +203,7 @@
     if (activeQuote) await close(false);
     ensureOverlay();stopMedia();generation++;closing=false;
     const token=generation,q=quotes.get(id),m=media.get(id)||normalizeMedia(null,q);
-    activeQuote=q;origin=trigger||document.activeElement;lastTilt={x:0,y:0};tilt.style.transform='';setExpanded(false);
+    activeQuote=q;origin=trigger||document.activeElement;setExpanded(false);
     document.getElementById('statement-flash-title').textContent=q.title;
     document.getElementById('statement-flash-meta').textContent=`${q.date} · ${q.medium==='written'?'本人文章':'口語發言'} · ${m.label}`;
     document.getElementById('statement-flash-quote').textContent=`「${q.quote}」`;
@@ -333,21 +344,48 @@
     if(oldVideo){try{oldVideo.removeAttribute('src');oldVideo.load();}catch{}}
     if(overlay)document.getElementById('statement-flash-player-controls').hidden=true;
   }
+  function foilState(x,y) {
+    const clamp=value=>Math.max(-8,Math.min(8,Number.isFinite(value)?value:0));
+    x=clamp(x);y=clamp(y);
+    const power=Math.min(1,Math.hypot(x,y)/8);
+    return {x,y,foilX:50+y*6.25,foilY:50+x*6.25,power,angle:power?(Math.atan2(x,y)*180/Math.PI+360)%360:0};
+  }
+  function writeFoil(state) {
+    if(!tilt)return;
+    const values={'--foil-x':`${state.foilX.toFixed(2)}%`,'--foil-y':`${state.foilY.toFixed(2)}%`,'--foil-power':state.power.toFixed(3),'--foil-angle':`${state.angle.toFixed(2)}deg`};
+    for(const [name,value] of Object.entries(values))tilt.style.setProperty(name,value);
+    tilt.dataset.foilActive=String(state.power>0);
+  }
+  function resetTilt(stopSensor=false) {
+    cancelAnimationFrame(frame);frame=0;
+    const capture=lastPointer;lastPointer=null;lastTilt={x:0,y:0};
+    try{if(capture?.handle.hasPointerCapture?.(capture.id))capture.handle.releasePointerCapture(capture.id);}catch{}
+    if(tilt){tilt.style.transform='';writeFoil(foilState(0,0));}
+    if(stopSensor&&orientation){window.removeEventListener('deviceorientation',orientation);orientation=null;}
+    if(stopSensor&&overlay){const button=overlay.querySelector('[data-flash-sensor]');button.disabled=expanded;button.textContent='啟用手機感應微傾';button.hidden=reduceMotion.matches||lowPower()||!window.DeviceOrientationEvent;}
+  }
   function queueTilt(x,y) {
-    if(!activeQuote||expanded||reduceMotion.matches||lowPower())return;
-    lastTilt={x:Math.max(-8,Math.min(8,x)),y:Math.max(-8,Math.min(8,y))};
+    if(!activeQuote||closing||expanded||reduceMotion.matches||lowPower()){resetTilt(true);return;}
+    const state=foilState(x,y);lastTilt={x:state.x,y:state.y};
     if(frame)return;
-    frame=requestAnimationFrame(()=>{frame=0;if(activeQuote)tilt.style.transform=`perspective(1200px) rotateX(${-lastTilt.x}deg) rotateY(${lastTilt.y}deg)`;});
+    const token=generation;
+    frame=requestAnimationFrame(()=>{
+      frame=0;
+      if(token!==generation||!activeQuote||closing||expanded||reduceMotion.matches||lowPower()){resetTilt(true);return;}
+      const value=foilState(lastTilt.x,lastTilt.y);
+      tilt.style.transform=`perspective(1200px) rotateX(${-value.x}deg) rotateY(${value.y}deg)`;
+      writeFoil(value);
+    });
   }
   async function enableSensor() {
     const button=overlay.querySelector('[data-flash-sensor]'), token=generation;
     const Sensor=window.DeviceOrientationEvent;
-    if(!Sensor||reduceMotion.matches||lowPower())return;
+    if(!Sensor||expanded||reduceMotion.matches||lowPower()){resetTilt(true);return;}
     button.disabled=true;
     try {
       // Permission is requested only inside this explicit user click handler.
       if(typeof Sensor.requestPermission==='function'&&await Sensor.requestPermission()!=='granted')throw Error('permission_denied');
-      if(token!==generation||!activeQuote)return;
+      if(token!==generation||!activeQuote||expanded||reduceMotion.matches||lowPower())return;
       orientation=event=>{if(Number.isFinite(event.beta)&&Number.isFinite(event.gamma))queueTilt((event.beta-35)/8,event.gamma/8);};
       window.addEventListener('deviceorientation',orientation,{passive:true});button.textContent='手機感應已啟用';
     } catch {button.textContent='感應未啟用，仍可拖曳卡片';button.disabled=false;}
@@ -355,9 +393,7 @@
   async function close(restoreFocus=true) {
     if(!activeQuote||closing)return;
     if(video?.webkitDisplayingFullscreen&&video.webkitExitFullscreen)try{video.webkitExitFullscreen();}catch{}
-    closing=true;generation++;stopMedia();animation?.cancel();animation=null;cancelAnimationFrame(frame);frame=0;lastPointer=null;
-    if(orientation){window.removeEventListener('deviceorientation',orientation);orientation=null;}
-    tilt.style.transform='';
+    closing=true;generation++;stopMedia();animation?.cancel();animation=null;resetTilt(true);
     document.getElementById('statement-flash-media').replaceChildren();
     if(document.fullscreenElement&&overlay.contains(document.fullscreenElement))try{await document.exitFullscreen();}catch{}
     ownsFullscreen=false;setExpanded(false);
@@ -375,6 +411,7 @@
   });
   window.addEventListener('pagehide',()=>{if(activeQuote)close(false);});
   window.addEventListener('storage',event=>{if(registered&&event.key===storageKey()){opened=readCollection(event.newValue);updateCollection();}});
-  reduceMotion.addEventListener('change',()=>{if(!reduceMotion.matches)return;animation?.cancel();animation=null;cancelAnimationFrame(frame);frame=0;if(orientation){window.removeEventListener('deviceorientation',orientation);orientation=null;}if(tilt)tilt.style.transform='';});
-  window.RecordsStatementCards=Object.freeze({version:'v26',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress})});
+  reduceMotion.addEventListener('change',()=>{animation?.cancel();animation=null;resetTilt(true);});
+  navigator.connection?.addEventListener?.('change',()=>{if(overlay)overlay.dataset.lowPower=String(lowPower());if(lowPower()){animation?.cancel();animation=null;}resetTilt(true);});
+  window.RecordsStatementCards=Object.freeze({version:'v27',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress})});
 })();
