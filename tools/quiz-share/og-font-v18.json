@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/notofonts/noto-cjk",
+  "ref": "Sans2.004",
+  "commit": "523d033d6cb47f4a80c58a35753646f5c3608a78",
+  "license": "SIL Open Font License 1.1",
+  "font": {
+    "filename": "NotoSansCJKtc-Bold.otf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Bold.otf",
+    "sha256": "3ee160e5015106e3ec1a394301df54fa9bbbf8a251519984aec5c0abc50840c0"
+  },
+  "licenseFile": {
+    "filename": "OFL-NotoSansCJKtc.txt",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/523d033d6cb47f4a80c58a35753646f5c3608a78/LICENSE",
+    "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+  }
+}
