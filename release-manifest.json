@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v21",
+  "version": "public-release-v22",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7729,
-      "sha256": "6534484e416cb7e46a74836e3dbe40460e4538ffde386343c14e8f06968d717d"
+      "bytes": 8350,
+      "sha256": "af2dc16270576272891eba413d4a3dbf895ad1ba002e3a21d62164395faf5c8e"
     },
     {
       "path": "anchor.js",
@@ -139,8 +139,8 @@
     },
     {
       "path": "data/quiz-share-catalog-v18.json",
-      "bytes": 125492,
-      "sha256": "262ad373030ce3fdb6b138435aac10b29e00d575837015f8e7114d5d60ab5c2e"
+      "bytes": 123913,
+      "sha256": "0fdb0b80b0f948ded9656511c863ae6753d79e3695f64498df77d59178cb3aec"
     },
     {
       "path": "data/quotes.json",
@@ -214,13 +214,13 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 29098,
-      "sha256": "6d36bdfbc43cd0d4fa27bd1407234da6397e96f83e82b404f8dc510995e84c17"
+      "bytes": 29267,
+      "sha256": "ffaae57bce9673a9a1207c71b17f5313b0825e74ae2d1205a4346399e93bb93d"
     },
     {
       "path": "game/quiz-share-core.js",
-      "bytes": 10549,
-      "sha256": "f339367197d6c7bbd4363364571f762973f0465411605a29dfddb5bc73ff01b4"
+      "bytes": 11087,
+      "sha256": "ded4b68f06cb840b0e3c753ddd6e8d4336fc75b59ba490dabd8b6bc5078260a6"
     },
     {
       "path": "game/quiz-share-landing.js",
@@ -239,8 +239,8 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5330,
-      "sha256": "78b8c07f4b73392590aa42cef334ba795f4aa9f15736de2e2c7ac2bc7831e52e"
+      "bytes": 5327,
+      "sha256": "3a3cc4d63825141041823e5a82d8b82f89da7b687645fd81270d3c084c3d94c4"
     },
     {
       "path": "game/red-notes/index.html",
@@ -269,8 +269,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26574,
-      "sha256": "f3dd49745b4da104b8df7411f5f21a254fb6e49a00b15cf159456043d95c2daf"
+      "bytes": 26576,
+      "sha256": "0e9e54e44ee8aa7368b17bd8dc2a7ade018266df113be96aad004c054edb2b6d"
     },
     {
       "path": "leaderboard.css",
@@ -329,8 +329,8 @@
     },
     {
       "path": "statements.js",
-      "bytes": 11866,
-      "sha256": "7520afe7366be2d311a6b1649d6e7e4a7ec33d6826b859bc58fc34f0e3e2f006"
+      "bytes": 12275,
+      "sha256": "126e7d43f23558e1ac552f3076f7cb31b59198dd21f407d7a3b567810c8fb0a4"
     },
     {
       "path": "style.css",
@@ -384,10 +384,24 @@
       "score",
       "quote"
     ],
-    "eligibleQuotes": 74,
+    "eligibleQuotes": 73,
     "roundSize": 6,
-    "cards": 1036,
+    "cards": 1022,
     "scoreVerification": "player-self-reported",
     "runtimeServiceRequired": false
+  },
+  "quoteCountsScope": "raw-archive-before-editorial-exclusions",
+  "activeQuizCatalog": {
+    "quoteCount": 73,
+    "events": 67,
+    "pre": 64,
+    "post": 9,
+    "roundSize": 6,
+    "cards": 1022,
+    "advancedSegments": 57,
+    "withdrawnQuoteIds": [
+      "legislature-hypocrite-152732"
+    ],
+    "sourceVersion": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
   }
 }

@@ -7,6 +7,7 @@
  const normalize=s=>String(s??'').normalize('NFKC').toLocaleLowerCase('zh-TW');
  const spoken=q=>q.medium!=='written';
  const before=q=>(q.eventDate||q.date).slice(0,10)<'2026-05-13';
+ const eligible=q=>window.RecordsQuizShareCore?.isQuizEligible?window.RecordsQuizShareCore.isQuizEligible(q):q.quizEligible!==false&&q.id!=='legislature-hypocrite-152732';
  let data=null,period='pre',topic='all',medium='all',query='',sort='editorial',shown=12,advancedShown=12;
  root.innerHTML=`<div class="wrap">
   <div class="section-heading"><div><p class="section-number">原話檔案 ／ 正式提名前，先看這些</p><h2>溫和形象之外，<br>回頭看他的原話。</h2></div><p class="section-deck">姓名挖苦、智商批評、強烈反問。<br>按下來源，讀完整前後文。</p></div>
@@ -64,11 +65,11 @@
  function updateMore(id,count,limit){const el=document.getElementById(id);el.hidden=limit>=count;el.textContent=`再顯示 ${Math.min(12,Math.max(0,count-limit))} 則 ↓`;}
  function render(){
   const rows=data.quotes.filter(matches).sort(compare);
-  const selected=rows.filter(q=>q.quizEligible!==false),advanced=rows.filter(q=>q.quizEligible===false);
+  const selected=rows.filter(eligible),advanced=rows.filter(q=>!eligible(q));
   const events=new Set(selected.map(q=>q.eventId||q.id));
   document.getElementById('stmt-count').textContent=`精選 ${selected.length} 則，來自 ${events.size} 個事件／文章；顯示 ${Math.min(shown,selected.length)} 則。${period==='pre'?'均早於正式提名。':period==='post'?'均為正式提名起。':'含提名前後。'}`;
   document.getElementById('stmt-list').innerHTML=selected.length?selected.slice(0,shown).map(q=>card(q)).join(''):'<p class="empty-state">精選中沒有符合紀錄；可改條件，或展開下方進階資料。</p>';
-  document.getElementById('stmt-advanced-count').textContent=`${advanced.length} 則符合 · 全庫 ${data.quotes.filter(q=>q.quizEligible===false).length} 則`;
+  document.getElementById('stmt-advanced-count').textContent=`${advanced.length} 則符合 · 全庫 ${data.quotes.filter(q=>!eligible(q)).length} 則`;
   document.getElementById('stmt-advanced-list').innerHTML=advanced.length?advanced.slice(0,advancedShown).map(q=>card(q,true)).join(''):'<p class="empty-state">進階資料中沒有符合紀錄。</p>';
   updateMore('stmt-more',selected.length,shown);updateMore('stmt-advanced-more',advanced.length,advancedShown);
  }
@@ -79,9 +80,9 @@
  }
  fetch('./data/quotes.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('quotes');return r.json();}).then(d=>{
   data=d;
-  const selected=d.quotes.filter(q=>q.quizEligible!==false).length;
+  const selected=d.quotes.filter(eligible).length;
   document.getElementById('stmt-total').textContent=`全庫 ${d.quotes.length} 則 · ${new Set(d.quotes.map(q=>q.eventId||q.id)).size} 個事件／文章 · 精選猜題 ${selected} 則 · 進階 ${d.quotes.length-selected} 則`;
-  document.getElementById('stmt-selection').textContent=d.selection;
+  document.getElementById('stmt-selection').textContent=`目前精選與猜題 ${selected} 則，進階資料 ${d.quotes.length-selected} 則。已下架題目不再出題，也不提供分享卡；原始來源仍保留供查核。每輪優先抽出尚未看過、來自不同事件的片段；口語與書面分開標示，未核實的時間點不編造。`;
   const topics=[...new Set(d.quotes.map(q=>q.topic||'政治言論'))];
   document.getElementById('stmt-topic').innerHTML='<option value="all">所有主題</option>'+topics.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('');
   render();pairs();
