@@ -51,7 +51,7 @@
       setText('policy-chart','政策資料暫時無法讀取，可點下方官方來源查看。');
     }
     if(results[2].status==='fulfilled')state.quotes=list(results[2].value.quotes);
-    buildGames();
+    await buildGames();
   }
 
   function prepareData() {
@@ -79,7 +79,7 @@
     renderCommitteeRoleTable();
     renderAttendance();
     populateFilters();
-    updateKeyword();
+    
     renderBills();
     setText('method-period',`查詢起訖：${m.start || '未提供'} 至 ${m.end || '未提供'}。列名提案可見日期：${m.firstProposal || '未提供'} 至 ${m.lastProposal || '未提供'}。${m.latestCosign ? `連署案最晚日期：${m.latestCosign}。` : ''} ${m.unit || ''} ${m.coverageNote || ''}`);
     setText('retrieved-at',`本次彙整時間：${m.retrievedAt ? new Date(m.retrievedAt).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false}) + '（台北時間）' : '未提供'}。`);
@@ -91,7 +91,7 @@
     const rows=scopedBills(),label=state.scopeRole?roleNames[state.scopeRole]:'全部角色';
     setText('scope-name',label+' '+fmt(rows.length)+' 件');setText('status-title',label+' '+fmt(rows.length)+' 件的審議進度');
     if($('scope-filter'))$('scope-filter').value=state.scopeRole;
-    renderBars('topic-chart',state.data.topics,'topic');renderBars('committee-chart',state.data.committees,'committee');renderProcedure();populateFilters();updateKeyword();
+    renderBars('topic-chart',state.data.topics,'topic');renderBars('committee-chart',state.data.committees,'committee');renderProcedure();populateFilters();
   }
 
   function renderDonut(t) {
@@ -209,31 +209,6 @@
     definitions.forEach(([id,rows]) => { const value=$(id).value;$(id).innerHTML='<option value="">'+({ 'topic-filter':'所有主題','committee-filter':'所有委員會','status-filter':'所有進度'}[id])+'</option>'+rows.map(row => `<option value="${esc(row.value)}">${esc(row.label)}</option>`).join('');$(id).value=value; });
   }
 
-  function keywordCounts(term, role) {
-    let occurrences = 0, bills = 0;
-    for (const bill of state.data?.bills || []) {
-      if (role && bill.role !== role) continue;
-      const count = countWord(keywordText.get(bill.id) || '',term);
-      if (count) { occurrences += count; bills++; }
-    }
-    return {occurrences,bills};
-  }
-
-  function updateKeyword() {
-    if (!state.data) return;
-    const previousKeyword = state.keyword;
-    state.keyword = normalize($('keyword-input').value.trim());
-    const word = state.keyword, counts = keywordCounts(word,state.scopeRole), primary = keywordCounts(word,'primary'), k = state.data.keywords || {};
-    setText('keyword-count',word ? fmt(counts.occurrences) : '—');
-    setText('keyword-bills',word ? fmt(counts.bills) : '—');
-    const missing = k.coverage || {}, missingReasons = scopedBills().filter(b=>b.hasReason===false).length, missingText = scopedBills().filter(b=>b.hasAmendmentText===false).length;
-    const scope = `目前為${state.scopeRole?roleNames[state.scopeRole]:'全部角色'} ${scopedBills().length} 件。${k.label || '議案名稱、案由與已收錄文字'}。${k.scope || ''}${missingReasons || missingText ? ` 已知 ${missingReasons} 案缺案由、${missingText} 案缺修正表文字，文本不完整。` : ''}${word ? `主提案範圍：「${word}」${fmt(primary.occurrences)} 次、${fmt(primary.bills)}／${fmt(state.data.totals?.primary)} 案。` : '請輸入字詞開始計算。'}`;
-    setText('keyword-scope',scope);
-    $('keyword-explore').disabled = !word;
-    document.querySelectorAll('[data-keyword]').forEach(button => button.classList.toggle('active',button.dataset.keyword === word));
-    if (previousKeyword !== word && !state.exactKeyword) renderBills();
-  }
-
   function setFilter(key,value,scroll) {
     if (scroll) {
       Object.assign(state,{search:'',role:state.scopeRole,topic:'',committee:'',status:'',exactKeyword:''});
@@ -296,97 +271,19 @@
     }));
   }
 
-  function gameQuotes() {
-    return state.quotes.filter(q=>q.quizEligible!==false).filter(q=>{
-      const date=String(q.eventDate || q.date).slice(0,10);
-      return state.gamePeriod==='all' || (state.gamePeriod==='pre' ? date<'2026-05-13' : date>='2026-05-13');
-    });
-  }
-
-  function quoteMedium(q) { return q.medium==='written' ? '書面文章' : '口語發言'; }
-
-  const QUIZ_ROUND_SIZE=6;
-  const quizSeenKey='record-quiz-seen-v1';
-  let quizSeen=new Set();
-  try{const stored=JSON.parse(localStorage.getItem(quizSeenKey)||'[]');if(Array.isArray(stored))quizSeen=new Set(stored.filter(x=>typeof x==='string'));}catch{}
-  function shuffled(items){const out=[...items];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
-  function poolInfo(){
-    const pool=gameQuotes(),period={pre:'正式提名前',post:'正式提名起',all:'所有時期'}[state.gamePeriod],seen=pool.filter(q=>quizSeen.has(q.id)).length;
-    setText('game-period-note',period+'：'+pool.length+'段、'+new Set(pool.map(q=>q.eventId||q.id)).size+'個事件／文章。提名切點2026-05-13。');
-    setText('quiz-pool-count',pool.length);setText('quiz-seen-count',seen+' / '+pool.length);
-    setText('quiz-round-note',state.quizNewCount?'本輪'+state.quiz.length+'題，抽到'+state.quizNewCount+'題未看過的新題。優先避開上一輪；記錄只存在這個瀏覽器。':'本期題目已全數看過；本輪重抽順序，並盡量避開上一輪。');
-  }
-  function buildGames(){
-    const quotes=gameQuotes();
-    setText('quote-selection','本範圍精選'+quotes.length+'段本人言論／文章，全部答案為「是」。精選集並非隨機言論樣本，不能推算平日風格。口語與書面分別提問，官方逐字稿與媒體引述分別標示。');
-    resetQuiz();
-  }
-  function resetQuiz(){
-    const pool=gameQuotes(),previous=new Set(state.quiz.map(q=>q.id));
-    const fresh=shuffled(pool.filter(q=>!quizSeen.has(q.id)));
-    const older=shuffled(pool.filter(q=>quizSeen.has(q.id)&&!previous.has(q.id)));
-    const last=shuffled(pool.filter(q=>quizSeen.has(q.id)&&previous.has(q.id)));
-    const chosen=[],chosenEvents=new Set();
-    const roundSize=Math.min(QUIZ_ROUND_SIZE,new Set(pool.map(q=>q.eventId||q.id)).size);
-    for(const q of [...fresh,...older,...last]){
-      const eventId=q.eventId||q.id;
-      if(chosenEvents.has(eventId))continue;
-      chosen.push(q);chosenEvents.add(eventId);
-      if(chosen.length===roundSize)break;
+  let quizEngineLoading;
+  async function buildGames() {
+    if (!document.getElementById('quiz-card')) return;
+    if (!window.RecordsQuiz) {
+      quizEngineLoading ||= new Promise((resolve,reject) => {
+        const script=document.createElement('script');
+        script.src=new URL('./game/quiz-engine.js',location.href).href;
+        script.onload=resolve;script.onerror=()=>reject(new Error('猜題介面暫時無法讀取'));
+        document.head.append(script);
+      });
+      await quizEngineLoading;
     }
-    state.quizNewCount=chosen.filter(q=>!quizSeen.has(q.id)).length;
-    state.quiz=shuffled(chosen).map(q=>({id:q.id,statement:'「'+q.quote+'」\n這是沈伯洋'+(q.medium==='written'?'寫的':'說的')+'嗎？',answer:true,source:q.url,frontContext:q.frontContext||q.context,meta:q.date+' · '+quoteMedium(q),explanation:q.date+' · '+quoteMedium(q)+' · '+q.venue+'。'+q.context+'〔'+q.sourceType+'〕',limit:q.inferenceLimit||'',locator:q.evidenceLocator||''}));
-    state.quizIndex=0;state.quizCorrect=0;state.quizAnswered=false;
-    $('quiz-restart').hidden=!state.quiz.length;renderQuiz();
-  }
-
-  function renderQuiz() {
-    const question = state.quiz[state.quizIndex];
-    $('quiz-feedback').hidden=true;
-    $('quiz-next').hidden=true;
-    $('quiz-controls').hidden=false;
-    $('quiz-card').style.transform='';
-    $('quiz-card').style.opacity='';
-    $('quiz-card').querySelectorAll('.swipe-stamp').forEach(stamp => stamp.style.opacity='0');
-    state.quizAnswered=false;
-    setText('quiz-score',`${state.quizCorrect*10} ／ ${state.quiz.length*10} 分`);
-    if (!question) {
-      poolInfo();$('quiz-card').dataset.questionId='';
-      setText('quiz-context','');
-      setText('quiz-meta','');
-      setText('quiz-progress',state.quiz.length ? '本輪完成' : '題庫未載入');
-      setText('quiz-question',state.quiz.length ? `完成 ${state.quiz.length} 次核對，答對 ${state.quizCorrect} 題。` : '題庫暫時無法讀取，請重新整理後再試。');
-      $('quiz-card').querySelector('.quiz-foot').textContent=state.quiz.length ? '記住來源，比記住答案更有用。' : '每個答案都需要可核對的來源。';
-      $('quiz-controls').hidden=true;
-      $('quiz-restart').hidden=!state.quiz.length;
-      return;
-    }
-    quizSeen.add(question.id);try{localStorage.setItem(quizSeenKey,JSON.stringify([...quizSeen].slice(-800)));}catch{}
-    poolInfo();
-    $('quiz-card').dataset.questionId=question.id;
-    setText('quiz-progress',`${state.quizIndex+1} ／ ${state.quiz.length} 題`);
-    setText('quiz-meta',question.meta);
-    setText('quiz-context',question.frontContext || '請連同回答後提供的場合與上下文核對。');
-    setText('quiz-question',question.statement);
-    $('quiz-card').querySelector('.quiz-foot').textContent='左滑否 ／ 右滑是 ／ 鍵盤方向鍵';
-  }
-
-  function answerQuiz(answer) {
-    if (state.quizAnswered || !state.quiz[state.quizIndex]) return;
-    const question = state.quiz[state.quizIndex], correct = answer === question.answer;
-    state.quizAnswered=true;
-    if (correct) state.quizCorrect++;
-    const feedback=$('quiz-feedback');
-    feedback.hidden=false;
-    feedback.classList.toggle('incorrect',!correct);
-    feedback.innerHTML=`<strong>${correct ? '✓ 核對正確' : '再看一次證據'} · 答案是「${question.answer ? '是' : '否'}」</strong><p>${esc(question.explanation)}</p>${question.locator ? `<p><b>查核位置：</b>${esc(question.locator)}</p>` : ''}${question.limit ? `<p><b>判讀範圍：</b>${esc(question.limit)}</p>` : ''}<a href="${esc(safeUrl(question.source) === '#method' && question.source?.startsWith('#') ? question.source : safeUrl(question.source))}" ${question.source?.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>查看原文與上下文 ↗</a>`;
-    setText('quiz-score',`${state.quizCorrect*10} ／ ${state.quiz.length*10} 分`);
-    $('quiz-controls').hidden=true;
-    $('quiz-next').hidden=false;
-    setText('quiz-next',state.quizIndex === state.quiz.length-1 ? '看本輪結果 →' : '下一題 →');
-    $('quiz-card').style.transform=`rotate(${answer ? 2 : -2}deg)`;
-    $('quiz-card').querySelector(answer ? '.stamp-yes' : '.stamp-no').style.opacity='.85';
-    announce(`${correct ? '答對' : '答案不同'}。${question.answer ? '是' : '否'}。${question.explanation}`);
+    window.RecordsQuiz.mount(document,{quotes:state.quotes});
   }
 
   function bindEvents() {
@@ -394,27 +291,11 @@
     $('primary-axis')?.addEventListener('change',e=>{state.axis=e.target.value;renderPrimaryTopics();});
     $('open-advanced')?.addEventListener('click',()=>{$('advanced-information').open=true;});
     document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>setFilter('role',button.dataset.role,true)));
-    document.querySelectorAll('[data-keyword]').forEach(button=>button.addEventListener('click',()=>{$('keyword-input').value=button.dataset.keyword;updateKeyword();}));
-    $('keyword-form').addEventListener('submit',event=>{event.preventDefault();updateKeyword();});
-    $('keyword-input').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(updateKeyword,180);});
-    $('keyword-explore').addEventListener('click',()=>{Object.assign(state,{exactKeyword:state.keyword,search:'',role:state.scopeRole,topic:'',committee:'',status:'',page:1});['bill-search','role-filter','topic-filter','committee-filter','status-filter'].forEach(id=>$(id).value='');$('role-filter').value=state.role;renderBills();$('explorer').scrollIntoView({behavior:'smooth'});});
     $('bill-search').addEventListener('input',event=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.search=event.target.value;state.page=1;renderBills();},200);});
     [['role-filter','role'],['topic-filter','topic'],['committee-filter','committee'],['status-filter','status'],['sort-select','sort']].forEach(([id,key])=>$(id).addEventListener('change',event=>setFilter(key,event.target.value,false)));
     $('reset-filters').addEventListener('click',()=>{Object.assign(state,{page:1,search:'',role:'primary',scopeRole:'primary',topic:'',committee:'',status:'',exactKeyword:'',sort:'date-desc'});['bill-search','role-filter','topic-filter','committee-filter','status-filter'].forEach(id=>$(id).value='');$('sort-select').value='date-desc';$('role-filter').value='primary';renderScope();renderBills();});
     [['prev-page',-1],['next-page',1]].forEach(([id,direction])=>$(id).addEventListener('click',()=>{state.page+=direction;renderBills();$('explorer').scrollIntoView({behavior:'smooth'});}));
-    $('quiz-no').addEventListener('click',()=>answerQuiz(false));
-    $('game-period').addEventListener('change',event=>{state.gamePeriod=event.target.value;buildGames();});
-    $('quiz-yes').addEventListener('click',()=>answerQuiz(true));
-    $('quiz-next').addEventListener('click',()=>{state.quizIndex++;renderQuiz();$('quiz-card').focus({preventScroll:true});});
-    $('quiz-restart').addEventListener('click',resetQuiz);
-    $('quiz-card').addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();answerQuiz(event.key==='ArrowRight');}});
-    let pointerStart=null;
-    const card=$('quiz-card');
-    card.addEventListener('pointerdown',event=>{if(state.quizAnswered||!state.quiz[state.quizIndex]||event.target.closest('a,button'))return;pointerStart={x:event.clientX,y:event.clientY,id:event.pointerId};card.setPointerCapture(event.pointerId);});
-    card.addEventListener('pointermove',event=>{if(!pointerStart)return;const dx=event.clientX-pointerStart.x,dy=event.clientY-pointerStart.y;if(Math.abs(dy)>60&&Math.abs(dy)>Math.abs(dx)){pointerStart=null;card.style.transform='';return;}card.style.transform=`translateX(${dx*.55}px) rotate(${dx/22}deg)`;card.querySelector('.stamp-yes').style.opacity=String(Math.max(0,Math.min(dx/100,1)));card.querySelector('.stamp-no').style.opacity=String(Math.max(0,Math.min(-dx/100,1)));});
-    const endPointer=event=>{if(!pointerStart)return;const dx=event.clientX-pointerStart.x;pointerStart=null;card.style.transform='';card.querySelectorAll('.swipe-stamp').forEach(stamp=>stamp.style.opacity='0');if(Math.abs(dx)>65)answerQuiz(dx>0);};
-    card.addEventListener('pointerup',endPointer);
-    card.addEventListener('pointercancel',()=>{pointerStart=null;card.style.transform='';card.querySelectorAll('.swipe-stamp').forEach(stamp=>stamp.style.opacity='0');});
+
   }
 
   init().catch(error=>{console.error('資料觀測頁初始化失敗',error);$('load-error').hidden=false;$('load-error').textContent='頁面尚未完整載入。請重新整理，或下載原始資料核對。';}).finally(()=>{document.dispatchEvent(new CustomEvent('records:ready',{detail:'app'}));});

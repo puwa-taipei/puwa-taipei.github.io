@@ -1,11 +1,11 @@
 (() => {
  'use strict';
  const root=document.getElementById('game3d');if(!root)return;
- root.innerHTML=`<div class="section-heading"><div><p class="section-number">GAME 03 ／ 紅紙鈔・掉面具</p><h2>紅紙鈔<br>掉面具。</h2></div><p class="section-deck">抓一疊道具紙鈔，往前撒！<br>40 秒，看看你能撒出幾連擊。</p></div>
+ root.innerHTML=`<div class="section-heading"><div><p class="section-number">GAME 02 ／ 紅紙鈔・掉面具</p><h2>紅紙鈔<br>掉面具。</h2></div><p class="section-deck">抓一疊道具紙鈔，往前撒！<br>40 秒，看看你能撒出幾連擊。</p></div>
  <div class="g3-arcade"><div class="g3-stage"><canvas id="g3-canvas" tabindex="0" aria-label="紅紙鈔掉面具。方向鍵或 WASD 移動落點，按住空白鍵撒道具紙鈔；滑鼠或觸控移動落點並撒鈔，Esc 暫停。"></canvas>
  <div class="g3-hud" aria-live="off"><div class="g3-scorebox"><small>SCORE</small><strong id="g3-score">000000</strong></div><div class="g3-wavebox"><small id="g3-progress">WAVE 01</small><strong id="g3-combo">READY?</strong></div><div class="g3-timebox"><small>TIME</small><strong id="g3-time">40.0</strong></div></div>
  <div class="g3-livebar"><span>PAPER NOTE ARCADE</span><span id="g3-best">BEST 000000</span></div><div id="g3-overlay"><div class="g3-overlay-inner"><p class="g3-kicker" id="g3-kicker">GRAB A HANDFUL</p><h3 id="g3-overlay-title">笑容滿面。<br><em>撒出問號！</em></h3><p id="g3-overlay-copy">紅紙鈔轉啊轉，面具飛啊飛。<br>按住連撒，讓問號一張張飛到笑容前。</p><div class="g3-intro-keys"><span>← → / WASD 移動落點</span><span>SPACE 撒鈔</span><span>點按／拖曳也能撒</span></div><button id="g3-start" type="button">開始撒鈔 <span>▶</span></button><p class="g3-overlay-note">40 秒一局 · 音效可自由開關</p></div></div>
- <div class="g3-retro-corner" aria-hidden="true">ARCADE / 03</div></div>
+ <div class="g3-retro-corner" aria-hidden="true">ARCADE / 02</div></div>
  <div class="g3-controlbar"><div class="g3-maincontrols"><button id="g3-toggle" type="button">暫停 ⏸</button><button id="g3-reset" type="button">重新開局 ↻</button><button id="g3-sound" type="button" aria-pressed="false">音效：關</button></div><p>滑鼠移動落點／按住撒鈔 · 方向鍵移動 · 空白鍵撒鈔 · Esc 暫停</p></div>
  <div class="g3-touch"><div class="g3-direction"><button type="button" data-g3-move="left" aria-label="向左移動落點">◀</button><button type="button" data-g3-move="right" aria-label="向右移動落點">▶</button></div><span>拖曳畫面選落點</span><button id="g3-fire" type="button">撒鈔！ <small>HOLD TO TOSS</small></button></div></div>
  <p id="g3-notice" class="small-note">紙鈔與表情為諷刺道具，不代表實際金流或犯罪認定。遊戲角色與命中結果不代表立法資料或原話的查證結論。</p>`;
@@ -14,6 +14,10 @@
  const TAU=Math.PI*2,DURATION=40,keys=new Set(),enemies=[],particles=[],rings=[],shots=[],floaters=[],stars=Array.from({length:66},()=>({x:Math.random(),y:Math.random()*.55,s:.4+Math.random()*1.3}));
  let w=1000,h=600,dpr=1,last=0,visualTime=0,elapsed=0,spawnClock=0,fireClock=0,score=0,combo=0,maxCombo=0,hits=0,missed=0,best=0,running=false,started=false,finished=false,fireHeld=false,pointerDown=false,sound=false,audio=null,playerX=0,playerY=0,shake=0,flash=0,toss=0,aim={x:.5,y:.56},lastHud=-1;
  try{best=Number(localStorage.getItem('smile-breaker-best')||0)||0;}catch{}
+ const RUN_VERSION='red-notes-v2';
+ let runId='',runStartedAt=0,totalShots=0,targetSequence=0,pauseCount=0;
+ const hitEvents=[],shotEvents=[];
+ const dispatch=(name,detail)=>document.dispatchEvent(new CustomEvent(name,{detail:{game:'red-notes',version:RUN_VERSION,...detail}}));
  const rand=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
  function rounded(x,y,width,height,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,width,height,r);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
  function glowLine(points,color,width=2,blur=10){ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.shadowColor=color;ctx.shadowBlur=blur;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.restore();}
@@ -21,11 +25,11 @@
  function beep(freq=300,duration=.08,type='square',volume=.035){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const osc=audio.createOscillator(),gain=audio.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audio.currentTime);osc.frequency.exponentialRampToValueAtTime(freq*.55,audio.currentTime+duration);gain.gain.setValueAtTime(volume,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);osc.connect(gain);gain.connect(audio.destination);osc.start();osc.stop(audio.currentTime+duration);}catch{}}
  function updateHud(force=false){if(!force&&Math.floor(elapsed*10)===lastHud)return;lastHud=Math.floor(elapsed*10);$('score').textContent=String(score).padStart(6,'0');$('time').textContent=Math.max(0,DURATION-elapsed).toFixed(1);$('time').classList.toggle('g3-urgent',elapsed>30);$('progress').textContent='WAVE '+String(Math.min(4,Math.floor(elapsed/10)+1)).padStart(2,'0');$('combo').textContent=combo>1?`${combo} COMBO!`:combo===1?'NICE TOSS!':started?'TOSS A QUESTION':'READY?';$('combo').classList.toggle('g3-hot',combo>=5);$('best').textContent='BEST '+String(best).padStart(6,'0');}
  function overlay(mode){$('overlay').hidden=false;const ending=mode==='finish',pause=mode==='pause';$('kicker').textContent=ending?'TIME UP / PLAY AGAIN':pause?'TAKE A BREATH':'GRAB A HANDFUL';$('overlay-title').innerHTML=ending?`<span class="g3-result-score">${score.toLocaleString()}</span><br><em>${maxCombo>=10?'連擊高手！':hits>=15?'面具收割機！':'再來一局？'}</em>`:pause?'暫停一下。<br><em>等等繼續撒鈔。</em>':'笑容滿面。<br><em>撒出問號！</em>';$('overlay-copy').textContent=ending?`命中 ${hits} 個面具 · 最高 ${maxCombo} 連擊 · 擦身而過 ${missed} 次` :pause?'你的位置與分數已保留。': '紅紙鈔轉啊轉，面具飛啊飛。按住連撒，讓問號一張張飛到笑容前。';$('start').innerHTML=ending?'再玩一次 <span>↻</span>':pause?'繼續撒鈔 <span>▶</span>':'開始撒鈔 <span>▶</span>';$('toggle').textContent=pause?'繼續 ▶':'暫停 ⏸';}
- function play(){if(!started||finished)reset();running=true;started=true;finished=false;$('overlay').hidden=true;$('toggle').textContent='暫停 ⏸';canvas.focus({preventScroll:true});if(sound)beep(600,.15,'triangle');}
- function pause(){if(!running)return;running=false;keys.clear();fireHeld=false;pointerDown=false;overlay('pause');}
- function reset(){enemies.length=particles.length=rings.length=shots.length=floaters.length=0;elapsed=0;spawnClock=.02;fireClock=0;score=combo=maxCombo=hits=missed=0;playerX=playerY=0;shake=flash=toss=0;aim={x:.5,y:.56};running=false;started=false;finished=false;keys.clear();fireHeld=false;pointerDown=false;lastHud=-1;updateHud(true);overlay('intro');}
- function finish(){running=false;finished=true;fireHeld=false;pointerDown=false;keys.clear();if(score>best){best=score;try{localStorage.setItem('smile-breaker-best',String(best));}catch{}}updateHud(true);overlay('finish');beep(180,.25,'triangle');}
- function spawn(){const wave=Math.floor(elapsed/10),initial=hits===0&&elapsed<1.5&&enemies.length===0;enemies.push({lane:initial?0:rand(-.91,.91),z:initial?.53:1.05,phase:rand(0,TAU),speed:rand(.13,.19)+wave*.024,mask:true,hit:0,angle:0,vx:0,variant:Math.random()>.5?0:1,tag:Math.floor(Math.random()*3)});}
+ function play(){const fresh=!started||finished;if(fresh){reset();runId=globalThis.crypto?.randomUUID?.()||('run-'+Date.now()+'-'+Math.random().toString(36).slice(2));runStartedAt=Date.now();dispatch('arcade:start',{runId,durationMs:DURATION*1000,startedAt:new Date(runStartedAt).toISOString()});}running=true;started=true;finished=false;$('overlay').hidden=true;$('toggle').textContent='暫停 ⏸';canvas.focus({preventScroll:true});if(sound)beep(600,.15,'triangle');}
+ function pause(){if(!running)return;pauseCount++;running=false;keys.clear();fireHeld=false;pointerDown=false;overlay('pause');}
+ function reset(){hitEvents.length=shotEvents.length=0;totalShots=targetSequence=pauseCount=0;runId='';runStartedAt=0;enemies.length=particles.length=rings.length=shots.length=floaters.length=0;elapsed=0;spawnClock=.02;fireClock=0;score=combo=maxCombo=hits=missed=0;playerX=playerY=0;shake=flash=toss=0;aim={x:.5,y:.56};running=false;started=false;finished=false;keys.clear();fireHeld=false;pointerDown=false;lastHud=-1;updateHud(true);overlay('intro');}
+ function finish(){if(finished)return;elapsed=DURATION;running=false;finished=true;fireHeld=false;pointerDown=false;keys.clear();if(score>best){best=score;try{localStorage.setItem('smile-breaker-best',String(best));}catch{}}updateHud(true);overlay('finish');beep(180,.25,'triangle');dispatch('arcade:finish',{runId,score,hits,shots:totalShots,maxCombo,missed,durationMs:Math.round(elapsed*1000),wallDurationMs:Math.max(0,Date.now()-runStartedAt),pauseCount,startedAt:new Date(runStartedAt).toISOString(),endedAt:new Date().toISOString(),hitEvents:hitEvents.map(e=>({...e})),shotEvents:shotEvents.map(e=>({...e}))});}
+ function spawn(){const wave=Math.floor(elapsed/10),initial=hits===0&&elapsed<1.5&&enemies.length===0;enemies.push({id:++targetSequence,lane:initial?0:rand(-.91,.91),z:initial?.53:1.05,phase:rand(0,TAU),speed:rand(.13,.19)+wave*.024,mask:true,hit:0,angle:0,vx:0,variant:Math.random()>.5?0:1,tag:Math.floor(Math.random()*3)});}
  function project(e){const z=clamp(e.z,0,1.15),near=1-clamp(z,0,1),scale=(.18+near*1.5)*Math.min(w/720,h/590);return{x:w*.5+e.lane*w*(.15+near*.42)-playerX*w*.075*(.2+near),y:h*.43+Math.pow(near,1.4)*h*.58+Math.sin(e.phase+visualTime*3)*5*scale,scale};}
  function drawGlasses(y,color='#292c35'){
   ctx.save();ctx.strokeStyle=color;ctx.lineWidth=2.6;
@@ -93,10 +97,10 @@
   if(hit)text(e.tag===0?'！':e.tag===1?'!!':'?!',54,-222,32,'#ffe278');ctx.restore();
   if(!hit&&!demo){ctx.save();ctx.globalAlpha=.25+Math.sin(visualTime*4+e.phase)*.08;ctx.strokeStyle='#50ffd6';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(p.x,p.y+14*s,51*s,13*s,0,0,TAU);ctx.stroke();ctx.restore();}
  }
- function hitTarget(e){
+ function hitTarget(e,shotId){
   if(!e||!enemies.includes(e)||!e.mask||e.hit!==0)return;
   const p=project(e);e.mask=false;e.hit=.001;e.vx=(p.x-w/2)*.002+rand(-.5,.5);e.angle=rand(-.14,.14);hits++;combo++;maxCombo=Math.max(maxCombo,combo);
-  const multiplier=Math.min(5,1+Math.floor(combo/4)),earned=100*multiplier;score+=earned;shake=3+Math.min(5,combo*.3);flash=.075;
+  const multiplier=Math.min(5,1+Math.floor(combo/4)),earned=100*multiplier;score+=earned;hitEvents.push({t:Math.round(elapsed*1000),delta:earned,combo,score,shotId,targetId:e.id});shake=3+Math.min(5,combo*.3);flash=.075;
   floaters.push({x:p.x,y:p.y-215*p.scale,text:`+${earned}`,life:1,color:combo>=5?'#ffe36f':'#ffd9c3'});
   if(combo>1&&combo%5===0)floaters.push({x:w*.5,y:h*.32,text:`${combo} COMBO!`,life:1.3,color:'#ffd075',big:true});
   particles.push({type:'mask',x:p.x,y:p.y-166*p.scale,vx:(Math.random()<.5?-1:1)*rand(250,370),vy:-275,rot:0,spin:rand(-5,5),scale:p.scale,life:1.05});
@@ -108,14 +112,15 @@
   const x=aim.x*w,y=aim.y*h;
   const choices=enemies.filter(e=>e.mask&&e.hit===0).map(e=>{const p=project(e),rx=Math.max(34,65*p.scale),ry=Math.max(40,119*p.scale);return{e,d:Math.hypot((x-p.x)/rx,(y-p.y+132*p.scale)/ry)};}).filter(v=>v.d<1.26).sort((a,b)=>a.e.z-b.e.z||a.d-b.d);
   // Real travelling paper replaces the old instant beam. Only the centre note resolves a hit.
-  shots.push({sx:w*.5+playerX*w*.24,sy:h*.93,x,y,age:0,duration:.3+Math.hypot(x-w*.5,y-h*.93)/Math.max(w,h)*.17,target:choices[0]?.e,seed:rand(0,TAU)});
+  totalShots++;shotEvents.push({id:totalShots,t:Math.round(elapsed*1000),x:Number(aim.x.toFixed(4)),y:Number(aim.y.toFixed(4)),targetId:choices[0]?.e.id||null});
+  shots.push({id:totalShots,sx:w*.5+playerX*w*.24,sy:h*.93,x,y,age:0,duration:.3+Math.hypot(x-w*.5,y-h*.93)/Math.max(w,h)*.17,target:choices[0]?.e,seed:rand(0,TAU)});
   beep(340,.045,'triangle',.022);
  }
  function simulation(dt){elapsed+=dt;fireClock=Math.max(0,fireClock-dt);spawnClock-=dt;const wave=Math.floor(elapsed/10);if(spawnClock<=0){spawn();spawnClock=Math.max(.39,.95-wave*.15)+rand(0,.15);}const dx=Number(keys.has('ArrowRight')||keys.has('KeyD'))-Number(keys.has('ArrowLeft')||keys.has('KeyA')),dy=Number(keys.has('ArrowDown')||keys.has('KeyS'))-Number(keys.has('ArrowUp')||keys.has('KeyW'));if(dx||dy){aim.x=clamp(aim.x+dx*dt*.7,.07,.93);aim.y=clamp(aim.y+dy*dt*.6,.23,.86);}playerX+=(clamp((aim.x-.5)*2,-1,1)-playerX)*dt*5;playerY+=(clamp((aim.y-.55)*2,-1,1)-playerY)*dt*4;if(fireHeld||pointerDown||keys.has('Space'))attack();for(let i=enemies.length-1;i>=0;i--){const e=enemies[i];if(e.hit>0){e.hit+=dt;e.lane+=e.vx*dt;e.angle+=e.vx*dt*.5;if(e.hit>1.08)enemies.splice(i,1);}else{e.z-=e.speed*dt;if(e.z<-.09){enemies.splice(i,1);missed++;combo=0;floaters.push({x:w*.5,y:h*.4,text:'擦身而過',life:.7,color:'#dfc8ed'});updateHud(true);}}}if(elapsed>=DURATION)finish();updateHud();}
  function effects(dt){
   shake=Math.max(0,shake-dt*40);flash=Math.max(0,flash-dt);toss=Math.max(0,toss-dt*5);
   for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=350*dt;if(p.type==='mask'||p.type==='paper')p.rot+=p.spin*dt;if(p.life<=0)particles.splice(i,1);}
-  for(let i=shots.length-1;i>=0;i--){const p=shots[i];p.age+=dt;if(p.age>=p.duration){if(running)hitTarget(p.target);for(let j=0;j<3;j++)particles.push({type:'paper',x:p.x+rand(-15,15),y:p.y+rand(-10,10),vx:rand(-55,55),vy:rand(-60,15),rot:rand(-3,3),spin:rand(-4,4),scale:.28,life:.6});shots.splice(i,1);}}
+  for(let i=shots.length-1;i>=0;i--){const p=shots[i];p.age+=dt;if(p.age>=p.duration){if(running)hitTarget(p.target,p.id);for(let j=0;j<3;j++)particles.push({type:'paper',x:p.x+rand(-15,15),y:p.y+rand(-10,10),vx:rand(-55,55),vy:rand(-60,15),rot:rand(-3,3),spin:rand(-4,4),scale:.28,life:.6});shots.splice(i,1);}}
   for(const list of [rings,floaters])for(let i=list.length-1;i>=0;i--){list[i].life-=dt;if(list===floaters)list[i].y-=dt*38;if(list[i].life<=0)list.splice(i,1);}
  }
  function background(){const horizon=h*.39,g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,'#0c1027');g.addColorStop(.42,'#2d1a48');g.addColorStop(.43,'#152139');g.addColorStop(1,'#071e2a');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.save();for(const s of stars){ctx.globalAlpha=.3+.5*(.5+.5*Math.sin(visualTime+s.x*20));ctx.fillStyle='#d2f9ff';ctx.fillRect(s.x*w,s.y*h*.6,s.s,s.s);}ctx.globalAlpha=1;ctx.save();ctx.beginPath();ctx.rect(0,0,w,horizon);ctx.clip();ctx.translate(w*.5-playerX*18,horizon*.79);const sun=ctx.createLinearGradient(0,-h*.2,0,h*.15);sun.addColorStop(0,'#ffce86');sun.addColorStop(1,'#fa6d8f');ctx.fillStyle=sun;ctx.beginPath();ctx.arc(0,0,h*.16,0,TAU);ctx.fill();ctx.fillStyle='#321a48';for(let y=2;y<h*.2;y+=13)ctx.fillRect(-h*.17,y,h*.34,5+y*.025);ctx.restore();

@@ -1,0 +1,245 @@
+{
+  "version": "public-release-v10",
+  "date": "2026-10-21",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "anchor.js",
+      "bytes": 658,
+      "sha256": "8dff52e1e42406008c8df6aefa9d13975adfc229eeff47b4f3db68486a5dbfc1"
+    },
+    {
+      "path": "app.js",
+      "bytes": 27470,
+      "sha256": "ab59ad0539d9b8df459039d646a1af41da3f8d989fa1590b1f43759ce64c0e02"
+    },
+    {
+      "path": "assets/og-game-hub.png",
+      "bytes": 114531,
+      "sha256": "2bcd9f14ae63aec231bb3ec9f43e8293e84b8c9e93fc55b11abc849332e42e5c"
+    },
+    {
+      "path": "assets/og-game-hub.svg",
+      "bytes": 4789,
+      "sha256": "93eae49e84408167d13cfda37b0cc1056682c84a980955aeb05424cfeb8f80c1"
+    },
+    {
+      "path": "assets/og-game-quiz.png",
+      "bytes": 90690,
+      "sha256": "1c88ca372d93e4857bde9961c1dba65e73ac1652dbf2c7178855b12f048895a4"
+    },
+    {
+      "path": "assets/og-game-quiz.svg",
+      "bytes": 2975,
+      "sha256": "dd733b0580da8bd5321a2beea12f62ff07885a660f9dba8a337ce82c3a467387"
+    },
+    {
+      "path": "assets/og-game-red-notes.png",
+      "bytes": 140481,
+      "sha256": "b71b20355bcd9a12d8790dac84934141fb342a6c7963cce0aaa1ff2ba80a1ff9"
+    },
+    {
+      "path": "assets/og-game-red-notes.svg",
+      "bytes": 8092,
+      "sha256": "2ee01d6505da9a22f871c2513c35aebbb7f3bb54538a6d2d333de45dcf965eaf"
+    },
+    {
+      "path": "assets/og-records.png",
+      "bytes": 105399,
+      "sha256": "a94ba9bbe9378fb210eb235d55d703e9728971ed4da7ca332eb069ad1db738ac"
+    },
+    {
+      "path": "assets/og-records.svg",
+      "bytes": 36449,
+      "sha256": "50e61431f2ad7f0d1184a6169541bfd3d0daaf6fe90f5ba125c03219d55de648"
+    },
+    {
+      "path": "comparison.css",
+      "bytes": 21387,
+      "sha256": "83480c1ccfc48941f36f5882f3e2d0db1d389a214b684af169ff65c9d8ac77cf"
+    },
+    {
+      "path": "comparison.js",
+      "bytes": 33493,
+      "sha256": "6d2a97a8136eaa78420b9977256efb21057591b4805e099f8e2d3d0eeca23fff"
+    },
+    {
+      "path": "data/analysis.json",
+      "bytes": 15681186,
+      "sha256": "6eca63051c52cbc6bc3f5440631f48ebcad04e44392970fb0cd7b321d0d0b0e4"
+    },
+    {
+      "path": "data/bills.json",
+      "bytes": 16557798,
+      "sha256": "41e0befe1dbc61dfc98f467f2c07232779fe41a1a55d97f90589948fa61be824"
+    },
+    {
+      "path": "data/comparison-codebook.json",
+      "bytes": 4444,
+      "sha256": "5aa4ce86a895e6ec85a64c5ca00860d444cf2887aa275079bda5ba3fc5159ec0"
+    },
+    {
+      "path": "data/comparison.json",
+      "bytes": 171115,
+      "sha256": "c6d7ebeacac1f9a8f4674213d61192ad300ed1d5c4dfcff38d8623b9d3ae813b"
+    },
+    {
+      "path": "data/policy.json",
+      "bytes": 7647,
+      "sha256": "6917354de8bfaa2d2e7de7f803c0128c664c74aae383a07d64676bef259867a1"
+    },
+    {
+      "path": "data/quotes.json",
+      "bytes": 375483,
+      "sha256": "23b2eac060298e6c21b4ca2c896f37b670349ae8212df2ff865b48a87e2e6647"
+    },
+    {
+      "path": "data/speeches.json",
+      "bytes": 2891387,
+      "sha256": "a475d5be2be38303e922dbc34b5720bbd72c885e6140f14118509748a070a22c"
+    },
+    {
+      "path": "downloads/bills.csv",
+      "bytes": 418214,
+      "sha256": "3b2173c2e91d3649df9380d38930e86f1461dc5832f971b14cf2bec806316e36"
+    },
+    {
+      "path": "downloads/comparison-coding.csv",
+      "bytes": 49460,
+      "sha256": "e7225e612403da61206fca59583c9dd973e3b633a253b42a3afc117a9d810ee2"
+    },
+    {
+      "path": "downloads/obsidian-vault.zip",
+      "bytes": 26124908,
+      "sha256": "dd2a70e4cb73559931362325947467082c70c4a480ecf3f70e827e37d6c6790b"
+    },
+    {
+      "path": "downloads/primary-bills.csv",
+      "bytes": 14575,
+      "sha256": "ec520c424f3a3f69f98fb836b0cab4edc87cc440d0fbb40e9c3397f55f9f3ecc"
+    },
+    {
+      "path": "downloads/quotes.csv",
+      "bytes": 233967,
+      "sha256": "75dc7cd9df2ea57b3a710e054da38b8dd40759439fe338072ea68640d885962b"
+    },
+    {
+      "path": "downloads/speech-sources-v10.zip",
+      "bytes": 1222021,
+      "sha256": "abe690f8b95270b66a198d1bd8b8a4fee20938618abd3920f020706e2f32a189"
+    },
+    {
+      "path": "game/hub.css",
+      "bytes": 9125,
+      "sha256": "e5b2ff8be36aa082d1e86dac48b7894dce4f181fd418b275644e2ded761fbda5"
+    },
+    {
+      "path": "game/index.html",
+      "bytes": 4341,
+      "sha256": "532577591841ef507eeeb99967536f9c4e67c2c366a42c25ede6e0fc8a8b7548"
+    },
+    {
+      "path": "game/quiz/index.html",
+      "bytes": 4771,
+      "sha256": "81e7fe3e60acd426e22f2d1c040d79e5b2673938929c1ec1c6d8710b26dfda68"
+    },
+    {
+      "path": "game/quiz-engine.js",
+      "bytes": 11792,
+      "sha256": "8866e76dbf6e4b66bae695632437a2d06e5cc3a12a9027920d7b287082a05770"
+    },
+    {
+      "path": "game/red-notes/index.html",
+      "bytes": 2503,
+      "sha256": "18e0190a61f2cad20ce5107d37cb2d03dbdafd7e0424db371a37d6819682d7e6"
+    },
+    {
+      "path": "game/share/index.html",
+      "bytes": 2495,
+      "sha256": "ee89326dda83531a6fdad9314e93f51603ae648b15c6e1c9eb63f7796c21bce1"
+    },
+    {
+      "path": "game/swipe-ui.css",
+      "bytes": 8388,
+      "sha256": "f2d5e73b66a5fd682f2ce3ba2c0844f910e252a5fbd51aca9d218e993dd25594"
+    },
+    {
+      "path": "game3d.css",
+      "bytes": 6770,
+      "sha256": "702bb256acd69a1a59dd1435e8ddec5a507d0395522f393f8d2c92a69a0c2d10"
+    },
+    {
+      "path": "game3d.js",
+      "bytes": 29927,
+      "sha256": "3a24b2fbea400fa6d356f9cc58750138986e356ce927abbd0a61de5c18d73f79"
+    },
+    {
+      "path": "index.html",
+      "bytes": 25647,
+      "sha256": "5d7b4d2c25c5da5931e7a922f20ea06a776129adc5a31bc270fe70a957195b4c"
+    },
+    {
+      "path": "leaderboard.css",
+      "bytes": 4419,
+      "sha256": "772dbe52eea6e6173f2bee0188d5ac947f5c30948a0a4d794fb9143c1ea6ae84"
+    },
+    {
+      "path": "leaderboard.js",
+      "bytes": 13595,
+      "sha256": "9d05e30a405c4791acbc743003f833999a415fcb67ba5be42dd56c39def63e43"
+    },
+    {
+      "path": "quiz.css",
+      "bytes": 37,
+      "sha256": "04fde68b6c06e6c2a52e980d4ff49513f754074b4e4337c56eea8d0699add2df"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3651,
+      "sha256": "a24f2173b103074559c37370b3f7c3f565219d0768b07232a166c0a0e683db96"
+    },
+    {
+      "path": "speech-search.css",
+      "bytes": 5923,
+      "sha256": "42de7e9eb05b5727feb78ccfeb8aca198a10de39b9fbd01aea68c3c18c21f7fd"
+    },
+    {
+      "path": "speech-search.js",
+      "bytes": 13470,
+      "sha256": "db505bce1df603b3baef8231c9dfdf8cc0d2a01f59b8d48049c27c891a812b95"
+    },
+    {
+      "path": "statements.css",
+      "bytes": 6082,
+      "sha256": "965f6be368142654a68f1b10567ad45fa550bfb29e670536121949a0db1823da"
+    },
+    {
+      "path": "statements.js",
+      "bytes": 11866,
+      "sha256": "7520afe7366be2d311a6b1649d6e7e4a7ec33d6826b859bc58fc34f0e3e2f006"
+    },
+    {
+      "path": "style.css",
+      "bytes": 42475,
+      "sha256": "831c19355eb6c346a08cfedeaa4d7594c61d0101a3944610c6164b7e409afa4f"
+    }
+  ],
+  "manifestSelfExcluded": true,
+  "quoteCounts": {
+    "segments": 129,
+    "events": 123,
+    "quiz": 73,
+    "advanced": 56
+  },
+  "speechCounts": {
+    "included": 235,
+    "listed": 263,
+    "characters": 385704
+  },
+  "globalLeaderboard": "not-connected",
+  "personalizedOg": false
+}
