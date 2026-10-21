@@ -61,7 +61,7 @@
     const play = card.closest('#play'), game = card.closest('.swipe-game');
     const text = (id, value) => { if ($(id)) $(id).textContent = value; };
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    const state = {quotes: Array.isArray(options.quotes) ? options.quotes : [], period: $('game-period')?.value || 'pre', seen: new Set(), drag: null, newCount: 0};
+    const state = {quotes: Array.isArray(options.quotes) ? options.quotes : [], period: $('game-period')?.value || 'pre', seen: new Set(), drag: null, newCount: 0, challenge: null};
     if (!profile.nominationDate) { state.period = 'all'; if ($('game-period')) { $('game-period').value = 'all'; $('game-period').disabled = true; } }
     function mergeSeen(raw) {
       try { const stored = JSON.parse(raw ?? localStorage.getItem(seenKey) ?? '[]'); if (Array.isArray(stored)) for (const id of stored) if (typeof id === 'string') state.seen.add(id); } catch {}
@@ -81,6 +81,28 @@
     const autoInput = settings.querySelector('input');
     const results = document.createElement('section'); results.id = 'quiz-results'; results.className = 'quiz-results'; results.hidden = true; results.setAttribute('aria-label', '本輪逐題回顧');
     play.querySelector('.quiz-layout').after(results);
+    // Sharing is optional. Old cached HTML and the independent Su profile keep
+    // the complete quiz even if a v18 script, catalogue or card is unavailable.
+    const shareCore = profile.subjectId === 'shen-pao-yang' ? window.RecordsQuizShareCore : null;
+    let shareUI = null, challengeNotice = null;
+    if (profile.subjectId === 'shen-pao-yang') {
+      challengeNotice = document.createElement('p'); challengeNotice.className = 'quiz-challenge-notice'; challengeNotice.hidden = true; challengeNotice.setAttribute('role','status');
+      play.querySelector('.quiz-layout').before(challengeNotice);
+      try { shareUI = window.RecordsQuizShare?.mount({profile,results}) || null; } catch {}
+    }
+    function clearShare() { try { shareUI?.clear(); } catch {} }
+    function showShare(snapshot) {
+      try { Promise.resolve(shareUI?.show(snapshot,{period:state.period,challenge:state.challenge,sourceVersion:options.quoteSourceVersion})).catch(() => {}); } catch {}
+    }
+    function notice(message,invalid = false) {
+      if (!challengeNotice) return;
+      challengeNotice.textContent = message; challengeNotice.hidden = !message; challengeNotice.classList.toggle('is-invalid',invalid);
+    }
+    function clearChallenge(keepNotice = false) {
+      state.challenge = null; if (!keepNotice) notice('');
+      if (profile.subjectId !== 'shen-pao-yang') return;
+      try { const url = new URL(location.href); if (url.searchParams.has('challenge')) { url.searchParams.delete('challenge'); history.replaceState(null,'',url.pathname + url.search + url.hash); } } catch {}
+    }
     $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
     $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
     $('quiz-no').setAttribute('aria-label', '不是' + speaker + '的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是' + speaker + '的原話，向右選');
@@ -91,7 +113,7 @@
       text('quiz-pool-count', rows.length); text('quiz-seen-count', seen + ' / ' + rows.length);
       text('game-period-note', `${period}：${rows.length} 段、${new Set(rows.map(q => q.eventId || q.id)).size} 個事件／文章。${profile.nominationDate ? '正式提名切點 ' + profile.nominationDate + '。' : '尚未設定可核對的正式提名切點，目前使用所有已收錄時期。'}`);
       const length = controller.snapshot().round.length;
-      text('quiz-round-note', state.newCount ? `本輪 ${length} 題，${state.newCount} 題尚未看過。同一輪不重複事件；換時期會重開一輪。` : '本期都看過了？這輪換個順序，盡量避開上一輪。');
+      text('quiz-round-note', state.challenge ? '朋友的同一輪六題，題目與順序固定；你的分數從零開始。再玩或切換時期，會離開這輪挑戰。' : state.newCount ? `本輪 ${length} 題，${state.newCount} 題尚未看過。同一輪不重複事件；換時期會重開一輪。` : '本期都看過了？這輪換個順序，盡量避開上一輪。');
       text('quote-selection', `本範圍精選 ${rows.length} 段本人公開言論／文章，答案均為「是」；這是有意挑選的原話遊戲，不加入虛構的「否」題。媒體引述、官方逐字稿與書面文章逐題標示；最後可看本輪完整來源。`);
     }
     function clearDrag() { state.drag = null; card.classList.remove('is-dragging','is-left','is-right'); card.style.transform = ''; card.style.setProperty('--swipe-yes','0'); card.style.setProperty('--swipe-no','0'); }
@@ -122,6 +144,7 @@
     function focusQuestion() { if (play.contains(document.activeElement)) card.focus({preventScroll:true}); }
     function render(s, reason) {
       if (reason === 'hold' || reason === 'preference') { updateHold(s); return; }
+      if (reason === 'round') clearShare();
       const activeBefore = document.activeElement;
       const focusInChangingControls = $('quiz-controls').contains(activeBefore) || $('quiz-feedback').contains(activeBefore) || activeBefore === $('quiz-next');
       // Preserve a Tab/Enter player's landing point before disabled/hidden controls lose focus.
@@ -158,7 +181,7 @@
         text('quiz-progress','本輪完成'); text('quiz-score',`${s.score} / 100 分`); text('quiz-meta',`答對 ${s.correct} / ${s.round.length} 題`); text('quiz-context','');
         $('quiz-question').innerHTML = `<span class="quiz-final-score" style="--quiz-score-angle:${s.score * 3.6}deg"><b>${s.score}</b><small>分 / 100</small></span><span class="quiz-final-message">${high ? '恭喜，你把原話認出來了！' : low ? '別被印象的洋流帶走，從答錯的幾題回頭看原文。' : '有幾句出乎意料？回頭看本輪原文。'}</span>`;
         card.querySelector('.quiz-foot').textContent = `本輪等權計分：答對題數 ÷ ${s.round.length} × 100，四捨五入。這是原話辨識得分。`;
-        renderReview(s); announce(`本輪完成，${s.score} 分。答對 ${s.correct}／${s.round.length} 題。下方可逐題回顧來源。`); focusQuestion(); return;
+        renderReview(s); showShare(s); announce(`本輪完成，${s.score} 分。答對 ${s.correct}／${s.round.length} 題。下方可逐題回顧來源。`); focusQuestion(); return;
       }
       if (s.phase === 'empty') {
         card.dataset.questionId = ''; text('quiz-progress','題庫尚未載入'); text('quiz-meta','SOURCE REQUIRED'); text('quiz-context',''); text('quiz-question','題庫暫時無法讀取。\n請重新整理後再試。'); card.querySelector('.quiz-foot').textContent = '每個答案都需要可追溯的來源。'; $('quiz-restart').hidden = true; info(); return;
@@ -173,7 +196,8 @@
       announce(`第 ${s.index+1}／${s.round.length} 題。${q.date}，${q.medium === 'written' ? '書面文章' : '口語發言'}。「${q.quote}」。這是${speaker}${q.medium === 'written' ? '寫的' : '說的'}嗎？`);
     }
     const controller = createRoundController({onChange:render, delay:AUTO_DELAY});
-    function drawRound(focus = false) {
+    function drawRound(focus = false, keepNotice = false) {
+      clearChallenge(keepNotice);
       mergeSeen(); const rows = pool(), previous = new Set(controller.snapshot().round.map(q => q.id));
       const prioritized = items => randomize(items).sort((a,b) => {
         const tier = q => Number.isFinite(Number(q.editorialRank)) ? Math.floor((Number(q.editorialRank)-1)/12) : Number.isFinite(Number(q.quizPriority)) ? -Math.floor(Number(q.quizPriority)/10) : 999;
@@ -183,6 +207,22 @@
       const events = new Set(), chosen = [];
       for (const q of candidates) { const event = q.eventId || q.id; if (events.has(event)) continue; events.add(event); chosen.push(q); if (chosen.length === 6) break; }
       state.newCount = chosen.filter(q => !state.seen.has(q.id)).length; controller.start(randomize(chosen)); if (focus) card.focus({preventScroll:true});
+    }
+    function startInitialRound() {
+      if (profile.subjectId !== 'shen-pao-yang') { drawRound(); return; }
+      let incoming;
+      try { incoming = shareCore ? shareCore.readSearch(location.search) : {present:typeof location.search === 'string' && new URLSearchParams(location.search.slice(0,4096)).has('challenge')}; } catch { incoming = {present:false}; }
+      if (!incoming.present) { drawRound(); return; }
+      const challenge = shareCore?.resolveChallenge(incoming.token,state.quotes,options.quoteSourceVersion);
+      if (!challenge?.ok) {
+        drawRound(false,true);
+        notice(shareCore ? '朋友的挑戰資料已過期、題目不完整或時期不符，已開始自己的新一輪；沒有代入對方分數。' : '分享功能目前未完整載入，已先開始自己的新一輪；沒有代入朋友的題目或分數。',true);
+        return;
+      }
+      mergeSeen(); state.period = challenge.period; state.challenge = challenge; if ($('game-period')) $('game-period').value = state.period;
+      state.newCount = challenge.round.filter(q => !state.seen.has(q.id)).length;
+      notice(`朋友邀你挑戰同一輪六題。連結標示對方答對 ${challenge.correct}／6 題（自行分享）；你的成績會重新計算。`);
+      controller.start(challenge.round);
     }
     $('quiz-no').addEventListener('click', () => controller.answer(false)); $('quiz-yes').addEventListener('click', () => controller.answer(true));
     $('quiz-next').addEventListener('click', () => controller.next()); $('quiz-restart').addEventListener('click', () => drawRound(true));
@@ -211,8 +251,11 @@
     card.addEventListener('pointercancel',clearDrag); card.addEventListener('lostpointercapture',()=>{if(state.drag)clearDrag();});
     window.addEventListener('blur',()=>{clearDrag();controller.hold();}); document.addEventListener('visibilitychange',()=>{if(document.hidden)controller.hold();});
     window.addEventListener('storage',event=>{if(event.key===seenKey){mergeSeen(event.newValue);info();}});
-    const api={setQuotes(quotes){state.quotes=Array.isArray(quotes)?quotes:[];drawRound();},reset(){drawRound();}}; mounted.set(root,api); drawRound(); return api;
+    const api={setQuotes(quotes){state.quotes=Array.isArray(quotes)?quotes:[];drawRound();},reset(){drawRound();}}; mounted.set(root,api); startInitialRound(); return api;
   }
   window.RecordsQuiz={mount};
-  if(document.querySelector('[data-standalone-quiz]')) fetch('/data/quotes.json',{cache:'no-cache'}).then(response=>{if(!response.ok)throw new Error('quotes '+response.status);return response.json();}).then(data=>mount(document,{quotes:data.quotes})).catch(()=>mount(document,{quotes:[]}));
+  if(document.querySelector('[data-standalone-quiz]')) fetch('/data/quotes.json',{cache:'no-cache'}).then(response=>{
+    if(!response.ok)throw new Error('quotes '+response.status);
+    return window.RecordsQuizShareCore?.readQuoteResponse ? window.RecordsQuizShareCore.readQuoteResponse(response) : response.json().then(data=>({data,sourceVersion:null}));
+  }).then(({data,sourceVersion})=>mount(document,{quotes:data.quotes,quoteSourceVersion:sourceVersion})).catch(()=>mount(document,{quotes:[]}));
 })();
