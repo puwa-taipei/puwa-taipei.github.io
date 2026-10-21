@@ -6,26 +6,26 @@
   <meta name="theme-color" content="#173e36">
   <meta name="referrer" content="no-referrer">
   <title>一起補上紀錄｜國會紀錄觀測</title>
-  <meta name="description" content="提供可核對的原話來源，或投稿附公開原始碼的網頁遊戲。所有投稿先經人工審核。">
+  <meta name="description" content="提供原話來源、投稿附公開原始碼的網頁遊戲，或只寫下一個遊戲想法。所有投稿先經人工審核。">
   <link rel="canonical" href="https://puwa.taipei/contribute/">
   <meta property="og:type" content="website"><meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="一起補上紀錄｜國會紀錄觀測">
-  <meta property="og:description" content="有原話來源，或做了一款網頁遊戲？把線索交給人工審核。">
+  <meta property="og:description" content="有原話來源、網頁遊戲，或一個想請我們製作的點子？歡迎投稿。">
   <meta property="og:url" content="https://puwa.taipei/contribute/">
   <meta property="og:image" content="https://puwa.taipei/assets/og-records.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/contribute/contribute.css?v=17">
-  <script src="/contribute/core.js?v=17" defer></script>
-  <script src="/contribute/form.js?v=17" defer></script>
+  <link rel="stylesheet" href="/contribute/contribute.css?v=30">
+  <script src="/contribute/core.js?v=30" defer></script>
+  <script src="/contribute/form.js?v=30" defer></script>
 <link rel="stylesheet" href="/typography.css?v=19"></head>
 <body data-subject-id="shen-pao-yang">
 <a class="skip" href="#contribution">直接填寫投稿</a>
 <header class="intake-header"><a class="wordmark" href="/"><span aria-hidden="true">◎</span><span>國會紀錄觀測<small>THE RECORD, IN CONTEXT</small></span></a><nav aria-label="主要導覽"><a href="/#statements">原話檔案 ↗</a><a href="/game/">遊戲庫 ↗</a><a href="/">回首頁 ↗</a></nav></header>
 <main class="intake-shell">
-  <section class="intake-hero"><div><p class="eyebrow">OPEN CALL / ADD A SOURCE, BUILD A GAME</p><h1>下一筆紀錄，<br><em>一起補上。</em></h1><p>看到值得核對的原話，或做了一款有意思的網頁遊戲？<br>留下來源與說明，讓每一筆投稿都能好好檢查。</p></div><aside class="process-card"><span class="process-mark" aria-hidden="true">＋</span><h2>先收件，再審核。</h2><ol><li>你提供來源或公開原始碼</li><li>審稿團隊核對內容與權利</li><li>通過後，再由編輯安排收錄</li></ol><p>投稿不會直接公開。原話通過審核後，也不會自動加入現有題庫。</p></aside></section>
+  <section class="intake-hero"><div><p class="eyebrow">OPEN CALL / ADD A SOURCE, BUILD A GAME</p><h1>下一筆紀錄，<br><em>一起補上。</em></h1><p>看到值得核對的原話，或想到一款有意思的遊戲？<br>會寫程式，就交作品；不會，也能只交一個好點子。</p></div><aside class="process-card"><span class="process-mark" aria-hidden="true">＋</span><h2>先收件，再審核。</h2><ol><li>你提供來源、遊戲或一個好點子</li><li>審稿團隊核對內容與權利</li><li>精選點子由我們評估製作；作品再審核上架</li></ol><p>投稿不會直接公開。原話通過審核後，也不會自動加入現有題庫。</p></aside></section>
   <section id="contribution" class="intake-panel" aria-labelledby="form-heading">
     <h2 id="form-heading" class="sr-only">選擇投稿類型並填寫</h2>
-    <div class="type-tabs" role="tablist" aria-label="投稿類型"><button id="tab-quote" role="tab" type="button" aria-controls="panel-quote" aria-selected="true" tabindex="0"><span>01</span>提供原話線索</button><button id="tab-game" role="tab" type="button" aria-controls="panel-game" aria-selected="false" tabindex="-1"><span>02</span>投稿網頁遊戲</button></div>
+    <div class="type-tabs" role="tablist" aria-label="投稿類型"><button id="tab-quote" role="tab" type="button" aria-controls="panel-quote" aria-selected="true" tabindex="0"><span>01</span>提供原話線索</button><button id="tab-game" role="tab" type="button" aria-controls="panel-game" aria-selected="false" tabindex="-1"><span>02</span>遊戲／好點子</button></div>
     <div id="connection-status" class="connection-status" role="status">正在確認收件狀態。表單不會自動送出。</div>
     <noscript><p class="form-notice">這份表單需要啟用 JavaScript。啟用前無法傳送任何資料。</p></noscript>
     <div id="panel-quote" role="tabpanel" aria-labelledby="tab-quote">
@@ -50,6 +50,7 @@
       </form>
     </div>
     <div id="panel-game" role="tabpanel" aria-labelledby="tab-game" hidden>
+      <div class="game-mode-switch" role="group" aria-label="選擇遊戲投稿方式"><button type="button" data-game-mode="game" aria-pressed="true" aria-controls="game-form"><strong>我已經做好了</strong><span>提供遊戲與公開原始碼</span></button><button type="button" data-game-mode="idea" aria-pressed="false" aria-controls="idea-form"><strong>我有好點子，請幫我做</strong><span>不會寫程式也可以，只需一段 prompt</span></button></div>
       <form id="game-form" data-kind="game" novalidate>
         <div class="form-head"><p class="eyebrow">BUILD SOMETHING PLAYABLE</p><h2>把你的網頁遊戲，<br>放進下一個空位。</h2><p>填上名稱、簡介與公開原始碼，就能送出投稿。其他資訊可選填；這裡不會載入遠端遊戲或圖片。</p></div>
         <div class="error-summary" tabindex="-1" role="alert" hidden></div>
@@ -73,6 +74,23 @@
         <div class="consent-block"><label class="check"><input name="reviewConsent" type="checkbox" required>我了解遊戲會先經人工檢查，投稿不代表本站認可或保證收錄；程式、公開來源及署名在獲選後可能列於遊戲庫。</label><p>請勿提交金鑰、帳密或他人的私人資料。私人聯絡方式不公開。審核通過也不會在本站直接執行你的程式。</p></div>
         <div class="honey" aria-hidden="true"><label for="game-website">此欄請留空</label><input id="game-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="form-actions"><button class="submit-button" type="submit" disabled>送出遊戲投稿 <span aria-hidden="true">↗</span></button><button type="button" data-action="save">存成這台瀏覽器的草稿</button><button type="button" data-action="clear">清除本機草稿</button></div><p class="draft-status hint" role="status">草稿不會自動保存。使用公用電腦時，請勿保存。</p><div class="submission-status" role="status" tabindex="-1" hidden></div>
+      </form>
+
+      <form id="idea-form" data-kind="idea" novalidate hidden>
+        <div class="form-head"><p class="eyebrow">ONE GOOD IDEA IS ENOUGH</p><h2>不會寫程式，<br>也能一起做遊戲。</h2><p>把玩法或 prompt 寫下來就好。我們會精選點子、評估製作，再把完成的作品送審上架；投稿不保證採用或製作。</p></div>
+        <div class="error-summary" tabindex="-1" role="alert" hidden></div>
+        <div class="field"><label for="idea-prompt">你的遊戲想法／prompt <span>必填</span></label><textarea id="idea-prompt" name="prompt" rows="7" maxlength="4000" required placeholder="例如：做一個對話遊戲，玩家從幾句附來源的原話中，選出適合情境的回應，最後看匹配度。" aria-describedby="idea-prompt-hint"></textarea><p id="idea-prompt-hint" class="hint">想讓玩家做什麼？怎麼操作、怎麼結束？一句話或完整企劃都可以。若引用真人言論，歡迎附來源；不要填私人聯絡資料。<span class="count" data-count="prompt">0 / 4000</span></p></div>
+        <details class="optional-details" data-section="idea-info"><summary><span>再說一點</span><small>選填 · 對象、暫定名稱與補充</small></summary><div class="optional-content">
+        <div class="field"><label for="idea-subjectId">想做誰的遊戲？</label><select id="idea-subjectId" name="subjectId"><option value="shen-pao-yang">沈伯洋</option><option value="su-chiao-hui">蘇巧慧</option></select></div>
+        <div class="field"><label for="idea-title">暫定遊戲名稱 <span>選填</span></label><input id="idea-title" name="title" maxlength="100" type="text"></div>
+        <div class="field"><label for="idea-note">其他補充 <span>選填</span></label><textarea id="idea-note" name="note" rows="3" maxlength="1000" aria-describedby="idea-note-hint"></textarea><p id="idea-note-hint" class="hint">支援裝置、參考玩法或你能協助的部分。<span class="count" data-count="note">0 / 1000</span></p></div>
+        </div></details>
+        <details class="optional-details" data-section="idea-identity"><summary><span>署名與聯絡方式</span><small>選填 · 聯絡方式不公開</small></summary><div class="optional-content">
+        <fieldset class="identity-fields"><legend>署名與聯絡方式</legend><p class="hint">都可不填。公開署名和私人聯絡方式，分開處理。</p><div class="field"><label for="idea-creditName">希望公開顯示的署名 <span>選填</span></label><input id="idea-creditName" name="creditName" type="text" maxlength="60" autocomplete="off" aria-describedby="idea-creditName-hint"><p id="idea-creditName-hint" class="hint">可用暱稱，請勿放 Email 或網址；不填就不署名。</p></div><label class="check"><input name="creditConsent" type="checkbox">若內容獲選，我同意公開顯示這個署名。</label><div class="contact-grid"><div class="field"><label for="idea-contactKind">私人聯絡方式 <span>選填</span></label><select id="idea-contactKind" name="contactKind"><option value="email">Email</option><option value="url">公開聯絡網址</option></select></div><div class="field"><label for="idea-contactValue">Email／HTTPS 聯絡網址</label><input id="idea-contactValue" name="contactValue" type="text" maxlength="2048" autocomplete="off" aria-describedby="idea-contactValue-hint"><p id="idea-contactValue-hint" class="hint">只提供給審稿團隊，不公開，也不寫入本機草稿。</p></div></div><label class="check"><input name="contactConsent" type="checkbox">若有填聯絡方式，我同意審稿團隊私下保存，僅供本次投稿聯繫。</label></fieldset>
+        </div></details>
+        <div class="consent-block"><label class="check"><input name="reviewConsent" type="checkbox" required>我了解點子會先經人工評選，不保證採用、製作或上架；若選中，團隊可能調整玩法，完成後仍須審核。</label><p>不需要先有原始碼。完成作品上架前，仍須有公開原始碼、固定版本與權利核對；私人聯絡方式不公開。請勿提交金鑰、帳密或他人私人資料。</p></div>
+        <div class="honey" aria-hidden="true"><label for="idea-website">此欄請留空</label><input id="idea-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="form-actions"><button class="submit-button" type="submit" disabled>送出我的遊戲想法 <span aria-hidden="true">↗</span></button><button type="button" data-action="save">存成這台瀏覽器的草稿</button><button type="button" data-action="clear">清除本機草稿</button></div><p class="draft-status hint" role="status">草稿不會自動保存。使用公用電腦時，請勿保存。</p><div class="submission-status" role="status" tabindex="-1" hidden></div>
       </form>
     </div>
   </section>

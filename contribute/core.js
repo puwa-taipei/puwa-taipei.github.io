@@ -3,8 +3,8 @@
   'use strict';
   const SUBJECTS = Object.freeze({'shen-pao-yang':'沈伯洋','su-chiao-hui':'蘇巧慧'});
   const subjectId = value => typeof value === 'string' && Object.prototype.hasOwnProperty.call(SUBJECTS,value) ? value : null;
-  function draftStorageKey(kind,subject) { if (!['quote','game'].includes(kind) || !subjectId(subject)) throw new Error('invalid_draft_target'); return 'record-contribution-draft-v2-' + kind + '-' + subject; }
-  const LIMITS = Object.freeze({quote:600,sourceUrl:2048,locator:240,context:2000,note:1000,title:100,summary:1200,repoUrl:2048,commitSha:40,gameUrl:2048,screenshotUrl:2048,license:120,assetRights:1200,externalServices:1000,creditName:60,contactValue:2048});
+  function draftStorageKey(kind,subject) { if (!['quote','game','idea'].includes(kind) || !subjectId(subject)) throw new Error('invalid_draft_target'); return 'record-contribution-draft-v2-' + kind + '-' + subject; }
+  const LIMITS = Object.freeze({prompt:4000,quote:600,sourceUrl:2048,locator:240,context:2000,note:1000,title:100,summary:1200,repoUrl:2048,commitSha:40,gameUrl:2048,screenshotUrl:2048,license:120,assetRights:1200,externalServices:1000,creditName:60,contactValue:2048});
   const forbidden = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f\u200b\u200e\u200f\u202a-\u202e\u2066-\u2069\ud800-\udfff]/u;
   const clean = value => typeof value === 'string' ? value.trim() : '';
   function publicHttps(value) {
@@ -34,7 +34,7 @@
   }
   function validate(kind, values) {
     const errors = {}, payload = {};
-    if (!['quote','game'].includes(kind)) return {ok:false,errors:{kind:'請選擇投稿類型。'}};
+    if (!['quote','game','idea'].includes(kind)) return {ok:false,errors:{kind:'請選擇投稿類型。'}};
     const target = subjectId(values.subjectId === undefined ? 'shen-pao-yang' : values.subjectId);
     if (!target) errors.subjectId = '請選擇這份投稿主要關於的人物。'; else payload.subjectId = target;
     function text(key, label, required = true) {
@@ -58,6 +58,9 @@
       else payload.sourceDate = sourceDate;
       text('locator','來源位置',false); text('context','前後文與背景',false); text('note','補充／收錄理由',false);
       for (const key of ['locator','context','note']) payload[key] ??= '';
+    } else if (kind === 'idea') {
+      text('prompt','遊戲想法／prompt'); text('title','暫定名稱',false); text('note','其他補充',false);
+      for (const key of ['title','note']) payload[key] ??= '';
     } else {
       text('title','遊戲名稱'); text('summary','遊戲簡介');
       link('repoUrl','公開 GitHub 原始碼',true,repository);
@@ -95,7 +98,7 @@
     if (!Object.keys(errors).length && new TextEncoder().encode(JSON.stringify({kind,payload})).length > 16000) errors.note = '整份投稿篇幅過長，請縮短補充、背景或網址，總內容需小於 16 KB。';
     return {ok:Object.keys(errors).length === 0,errors,payload,contact};
   }
-  const draftFields = {quote:['subjectId','quote','sourceUrl','sourceDate','dateUnknown','locator','context','note','creditName'],game:['subjectId','title','summary','repoUrl','commitSha','gameUrl','screenshotUrl','license','assetRights','externalServices','note','creditName']};
+  const draftFields = {idea:['subjectId','prompt','title','note','creditName'],quote:['subjectId','quote','sourceUrl','sourceDate','dateUnknown','locator','context','note','creditName'],game:['subjectId','title','summary','repoUrl','commitSha','gameUrl','screenshotUrl','license','assetRights','externalServices','note','creditName']};
   function sanitizeDraft(kind, values) {
     const result = {};
     for (const key of draftFields[kind] || []) {

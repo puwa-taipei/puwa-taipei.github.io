@@ -164,7 +164,7 @@
     }
     async call(action,body={}){
       if(!this.checkExpiry())throw new ReviewError('session_expired',401);
-      if(!['admin_list','admin_detail','admin_update','admin_publish','admin_retract'].includes(action))throw new ReviewError('invalid_request');
+      if(!['admin_list','admin_detail','admin_update','admin_idea_stage','admin_publish','admin_retract'].includes(action))throw new ReviewError('invalid_request');
       return this.#request(this.#config.apiUrl,{token:this.#token,body:{...body,action}});
     }
     async signOut(){const token=this.#token;this.clear('signed_out');if(token&&this.enabled){try{await this.#request(`${this.#config.supabaseUrl}/auth/v1/logout?scope=local`,{token,auth:true});}catch{}}}
