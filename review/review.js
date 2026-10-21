@@ -5,6 +5,7 @@
   const R=globalThis.RecordsReview,$=id=>document.getElementById(id);
   const statusText={pending:'待審核',needs_info:'待補資料',approved:'已核准',rejected:'未採用'};
   const errors={not_configured:'工作台尚未連線。管理員資料庫與登入設定完成後才會開放；目前沒有讀取任何投稿。',access_denied:'這個帳號沒有管理員權限。私人內容已清空。',session_expired:'登入已到期，私人內容已清空。請重新登入。',login_link_invalid:'登入連結無效或已過期，請重新寄送。',verifier_missing:'找不到原分頁的登入驗證資料。請回到寄信的分頁，重新寄送並在同一分頁開啟郵件連結。',storage_unavailable:'瀏覽器未允許暫存登入驗證資料，無法安全完成登入。請允許此分頁的暫存功能後重試。',invalid_email:'請輸入有效的 Email。',invalid_public_game:'請檢查公開標題、簡介、GitHub 儲存庫、完整提交編號與授權；封面只接受本站已檢核圖檔路徑。',not_approved:'請先把遊戲設為「已核准」，再建立公開預覽。',approval_required:'請先核准遊戲並勾選人工檢核確認，再發布。',source_mismatch:'儲存庫必須和原投稿一致；原稿已有完整提交編號時也不能更換，未提供時才可補齊已核對的完整編號。',publication_incomplete:'請補齊素材權利說明，並勾選已人工核對權利，再重新建立公開預覽。',version_conflict:'另一位管理員已更新這則投稿。已重新讀取最新版本，請核對後再操作；你的修改沒有覆蓋其他人的變更。',rate_limited:'請稍候至少 60 秒再試；郵件服務也可能有寄送額度限制。',repo_verification_failed:'無法確認這是公開 GitHub 儲存庫中的指定完整提交，尚未發布。請核對儲存庫與提交編號。',repo_verification_unavailable:'GitHub 核對服務目前無法使用，尚未發布。請稍後重試。',not_found:'這則投稿已不存在或無法讀取。',invalid_response:'伺服器回覆無法核對，請重新讀取。',invalid_request:'資料格式無法核對，尚未發布。請重新讀取投稿並檢查補齊內容。',request_timeout:'連線逾時，請稍後重新讀取。',signup_disabled:'帳號尚未完成信箱邀請確認。請先開啟原邀請或確認郵件，完成後再寄送登入連結；這裡不開放自行註冊。',email_not_confirmed:'信箱尚未確認。請先完成原邀請或確認郵件，再回來登入。',over_email_send_rate_limit:'郵件寄送已達服務限制。請稍後再試；必要時請管理員檢查寄信額度。',over_request_rate_limit:'登入請求已達服務限制，請稍候再試。',email_address_not_authorized:'目前寄信服務不允許此收件地址。請管理員確認收件權限或寄信服務設定。',email_provider_disabled:'郵件登入目前未啟用，請管理員檢查登入服務設定。',validation_failed:'登入資料未通過驗證。請檢查 Email 格式；若仍失敗，請管理員核對登入設定。',otp_disabled:'這個工作台不建立新帳號。請先由管理員完成帳號建立、邀請與授權，再回來登入。',otp_expired:'登入連結已失效，請重新寄送並在原分頁開啟。',flow_state_expired:'登入驗證已逾時，請重新寄送連結。',flow_state_not_found:'找不到這次登入驗證，請重新寄送並在原分頁開啟。',bad_code_verifier:'登入驗證與原分頁不符，請重新寄送並在同一分頁開啟。',temporarily_unavailable:'目前無法完成操作。請稍後重試；本頁不顯示私人錯誤細節。'};
+  const ideaStages={received:'收到點子',selected:'精選入列',building:'製作中',ready:'完成待作品審核'};
   let client=null,uiGeneration=0,listGeneration=0,detailGeneration=0,mutationTicket=0,items=[],nextOffset=0,current=null,mutationBusy=false,mailUntil=0,preview=null;
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n;};
   const message=text=>{$('message').textContent=text;$('message').hidden=!text;};
@@ -19,7 +20,7 @@
   function active(){return client?.checkExpiry()===true;}
   function renderItems(){
     const holder=$('items');holder.replaceChildren();$('list-count').textContent=`已載入 ${items.length} 則`;
-    for(const item of items){const b=el('button',undefined,'item');b.type='button';b.setAttribute('aria-current',String(item.id===current?.id));b.append(el('strong',item.title||'未提供標題'),el('span',`${R.SUBJECTS[R.subjectId(item)]} · ${item.kind==='quote'?'原話線索':'社群遊戲'} · ${statusText[item.status]||'未知狀態'}`,'badge'));b.append(el('small',`${date(item.createdAt)} · v${item.version}${item.hasContact?' · 有私人聯絡方式':''}${item.published?' · 已公開':''}`));b.addEventListener('click',()=>loadDetail(item.id));holder.append(b);}
+    for(const item of items){const b=el('button',undefined,'item');b.type='button';b.setAttribute('aria-current',String(item.id===current?.id));b.append(el('strong',item.title||'未提供標題'),el('span',`${R.SUBJECTS[R.subjectId(item)]} · ${item.kind==='quote'?'原話線索':item.kind==='idea'?'遊戲點子 · '+(ideaStages[item.ideaStage]||'收到點子'):'社群遊戲'} · ${statusText[item.status]||'未知狀態'}`,'badge'));b.append(el('small',`${date(item.createdAt)} · v${item.version}${item.hasContact?' · 有私人聯絡方式':''}${item.published?' · 已公開':''}`));b.addEventListener('click',()=>loadDetail(item.id));holder.append(b);}
     if(!items.length)holder.append(el('p','這個篩選條件目前沒有投稿。','empty'));
   }
   async function loadList(append=false){
@@ -28,7 +29,7 @@
     try{
       const result=await client.call('admin_list',{status:$('filter-status').value,kind:$('filter-kind').value,offset:append?nextOffset:0,limit:20});
       if(generation!==listGeneration||epoch!==uiGeneration||!active())return;
-      if(!Array.isArray(result.items)||result.items.some(x=>!R.UUID.test(x?.id||'')||!['quote','game'].includes(x.kind)||!statusText[x.status]||!Number.isInteger(x.version)))throw new R.ReviewError('invalid_response');
+      if(!Array.isArray(result.items)||result.items.some(x=>!R.UUID.test(x?.id||'')||!['quote','game','idea'].includes(x.kind)||!statusText[x.status]||!Number.isInteger(x.version)))throw new R.ReviewError('invalid_response');
       items=append?[...items,...result.items.filter(x=>!items.some(y=>y.id===x.id))]:result.items;nextOffset=Number.isInteger(result.nextOffset)?result.nextOffset:items.length;$('more').hidden=result.hasMore!==true;renderItems();message('');
     }catch(error){if(generation===listGeneration&&epoch===uiGeneration)showError(error);}
     finally{if(generation===listGeneration&&epoch===uiGeneration){$('refresh').disabled=false;$('more').disabled=false;}}
@@ -43,6 +44,8 @@
     field(list,'原投稿對象（固定）',R.SUBJECTS[R.subjectId(item)]);
     if(item.kind==='quote'){
       field(list,'投稿原話',p.quote);field(list,'來源',p.sourceUrl,{url:true});field(list,'來源日期',p.dateUnknown?'日期不確定':p.sourceDate);field(list,'原文位置',p.locator);field(list,'前後文',p.context);
+    }else if(item.kind==='idea'){
+      field(list,'遊戲想法／prompt',p.prompt);field(list,'暫定名稱',p.title);field(list,'製作階段',ideaStages[item.ideaStage]||'收到點子');
     }else{
       field(list,'遊戲名稱',p.title);field(list,'遊戲簡介',p.summary);field(list,'GitHub',p.repoUrl,{url:true});field(list,'指定提交',p.commitSha);field(list,'第三方試玩',p.gameUrl,{url:true});field(list,'截圖（手動開啟）',p.screenshotUrl,{url:true});field(list,'程式授權',p.license);field(list,'素材權利說明',p.assetRights);field(list,'外部服務',p.externalServices);field(list,'權利確認',p.rightsConfirmed);
     }
@@ -56,11 +59,19 @@
     const form=el('form',undefined,'section moderation');form.id='moderation-form';form.append(el('h3','審核判定'));
     const statusLabel=el('label','狀態'),status=el('select');status.id='moderation-status';for(const [value,name]of Object.entries(statusText)){const o=el('option',name);o.value=value;status.append(o);}status.value=item.status;statusLabel.append(status);form.append(statusLabel);
     const noteLabel=el('label','私人審核備註'),note=el('textarea');note.id='moderation-note';note.maxLength=1000;note.value=item.moderatorNote||'';noteLabel.append(note);form.append(noteLabel);
-    form.append(el('p',item.kind==='quote'?'核准只代表完成這則投稿的審核，不會自動加入現有原話庫或猜題。':'核准後仍須完成下方公開預覽，並另外按下「正式發布遊戲」。','notice'));
+    form.append(el('p',item.kind==='quote'?'核准只代表完成這則投稿的審核，不會自動加入現有原話庫或猜題。':item.kind==='idea'?'點子核准後才可標記精選與製作進度。點子本身不會公開，不能直接上架；完成品仍須另交公開原始碼並審核發布。':'核准後仍須完成下方公開預覽，並另外按下「正式發布遊戲」。','notice'));
     const save=el('button','儲存審核判定');save.type='submit';save.disabled=mutationBusy;form.append(save);form.addEventListener('submit',event=>{event.preventDefault();mutate('admin_update',{status:status.value,note:note.value.trim()});});box.append(form);
     if(item.kind==='game')renderPublish(box,item);
+    if(item.kind==='idea')renderIdeaPipeline(box,item);
     const history=el('section',undefined,'section');history.append(el('h3','審核操作紀錄'));const entries=el('ol',undefined,'history');
     for(const event of (Array.isArray(item.audit)?item.audit:[])){const li=el('li');li.append(el('strong',`${date(event.createdAt)} · ${event.action} · v${event.version}`),el('span',`${statusText[event.fromStatus]||'—'} → ${statusText[event.toStatus]||'—'}${event.note?'\n'+event.note:''}`));entries.append(li);}if(!entries.childNodes.length)entries.append(el('li','尚無審核操作。'));history.append(entries);box.append(history);
+  }
+  function renderIdeaPipeline(box,item){
+    const section=el('section',undefined,'section private');section.append(el('h3','點子製作管線 · 私人'),el('p','收到點子 → 精選入列 → 製作中 → 完成待作品審核。此處只記錄工作進度，不會發布點子或聯絡資料。','notice'));
+    const label=el('label','製作階段'),select=el('select');for(const [value,text]of Object.entries(ideaStages)){const option=el('option',text);option.value=value;option.disabled=item.status!=='approved'&&value!=='received';select.append(option);}select.value=item.ideaStage||'received';label.append(select);section.append(label);
+    if(item.status!=='approved')section.append(el('p','請先在上方把點子設為「已核准」並儲存，才能標記精選與後續製作階段。','notice'));
+    const button=el('button','儲存點子製作階段');button.type='button';button.disabled=mutationBusy;button.addEventListener('click',()=>mutate('admin_idea_stage',{stage:select.value,note:$('moderation-note').value.trim()}));section.append(button);
+    const a=el('a','完成作品後，另交公開原始碼送審 ↗');a.href='/contribute/?type=game&subject='+encodeURIComponent(R.subjectId(item));a.target='_blank';a.rel='noopener noreferrer';section.append(el('p','請把點子收件／內部編號記在作品的私人補充欄，保留原稿與製作紀錄；不要把聯絡資料複製到公開簡介。','notice'),a);box.append(section);
   }
   function renderPublish(box,item){
     const section=el('section',undefined,'section');section.append(el('h3','遊戲公開預覽與人工發布'));
@@ -109,7 +120,7 @@
       const result=await client.call(action,{id:item.id,expectedVersion:item.version,...extra});if(epoch!==uiGeneration||generation!==detailGeneration||!active())return;
       if(result.item?.id!==item.id||!Number.isInteger(result.item.version)||result.item.version<=item.version||!statusText[result.item.status])throw new R.ReviewError('invalid_response');
       const summary=result.item;const index=items.findIndex(x=>x.id===item.id);if(index>=0)items[index]={...items[index],...summary};mutationBusy=false;renderItems();
-      await loadDetail(item.id,{notice:action==='admin_publish'?'遊戲已發布到社群清單。':action==='admin_retract'?'公開遊戲已撤下。':'審核判定已儲存。原話不會自動加入題庫。'});
+      await loadDetail(item.id,{notice:action==='admin_publish'?'遊戲已發布到社群清單。':action==='admin_retract'?'公開遊戲已撤下。':action==='admin_idea_stage'?'點子製作階段已儲存，尚未公開。':'審核判定已儲存。內容不會自動加入題庫或遊戲庫。'});
     }catch(error){if(epoch!==uiGeneration||generation!==detailGeneration)return;mutationBusy=false;if(error.code==='version_conflict'){await loadDetail(item.id,{notice:errors.version_conflict});}else{renderDetail();showError(error);}}
     finally{if(epoch===uiGeneration&&ticket===mutationTicket)mutationBusy=false;}
   }
@@ -121,7 +132,7 @@
   setInterval(()=>{client?.checkExpiry();if(client?.enabled&&Date.now()>=mailUntil)$('send-link').disabled=false;},1000);
   (async()=>{
     try{
-      const response=await fetch('/contribute/config.json?v=17',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw new Error();const settings=await response.json();client=new R.Client({settings,onChange:sessionChanged});
+      const response=await fetch('/contribute/config.json?v=30',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw new Error();const settings=await response.json();client=new R.Client({settings,onChange:sessionChanged});
       if(!client.enabled){clearPrivate();message(errors.not_configured);return;}$('email').disabled=false;$('send-link').disabled=false;
       if(callback){message('正在核對管理員權限…');try{await client.authenticate(callback);await loadList();}catch(error){showError(error);}}
       else message('請以已授權的管理員帳號登入。登入連結不會建立新帳號。');
