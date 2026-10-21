@@ -5,6 +5,10 @@
   const SOURCE_VERSION = 'abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b';
   const ORIGIN = 'https://puwa-taipei.github.io', CARD_BASE = '/game/quiz/cards/v18/';
   const CATALOG_URL = '/data/quiz-share-catalog-v18.json', NOMINATION = '2026-05-13';
+  // Editorial withdrawals are independent of the unchanged archival source.
+  const WITHDRAWN_IDS = Object.freeze(['legislature-hypocrite-152732']);
+  const withdrawn = new Set(WITHDRAWN_IDS);
+  const isQuizEligible = q => !!q && q.quizEligible !== false && !withdrawn.has(q.id);
   const ID = /^[a-z0-9-]{1,100}$/, PERIODS = new Set(['pre','post','all']), MODES = new Set(['score','quote']);
   const own = (value,key) => Object.prototype.hasOwnProperty.call(value,key);
   const error = reason => ({ok:false,reason});
@@ -36,6 +40,7 @@
     if (parts[1] !== sourceVersion || sourceVersion !== SOURCE_VERSION) return error('stale_source');
     const [,,period,count,joined] = parts, ids = joined.split(',');
     if (!PERIODS.has(period) || !/^[0-6]$/.test(count) || ids.length !== ROUND_SIZE || ids.some(id => !ID.test(id)) || new Set(ids).size !== ROUND_SIZE) return error('invalid_challenge');
+    if (ids.some(id => withdrawn.has(id))) return error('unavailable_question');
     return {ok:true,token,sourceVersion,period,correct:Number(count),total:ROUND_SIZE,ids};
   }
   function resolveChallenge(token,quotes,sourceVersion) {
@@ -44,7 +49,7 @@
     if (!Array.isArray(quotes)) return error('unavailable_question');
     const index = new Map();
     for (const q of quotes) {
-      if (!q || q.quizEligible === false || !ID.test(q.id || '')) continue;
+      if (!isQuizEligible(q) || !ID.test(q.id || '')) continue;
       if (index.has(q.id)) return error('unavailable_question');
       index.set(q.id,q);
     }
@@ -65,10 +70,10 @@
     try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password ? u.href : null; } catch { return null; }
   }
   function catalog(value) {
-    if (!value || value.version !== VERSION || value.subjectId !== SUBJECT || value.sourceVersion !== SOURCE_VERSION || value.roundSize !== ROUND_SIZE || value.cardBase !== CARD_BASE || value.cards !== 1036 || !Array.isArray(value.modes) || value.modes.length !== 2 || !value.modes.every(mode => MODES.has(mode)) || new Set(value.modes).size !== 2 || !Array.isArray(value.quotes) || value.quotes.length !== 74) throw new Error('invalid_share_catalog');
+    if (!value || value.version !== VERSION || value.subjectId !== SUBJECT || value.sourceVersion !== SOURCE_VERSION || value.roundSize !== ROUND_SIZE || value.cardBase !== CARD_BASE || value.cards !== 1022 || value.quoteCount !== 73 || !Array.isArray(value.modes) || value.modes.length !== 2 || !value.modes.every(mode => MODES.has(mode)) || new Set(value.modes).size !== 2 || !Array.isArray(value.quotes) || value.quotes.length !== 73) throw new Error('invalid_share_catalog');
     const ids = new Set(), quotes = [];
     for (const q of value.quotes) {
-      if (!q || !ID.test(q.id || '') || ids.has(q.id) || typeof q.eventId !== 'string' || !q.eventId || typeof q.quote !== 'string' || !q.quote || q.quote.length > 600 || typeof q.date !== 'string' || !dateValue(q) || !['spoken','written'].includes(q.medium) || typeof q.context !== 'string' || !q.context || typeof q.sourceType !== 'string' || !q.sourceType || !https(q.sourceUrl)) throw new Error('invalid_share_catalog');
+      if (!isQuizEligible(q) || !ID.test(q.id || '') || ids.has(q.id) || typeof q.eventId !== 'string' || !q.eventId || typeof q.quote !== 'string' || !q.quote || q.quote.length > 600 || typeof q.date !== 'string' || !dateValue(q) || !['spoken','written'].includes(q.medium) || typeof q.context !== 'string' || !q.context || typeof q.sourceType !== 'string' || !q.sourceType || !https(q.sourceUrl)) throw new Error('invalid_share_catalog');
       ids.add(q.id); quotes.push(Object.freeze({...q,sourceUrl:https(q.sourceUrl)}));
     }
     return Object.freeze({...value,quotes:Object.freeze(quotes)});
@@ -76,6 +81,7 @@
   function result(snapshot) {
     if (!snapshot || snapshot.phase !== 'results' || !Array.isArray(snapshot.round) || snapshot.round.length !== ROUND_SIZE || !Array.isArray(snapshot.answers) || snapshot.answers.length !== ROUND_SIZE) throw new Error('incomplete_round');
     const ids = snapshot.round.map(q => q?.id);
+    if (snapshot.round.some(q => !isQuizEligible(q))) throw new Error('unavailable_question');
     if (ids.some(id => !ID.test(id || '')) || new Set(ids).size !== ROUND_SIZE || new Set(snapshot.round.map(q => q.eventId || q.id)).size !== ROUND_SIZE) throw new Error('invalid_round');
     if (snapshot.answers.some((a,i) => a?.question?.id !== ids[i] || typeof a.choice !== 'boolean' || a.answer !== true || a.correct !== a.choice)) throw new Error('invalid_answers');
     const correct = snapshot.answers.filter(a => a.choice).length, score = Math.round(correct / ROUND_SIZE * 100);
@@ -93,7 +99,7 @@
     return '口語發言，來源與語境見原文';
   }
   function cardPath(id,correct,mode,extension = 'html') {
-    if (!ID.test(id || '') || !Number.isInteger(correct) || correct < 0 || correct > ROUND_SIZE || !MODES.has(mode) || !['html','png'].includes(extension)) throw new Error('invalid_card');
+    if (!ID.test(id || '') || withdrawn.has(id) || !Number.isInteger(correct) || correct < 0 || correct > ROUND_SIZE || !MODES.has(mode) || !['html','png'].includes(extension)) throw new Error('invalid_card');
     return CARD_BASE + id + '-' + correct + '-6-' + mode + '.' + extension;
   }
   function buildShare(snapshot,period,sourceCatalog,quoteSourceVersion) {
@@ -128,7 +134,7 @@
     try { if (globalThis.crypto?.subtle) sourceVersion = [...new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',bytes))].map(byte => byte.toString(16).padStart(2,'0')).join(''); } catch {}
     return {data,sourceVersion};
   }
-  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,readSearch,parseChallenge,resolveChallenge,encodeChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
+  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,WITHDRAWN_IDS,isQuizEligible,readSearch,parseChallenge,resolveChallenge,encodeChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (global) global.RecordsQuizShareCore = api;
 })(typeof window === 'undefined' ? null : window);
