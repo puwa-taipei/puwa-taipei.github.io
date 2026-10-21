@@ -46,24 +46,28 @@
     }
     if (kind === 'quote') {
       text('quote','原話'); link('sourceUrl','主要來源');
-      payload.dateUnknown = values.dateUnknown === true;
+      const sourceDate = clean(values.sourceDate);
+      payload.dateUnknown = values.dateUnknown === true || !sourceDate;
       if (payload.dateUnknown) payload.sourceDate = null;
-      else if (!calendarDate(clean(values.sourceDate))) errors.sourceDate = '請填寫有效日期，或勾選「日期尚不確定」。';
-      else payload.sourceDate = clean(values.sourceDate);
-      text('locator','來源位置'); text('context','前後文與背景'); text('note','補充／收錄理由',false);
+      else if (!calendarDate(sourceDate)) errors.sourceDate = '日期若有填寫，請使用有效日期；不確定可留空。';
+      else payload.sourceDate = sourceDate;
+      text('locator','來源位置',false); text('context','前後文與背景',false); text('note','補充／收錄理由',false);
+      for (const key of ['locator','context','note']) payload[key] ??= '';
     } else {
       text('title','遊戲名稱'); text('summary','遊戲簡介');
       link('repoUrl','公開 GitHub 原始碼',true,repository);
       if (errors.repoUrl && clean(values.repoUrl)) errors.repoUrl = '請填入 https://github.com/擁有者/專案 的公開儲存庫，不是分支或檔案網址。';
-      const sha = clean(values.commitSha); if (!/^[a-f\d]{40}$/i.test(sha)) errors.commitSha = '請貼上 40 個十六進位字元的完整 commit SHA。'; else payload.commitSha = sha.toLowerCase();
+      const sha = clean(values.commitSha); if (sha && !/^[a-f\d]{40}$/i.test(sha)) errors.commitSha = '版本編號若有填寫，請貼上 40 個十六進位字元的完整 commit SHA。'; else payload.commitSha = sha.toLowerCase();
       link('gameUrl','第三方試玩網址',false);
-      link('screenshotUrl','封面來源',true,cover);
+      link('screenshotUrl','封面來源',false,cover);
       if (errors.screenshotUrl && clean(values.screenshotUrl)) errors.screenshotUrl = '封面須為公開 HTTPS 的 PNG 或 JPG 圖片網址（路徑以 .png、.jpg 或 .jpeg 結尾）。';
-      text('license','程式授權'); text('assetRights','素材授權與權利說明'); text('externalServices','外部服務說明'); text('note','其他補充',false);
-      if (values.rightsConfirmed !== true) errors.rightsConfirmed = '請確認你有權提供遊戲與素材供審核。';
+      text('license','程式授權',false); text('assetRights','素材授權與權利說明',false); text('externalServices','外部服務說明',false); text('note','其他補充',false);
+      for (const key of ['gameUrl','screenshotUrl']) payload[key] ??= null;
+      for (const key of ['license','assetRights','externalServices','note']) payload[key] ??= '';
       payload.rightsConfirmed = values.rightsConfirmed === true;
     }
     const name = clean(values.creditName);
+    payload.creditName = '';
     payload.creditConsent = values.creditConsent === true;
     if (name) {
       if (name.length > 60 || forbidden.test(name) || /[\r\n\t@]|:\/\//i.test(name)) errors.creditName = '公開署名最多 60 字元，請勿放 Email、網址或控制字元。';

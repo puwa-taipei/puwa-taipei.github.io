@@ -12,6 +12,13 @@
     for (const field of form.elements) if (field.name) values[field.name] = field.type === 'checkbox' ? field.checked : field.value;
     return values;
   }
+  function resetOptionalDetails(form) {
+    for (const details of form.querySelectorAll('.optional-details')) details.open = false;
+  }
+  function revealField(field) {
+    for (let parent = field.parentElement; parent; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true;
+    field.focus();
+  }
   function updateCounts(form) {
     for (const count of form.querySelectorAll('[data-count]')) { const field = form.elements.namedItem(count.dataset.count); count.textContent = field.value.length + ' / ' + field.maxLength; }
     const unknown = form.elements.namedItem('dateUnknown'); if (unknown) form.elements.namedItem('sourceDate').disabled = unknown.checked;
@@ -47,16 +54,20 @@
   function showErrors(form, errors) {
     clearErrors(form);
     const box = form.querySelector('.error-summary'); box.replaceChildren(node('h3','還有幾個地方需要補上。'));
-    const list = node('ul');
+    const list = node('ul'); let firstField = null;
     for (const [key, text] of Object.entries(errors)) {
       const field = form.elements.namedItem(key); if (!field) continue;
+      firstField ||= field;
+      // A folded optional section must never conceal a validation error.
+      for (let parent = field.parentElement; parent && parent !== form; parent = parent.parentElement) if (parent.tagName === 'DETAILS') parent.open = true;
       if (!field.id) field.id = form.dataset.kind + '-' + key;
       const id = field.id + '-error', error = node('p', text, 'field-error'); error.id = id;
       (field.closest('.field') || field.closest('label') || field).after(error);
       field.setAttribute('aria-invalid','true'); field.setAttribute('aria-describedby', ((field.getAttribute('aria-describedby') || '') + ' ' + id).trim());
-      const item = node('li'), link = node('a',text); link.href = '#' + field.id; link.addEventListener('click', event => { event.preventDefault(); field.focus(); }); item.append(link); list.append(item);
+      const item = node('li'), link = node('a',text); link.href = '#' + field.id; link.addEventListener('click', event => { event.preventDefault(); revealField(field); }); item.append(link); list.append(item);
     }
-    box.append(list); box.hidden = false; box.focus();
+    box.append(list); box.hidden = false;
+    if (firstField) revealField(firstField); else box.focus();
   }
   function failure(form, heading, text) {
     const box = form.querySelector('.submission-status'); box.className = 'submission-status failure'; box.replaceChildren(node('h3',heading), node('p',text)); box.hidden = false; box.focus();
@@ -71,6 +82,7 @@
   for (const form of forms) {
     const kind = form.dataset.kind;
     const session = {busy:false,success:false,nonces:core.nonceTracker(() => crypto.randomUUID())}; sessions.set(form,session);
+    resetOptionalDetails(form);
     const draftStatus = form.querySelector('.draft-status');
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey(kind)) || 'null');
@@ -87,6 +99,10 @@
       setReady(form);
     };
     form.addEventListener('input',changed); form.addEventListener('change',changed);
+    form.addEventListener('reset', event => {
+      if (session.busy) { event.preventDefault(); return; }
+      queueMicrotask(() => { clearErrors(form); resetOptionalDetails(form); session.success = false; session.nonces.reset(); form.querySelector('.submission-status').hidden = true; setReady(form); });
+    });
     form.querySelector('[data-action=save]').addEventListener('click', () => {
       try { localStorage.setItem(storageKey(kind),JSON.stringify({kind,savedAt:new Date().toISOString(),fields:core.sanitizeDraft(kind,readValues(form))})); draftStatus.textContent = '草稿已存到這台瀏覽器。聯絡方式與同意勾選沒有保存；其他使用同一瀏覽器的人可能讀到內容。'; }
       catch { draftStatus.textContent = '無法保存草稿，可能是瀏覽器限制或空間不足。請先自行複製內容，離開後可能遺失。'; }
@@ -99,6 +115,8 @@
       event.preventDefault(); if (session.busy || session.success) return;
       if (!apiUrl || !crypto.randomUUID) { failure(form,'目前尚未開放收件。','這次沒有傳送內容。你可以先保存本機草稿，待收件服務開放後再送出。'); return; }
       const values = readValues(form), result = core.validate(kind,values);
+      const sourceDate = form.elements.namedItem('sourceDate');
+      if (sourceDate && !sourceDate.disabled && sourceDate.validity.badInput) { result.errors.sourceDate = '日期尚未填寫完整；可以補上有效日期，或清空留待後續核對。'; result.ok = false; }
       if (!result.ok) { showErrors(form,result.errors); return; }
       clearErrors(form);
       const website = String(values.website || '').slice(0,300);
@@ -131,7 +149,7 @@
   }
   (async () => {
     try {
-      const response = await fetch('/contribute/config.json?v=15',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
+      const response = await fetch('/contribute/config.json?v=16',{credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
       if (!response.ok) throw new Error('config');
       const raw = await response.text(); if (raw.length > 8000) throw new Error('config');
       const config = JSON.parse(raw), candidate = core.publicHttps(config.apiUrl);
