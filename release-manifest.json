@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v16",
+  "version": "public-release-v17",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6802,
-      "sha256": "17799ee29bb671dbf98f1e3788f93a29e5d1727212004844ea3cb3aa24096dab"
+      "bytes": 7046,
+      "sha256": "9ea2063dd18dd6b5df845f0112119d90beb3eb43ef5bf50712968a7528a3da90"
     },
     {
       "path": "anchor.js",
@@ -94,18 +94,18 @@
     },
     {
       "path": "contribute/core.js",
-      "bytes": 8373,
-      "sha256": "c899a9e4573fb57b156db019a9cdb2a31ab18bced8b5461f1b7c243ad8a8d9c2"
+      "bytes": 9179,
+      "sha256": "8aca895deb956b7a2a8177d5a6c6dd4094874e17152d3775491251e6e100302e"
     },
     {
       "path": "contribute/form.js",
-      "bytes": 14476,
-      "sha256": "ef89f5d992c0ed2656cd65034c71e44a2c877ff07d944c6aeb56c1cad822e6f3"
+      "bytes": 16080,
+      "sha256": "87f356e9d7ffbc5e9e6714f238df6d4eade0d5f6ac0108c8e530626aed3bd644"
     },
     {
       "path": "contribute/index.html",
-      "bytes": 18864,
-      "sha256": "896cb74548e7c7563827197eeae258df26616b74b49fa46a3ac4970e8aa3564a"
+      "bytes": 19790,
+      "sha256": "35622aae22c7b9374c627d9d577a173ad49043de71cb394f1cc0d671fa9bd1bb"
     },
     {
       "path": "data/analysis.json",
@@ -126,6 +126,11 @@
       "path": "data/comparison.json",
       "bytes": 171115,
       "sha256": "c6d7ebeacac1f9a8f4674213d61192ad300ed1d5c4dfcff38d8623b9d3ae813b"
+    },
+    {
+      "path": "data/game-catalog.json",
+      "bytes": 1324,
+      "sha256": "8b71e034116d6ad49bce5846085b73a82c16fd56e48dfb67019cf92a20519768"
     },
     {
       "path": "data/policy.json",
@@ -154,8 +159,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26150022,
-      "sha256": "ba33bef47e1d0b8446e55f26048c2b4c9d29b8d7312f3cd715cc2acf4ccc4d36"
+      "bytes": 26151106,
+      "sha256": "26b04eeda2861ea4f40f5ff2f4fb1c6a6bfa13962d2fc894becf6451d6304aa0"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -184,23 +189,33 @@
     },
     {
       "path": "game/hub.css",
-      "bytes": 9142,
-      "sha256": "1b517600e9c8d6f4c35c0e04eaf0c193a6bf2ebcc4e1166e92676cc6fb4dc0e9"
+      "bytes": 15765,
+      "sha256": "0aba9ca0ec9ba21bb859f3b1afc3258136d608d7e9f5c7c334b112fc5e49774a"
     },
     {
       "path": "game/index.html",
-      "bytes": 5408,
-      "sha256": "f844c0c83b2a93a5f898d32f7c698faaba0a67afc36683466f5b2c8dd8c5b6d5"
+      "bytes": 5136,
+      "sha256": "d413a109fa116bb6cd6223cc093ad372ccf3563a5973bb7b83754da41c472cd0"
+    },
+    {
+      "path": "game/library-core.js",
+      "bytes": 6911,
+      "sha256": "ff367a65ebec98f1ea3c44743dc18aec30112f13c1d42f65fd3794c1aa2882fb"
+    },
+    {
+      "path": "game/library.js",
+      "bytes": 9902,
+      "sha256": "3b2dc1d41126b944c929605a337c3722bef9552d74e338cc224cc802c465d05e"
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 23879,
-      "sha256": "90ab30e25f33bb8da3b34f336e5fa9e709b091567e0a76b3b97fb561cc47f275"
+      "bytes": 25362,
+      "sha256": "69841227e69189c2f47df6f6cb9e27a891e0edf0a7fc33ec5e34fde9bc476ec0"
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5039,
-      "sha256": "91b086d42b03e22f0442667c5dc4577c0b7700bb227ac485730e8fdc7710f434"
+      "bytes": 5044,
+      "sha256": "f8d68ff8e8ef8409b640d6161b1c91ff675a8340c9c4c704a6ad2277f6a1d13a"
     },
     {
       "path": "game/red-notes/index.html",
@@ -229,8 +244,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26014,
-      "sha256": "1d840faa0b0217168f0eb76ab94053e4039040540bdf426cb0b34760720a63d0"
+      "bytes": 26430,
+      "sha256": "8e1db19714265be34ab5d85377d19d95c364b4f17ecaddccd59680755257ad54"
     },
     {
       "path": "leaderboard.css",
@@ -243,6 +258,11 @@
       "sha256": "217e159a787210d881bbfb3b88ffee1ad4892f0c295220aa6047fac3f858aabc"
     },
     {
+      "path": "network.css",
+      "bytes": 613,
+      "sha256": "adacaed3f3e81505c08758c824b98896b2fe842ffafff2690b8315288dc07296"
+    },
+    {
       "path": "quiz.css",
       "bytes": 42,
       "sha256": "0d404c536bf86e3fa900937253b4974ef9490094218831ca9494a426d9d2ee27"
@@ -250,12 +270,12 @@
     {
       "path": "review/index.html",
       "bytes": 4478,
-      "sha256": "d6014ce12f22816e076969ff08d7ce228ef0dc5f17c12a5378d6346e6123ef6d"
+      "sha256": "e87a5bd8718b40b005c6c8b98f9e89ec76804659939d3776bb8b4c68fe0d2df6"
     },
     {
       "path": "review/review-core.js",
-      "bytes": 14860,
-      "sha256": "18988a0b8f83fbde02432a6ee4f5bf3fe2fc10bd1af48ed35cda784d1d1aaf71"
+      "bytes": 15831,
+      "sha256": "797e73cf4741a1562791e88c8ffdaf5d89c3834353a2db974342ef44b82592c1"
     },
     {
       "path": "review/review.css",
@@ -264,8 +284,8 @@
     },
     {
       "path": "review/review.js",
-      "bytes": 23215,
-      "sha256": "d996a55a65707163053397b8409b335c0d57d014a36cfb3920c104232501a478"
+      "bytes": 24172,
+      "sha256": "f79d8d1881f043f07e71c0c0efc53513112c27ee2947fff0b1807346bc87c22d"
     },
     {
       "path": "speech-search.css",
@@ -321,5 +341,10 @@
   "adminEmailLoginChecked": false,
   "submissionAutoPublication": false,
   "contributionForm": "minimal-required-collapsed-optional",
-  "gamePublication": "complete-reviewed-fixed-version"
+  "gamePublication": "complete-reviewed-fixed-version",
+  "sharedGameCatalog": "https://puwa-taipei.github.io/data/game-catalog.json",
+  "subjects": [
+    "shen-pao-yang",
+    "su-chiao-hui"
+  ]
 }
