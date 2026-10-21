@@ -30,15 +30,21 @@ jobs:
         run: |
           python -m pip install --only-binary=:all: --require-hashes -r tools/quiz-share/requirements-og.txt
       - name: Validate build logic
-        run: python tools/quiz-share/test-quiz-og.py
+        run: |
+          python tools/quiz-share/test-quiz-og.py
+          python tools/quiz-share/legacy-v18/test-quiz-og.py
       - name: Assemble exact public payload allowlist
         run: python tools/quiz-share/assemble-pages.py --source . --output _site
       - name: Fetch verified open font outside the public artifact
         run: python tools/quiz-share/fetch-og-font.py --output "$RUNNER_TEMP/quiz-og-font"
       - name: Build immutable OG landing pages and PNGs
-        run: python tools/quiz-share/build-quiz-og.py --site-dir _site --font "$RUNNER_TEMP/quiz-og-font/NotoSansCJKtc-Bold.otf"
+        run: |
+          python tools/quiz-share/legacy-v18/build-quiz-og.py --site-dir _site --source _site/data/quotes-v18-archive.json --font "$RUNNER_TEMP/quiz-og-font/NotoSansCJKtc-Bold.otf"
+          python tools/quiz-share/build-quiz-og.py --site-dir _site --font "$RUNNER_TEMP/quiz-og-font/NotoSansCJKtc-Bold.otf"
       - name: Verify generated public cards
-        run: python tools/quiz-share/test-quiz-og.py --site-dir _site
+        run: |
+          python tools/quiz-share/legacy-v18/test-quiz-og.py --site-dir _site
+          python tools/quiz-share/test-quiz-og.py --site-dir _site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
