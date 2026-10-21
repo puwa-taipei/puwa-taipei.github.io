@@ -1,0 +1,18 @@
+/* Each changed numeral moves once; no continuous animation or layout loop. */
+.hero-strip #elapsed-days.tenure-clock{font-size:40px;line-height:1.2;letter-spacing:0;white-space:nowrap;min-width:0;font-weight:450;font-variant-numeric:tabular-nums}
+.tenure-value{display:inline-flex;align-items:baseline;gap:0;font-family:ui-monospace,'SFMono-Regular',Consolas,'Liberation Mono',monospace;max-width:100%}
+.tenure-integer,.tenure-fraction-digits{display:inline-flex;flex:none;align-items:baseline}
+.tenure-fraction{display:inline-flex;align-items:baseline;font-size:20px;color:var(--ink-soft);margin-left:1px;letter-spacing:0}
+.tenure-dot{display:inline-block;width:.45em;text-align:center}
+.tenure-digit{position:relative;display:inline-block;flex:0 0 .64em;width:.64em;height:1.15em;overflow:hidden;vertical-align:bottom}
+.tenure-face{position:absolute;inset:0;display:block;height:1.15em;line-height:1.15em;text-align:center}
+.tenure-enter{animation:tenure-enter .58s cubic-bezier(.2,.65,.25,1) both}
+.tenure-leave{animation:tenure-leave .58s cubic-bezier(.2,.65,.25,1) both}
+body .hero-strip #elapsed-days .tenure-unit{display:inline-block;font-family:var(--sans);font-size:14px;line-height:1.2;margin-left:5px;letter-spacing:0;color:var(--ink-soft);font-weight:400}
+@keyframes tenure-enter{from{transform:translateY(100%);opacity:.35}to{transform:translateY(0);opacity:1}}
+@keyframes tenure-leave{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
+.tenure-clock[data-tenure-quiet=true] .tenure-enter{animation:none}
+.tenure-clock[data-tenure-quiet=true] .tenure-leave{display:none}
+@media(max-width:580px){.hero-strip #elapsed-days.tenure-clock{font-size:clamp(22px,6.8vw,28px)}.tenure-fraction{font-size:clamp(12px,3.8vw,15px)}body .hero-strip #elapsed-days .tenure-unit{font-size:12px;margin-left:3px}.tenure-fraction{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.tenure-enter{animation:none}.tenure-leave{display:none}}
+@media print{.tenure-enter{animation:none;transform:none;opacity:1}.tenure-leave{display:none}}

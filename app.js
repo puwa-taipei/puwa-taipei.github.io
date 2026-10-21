@@ -74,7 +74,6 @@
   function renderData() {
     const d = state.data, m = d.meta || {}, t = d.totals || {};
     setText('asof',`觀測截止 ${m.end || '未提供'}`);
-    $('elapsed-days').innerHTML = `${fmt(m.elapsedDays)}<small>天</small>`;
     ['primary','joint','cosign'].forEach(role => setText(`total-${role}`,fmt(t[role])));
     setText('total-unique',fmt(t.unique));
     setText('role-note',`${fmt(t.primary)}（主提案）＋${fmt(t.joint)}（共同提案）＋${fmt(t.cosign)}（連署）＝${fmt(t.unique)}（去重參與合計）。另1件修憲連署未列入法律案主表。`);

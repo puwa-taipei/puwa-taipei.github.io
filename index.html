@@ -32,7 +32,8 @@
   <script src="./game/quiz-share-core.js?v=28" defer></script>
   <script src="./game/quiz-share.js?v=18" defer></script>
   <script src="./game/quiz-engine.js?v=25" defer></script>
-  <script src="./app.js?v=25" defer></script>
+  <script src="./tenure-clock.js?v=29" defer></script>
+  <script src="./app.js?v=29" defer></script>
   <script src="./comparison.js?v=20" defer></script>
   <script src="./statement-cards.js?v=27" defer></script>
   <script src="./statements.js?v=26" defer></script>
@@ -40,7 +41,7 @@
   <script src="./leaderboard.js?v=28" defer></script>
   <script src="./game3d.js" defer></script>
   <link rel="stylesheet" href="./game3d.css">
-<link rel="stylesheet" href="/typography.css?v=19"></head>
+<link rel="stylesheet" href="/typography.css?v=19"><link rel="stylesheet" href="./tenure-clock.css?v=29"></head>
 <body data-subject-id="shen-pao-yang" data-speaker="沈伯洋" data-nomination-date="2026-05-13">
   <a class="skip-link" href="#records">直接查看紀錄</a>
   <div class="observation-network"><span>人物觀測</span><a href="https://puwa.taipei/" aria-current="page">001 ／ 沈伯洋</a><a href="https://huiao-new-taipei.github.io/">002 ／ 蘇巧慧 ↗</a><a href="/game/?person=all">共用遊戲庫 ↗</a></div>
@@ -60,7 +61,7 @@
           <span class="art-note">每一筆數字，都應該找得到原點。</span>
         </div>
       </div>
-      <div class="hero-strip"><div><span class="strip-label">觀測起點</span><strong>2024.02.01</strong><span>第 11 屆立委上任</span></div><div><span class="strip-label">日曆期間</span><strong id="elapsed-days">—<small>天</small></strong><span>日期相減，非開會天數</span></div><div><span class="strip-label">觀測原則</span><strong class="strip-principle">有來源，也有界限。</strong><span>保留不確定性，公開計算口徑</span></div></div>
+      <div class="hero-strip"><div><span class="strip-label">觀測起點</span><strong>2024.02.01</strong><span>第 11 屆立委上任</span></div><div><span class="strip-label">上任至今</span><strong id="elapsed-days" class="tenure-clock" data-start="2024-02-01T00:00:00+08:00" role="timer" aria-live="off" aria-label="正在計算自2024年2月1日起的日曆經過天數。">—<small>天</small></strong><span>台北時間 · 非開會天數</span></div><div><span class="strip-label">觀測原則</span><strong class="strip-principle">有來源，也有界限。</strong><span>保留不確定性，公開計算口徑</span></div></div>
     </section>
 
     <div id="load-error" class="wrap load-error" hidden role="alert"></div>

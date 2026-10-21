@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v28",
+  "version": "public-release-v29",
   "date": "2026-10-22",
   "files": [
     {
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 28246,
-      "sha256": "b9cebea68d1cef8034013ee3b62187ac14e696950379143a056257b4c9842b07"
+      "bytes": 28169,
+      "sha256": "ee63544c0fc8bb5b3c2c4792a05b0604b3af1520bca524e3f5c24524d946e36b"
     },
     {
       "path": "assets/og-game-hub.png",
@@ -284,8 +284,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 27194,
-      "sha256": "41811ac9371ce9644d44ad10193ecaffc1097fc03ea5a2abcb27dc2a9409646a"
+      "bytes": 27464,
+      "sha256": "131c2c598b5edec33c45110fda8672ec2fb43ffa6639e26bdfe9947757562d43"
     },
     {
       "path": "leaderboard.css",
@@ -361,6 +361,16 @@
       "path": "style.css",
       "bytes": 48746,
       "sha256": "e1d960e090e04f92396b955a5b14807a85cb19cb7472db24be13fa99f8000975"
+    },
+    {
+      "path": "tenure-clock.css",
+      "bytes": 2062,
+      "sha256": "7e6e1e9b1a5209932dc03a23c14a36fe651795db314f4275e99b651139101eac"
+    },
+    {
+      "path": "tenure-clock.js",
+      "bytes": 8922,
+      "sha256": "93e82980a05e5a59d1588dd04b0232e89292a7593495b6b8b9275d3137038642"
     },
     {
       "path": "typography.css",
