@@ -2,6 +2,9 @@
   "version": "v18",
   "subjectId": "shen-pao-yang",
   "sourceVersion": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b",
+  "excludedQuoteIds": [
+    "legislature-hypocrite-152732"
+  ],
   "quoteIds": [
     "legislature-hypocrite-152732",
     "iq-criticism-20260122",

@@ -4,9 +4,11 @@ This directory is published as `tools/quiz-share/` in the public source reposito
 It generates real HTML Open Graph tags and 1200×630 PNGs before Pages deployment.
 The browser never needs an API key or a score-submission database for this feature.
 
-The v18 corpus is frozen to 74 existing quiz-eligible items and the exact SHA256 of
-the existing `data/quotes.json`. Each item has seven six-question outcomes and two
-layouts (`score`, `quote`): 1,036 HTML pages plus 1,036 PNGs. Original quotation,
+The original v18 membership pin retains 74 items and the exact SHA256 of the
+unmodified `data/quotes.json`. The v22 editorial exclusion list withdraws
+`legislature-hypocrite-152732` from play and sharing without rewriting its archived
+source record. The active catalog has 73 items. Each has seven six-question
+outcomes and two layouts (`score`, `quote`): 1,022 HTML pages plus 1,022 PNGs. Original quotation,
 human date, full front context and source-type qualification are retained. Human
 landing pages also show full context, source/video links and evidence limits.
 The shared score is a player claim, not a verified leaderboard entry.
@@ -46,6 +48,16 @@ cards without creating a partial public catalog.
 `sourceVersion` is the SHA256 of the unmodified raw source JSON, not a hash of a
 reserialized object. Source changes require a reviewed new card version; do not
 replace old v18 URLs with a different quotation or outcome.
+
+Editorial withdrawals are a separate allowlisted exclusion, applied only after
+validating the complete original membership and source hash. The builder removes
+only that item's 14 PNG and 14 HTML paths, with resolved paths confined to the
+card directory; it never deletes directories or substitutes another quotation.
+Existing PNGs with matching source metadata and a valid CRC are preserved byte
+for byte. The unaffected v18 card URLs and source identity remain unchanged.
+Generated HTML loads the v22 core policy so challenges containing a withdrawn
+item are rejected, while unaffected existing challenges remain usable. Platform
+preview caches and copies already downloaded by users cannot be remotely erased.
 
 ## Font and deployment
 
