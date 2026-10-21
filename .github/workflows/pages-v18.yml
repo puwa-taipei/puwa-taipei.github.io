@@ -1,0 +1,59 @@
+name: Build static quiz cards and deploy Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main' && github.repository == 'puwa-taipei/puwa-taipei.github.io'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout reviewed public source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Use Python 3.12
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Install pinned raster renderer
+        run: python -m pip install --only-binary=:all: --require-hashes -r tools/quiz-share/requirements-og.txt
+      - name: Validate build logic
+        run: python tools/quiz-share/test-quiz-og.py
+      - name: Assemble exact public payload allowlist
+        run: python tools/quiz-share/assemble-pages.py --source . --output _site
+      - name: Fetch verified open font outside the public artifact
+        run: python tools/quiz-share/fetch-og-font.py --output "$RUNNER_TEMP/quiz-og-font"
+      - name: Build immutable OG landing pages and PNGs
+        run: python tools/quiz-share/build-quiz-og.py --site-dir _site --font "$RUNNER_TEMP/quiz-og-font/NotoSansCJKtc-Bold.otf"
+      - name: Verify generated public cards
+        run: python tools/quiz-share/test-quiz-og.py --site-dir _site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: _site
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.repository == 'puwa-taipei/puwa-taipei.github.io'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified artifact to the existing Pages site
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
