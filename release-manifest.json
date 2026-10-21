@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v15",
+  "version": "public-release-v16",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6269,
-      "sha256": "a54d07ac1702431d7277d39d86211e83d3ba6e69ca65bece04fe81a62d04e786"
+      "bytes": 6802,
+      "sha256": "17799ee29bb671dbf98f1e3788f93a29e5d1727212004844ea3cb3aa24096dab"
     },
     {
       "path": "anchor.js",
@@ -89,23 +89,23 @@
     },
     {
       "path": "contribute/contribute.css",
-      "bytes": 10451,
-      "sha256": "3d423d1148b571519f1a34c5b1088cc5fb962b6598d99772c5c6cd34e29f06db"
+      "bytes": 12310,
+      "sha256": "2cd6b0d2ead68ee5b02a6a7009fc4cde77ab2fa5cf6aaf0ad2be3e56b7b34027"
     },
     {
       "path": "contribute/core.js",
-      "bytes": 7992,
-      "sha256": "216d96d4314d71f4bcce18133faf05a5c676b93946e7f387bec67400c983b72e"
+      "bytes": 8373,
+      "sha256": "c899a9e4573fb57b156db019a9cdb2a31ab18bced8b5461f1b7c243ad8a8d9c2"
     },
     {
       "path": "contribute/form.js",
-      "bytes": 13022,
-      "sha256": "2e673e15a72730da2e910675f72eaec697f776cc684c7854ebe957dbfeb3497c"
+      "bytes": 14476,
+      "sha256": "ef89f5d992c0ed2656cd65034c71e44a2c877ff07d944c6aeb56c1cad822e6f3"
     },
     {
       "path": "contribute/index.html",
-      "bytes": 17737,
-      "sha256": "9d19b99794882d2c6e79c996af28716106ede9d77b67419676d40e4f4e710104"
+      "bytes": 18864,
+      "sha256": "896cb74548e7c7563827197eeae258df26616b74b49fa46a3ac4970e8aa3564a"
     },
     {
       "path": "data/analysis.json",
@@ -154,8 +154,8 @@
     },
     {
       "path": "downloads/obsidian-vault.zip",
-      "bytes": 26148372,
-      "sha256": "299fcaa21a9594535e6803f2d676a2e4dc340bad4c606abc0b232ded2aeb595a"
+      "bytes": 26150022,
+      "sha256": "ba33bef47e1d0b8446e55f26048c2b4c9d29b8d7312f3cd715cc2acf4ccc4d36"
     },
     {
       "path": "downloads/primary-bills.csv",
@@ -249,13 +249,13 @@
     },
     {
       "path": "review/index.html",
-      "bytes": 4433,
-      "sha256": "7bae467cb03ee56bf3a043269fed0109af2337db0058740ba101df67d24b5330"
+      "bytes": 4478,
+      "sha256": "d6014ce12f22816e076969ff08d7ce228ef0dc5f17c12a5378d6346e6123ef6d"
     },
     {
       "path": "review/review-core.js",
-      "bytes": 13660,
-      "sha256": "da49aa30b27d7bfab6145714f8874b2a100b5844f1a7658788de24e7e0bd0a68"
+      "bytes": 14860,
+      "sha256": "18988a0b8f83fbde02432a6ee4f5bf3fe2fc10bd1af48ed35cda784d1d1aaf71"
     },
     {
       "path": "review/review.css",
@@ -264,8 +264,8 @@
     },
     {
       "path": "review/review.js",
-      "bytes": 20419,
-      "sha256": "a7dfb59424df4ff3297f1e0bdcd12d44b14f013269a0617de441cd469b0b4219"
+      "bytes": 23215,
+      "sha256": "d996a55a65707163053397b8409b335c0d57d014a36cfb3920c104232501a478"
     },
     {
       "path": "speech-search.css",
@@ -319,5 +319,7 @@
   "communityIntake": "remote-checked",
   "privateModeration": "server-auth-required",
   "adminEmailLoginChecked": false,
-  "submissionAutoPublication": false
+  "submissionAutoPublication": false,
+  "contributionForm": "minimal-required-collapsed-optional",
+  "gamePublication": "complete-reviewed-fixed-version"
 }
