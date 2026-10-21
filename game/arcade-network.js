@@ -39,7 +39,9 @@
       const timer=setTimeout(()=>controller.abort(),9000);
       if(!body){u.searchParams.set('action',action);if(id)u.searchParams.set('id',id);}
       try{
-        const response=await this.#fetch(u.href,{method:body?'POST':'GET',credentials:'omit',cache:'no-store',headers:body?{'content-type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined,signal:controller.signal});
+        // Call fetch without binding the Client instance as the native browser receiver.
+        const request=this.#fetch;
+        const response=await request(u.href,{method:body?'POST':'GET',credentials:'omit',cache:'no-store',headers:body?{'content-type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined,signal:controller.signal});
         const data=await response.json().catch(()=>null);
         if(!response.ok)throw new ArcadeError(typeof data?.error==='string'?data.error:'temporarily_unavailable',response.status);
         if(!data||typeof data!=='object')throw new ArcadeError('invalid_response');

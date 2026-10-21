@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v25",
+  "version": "public-release-v26",
   "date": "2026-10-21",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10575,
-      "sha256": "b6351a1336f1cc7aa9fbe94f93bbabb4c3e96e12fbd87cd96e70ea981880eed1"
+      "bytes": 12133,
+      "sha256": "f88500ab889810702c8234b29941272f5b974698fa14b1fc6dd515a1b3f5a240"
     },
     {
       "path": "anchor.js",
@@ -163,6 +163,11 @@
       "sha256": "a475d5be2be38303e922dbc34b5720bbd72c885e6140f14118509748a070a22c"
     },
     {
+      "path": "data/statement-media-v26.json",
+      "bytes": 93582,
+      "sha256": "d532198e75158a4a75101b321f863c6e35e63bfe49de382e0209028fdcb3d988"
+    },
+    {
       "path": "downloads/bills.csv",
       "bytes": 418214,
       "sha256": "3b2173c2e91d3649df9380d38930e86f1461dc5832f971b14cf2bec806316e36"
@@ -194,13 +199,13 @@
     },
     {
       "path": "game/arcade-config.json",
-      "bytes": 19,
-      "sha256": "54df7efeba3e42db270a0d6a6883fa9d4a731cabecaa736fbcb304f386bbbfdf"
+      "bytes": 86,
+      "sha256": "94a7172dd8195709188967c4cb224510dd704d6f92cfaf5f1e02cb1775c1df8b"
     },
     {
       "path": "game/arcade-network.js",
-      "bytes": 7967,
-      "sha256": "8a5cfbf9a1a4dd9702ac34776620fd75c8e02cf283573b5e7a66792f697e6703"
+      "bytes": 8088,
+      "sha256": "94b6928784ff877cc02313bb83d0121d6f7b172e3d685e482968ac63d9db36d1"
     },
     {
       "path": "game/hub.css",
@@ -254,13 +259,13 @@
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2559,
-      "sha256": "8368a937ccea39183d9f3ec6b4216d8753507cf0d4c63fc61433fe2df6a24f8d"
+      "bytes": 2558,
+      "sha256": "d0a96e48ceafc15d5616053ec0ca64099fd9f2c7b09bd0c209645db42ab48557"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2620,
-      "sha256": "8394018ea7f8dee21cf2d0292f0178a05da319b65d2b76b737edf7db1c6b55c6"
+      "bytes": 2619,
+      "sha256": "f62081bd8881b824b16b7eb0f0fddb539aaf7206790b7c2d14ec1b75878b348d"
     },
     {
       "path": "game/swipe-ui.css",
@@ -279,8 +284,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 27126,
-      "sha256": "c91250dc9b97cb5abf99f0e6ca4f3d44d5bf34da4be8a4f19b72a120ff5e17cc"
+      "bytes": 27244,
+      "sha256": "fc97c79e7ffa1e5d9e1accc74da1b8dd9eca7da92a91e180a4d93cef07408bc2"
     },
     {
       "path": "leaderboard.css",
@@ -289,8 +294,8 @@
     },
     {
       "path": "leaderboard.js",
-      "bytes": 23177,
-      "sha256": "217e159a787210d881bbfb3b88ffee1ad4892f0c295220aa6047fac3f858aabc"
+      "bytes": 23000,
+      "sha256": "0a5b16db8f447855b6f0d56a330c8b4ca902f7a9c177433e35d86d4e06200ae0"
     },
     {
       "path": "network.css",
@@ -333,14 +338,24 @@
       "sha256": "635d103d82d4d35ff6e7b23c3ed1b789bf4657087dd429200f1711280b7c84f0"
     },
     {
+      "path": "statement-cards.css",
+      "bytes": 10268,
+      "sha256": "3a5ba3c20a4b1da1e2519e708dba59bab18380a2ca9914a91c43dd571fee5e33"
+    },
+    {
+      "path": "statement-cards.js",
+      "bytes": 34812,
+      "sha256": "3ffa8086afdad46b21c6e0f38d7df4aef5e16cf1485d68fa1105d3f570336728"
+    },
+    {
       "path": "statements.css",
       "bytes": 6082,
       "sha256": "965f6be368142654a68f1b10567ad45fa550bfb29e670536121949a0db1823da"
     },
     {
       "path": "statements.js",
-      "bytes": 13243,
-      "sha256": "c636f152ee5cf7c1a96369a598d1d9ca1b4b03bdeb6489661f758a2bbcb4a03b"
+      "bytes": 13775,
+      "sha256": "a89b1d33b84b539366842b9686c09ea8412227df2891112f55422ef239b4f4df"
     },
     {
       "path": "style.css",

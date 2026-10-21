@@ -148,10 +148,10 @@
       status.textContent='這局已登錄。分享連結會帶出這筆公開成績；預覽仍使用遊戲封面。';draw();updatePublic();loadTop();
     }catch(error){publicError(error);}
   });
-  function loadNetwork(){return new Promise((resolve,reject)=>{if(window.RecordsArcadeNetwork){resolve(window.RecordsArcadeNetwork);return;}const script=document.createElement('script');script.src='/game/arcade-network.js?v=13';script.onload=()=>window.RecordsArcadeNetwork?resolve(window.RecordsArcadeNetwork):reject(new Error('network unavailable'));script.onerror=()=>reject(new Error('network unavailable'));document.head.append(script);});}
+  function loadNetwork(){return new Promise((resolve,reject)=>{if(window.RecordsArcadeNetwork){resolve(window.RecordsArcadeNetwork);return;}const script=document.createElement('script');script.src='/game/arcade-network.js?v=26';script.onload=()=>window.RecordsArcadeNetwork?resolve(window.RecordsArcadeNetwork):reject(new Error('network unavailable'));script.onerror=()=>reject(new Error('network unavailable'));document.head.append(script);});}
   async function initializeNetwork(){
     try{
-      const [library,config]=await Promise.all([loadNetwork(),fetch('/game/arcade-config.json?v=13',{cache:'no-cache',credentials:'omit'}).then(response=>{if(!response.ok)throw new Error('config unavailable');return response.json();})]);
+      const [library,config]=await Promise.all([loadNetwork(),fetch('/game/arcade-config.json?v=26',{cache:'no-cache',credentials:'omit'}).then(response=>{if(!response.ok)throw new Error('config unavailable');return response.json();})]);
       api=new library.Client({apiUrl:config.apiUrl,onChange:updatePublic});apiConfigured=api.enabled;
       if(!apiConfigured){if(hasSharedId){status.textContent='這筆公開成績需要排行榜連線，目前尚未啟用。仍可直接挑戰新的一局。';shareState.textContent='排行榜尚未啟用，這筆公開成績目前無法核對。';}updatePublic();return;}
       globalTitle.textContent='公開排行榜 · 近 30 日 TOP 20';globalBadge.textContent='連線中';refresh.disabled=false;
