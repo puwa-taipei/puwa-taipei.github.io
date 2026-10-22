@@ -199,6 +199,9 @@ def existing_paths(site: Path) -> set[str]:
             # The immutable v32 generator independently owns these historical outputs.
             if relative == "q/build-manifest-v32.json" or re.fullmatch(r"q/24[0-9a-z][0-6][sq]/index\.html", relative):
                 continue
+            # Independent v41 aliases are not inputs or outputs of this generator.
+            if relative == "q/build-manifest-v41.json" or re.fullmatch(r"q/41[0-9a-z]{2}[0-6][sq]/index\.html", relative):
+                continue
             result.add(relative)
     return result
 
