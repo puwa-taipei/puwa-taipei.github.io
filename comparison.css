@@ -70,3 +70,256 @@ body .cmp-temporal-card>details{border-top:1px solid var(--line);padding-top:17p
 @media(max-width:1000px){.cmp-rings-legend-row{grid-template-columns:minmax(160px,1fr) 88px 88px 88px;gap:12px}.cmp-rings-panel{padding:18px}.cmp-rings-heading h3{font-size:21px}}
 @media(max-width:760px){.cmp-policy-rings-card{padding:23px}.cmp-rings-heading{grid-template-columns:1fr;gap:14px}.cmp-rings-score{text-align:left;display:flex;gap:12px;align-items:baseline}.cmp-rings-score strong{font-size:40px}.cmp-rings-score>span{font-size:9px}.cmp-rings-heading h3{font-size:20px}.cmp-rings-guide{gap:8px 20px}.cmp-rings-pair{gap:14px}.cmp-rings-panel{padding:16px 13px}.cmp-rings-panel h4{font-size:12px}.cmp-rings-panel-heading p{font-size:8px}.cmp-rings-fill{display:block;min-height:61px}.cmp-rings-fill>span{display:block;font-size:9px}.cmp-rings-fill>strong{display:block;margin-top:4px}.cmp-rings-legend-row{grid-template-columns:minmax(115px,1fr) 64px 64px 64px;gap:9px;font-size:10px}.cmp-rings-legend-row button{font-size:10px}.cmp-rings-legend-head{font-size:9px}.cmp-rings-legend-head small{font-size:7px}}
 @media(max-width:520px){.cmp-policy-rings-card{padding:20px 14px}.cmp-rings-heading h3{font-size:18px}.cmp-rings-pair{gap:9px}.cmp-rings-panel{padding:13px 7px}.cmp-rings-panel-heading{min-height:88px}.cmp-rings-panel h4{font-size:10px}.cmp-rings-panel-heading>span{font-size:8px;letter-spacing:.02em}.cmp-rings-panel-heading p{font-size:8px}.cmp-rings-total{font-size:47px}.cmp-rings-unit{font-size:13px}.cmp-rings-panel-note{font-size:8px;min-height:30px}.cmp-rings-fill>span{font-size:8px}.cmp-rings-fill>strong{font-size:20px}.cmp-rings-caption,.cmp-rings-axis-note{font-size:9px}.cmp-rings-guide p{font-size:9px}.cmp-rings-legend-row{grid-template-columns:minmax(100px,1fr) 46px 46px 50px;gap:7px;font-size:9px}.cmp-rings-legend-row>span:first-child{gap:5px}.cmp-rings-legend-row i{width:7px;height:7px}.cmp-rings-legend-row button{font-size:9px}.cmp-rings-legend-head{font-size:8px}.cmp-rings-legend-head small{font-size:6px}}
+
+/* v38: topic-by-topic proportion stamps. Keep all percentages and delta data visible. */
+body .cmp-chart-with-stamps > .cmp-chart-row {
+  grid-template-columns: minmax(170px,.95fr) minmax(0,1.25fr) 128px minmax(0,1.25fr) 88px;
+  gap: 20px;
+  min-height: 120px;
+  padding: 18px 0;
+}
+body .cmp-chart-with-stamps > .cmp-chart-row > * {min-width:0}
+body .cmp-chart-with-stamps > .cmp-chart-labels {
+  min-height: 0;
+  padding: 16px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+body .cmp-chart-with-stamps > .cmp-chart-labels > span {font-size:16px;line-height:1.6}
+body .cmp-chart-with-stamps > .cmp-chart-labels > span small {font-size:14px;line-height:1.6;margin-top:3px}
+body .cmp-chart-with-stamps > .cmp-chart-labels > span:nth-child(3) {text-align:center}
+body .cmp-chart-with-stamps .cmp-topic-button {font-size:17px;font-weight:650;line-height:1.7;gap:8px}
+body .cmp-chart-with-stamps .cmp-topic-button > span {display:inline;font-size:18px;flex:0 0 auto}
+body .cmp-chart-with-stamps .cmp-bar-cell {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 58px;
+  gap: 10px;
+  align-items: center;
+}
+body .cmp-chart-with-stamps .cmp-bar-cell > .cmp-bar-label {display:none}
+body .cmp-chart-with-stamps .cmp-bar-track {height:10px;min-width:0;border-radius:1px}
+body .cmp-chart-with-stamps .cmp-bar-cell > .cmp-bar-value {
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.6;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+body .cmp-chart-with-stamps .cmp-stamp-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2px 0;
+  text-align: center;
+}
+body .cmp-chart-with-stamps .cmp-zero-tag {
+  display: block;
+  max-width: 100%;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+body .cmp-chart-with-stamps .cmp-delta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+body .cmp-chart-with-stamps .cmp-delta-label {display:none}
+body .cmp-chart-with-stamps .cmp-delta-value {font-size:26px;line-height:1.2;letter-spacing:-.025em;white-space:nowrap}
+body .cmp-chart-with-stamps .cmp-delta small {font-size:14px;line-height:1.5;margin:0;white-space:nowrap}
+
+/* The seal is a CSS impression, with local type and intact, high-contrast glyphs. */
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal {
+  --cmp-seal-ink: #a3322a;
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 80px;
+  height: 80px;
+  padding: 7px;
+  border: 3px solid currentColor;
+  border-radius: 7% 3% 6% 4% / 4% 8% 3% 6%;
+  color: var(--cmp-seal-ink);
+  background: rgba(255,253,246,.35);
+  transform: rotate(-5deg);
+  vertical-align: middle;
+}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid currentColor;
+  border-radius: 2px 4px 2px 3px;
+  opacity: .9;
+  pointer-events: none;
+}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px dotted currentColor;
+  border-radius: inherit;
+  opacity: .24;
+  pointer-events: none;
+}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DFKai-SB','BiauKai','KaiTi','STKaiti','Noto Serif TC','PMingLiU',serif;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: .035em;
+  text-align: center;
+  text-shadow: .3px 0 currentColor,-.2px .2px currentColor;
+  -webkit-font-smoothing: auto;
+}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-text > span {display:block;white-space:nowrap}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-large {--cmp-seal-ink:#a3322a}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-marked {--cmp-seal-ink:#b65335;transform:rotate(3deg)}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-some {--cmp-seal-ink:#896124;transform:rotate(-3deg)}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-near {--cmp-seal-ink:#38645d;transform:rotate(2deg)}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-none {--cmp-seal-ink:#6c756e;transform:rotate(-1deg)}
+
+body .cmp-stamp-guide {
+  margin: 24px 0 22px;
+  padding: 22px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+body .cmp-stamp-guide :is(h3,h4) {font-size:20px;line-height:1.5;margin:0 0 8px}
+body .cmp-stamp-guide p {max-width:940px;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+body .cmp-stamp-guide p strong {color:var(--ink);font-weight:650}
+body .cmp-stamp-guide .cmp-stamp-legend {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 14px 20px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+body .cmp-stamp-guide .cmp-stamp-legend > li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 4px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+body .cmp-stamp-guide .cmp-stamp-legend > li > :not(.cmp-seal) {min-width:0;overflow-wrap:anywhere}
+body .cmp-stamp-guide .cmp-stamp-legend strong {display:block;font-size:16px;font-weight:650}
+body .cmp-stamp-guide .cmp-seal-mini {width:54px;height:54px;padding:5px;border-width:2px}
+body .cmp-stamp-guide .cmp-seal-mini::before {inset:3px}
+body .cmp-stamp-guide .cmp-seal-mini .cmp-seal-text {font-size:19px;line-height:1.04;letter-spacing:.02em}
+body .cmp-stamp-guide .cmp-stamp-empty-example {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 940px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  color: #6c756e;
+  font-size: 16px;
+  line-height: 1.8;
+}
+body .cmp-stamp-guide .cmp-stamp-empty-example > :not(.cmp-seal) {min-width:0}
+
+@media (min-width:701px) and (max-width:1000px) {
+  body .cmp-chart-with-stamps > .cmp-chart-row {
+    grid-template-columns: 128px minmax(0,1fr) 128px minmax(0,1fr) 76px;
+    gap: 12px;
+  }
+  body .cmp-chart-with-stamps .cmp-bar-cell {grid-template-columns:minmax(0,1fr) 52px;gap:7px}
+}
+@media (max-width:1000px) {
+  body .cmp-stamp-guide .cmp-stamp-legend {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px) {
+  body .cmp-chart-with-stamps {position:relative}
+  body .cmp-chart-with-stamps > .cmp-chart-row {
+    grid-template-columns: minmax(0,1fr) 92px minmax(0,1fr);
+    grid-template-areas: 'topic topic topic' 'leg seal policy' 'delta delta delta';
+    gap: 14px 12px;
+    min-height: 0;
+    padding: 22px 0;
+    align-items: center;
+  }
+  /* Visually hidden only: retain the row and its five ARIA column headers. */
+  body .cmp-chart-with-stamps > .cmp-chart-row.cmp-chart-labels {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    min-height: 0;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  body .cmp-chart-with-stamps .cmp-topic-cell {grid-area:topic}
+  body .cmp-chart-with-stamps .cmp-leg-cell {grid-area:leg}
+  body .cmp-chart-with-stamps .cmp-stamp-cell {grid-area:seal;gap:7px}
+  body .cmp-chart-with-stamps .cmp-policy-cell {grid-area:policy}
+  body .cmp-chart-with-stamps .cmp-topic-button {font-size:18px;line-height:1.65;min-height:32px;align-items:flex-start}
+  body .cmp-chart-with-stamps .cmp-topic-button > span {opacity:.75;line-height:1.65}
+  body .cmp-chart-with-stamps .cmp-bar-cell {grid-template-columns:minmax(0,1fr);gap:8px;align-self:center}
+  body .cmp-chart-with-stamps .cmp-bar-cell > .cmp-bar-label {
+    display: flex;
+    align-items: flex-end;
+    min-height: 48px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  body .cmp-chart-with-stamps .cmp-bar-cell > .cmp-bar-value {font-size:17px;text-align:left;line-height:1.5}
+  body .cmp-chart-with-stamps .cmp-zero-tag {font-size:15px;line-height:1.5}
+  body .cmp-chart-with-stamps .cmp-delta {
+    grid-area: delta;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto auto;
+    gap: 7px;
+    align-items: baseline;
+    padding-top: 12px;
+    margin-top: 1px;
+    border-top: 1px dashed var(--line);
+    text-align: right;
+  }
+  body .cmp-chart-with-stamps .cmp-delta-label {display:block;color:var(--ink-soft);font-family:var(--sans);font-size:16px;line-height:1.5;text-align:left}
+  body .cmp-chart-with-stamps .cmp-delta-value {font-size:24px;line-height:1.3}
+  body .cmp-chart-with-stamps .cmp-delta small {font-size:14px;line-height:1.5}
+  body .cmp-stamp-guide {margin-top:20px;padding:20px 0}
+}
+@media (max-width:420px) {
+  body .cmp-stamp-guide .cmp-stamp-legend {grid-template-columns:minmax(0,1fr);gap:10px}
+}
+@media (max-width:360px) {
+  body .cmp-chart-with-stamps > .cmp-chart-row {grid-template-columns:minmax(0,1fr) 84px minmax(0,1fr);column-gap:9px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal {width:74px;height:74px;padding:6px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal-text {font-size:25px}
+  body .cmp-chart-with-stamps .cmp-zero-tag {font-size:14px}
+}
+@media (prefers-reduced-motion:reduce) {
+  body .cmp-chart-with-stamps .cmp-bar,
+  body .cmp-chart-with-stamps .cmp-topic-button > span {transition:none}
+  body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal {animation:none;transition:none}
+}

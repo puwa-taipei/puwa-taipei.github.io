@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v37",
+  "version": "public-release-v38",
   "date": "2026-10-22",
   "files": [
     {
@@ -84,13 +84,13 @@
     },
     {
       "path": "comparison.css",
-      "bytes": 24470,
-      "sha256": "1eec54594565968f25d1b524f9b28aaf19df57a18faeec111d6c2bc513741a78"
+      "bytes": 34036,
+      "sha256": "74ae9058b5dcc913ee86a229f2ea01e91d2564259d61a9e6e20eec6e0b209ce7"
     },
     {
       "path": "comparison.js",
-      "bytes": 36248,
-      "sha256": "99a4ed044f367445c9af4548a1bb7589d7f785ccf7ab286d286a1e77684d6d3b"
+      "bytes": 38829,
+      "sha256": "be321341d66c08ef7053346c3ec8734962ae8630634a70d02dc14fb2ca8c75c1"
     },
     {
       "path": "contribute/agent-help.js",
@@ -360,7 +360,7 @@
     {
       "path": "index.html",
       "bytes": 28781,
-      "sha256": "6acb2546f07bada8ff0435a7c8904dde0bd4f762fcdd7e84962bc7cd08859b6c"
+      "sha256": "123e328b629e90272ed21c56cf515dfa46f562b392b2f240bf77e856375817b1"
     },
     {
       "path": "leaderboard.css",
