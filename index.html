@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="./style.css?v=31">
   <link rel="stylesheet" href="./network.css?v=17">
   <link rel="stylesheet" href="./comparison.css?v=20">
-  <link rel="stylesheet" href="./statements.css">
+  <link rel="stylesheet" href="./statements.css?v=34">
   <link rel="stylesheet" href="./statement-cards.css?v=27">
   <link rel="stylesheet" href="./quiz.css?v=13">
   <link rel="stylesheet" href="./game/quiz-share.css?v=18">
@@ -37,13 +37,14 @@
   <script src="./app.js?v=32" defer></script>
   <script src="./comparison.js?v=20" defer></script>
   <script src="./statement-cards.js?v=27" defer></script>
-  <script src="./statements.js?v=26" defer></script>
+  <script src="./statements.js?v=34" defer></script>
   <script src="./speech-search.js?v=25" defer></script>
   <script src="./game/arcade-share-core.js?v=32" defer></script>
   <script src="./leaderboard.js?v=32" defer></script>
   <script src="./game3d.js" defer></script>
   <link rel="stylesheet" href="./game3d.css">
-<link rel="stylesheet" href="/typography.css?v=19"><link rel="stylesheet" href="./tenure-clock.css?v=29"></head>
+<link rel="stylesheet" href="/typography.css?v=19"><link rel="stylesheet" href="./tenure-clock.css?v=29">  <script id="records-analytics-loader-v34" src="/analytics.js?v=34" data-measurement-id="G-HXGVHCCDCX" defer></script>
+</head>
 <body data-subject-id="shen-pao-yang" data-speaker="沈伯洋" data-nomination-date="2026-05-13">
   <a class="skip-link" href="#records">直接查看紀錄</a>
   <div class="observation-network"><span>人物觀測</span><a href="https://puwa.taipei/" aria-current="page">001 ／ 沈伯洋</a><a href="https://huiao-new-taipei.github.io/">002 ／ 蘇巧慧 ↗</a><a href="/game/?person=all">共用遊戲庫 ↗</a></div>
@@ -110,7 +111,7 @@
 
     <section id="method" class="section method-section"><div class="wrap"><div class="section-heading"><div><p class="section-number">07 ／ 開放資料，也開放檢查</p><h2>看得見數字，<br>也找得到計算的路。</h2></div><a class="button outline" href="./downloads/obsidian-vault.zip" download>下載 Obsidian 知識庫 <span>↓</span></a></div><div class="method-grid"><details open><summary>資料來源與工具 <span>＋</span></summary><div><p>法案與議事內容以立法院公開紀錄為核對起點；API 協助檢索與彙整。每案保留來源連結，第三方工具的欄位與更新範圍須另外確認。</p><ul class="source-list"><li data-source="lyapi"><a href="https://ly.govapi.tw/v2/" target="_blank" rel="noopener noreferrer">OpenFun LYAPI v2 <span>本次議案主資料：民間彙整 ↗</span></a></li><li><a href="https://www.ly.gov.tw/Pages/List.aspx?nodeid=153" target="_blank" rel="noopener noreferrer">立法院官方法律提案 API <span>99 案提案人逐案交叉核對 ↗</span></a></li><li><a href="https://ppg.ly.gov.tw/ppg/" target="_blank" rel="noopener noreferrer">立法院議事暨公報資訊網 <span>官方原始紀錄 ↗</span></a></li><li><a href="https://acta.tw/api" target="_blank" rel="noopener noreferrer">ACTA API <span>已調查工具：特定議題語料 ↗</span></a></li><li><a href="https://hub.twinkleai.tw/zh-TW/changelog/2026-10-07-open-parliament" target="_blank" rel="noopener noreferrer">Twinkle AI 開放國會 <span>已讀公開文件：未呼叫金鑰工具 ↗</span></a></li><li><a href="https://mcpservers.org/zh-TW/servers/narumiruna/ly-mcp" target="_blank" rel="noopener noreferrer">ly-mcp <span>MCP 社群工具 ↗</span></a></li><li><a href="https://puma.taipei/policies" target="_blank" rel="noopener noreferrer">候選人競選官網 <span>政策主張原頁 ↗</span></a></li></ul></div></details><details><summary>角色、去重與時間範圍 <span>＋</span></summary><div><p>以不重複法案識別碼為計數單位，區分第一列名提案人、其他提案人與連署人。三個角色欄位採互斥分類；若同案同時列名，以提案角色優先。具體欄位與去重口徑以下載資料為準。</p><p data-date-difference>日期以 LYAPI 提案日呈現。3 案與官方 API 日期有差異（2026-07-10／07-14），未確認成因；不影響本區間角色計數。知識庫保留逐案差異表。</p><p id="method-period">統計期間載入中…</p><p>日期相減是日曆期間，首尾皆計則多一天。它不是開會天數，也不是出席比例的分母。</p></div></details><details><summary>主題分類與關鍵詞限制 <span>＋</span></summary><div><p>首頁41件主提案先按規範對象／制度領域分類；另可切換修法目的子內容。主提及共同提案99件採共同碼表逐案語意分類，連署採規則複選標記，一案可以同時涉及教育、資安或兩岸等議題；委員會歸屬與內容主題分開計算。請保留對分類提出異議的空間。</p><p>字詞搜尋改以官方具名發言片段中可取得、可歸屬沈伯洋本人的逐字稿為範圍，排除官員與其他委員的發言。法案條文不混入計數。未提供逐字稿或錯誤回傳者列為缺漏，覆蓋率、日期與解析方式可在搜尋區及知識庫查閱。字詞出現不能直接代表支持或反對。</p></div></details><details><summary>如何重現、引用與後續補充 <span>＋</span></summary><div><p>下載逐案資料與 Obsidian 知識庫，可沿 Wiki 連結查看來源、定義、待核實主張與工具使用方式。引用時請一併保留截止日、角色定義及資料覆蓋限制。</p><p>網站是可更新的觀測紀錄。若有漏案、錯誤分類或更完整來源，應回到逐案證據修正，並更新資料版本。</p><p data-attribution>資料署名：立法院、OpenFun LYAPI；政策頁為候選人競選官網。本次未使用 Acta 作全量語料，Twinkle 僅查公開文件。分類與結論為本研究整理，不代表資料提供者背書。</p><p id="retrieved-at"></p></div></details></div></div></section>
   </main>
-  <footer class="site-footer wrap"><a class="brand" href="#top"><span class="brand-symbol" aria-hidden="true">◎</span><span>國會紀錄觀測<small>THE RECORD, IN CONTEXT</small></span></a><p>對紀錄好奇，對結論謹慎。<br><span>獨立資料整理，非候選人或立法院官方網站。</span></p><a href="#top" class="back-top" aria-label="回到頂端">↑</a></footer>
+  <footer class="site-footer wrap"><a class="brand" href="#top"><span class="brand-symbol" aria-hidden="true">◎</span><span>國會紀錄觀測<small>THE RECORD, IN CONTEXT</small></span></a><p>對紀錄好奇，對結論謹慎。<br><span>獨立資料整理，非候選人或立法院官方網站。</span><small class="analytics-notice" style="display:block;max-width:38em;font-size:13px;line-height:1.7;margin-top:6px">本站使用 Google Analytics 統計公開頁面瀏覽；投稿與審核頁不載入分析碼。</small></p><a href="#top" class="back-top" aria-label="回到頂端">↑</a></footer>
   <div id="announcement" class="sr-only" aria-live="polite"></div>
 </body>
 </html>

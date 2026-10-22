@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v32",
+  "version": "public-release-v34",
   "date": "2026-10-22",
   "files": [
     {
@@ -11,6 +11,11 @@
       "path": "README.md",
       "bytes": 14765,
       "sha256": "0ad51eff5fcc2cfe32bcdd2fa89a961c6748a9d11143f58c573a96e5ceab8a9a"
+    },
+    {
+      "path": "analytics.js",
+      "bytes": 5687,
+      "sha256": "4d149f9458960bfb001f3bd8e9dcf78cb5636e4f0e87749291864b38cc3e623d"
     },
     {
       "path": "anchor.js",
@@ -88,6 +93,11 @@
       "sha256": "99a4ed044f367445c9af4548a1bb7589d7f785ccf7ab286d286a1e77684d6d3b"
     },
     {
+      "path": "contribute/agent-help.js",
+      "bytes": 5526,
+      "sha256": "8a04653af6a6c96136e4c6d340b50ab50827e12dc4aa82422ec381610ff8d559"
+    },
+    {
       "path": "contribute/catalog.css",
       "bytes": 3514,
       "sha256": "66b5db776a9f278e669e0617a0dac61f5bdc0ed5fab87c15b98d078b5ac99f4d"
@@ -104,8 +114,8 @@
     },
     {
       "path": "contribute/contribute.css",
-      "bytes": 13233,
-      "sha256": "4d7f10b62554939737281f7620fae6e7905e8c4a86eed3eea6b6d214e6e00468"
+      "bytes": 14832,
+      "sha256": "21fa9dd4b46a501f5b741a836c10c92a96110215814a146e8e184e3ce633713b"
     },
     {
       "path": "contribute/core.js",
@@ -119,8 +129,8 @@
     },
     {
       "path": "contribute/index.html",
-      "bytes": 25129,
-      "sha256": "16eab8c82c4125714b672220b5aeb192c6926c067436908ed85de7db4dba712e"
+      "bytes": 28741,
+      "sha256": "c2001a130c3f7adffd466d1f6fdedbbac4b56cd786a136743d7e5bf4b38677fb"
     },
     {
       "path": "data/analysis.json",
@@ -161,6 +171,11 @@
       "path": "data/quiz-share-catalog-v24.json",
       "bytes": 56993,
       "sha256": "872c7966a630567eaadafd1a6002c53ad4eda5df6e8d99a19bb4b486fa803b73"
+    },
+    {
+      "path": "data/quote-library-v34.json",
+      "bytes": 7384,
+      "sha256": "dfdae024d4ad0afaa68573f409e17f21d15c19ab63517dd0991fb02fcdaa8677"
     },
     {
       "path": "data/quotes-v18-archive.json",
@@ -259,8 +274,8 @@
     },
     {
       "path": "game/dialogue/index.html",
-      "bytes": 8155,
-      "sha256": "97e345d2d8c2bdc8656be4769b9ca3d47c60c9698b6e8a6e3b63a01df4fc52db"
+      "bytes": 8275,
+      "sha256": "4c42c6d27767dacad20f92ea0c7a8bac8b742611e724e125e5ab503d414a59cc"
     },
     {
       "path": "game/dialogue/rounds.json",
@@ -274,8 +289,8 @@
     },
     {
       "path": "game/index.html",
-      "bytes": 5422,
-      "sha256": "12afdbf4d9f8aae86ff067df74db9e3a48a1cfbdd901aa8e72ba3f460d4919ca"
+      "bytes": 5542,
+      "sha256": "e2beb0a5f8e3e8019a1822efe9f14844d5ce921221b4b54d7f86d19afb764896"
     },
     {
       "path": "game/library-core.js",
@@ -299,8 +314,8 @@
     },
     {
       "path": "game/quiz-share-landing.js",
-      "bytes": 2587,
-      "sha256": "69741c2fc8597dc3a65810286a3c87fb06d11d0279a5ff77525526656ca133c8"
+      "bytes": 3304,
+      "sha256": "84b46a4f43133feacac7419ca5c2f5a61a014fc9e3d2281797906e34799d3ee4"
     },
     {
       "path": "game/quiz-share.css",
@@ -314,18 +329,18 @@
     },
     {
       "path": "game/quiz/index.html",
-      "bytes": 5287,
-      "sha256": "ca8840be3a404027923d0f85dc207ee3630c5e5e6563d678601fca016f86c500"
+      "bytes": 5407,
+      "sha256": "d3c6a0436f7ca4cc45e3b79fddae21f94357180f1cf12d5d81d714e058c76834"
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2579,
-      "sha256": "f0282e7b8583437dd4956b4d5ca4d7b17d916d61ec307666626ddaf09e35b799"
+      "bytes": 2699,
+      "sha256": "3033e579f6c7cae7f09249c4e93691cfb4055a5fcb04c4a03def3238eb9cda81"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2604,
-      "sha256": "a5b9c646ab6054cd18b69bd3671dbaeffa22bdf1510830858e5c304ace996abe"
+      "bytes": 2724,
+      "sha256": "e301d5677e47207c3d0614bf04f0f791d0aa944111cf4be3ed2c1c1282d7c27a"
     },
     {
       "path": "game/swipe-ui.css",
@@ -344,8 +359,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 28437,
-      "sha256": "63ad13211eb6f9dcae7344ed3aa87f2776c5503c4b0bf4ee2d4053325b374201"
+      "bytes": 28781,
+      "sha256": "d0cb6bf4007edc18057d465c87275cca57e2cbfb9d532cf15ba6329d9b33e583"
     },
     {
       "path": "leaderboard.css",
@@ -409,13 +424,13 @@
     },
     {
       "path": "statements.css",
-      "bytes": 6082,
-      "sha256": "965f6be368142654a68f1b10567ad45fa550bfb29e670536121949a0db1823da"
+      "bytes": 7456,
+      "sha256": "d43322bff7d84689a0b2f2ecafbedb9bc4ce6e66530028604727d8935539c5e0"
     },
     {
       "path": "statements.js",
-      "bytes": 13775,
-      "sha256": "a89b1d33b84b539366842b9686c09ea8412227df2891112f55422ef239b4f4df"
+      "bytes": 23489,
+      "sha256": "0568a58b4745893e8f435e6f062a6095d2f0e4b94f16380f466975dd404d022c"
     },
     {
       "path": "style.css",
