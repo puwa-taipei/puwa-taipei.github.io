@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const scriptURL = document.currentScript?.src || location.href;
-  const manifestURL = new URL('./data/statement-media-v40.json', scriptURL).href;
+  const manifestURL = new URL('./data/statement-media-v41.json', scriptURL).href;
   const resolverURL = 'https://wggebwlqsfxuwaocfpsf.supabase.co/functions/v1/arcade-api';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -35,7 +35,7 @@
     const verified = ['youtube','hls'].includes(type) && item.verificationStatus === 'verified-clip' && Number.isFinite(item.verifiedStart) && Number.isFinite(item.verifiedEnd) && item.verifiedStart >= 0 && item.verifiedEnd > item.verifiedStart;
     const credit = item.publicCredit;
     return {
-      type, sourceUrl, resolverQuoteId:resolved?quote.id:null, evidenceSourceUrl:safeHttps(item.evidenceSourceUrl), hlsUrl:type==='hls'?hlsUrl:null, videoUrl:safeHttps(item.videoUrl), fullVideoUrl:safeHttps(item.fullVideoUrl), youtubeId: type === 'youtube' ? id : null,
+      type, sourceUrl, resolverQuoteId:resolved?quote.id:null, evidenceSourceUrl:safeHttps(item.evidenceSourceUrl), sourceEvidenceUrls:(Array.isArray(item.sourceEvidenceUrls)?item.sourceEvidenceUrls:[]).slice(0,8).map(safeHttps).filter(Boolean), hlsUrl:type==='hls'?hlsUrl:null, videoUrl:safeHttps(item.videoUrl), fullVideoUrl:safeHttps(item.fullVideoUrl), youtubeId: type === 'youtube' ? id : null,
       verifiedStart: verified ? item.verifiedStart : null, verifiedEnd: verified ? item.verifiedEnd : null, verified,
       thumbnailUrl: safeHttps(item.thumbnailUrl),
       label: ['youtube','hls','ivod-resolved'].includes(type) ? (verified ? '已定位影片片段' : ['hls','ivod-resolved'].includes(type)?(item.sourceVideoScope==='full-member-speech'?'官方整段本人發言，原句起迄待定位':'官方完整來源影片，原句起迄待定位'):item.sourceVideoScope === 'publisher-news-report' ? '新聞來源影片，原句起迄待定位' : '完整影片，片段待定位') : type === 'article' ? '本人文章原文卡' : '原話文字卡・另開原站',
@@ -94,7 +94,7 @@
   async function loadManifest() {
     if (manifestPromise) return manifestPromise;
     manifestPromise = fetch(manifestURL,{cache:'no-cache'}).then(r => { if (!r.ok) throw Error('media_unavailable'); return r.json(); }).then(d => {
-      if (d.version !== 'v40' || d.subjectId !== subject || d.sourceVersion !== sourceVersion || d.selectionVersion !== selectionCore?.VERSION || !Array.isArray(d.items)) throw Error('media_source_mismatch');
+      if (d.version !== 'v41' || d.subjectId !== subject || d.sourceVersion !== sourceVersion || d.selectionVersion !== selectionCore?.VERSION || !Array.isArray(d.items)) throw Error('media_source_mismatch');
       const found = new Set();
       for (const item of d.items) {
         if (!ids.includes(item.quoteId) || found.has(item.quoteId)) continue;
@@ -105,7 +105,7 @@
     return manifestPromise;
   }
   function register(options) {
-    const core = options.core || window.RecordsQuizShareV40;
+    const core = options.core || window.RecordsQuizShareV41;
     if (!core || options.subjectId !== core.SUBJECT || options.sourceVersion !== core.SOURCE_VERSION) return false;
     selectionCore = core; subject = options.subjectId; sourceVersion = options.sourceVersion;
     quotes = new Map(options.quotes.filter(q => core.isQuizEligible(q)).map(q => [q.id,q]));
@@ -195,6 +195,14 @@
   function setMediaNote(value) { document.getElementById('statement-flash-media-note').textContent=value; }
   function sourceLinks(q,m) {
     const values=[{url:m.sourceUrl,label:'讀原始來源'},{url:q.url,label:'原文與逐字稿來源'},{url:m.evidenceSourceUrl,label:'原始紀錄來源'},{url:m.videoUrl,label:'到原站看來源影片'},{url:m.fullVideoUrl,label:'完整來源影片'},{url:q.videoUrl,label:q.videoLabel||'到原站看影片'},{url:q.fullVideoUrl,label:q.fullVideoLabel||'完整影片'}];
+    const labels=new Map([
+      ['https://50th.itri.org.tw/history/origin/46/','工研院：1973年成立沿革'],
+      ['https://50th.itri.org.tw/history/semiconductors/1/','工研院：RCA第一批受訓名單'],
+      ['https://50th.itri.org.tw/leaders/','工研院：張忠謀院長任期'],
+      ['https://50th.itri.org.tw/history/semiconductors/2/','工研院：聯電與台積電衍生史']
+    ]);
+    const evidence=[...(Array.isArray(q.sourceEvidenceUrls)?q.sourceEvidenceUrls:[]),...(Array.isArray(m.sourceEvidenceUrls)?m.sourceEvidenceUrls:[])].slice(0,16);
+    values.push(...evidence.map(value=>({url:value,label:labels.get(safeHttps(value))||'補充核對來源'})));
     const seen=new Set();
     return values.filter(s => {s.url=safeHttps(s.url);if(!s.url||seen.has(s.url))return false;seen.add(s.url);return true;}).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)} ↗</a>`).join('');
   }
@@ -413,5 +421,5 @@
   window.addEventListener('storage',event=>{if(registered&&event.key===storageKey()){opened=readCollection(event.newValue);updateCollection();}});
   reduceMotion.addEventListener('change',()=>{animation?.cancel();animation=null;resetTilt(true);});
   navigator.connection?.addEventListener?.('change',()=>{if(overlay)overlay.dataset.lowPower=String(lowPower());if(lowPower()){animation?.cancel();animation=null;}resetTilt(true);});
-  window.RecordsStatementCards=Object.freeze({version:'v40',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress})});
+  window.RecordsStatementCards=Object.freeze({version:'v41',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress,sourceLinks})});
 })();

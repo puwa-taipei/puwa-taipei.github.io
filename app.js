@@ -30,8 +30,8 @@
     return response.json();
   }
   async function fetchQuizSource() {
-    if (!window.RecordsQuizSourceV40?.resolve) throw new Error('quiz_source_unavailable');
-    return window.RecordsQuizSourceV40.resolve(location.search);
+    if (!window.RecordsQuizSourceV41?.resolve) throw new Error('quiz_source_unavailable');
+    return window.RecordsQuizSourceV41.resolve(location.search);
   }
 
   async function init() {
@@ -244,7 +244,7 @@
     if (!window.RecordsQuiz) {
       quizEngineLoading ||= new Promise((resolve,reject) => {
         const script=document.createElement('script');
-        script.src=new URL('./game/quiz-engine.js?v=40',location.href).href;
+        script.src=new URL('./game/quiz-engine.js?v=41',location.href).href;
         script.onload=resolve;script.onerror=()=>reject(new Error('猜題介面暫時無法讀取'));
         document.head.append(script);
       });

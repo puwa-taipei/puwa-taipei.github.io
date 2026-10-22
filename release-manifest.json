@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v40",
+  "version": "public-release-v41",
   "date": "2026-10-23",
   "files": [
     {
@@ -24,8 +24,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 21778,
-      "sha256": "f14d724ffac0a0f4a69d54a215eb04fa569dc3b34f7be8037fbe986f054d9e8d"
+      "bytes": 22049,
+      "sha256": "52eff7858e0981dcb9ef7a2cf374b86f0c492d69d4e845d66dd1160529485bd3"
     },
     {
       "path": "assets/og-game-dialogue.png",
@@ -178,6 +178,11 @@
       "sha256": "cc6c4c42e742feab481631fa246a124d23e93869e2a2cb06eae5796f0eb57c13"
     },
     {
+      "path": "data/quiz-share-catalog-v41.json",
+      "bytes": 64131,
+      "sha256": "d25d29fd829b0867de721f03cb57394f5585e5d9a446fcc222118f20228fb275"
+    },
+    {
       "path": "data/quote-library-v34.json",
       "bytes": 7384,
       "sha256": "dfdae024d4ad0afaa68573f409e17f21d15c19ab63517dd0991fb02fcdaa8677"
@@ -193,6 +198,11 @@
       "sha256": "0dffc6d23a5f6946fa9894c1bd36b1ba3cc63c125fb6405cad8abf97d58631e9"
     },
     {
+      "path": "data/quote-library-v41.json",
+      "bytes": 11905,
+      "sha256": "30c6498a65a933bd065d264041af6c11b79b49f9c2e1383d2d8ed4260236959a"
+    },
+    {
       "path": "data/quotes-v18-archive.json",
       "bytes": 378457,
       "sha256": "abdfd121cab3484d8e2bb7328691e61371eb0f2772a327b5ffcd9b73bd1a5f6b"
@@ -201,6 +211,11 @@
       "path": "data/quotes-v40.json",
       "bytes": 393669,
       "sha256": "1abf6bd319996ad4f03ec6a32d753f3c8101d9e471de8107fb0b8e1ec091d13c"
+    },
+    {
+      "path": "data/quotes-v41.json",
+      "bytes": 397831,
+      "sha256": "50adbd3c268f1a86e9c3d38a63192392f85530475943dcb3dc393b891bea38ff"
     },
     {
       "path": "data/quotes.json",
@@ -221,6 +236,11 @@
       "path": "data/statement-media-v40.json",
       "bytes": 97250,
       "sha256": "9acae47e3479eb86715a0548938488832dee58097fc49d4210a0ed258a50cc49"
+    },
+    {
+      "path": "data/statement-media-v41.json",
+      "bytes": 99047,
+      "sha256": "6b21bfcb0967aa3fa22088ee8a36d68340f3ef07e12e4340f918df9b63899011"
     },
     {
       "path": "downloads/bills.csv",
@@ -329,13 +349,18 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 34279,
-      "sha256": "200323dd65f69b5b596017e8b54b897e22906738ffacec16d783e23aeb61b8c6"
+      "bytes": 34608,
+      "sha256": "28bd83bb004ee071f7207b0dc47f4e9c3dbc8bbc4ad2c33363df330b098eda5c"
     },
     {
       "path": "game/quiz-share-core-v40.js",
       "bytes": 15712,
       "sha256": "91e6e0927ceca9d92ecdea4f8577219edc4248e17674d41e1ebfe5017d3dac43"
+    },
+    {
+      "path": "game/quiz-share-core-v41.js",
+      "bytes": 16297,
+      "sha256": "5a88f3a946464697bf7200a052cce7861882eb700bfab047ca56974006d7b171"
     },
     {
       "path": "game/quiz-share-core.js",
@@ -346,6 +371,11 @@
       "path": "game/quiz-share-landing-v40.js",
       "bytes": 2586,
       "sha256": "74959805fef9eaf4a00e168937255fdcd775f69b2fb256dd16e752222a268378"
+    },
+    {
+      "path": "game/quiz-share-landing-v41.js",
+      "bytes": 2586,
+      "sha256": "07365a2e1f33f82572b7d3a052c9966527b32be0ad3e3e0c084a133ba0ac9a8d"
     },
     {
       "path": "game/quiz-share-landing.js",
@@ -368,9 +398,14 @@
       "sha256": "4893ba5de8bff145f2aa250a45044a0ad09816bfa1f08a35461fefa1cfea0f01"
     },
     {
+      "path": "game/quiz-source-v41.js",
+      "bytes": 2520,
+      "sha256": "e7cec773099f8d55a5ba42e4aebc62ee332aea6ce9d419a918ac63d37aa18e10"
+    },
+    {
       "path": "game/quiz/index.html",
-      "bytes": 5529,
-      "sha256": "91f5dd300680ccb62b6edff5f467e147ddb0f5ab3c497f8effba7ba514e33416"
+      "bytes": 5592,
+      "sha256": "4bf4d8e9ef65e1923678ee44ff3ed8de09c4aaeb010cd8b33ea6b805c09f214f"
     },
     {
       "path": "game/red-notes/index.html",
@@ -399,8 +434,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 26235,
-      "sha256": "60708b5073e8a1d2e3ea0ed849e789ec222e9109823358383c05603ec16d0e29"
+      "bytes": 26422,
+      "sha256": "dacbfff75531a8530523c486d3f636e00a9c8d6b104e042ce38659583b6f2a22"
     },
     {
       "path": "leaderboard.css",
@@ -459,8 +494,8 @@
     },
     {
       "path": "statement-cards.js",
-      "bytes": 37297,
-      "sha256": "4e6b084d74377a3c288b824215d815aae7dbbbca413528ff8ddb1067ffb6fdfe"
+      "bytes": 37708,
+      "sha256": "d6780979f979c650763ac40d65c5a66cab17ddc80e259d95ff6c9a7b3f9e329f"
     },
     {
       "path": "statements.css",
@@ -469,8 +504,8 @@
     },
     {
       "path": "statements.js",
-      "bytes": 25001,
-      "sha256": "287258a55365c0a3b0283b74f0832e9f17ec32649e977ef673983e7a9a9bf152"
+      "bytes": 26144,
+      "sha256": "3784f11a78347cbaaa0a7ef72cf75fff55b1b9b48bba0cf29a4e271e4129ce3b"
     },
     {
       "path": "style.css",
