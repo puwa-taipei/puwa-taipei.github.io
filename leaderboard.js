@@ -4,10 +4,11 @@
   const host=document.getElementById('arcade-leaderboard');if(!host)return;
   if(!document.querySelector('link[data-arcade-scores]')){const link=document.createElement('link');link.rel='stylesheet';link.href='/leaderboard.css?v=13';link.dataset.arcadeScores='';document.head.append(link);}
   const isShared=Boolean(document.querySelector('[data-score-share]'));
-  const sharedParams=new URLSearchParams(location.search),hasSharedId=isShared&&sharedParams.has('id'),sharedId=sharedParams.get('id')||'';
+  const Share=window.RecordsArcadeShare,shared=isShared&&Share?Share.readSearch(location.search):null;
+  const hasSharedId=isShared&&shared?.kind==='registered',sharedId=hasSharedId?shared.id:'';
   const scoreKey='record-arcade-scores-v2',nameKey='record-arcade-name-v1';
-  const cleanName=value=>[...String(value??'').normalize('NFKC').replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/g,'').replace(/\s+/g,' ').trim()].slice(0,16).join('');
-  const validName=value=>[...value].length>=2&&[...value].length<=16&&!/[<>\u200b\u200e\u200f\ud800-\udfff]/u.test(value);
+  const cleanName=value=>Share?Share.cleanName(value):'玩家';
+  const validName=value=>Boolean(Share&&Share.validName(value));
   const integer=(v,max)=>Number.isInteger(v)&&v>=0&&v<=max;
   const validScore=s=>s&&s.version==='red-notes-v2'&&integer(s.score,200000)&&integer(s.hits,400)&&integer(s.shots,400)&&s.hits<=s.shots&&integer(s.maxCombo,s.hits)&&integer(s.durationMs,41000)&&s.durationMs>=39000;
   const node=(tag,className,value)=>{const el=document.createElement(tag);if(className)el.className=className;if(value!==undefined)el.textContent=value;return el;};
@@ -17,16 +18,7 @@
   let current=isShared?null:stored.recent,activeRun=null,sharedValid=false,blob=null,renderNumber=0;
   let api=null,apiConfigured=false,finishTrace=null,registeredItem=null,topGeneration=0,publicTimer=null;
   const finishedRuns=new Set();
-  if(isShared&&!hasSharedId){
-    const params=new URLSearchParams(location.search);
-    const rawName=params.get('name')||'',rawScore=params.get('score')||'',rawCombo=params.get('combo')||'';
-    if(location.search.length<=512&&rawName.length<=64&&/^\d{1,6}$/.test(rawScore)&&/^\d{1,3}$/.test(rawCombo)){
-      const name=cleanName(rawName),score=Number(rawScore),combo=Number(rawCombo);
-      if(validName(name)&&integer(score,200000)&&score%100===0&&integer(combo,400)){
-        nickname=name;current={version:'red-notes-v2',score,maxCombo:combo,shared:true};sharedValid=true;
-      }
-    }
-  }
+  if(isShared&&shared?.kind==='local'){nickname=shared.nickname;current={version:'red-notes-v2',score:shared.score,maxCombo:shared.maxCombo,shared:true};sharedValid=true;}
   const section=node('div','arcade-score-section');host.append(section);
   section.append(node('p','arcade-score-eyebrow',isShared?'PLAYER SHARED / SCORE CARD':'MY SCORE / LOCAL BROWSER'));
   section.append(node('h3','',isShared?'這是我的紅紙鈔成績。':'這一局，值得留一張。'));
@@ -82,7 +74,7 @@
   }
   function updateButtons(){const enabled=Boolean(current&&blob&&validName(cleanName(input.value)));share.disabled=download.disabled=copy.disabled=!enabled;}
   function summaryValues(){recentValue.textContent=stored.recent?stored.recent.score.toLocaleString('zh-TW'):'—';bestValue.textContent=stored.best?stored.best.score.toLocaleString('zh-TW'):'—';}
-  function challengeURL(){const link=new URL('/game/share/','https://puwa.taipei');if(registeredItem){link.searchParams.set('id',registeredItem.id);}else{link.searchParams.set('name',cleanName(input.value));link.searchParams.set('score',String(current.score));link.searchParams.set('combo',String(current.maxCombo));}return link.href;}
+  function challengeURL(){if(!Share)throw new Error('share_unavailable');return Share.shareUrl(registeredItem?{id:registeredItem.id}:{nickname:cleanName(input.value),score:current.score,maxCombo:current.maxCombo});}
   function saveImage(){if(!blob)return;const objectURL=URL.createObjectURL(blob),a=node('a');a.href=objectURL;a.download='red-notes-'+current.score+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(objectURL),60000);}
   async function copyChallenge(){const link=challengeURL();try{await navigator.clipboard.writeText(link);status.textContent='挑戰連結已複製。個人成績圖可另外下載或分享。';}catch{fallback.hidden=false;fallback.value=link;fallback.focus();fallback.select();status.textContent='請複製下方挑戰連結。';}}
   input.addEventListener('input',()=>{const clean=cleanName(input.value);if([...input.value].length>16)input.value=clean;nickname=clean;if(validName(clean)){try{localStorage.setItem(nameKey,clean);}catch{storageAvailable=false;}status.textContent=current?'暱稱已放進圖片，現在可以分享。':'先完成一局，再把成績做成卡片。';}else status.textContent='暱稱需要 2–16 個字，請使用一般文字。';fallback.hidden=true;draw();updatePublic();});
@@ -132,7 +124,7 @@
     try{
       const rows=await api.getTop();if(generation!==topGeneration)return;
       topList.replaceChildren();globalBadge.textContent='已連線';
-      rows.forEach((row,index)=>{const item=node('li'),rank=node('span','arcade-score-rank',String(index+1).padStart(2,'0')),name=node('a','arcade-score-top-name',row.nickname),points=node('strong','',row.score.toLocaleString('zh-TW')),meta=node('small','',`最高 ${row.maxCombo} 連擊 · ${new Date(row.createdAt).toLocaleDateString('zh-TW',{timeZone:'Asia/Taipei'})}`);name.href='/game/share/?id='+encodeURIComponent(row.id);item.append(rank,name,points,meta);topList.append(item);});
+        rows.forEach((row,index)=>{const item=node('li'),rank=node('span','arcade-score-rank',String(index+1).padStart(2,'0')),name=node('a','arcade-score-top-name',row.nickname),points=node('strong','',row.score.toLocaleString('zh-TW')),meta=node('small','',`最高 ${row.maxCombo} 連擊 · ${new Date(row.createdAt).toLocaleDateString('zh-TW',{timeZone:'Asia/Taipei'})}`);name.href=Share.shareUrl({id:row.id});item.append(rank,name,points,meta);topList.append(item);});
       topStatus.textContent=rows.length?'近 30 日 TOP 20。同名暱稱可以有不同局成績。':'近 30 日還沒有可顯示的成績。完成一局後，可選擇留下第一筆。';
     }catch{if(generation!==topGeneration)return;globalBadge.textContent=topList.children.length?'上次取得的清單':'暫時無法讀取';topStatus.textContent=topList.children.length?'目前無法更新，下面保留上次取得的清單。請稍後重新整理；本機成績圖仍可分享。':'排行榜暫時無法讀取，請稍後重新整理。本機成績圖仍可分享。';}
     finally{if(generation===topGeneration)refresh.disabled=false;}

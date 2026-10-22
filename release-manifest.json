@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v31",
+  "version": "public-release-v32",
   "date": "2026-10-22",
   "files": [
     {
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 13428,
-      "sha256": "d994f42ee87f031429fec0963cc5914d08ce39625b3b7d9d2f180eee309c841a"
+      "bytes": 14765,
+      "sha256": "0ad51eff5fcc2cfe32bcdd2fa89a961c6748a9d11143f58c573a96e5ceab8a9a"
     },
     {
       "path": "anchor.js",
@@ -20,7 +20,7 @@
     {
       "path": "app.js",
       "bytes": 28525,
-      "sha256": "1b11ab3ffacb10f68ca053242e0905f9302c7585f8922f71423ffeba28df5e3a"
+      "sha256": "126154433cafb20da848a2f8e0358916d96b015aef555425a0ed4c78d953c1ad"
     },
     {
       "path": "assets/og-game-dialogue.png",
@@ -56,6 +56,16 @@
       "path": "assets/og-game-red-notes.svg",
       "bytes": 8092,
       "sha256": "2ee01d6505da9a22f871c2513c35aebbb7f3bb54538a6d2d333de45dcf965eaf"
+    },
+    {
+      "path": "assets/og-records-v32.png",
+      "bytes": 129687,
+      "sha256": "097838ff25be725b720354aaaded876b58e8e695c4fb9ed2e10485c20b88e33b"
+    },
+    {
+      "path": "assets/og-records-v32.svg",
+      "bytes": 40220,
+      "sha256": "691875768efcd5aaf2d3b3187f36f1f5487753f99885be0c138c1de9c6d98e22"
     },
     {
       "path": "assets/og-records.png",
@@ -213,6 +223,11 @@
       "sha256": "94b6928784ff877cc02313bb83d0121d6f7b172e3d685e482968ac63d9db36d1"
     },
     {
+      "path": "game/arcade-share-core.js",
+      "bytes": 4484,
+      "sha256": "67c8421eac7832eb409c6b2219d4e429adbd5d46ebce7584bf5dca2f050e9b14"
+    },
+    {
       "path": "game/dialogue/LICENSE",
       "bytes": 1474,
       "sha256": "dce2dc2a57b12a800bf1f78db53051e12c7a4b3d4e3f83e40fb9821e32c4028c"
@@ -274,18 +289,18 @@
     },
     {
       "path": "game/quiz-engine.js",
-      "bytes": 33631,
-      "sha256": "4e62396b5b35f0633b0dbb8f2d7f4f928f3aa46e62a245631972e64c451ceb5e"
+      "bytes": 33713,
+      "sha256": "1ea6b3c4c78fe2f4e2d153fb12e4b0f3ec0f1852a16be8aafaf151c57f0bb1c1"
     },
     {
       "path": "game/quiz-share-core.js",
-      "bytes": 12772,
-      "sha256": "15fd30f39b285567870342499fec3d61e0cfa903177f64467788360b4075f6be"
+      "bytes": 15637,
+      "sha256": "a04fd7d50a3d651c9df76f181df8dddb6d33d4339a9f254dba2315852e9a7cad"
     },
     {
       "path": "game/quiz-share-landing.js",
-      "bytes": 2294,
-      "sha256": "209f68623f50d639f7ed94a0741829ba4b0656fd818535943ca33be1f3a7a816"
+      "bytes": 2587,
+      "sha256": "69741c2fc8597dc3a65810286a3c87fb06d11d0279a5ff77525526656ca133c8"
     },
     {
       "path": "game/quiz-share.css",
@@ -300,17 +315,17 @@
     {
       "path": "game/quiz/index.html",
       "bytes": 5287,
-      "sha256": "4d91ae36c01c2a17e3a17bc04c9d6e43f63673e6003c30254d4691fa896b7338"
+      "sha256": "ca8840be3a404027923d0f85dc207ee3630c5e5e6563d678601fca016f86c500"
     },
     {
       "path": "game/red-notes/index.html",
-      "bytes": 2518,
-      "sha256": "ba0b8d17e4cf3f537a4e3397cef0ccda6e77923eb53c12803f5124d0cc1f04a7"
+      "bytes": 2579,
+      "sha256": "f0282e7b8583437dd4956b4d5ca4d7b17d916d61ec307666626ddaf09e35b799"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2579,
-      "sha256": "8de46c24847a8a74fd7543091180c886dd636fd513f63e7c52307d5db2115b1e"
+      "bytes": 2604,
+      "sha256": "a5b9c646ab6054cd18b69bd3671dbaeffa22bdf1510830858e5c304ace996abe"
     },
     {
       "path": "game/swipe-ui.css",
@@ -329,8 +344,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 28256,
-      "sha256": "c2dbd1ea67faf43b57d86ad9d946fe1dd97d2952aface0a16e056878708e51b9"
+      "bytes": 28437,
+      "sha256": "63ad13211eb6f9dcae7344ed3aa87f2776c5503c4b0bf4ee2d4053325b374201"
     },
     {
       "path": "leaderboard.css",
@@ -339,8 +354,8 @@
     },
     {
       "path": "leaderboard.js",
-      "bytes": 22980,
-      "sha256": "4507f7adb89e38737c46c1ab3c452dbce43d83cbc3585905a283ae19a629bc2d"
+      "bytes": 22295,
+      "sha256": "996a4488b7b2501963ea9b33c22bafa8dcf5c6bb806b19187693d647f2f4616a"
     },
     {
       "path": "network.css",
