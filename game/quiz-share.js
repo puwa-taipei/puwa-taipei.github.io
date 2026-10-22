@@ -1,23 +1,27 @@
 /* Optional Shen quiz sharing. A failed catalogue/card never interrupts the game. */
 (() => {
   'use strict';
-  const C = window.RecordsQuizShareCore; if (!C) return;
   const node = (tag,cls,text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
-  let pendingCatalog = null;
-  async function loadCatalog() {
-    if (!pendingCatalog) pendingCatalog = (async () => {
-      const controller = new AbortController(), timer = setTimeout(() => controller.abort(),8000);
-      try {
-        const r = await fetch(C.CATALOG_URL,{credentials:'omit',cache:'no-cache',referrerPolicy:'no-referrer',signal:controller.signal});
-        if (!r.ok) throw new Error('share_catalog_unavailable');
-        const raw = await r.text(); if (raw.length > 350000) throw new Error('share_catalog_oversize');
-        return C.catalog(JSON.parse(raw));
-      } finally { clearTimeout(timer); }
-    })().catch(error => { pendingCatalog = null; throw error; });
-    return pendingCatalog;
+  const pendingCatalogs = new Map();
+  async function loadCatalog(core) {
+    const url = core.CATALOG_URL;
+    let pending = pendingCatalogs.get(url);
+    if (!pending) {
+      pending = (async () => {
+        const controller = new AbortController(), timer = setTimeout(() => controller.abort(),8000);
+        try {
+          const r = await fetch(url,{credentials:'omit',cache:'no-cache',referrerPolicy:'no-referrer',signal:controller.signal});
+          if (!r.ok) throw new Error('share_catalog_unavailable');
+          const raw = await r.text(); if (raw.length > 350000) throw new Error('share_catalog_oversize');
+          return JSON.parse(raw);
+        } finally { clearTimeout(timer); }
+      })().catch(error => { if (pendingCatalogs.get(url) === pending) pendingCatalogs.delete(url); throw error; });
+      pendingCatalogs.set(url,pending);
+    }
+    return core.catalog(await pending);
   }
-  function mount({profile,results}) {
-    if (profile?.subjectId !== C.SUBJECT || !results?.parentElement) return null;
+  function mount({profile,results,core:C = window.RecordsQuizShareCore}) {
+    if (!C || profile?.subjectId !== C.SUBJECT || !results?.parentElement) return null;
     const host = node('section','quiz-share-panel'); host.hidden = true; host.setAttribute('aria-label','分享這輪，挑戰朋友');
     const heading = node('div','quiz-share-heading'), headingText = node('div');
     headingText.append(node('p','quiz-share-eyebrow','SAME SIX / CHALLENGE A FRIEND'),node('h3','','這六句，朋友認得幾句？'),node('p','quiz-share-intro','已自動挑好一張卡。直接分享，朋友就能挑戰同一輪六題。'));
@@ -62,7 +66,7 @@
       cards.hidden = true; fact.textContent = ''; source.hidden = true; status.textContent = '正在準備這輪分享卡，遊戲與逐題原文仍可照常閱讀。';
       compare.textContent = C.challengeComparison(snapshot.correct,context.challenge); compare.hidden = !compare.textContent;
       try {
-        const catalog = await loadCatalog(); if (ticket !== generation) return;
+        const catalog = await loadCatalog(C); if (ticket !== generation) return;
         model = C.buildShare(snapshot,context.period,catalog,context.sourceVersion); mode = model.mode; cards.hidden = false;
         fact.textContent = `${model.quote.date} · ${model.sourceLabel}。${model.quote.frontContext || model.quote.context}`;
         source.href = model.quote.sourceUrl; source.textContent = '分享這一句之前，也可以先讀完整來源 ↗'; source.hidden = false;

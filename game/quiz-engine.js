@@ -10,7 +10,7 @@
     return {subjectId,speaker:speakers[subjectId],pronoun:subjectId === 'su-chiao-hui' ? '她' : '他',nominationDate,seenKey:subjectId === 'shen-pao-yang' ? 'record-quiz-seen-v1' : 'record-quiz-seen-v1-' + subjectId};
   }
   function quizCurationReady(profile, core) {
-    return profile.subjectId !== 'shen-pao-yang' || !!(core?.VERSION === 'v24' && Array.isArray(core.CURATED_IDS) && core.CURATED_IDS.length >= 6 && typeof core.isQuizEligible === 'function');
+    return profile.subjectId !== 'shen-pao-yang' || !!(['v24','v40'].includes(core?.VERSION) && Array.isArray(core.CURATED_IDS) && core.CURATED_IDS.length >= 6 && typeof core.isQuizEligible === 'function');
   }
   function quizEligibleForProfile(q, profile, core) {
     return !!q && (profile.subjectId === 'shen-pao-yang' ? quizCurationReady(profile,core) && core.isQuizEligible(q) : q.quizEligible !== false);
@@ -104,12 +104,12 @@
     play.querySelector('.quiz-layout').after(results);
     // Sharing is optional, but Shen's reviewed eligibility must be available.
     // The independent Su profile keeps its own archival membership behavior.
-    const shareCore = profile.subjectId === 'shen-pao-yang' ? window.RecordsQuizShareCore : null;
+    const shareCore = profile.subjectId === 'shen-pao-yang' ? (Object.hasOwn(options,'shareCore') ? options.shareCore : window.RecordsQuizShareCore) : null;
     let shareUI = null, challengeNotice = null;
     if (profile.subjectId === 'shen-pao-yang') {
       challengeNotice = document.createElement('p'); challengeNotice.className = 'quiz-challenge-notice'; challengeNotice.hidden = true; challengeNotice.setAttribute('role','status');
       play.querySelector('.quiz-layout').before(challengeNotice);
-      try { shareUI = window.RecordsQuizShare?.mount({profile,results}) || null; } catch {}
+      try { shareUI = window.RecordsQuizShare?.mount({profile,results,core:shareCore}) || null; } catch {}
     }
     // Put every choice and its answer immediately after the completed game;
     // the optional share panel mounts before results, so restore this order.
@@ -130,8 +130,8 @@
     $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
     $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
     $('quiz-no').setAttribute('aria-label', '不是' + speaker + '的原話，向左選'); $('quiz-yes').setAttribute('aria-label', '是' + speaker + '的原話，向右選');
-    const curationReady = quizCurationReady(profile,shareCore);
-    const eligible = q => quizEligibleForProfile(q,profile,shareCore);
+    const curationReady = quizCurationReady(profile,shareCore) && (profile.subjectId !== 'shen-pao-yang' || options.quoteSourceVersion === shareCore.SOURCE_VERSION);
+    const eligible = q => curationReady && quizEligibleForProfile(q,profile,shareCore);
     const poolForPeriod = period => state.quotes.filter(eligible).filter(q => {
       if (profile.subjectId === 'shen-pao-yang') return shareCore.inPeriod(q,period);
       const date = String(q.eventDate || q.date).slice(0,10); return !profile.nominationDate || period === 'all' || (period === 'pre' ? date < profile.nominationDate : date >= profile.nominationDate);
@@ -322,8 +322,18 @@
     const api={setQuotes(quotes){state.quotes=Array.isArray(quotes)?quotes:[];drawRound();},reset(){drawRound();}}; mounted.set(root,api); startInitialRound(); return api;
   }
   window.RecordsQuiz={mount};
-  if(document.querySelector('[data-standalone-quiz]')) fetch('/data/quotes.json',{cache:'no-cache'}).then(response=>{
-    if(!response.ok)throw new Error('quotes '+response.status);
-    return window.RecordsQuizShareCore?.readQuoteResponse ? window.RecordsQuizShareCore.readQuoteResponse(response) : response.json().then(data=>({data,sourceVersion:null}));
-  }).then(({data,sourceVersion})=>mount(document,{quotes:data.quotes,quoteSourceVersion:sourceVersion})).catch(()=>mount(document,{quotes:[]}));
+  if (document.querySelector('[data-standalone-quiz]')) {
+    if (quizProfile({},document.body.dataset).subjectId === 'shen-pao-yang') {
+      Promise.resolve().then(() => {
+        if (!window.RecordsQuizSourceV40?.resolve) throw new Error('quiz_source_unavailable');
+        return window.RecordsQuizSourceV40.resolve(location.search);
+      }).then(({core,source}) => mount(document,{quotes:source.data.quotes,quoteSourceVersion:source.sourceVersion,shareCore:core}))
+        .catch(() => mount(document,{quotes:[],quoteSourceVersion:null,shareCore:null}));
+    } else {
+      fetch('/data/quotes.json',{cache:'no-cache'}).then(response => {
+        if (!response.ok) throw new Error('quotes ' + response.status);
+        return response.json();
+      }).then(data => mount(document,{quotes:data.quotes})).catch(() => mount(document,{quotes:[]}));
+    }
+  }
 })();
