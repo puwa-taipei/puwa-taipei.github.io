@@ -141,7 +141,9 @@
     holder.classList.remove('loading-placeholder');
     holder.innerHTML = rows.length ? rows.map(row => {
       const roleParts = (state.scopeRole?[state.scopeRole]:['primary','joint','cosign']).map(role => `<span class="chart-part ${role}" style="width:${(Number(row[role]) || 0)/max*100}%" title="${roleNames[role]} ${fmt(row[role] || 0)} 件"></span>`).join('');
-      return `<button class="chart-row" data-chart-filter="${esc(row.name)}" title="${esc(row.name)}，共 ${fmt(row.count)} 件"><span class="chart-label">${esc(row.name)}</span><span class="chart-track">${roleParts}</span><span class="chart-value">${fmt(row.count)}<small>件</small></span></button>`;
+      const isZeroCommittee = type === 'committee' && Number(row.count) === 0;
+      const zeroLabel = isZeroCommittee ? '，已收錄流程：0 件（0.0%）' : `，共 ${fmt(row.count)} 件`;
+      return `<button class="chart-row${isZeroCommittee ? ' committee-zero' : ''}" data-chart-filter="${esc(row.name)}" title="${esc(row.name)}${zeroLabel}"><span class="chart-label">${esc(row.name)}</span><span class="chart-track">${roleParts}</span><span class="chart-value">${fmt(row.count)}<small>件</small>${isZeroCommittee ? '<span class="committee-zero-percent">0.0%</span>' : ''}</span></button>`;
     }).join('') : '<p class="small-note">這個範圍目前沒有可顯示資料。</p>';
     holder.querySelectorAll('[data-chart-filter]').forEach(button => button.addEventListener('click',() => setFilter(type,button.dataset.chartFilter,true)));
   }
@@ -149,7 +151,7 @@
   function renderCommitteeRoleTable() {
     const holder=$('committee-role-table');if(!holder)return;
     const d=state.data;
-    holder.innerHTML='<table><thead><tr><th>流程所載委員會</th><th>主提案／41</th><th>共同提案／58</th><th>連署／1,287</th></tr></thead><tbody>'+list(d.committees).map(c=>'<tr><th>'+esc(c.name)+'</th>'+['primary','joint','cosign'].map(role=>'<td>'+fmt(c[role])+'<small> '+(Number(c[role])/d.totals[role]*100).toFixed(1)+'%</small></td>').join('')+'</tr>').join('')+'</tbody></table>';
+    holder.innerHTML='<table><thead><tr><th>流程所載委員會</th><th>主提案／41</th><th>共同提案／58</th><th>連署／1,287</th></tr></thead><tbody>'+list(d.committees).map(c=>'<tr><th>'+esc(c.name)+'</th>'+['primary','joint','cosign'].map(role=>'<td'+(Number(c[role])===0?' class="committee-zero-cell"':'')+'>'+fmt(c[role])+'<small> '+(Number(c[role])/d.totals[role]*100).toFixed(1)+'%</small></td>').join('')+'</tr>').join('')+'</tbody></table>';
   }
 
   function renderProcedure() {

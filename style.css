@@ -83,3 +83,16 @@ body #statements .stmt-editorial-sources a{font-size:14px;line-height:1.8}
  body #keywords .speech-meeting-title[open] .speech-meeting-name{display:block}
  body #keywords .speech-title-action{display:block;margin-top:5px;color:var(--orange);font-size:14px;font-weight:500}
 }
+
+/* Keep zero committee counts visible without changing the chart scale or filters. */
+#committee-chart .committee-zero{border:2px solid #b43e32;border-radius:10px;padding:12px;background:#fff3ee;min-height:66px}
+#committee-chart .committee-zero .chart-label,#committee-chart .committee-zero .chart-value,#committee-chart .committee-zero .chart-value small{color:#9d3027}
+#committee-chart .committee-zero .chart-label{font-weight:700}
+#committee-chart .committee-zero .chart-track{background:#ecd6cd}
+#committee-chart .committee-zero .chart-value{font-weight:700;line-height:1.25}
+#committee-chart .committee-zero-percent{display:block;font-family:var(--sans);font-size:12px;font-weight:700;line-height:1.5;margin-top:3px}
+#committee-chart .committee-zero:hover{background:#ffe8df}
+#committee-chart .committee-zero:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+#committee-role-table .committee-zero-cell{background:#fff3ee;color:#9d3027;box-shadow:inset 0 0 0 2px #b43e32;font-weight:700}
+#committee-role-table .committee-zero-cell small{color:#9d3027}
+@media(max-width:580px){#committee-chart .committee-zero{padding:12px 10px;min-height:68px}#committee-chart .committee-zero-percent{font-size:12px}}

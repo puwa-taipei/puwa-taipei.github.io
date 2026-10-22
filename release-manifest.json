@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v30",
+  "version": "public-release-v31",
   "date": "2026-10-22",
   "files": [
     {
@@ -19,8 +19,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 28169,
-      "sha256": "ee63544c0fc8bb5b3c2c4792a05b0604b3af1520bca524e3f5c24524d946e36b"
+      "bytes": 28525,
+      "sha256": "1b11ab3ffacb10f68ca053242e0905f9302c7585f8922f71423ffeba28df5e3a"
     },
     {
       "path": "assets/og-game-dialogue.png",
@@ -330,7 +330,7 @@
     {
       "path": "index.html",
       "bytes": 28256,
-      "sha256": "044a508bed275810a7555295b5b9a3fad7ce7d2724a436cd24bc2041b7cd35cc"
+      "sha256": "c2dbd1ea67faf43b57d86ad9d946fe1dd97d2952aface0a16e056878708e51b9"
     },
     {
       "path": "leaderboard.css",
@@ -404,8 +404,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 48746,
-      "sha256": "e1d960e090e04f92396b955a5b14807a85cb19cb7472db24be13fa99f8000975"
+      "bytes": 49965,
+      "sha256": "665de6f1d0c628266db59e9d9cee09bd1dd0a8b8098d7c726b0105c1d61f3bc1"
     },
     {
       "path": "tenure-clock.css",
