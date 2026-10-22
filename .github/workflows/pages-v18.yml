@@ -45,6 +45,10 @@ jobs:
         run: |
           python tools/quiz-share/legacy-v18/test-quiz-og.py --site-dir _site
           python tools/quiz-share/test-quiz-og.py --site-dir _site
+      - name: Build source-matched short quiz aliases
+        run: python tools/quiz-share/build-short-aliases.py --site-dir _site
+      - name: Verify all short aliases against original cards
+        run: python tools/quiz-share/build-short-aliases.py --site-dir _site --verify-only
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
