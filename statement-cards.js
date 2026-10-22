@@ -2,12 +2,12 @@
 (() => {
   'use strict';
   const scriptURL = document.currentScript?.src || location.href;
-  const manifestURL = new URL('./data/statement-media-v26.json', scriptURL).href;
+  const manifestURL = new URL('./data/statement-media-v40.json', scriptURL).href;
   const resolverURL = 'https://wggebwlqsfxuwaocfpsf.supabase.co/functions/v1/arcade-api';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const lowPower = () => Boolean(navigator.connection?.saveData || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2));
-  let subject = '', sourceVersion = '', ids = [], quotes = new Map(), media = new Map(), opened = new Set();
+  let selectionCore = null, subject = '', sourceVersion = '', ids = [], quotes = new Map(), media = new Map(), opened = new Set();
   let registered = false, persistent = true, manifestPromise, apiPromise, hlsPromise;
   let overlay, panel, tilt, origin, activeQuote = null, player = null, playerReady = false, hlsPlayer = null, video = null;
   let generation = 0, loopTimer = 0, mediaTimer = 0, animation = null, frame = 0, orientation = null, inertElements = [];
@@ -94,7 +94,7 @@
   async function loadManifest() {
     if (manifestPromise) return manifestPromise;
     manifestPromise = fetch(manifestURL,{cache:'no-cache'}).then(r => { if (!r.ok) throw Error('media_unavailable'); return r.json(); }).then(d => {
-      if (d.version !== 'v26' || d.subjectId !== subject || d.sourceVersion !== sourceVersion || d.selectionVersion !== window.RecordsQuizShareCore?.VERSION || !Array.isArray(d.items)) throw Error('media_source_mismatch');
+      if (d.version !== 'v40' || d.subjectId !== subject || d.sourceVersion !== sourceVersion || d.selectionVersion !== selectionCore?.VERSION || !Array.isArray(d.items)) throw Error('media_source_mismatch');
       const found = new Set();
       for (const item of d.items) {
         if (!ids.includes(item.quoteId) || found.has(item.quoteId)) continue;
@@ -105,9 +105,9 @@
     return manifestPromise;
   }
   function register(options) {
-    const core = window.RecordsQuizShareCore;
+    const core = options.core || window.RecordsQuizShareV40;
     if (!core || options.subjectId !== core.SUBJECT || options.sourceVersion !== core.SOURCE_VERSION) return false;
-    subject = options.subjectId; sourceVersion = options.sourceVersion;
+    selectionCore = core; subject = options.subjectId; sourceVersion = options.sourceVersion;
     quotes = new Map(options.quotes.filter(q => core.isQuizEligible(q)).map(q => [q.id,q]));
     ids = core.CURATED_IDS.filter(id => quotes.has(id));
     try { opened = readCollection(localStorage.getItem(storageKey())); } catch { persistent = false; opened = new Set(); }
@@ -413,5 +413,5 @@
   window.addEventListener('storage',event=>{if(registered&&event.key===storageKey()){opened=readCollection(event.newValue);updateCollection();}});
   reduceMotion.addEventListener('change',()=>{animation?.cancel();animation=null;resetTilt(true);});
   navigator.connection?.addEventListener?.('change',()=>{if(overlay)overlay.dataset.lowPower=String(lowPower());if(lowPower()){animation?.cancel();animation=null;}resetTilt(true);});
-  window.RecordsStatementCards=Object.freeze({version:'v27',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress})});
+  window.RecordsStatementCards=Object.freeze({version:'v40',register,entry,hydrate,open,close,utils:Object.freeze({safeHttps,youtubeId,normalizeMedia,validateResolvedMedia,progress})});
 })();

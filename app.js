@@ -8,7 +8,7 @@
   const list = value => Array.isArray(value) ? value : value ? [value] : [];
   const roleNames = {primary:'主提案', joint:'共同提案', cosign:'連署'};
   const compactLists = matchMedia('(max-width:700px)');
-  const state = {data:null,policy:null,page:1,pageSize:12,mobileShown:4,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],quoteSourceVersion:null,gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
+  const state = {data:null,policy:null,page:1,pageSize:5,mobileShown:4,search:'',role:'primary',scopeRole:'primary',axis:'target',quotes:[],quoteSourceVersion:null,shareCore:null,gamePeriod:'pre',topic:'',committee:'',status:'',sort:'date-desc',exactKeyword:'',keyword:'中國',quiz:[],quizIndex:0,quizCorrect:0,quizAnswered:false,quizNewCount:0};
   let searchable = new Map();
   let keywordText = new Map();
   let searchTimer;
@@ -29,15 +29,14 @@
     if (!response.ok) throw new Error(`${url} (${response.status})`);
     return response.json();
   }
-  async function fetchQuizJSON(url) {
-    const response = await fetch(url,{cache:'no-cache'});
-    if (!response.ok) throw new Error(`${url} (${response.status})`);
-    return window.RecordsQuizShareCore?.readQuoteResponse ? window.RecordsQuizShareCore.readQuoteResponse(response) : {data:await response.json(),sourceVersion:null};
+  async function fetchQuizSource() {
+    if (!window.RecordsQuizSourceV40?.resolve) throw new Error('quiz_source_unavailable');
+    return window.RecordsQuizSourceV40.resolve(location.search);
   }
 
   async function init() {
     bindEvents();
-    const results = await Promise.allSettled([fetchJSON('./data/analysis.json'), fetchJSON('./data/policy.json'),fetchQuizJSON('./data/quotes.json')]);
+    const results = await Promise.allSettled([fetchJSON('./data/analysis.json'), fetchJSON('./data/policy.json'),fetchQuizSource()]);
     if (results[0].status === 'fulfilled') {
       state.data = results[0].value;
       prepareData();
@@ -56,7 +55,7 @@
     } else {
       setText('policy-chart','政策資料暫時無法讀取，可點下方官方來源查看。');
     }
-    if(results[2].status==='fulfilled'){state.quotes=list(results[2].value.data.quotes);state.quoteSourceVersion=results[2].value.sourceVersion;}
+    if(results[2].status==='fulfilled'){const {core,source}=results[2].value;state.quotes=list(source.data.quotes);state.quoteSourceVersion=source.sourceVersion;state.shareCore=core;}
     await buildGames();
   }
 
@@ -81,8 +80,6 @@
     renderDonut(t);
     renderPrimaryTopics();
     renderScope();
-    renderCommitteeRoleTable();
-    renderAttendance();
     populateFilters();
     
     renderBills();
@@ -93,10 +90,8 @@
   const scopedBills=()=>list(state.data?.bills).filter(b=>!state.scopeRole||b.role===state.scopeRole);
   function renderScope(){
     if(!state.data)return;
-    const rows=scopedBills(),label=state.scopeRole?roleNames[state.scopeRole]:'全部角色';
-    setText('scope-name',label+' '+fmt(rows.length)+' 件');setText('status-title',label+' '+fmt(rows.length)+' 件的審議進度');
     if($('scope-filter'))$('scope-filter').value=state.scopeRole;
-    renderBars('topic-chart',state.data.topics,'topic');renderBars('committee-chart',state.data.committees,'committee');renderProcedure();populateFilters();
+    renderBars('topic-chart',state.data.topics,'topic');populateFilters();
   }
 
   function renderDonut(t) {
@@ -146,49 +141,6 @@
       return `<button class="chart-row${isZeroCommittee ? ' committee-zero' : ''}" data-chart-filter="${esc(row.name)}" title="${esc(row.name)}${zeroLabel}"><span class="chart-label">${esc(row.name)}</span><span class="chart-track">${roleParts}</span><span class="chart-value">${fmt(row.count)}<small>件</small>${isZeroCommittee ? '<span class="committee-zero-percent">0.0%</span>' : ''}</span></button>`;
     }).join('') : '<p class="small-note">這個範圍目前沒有可顯示資料。</p>';
     holder.querySelectorAll('[data-chart-filter]').forEach(button => button.addEventListener('click',() => setFilter(type,button.dataset.chartFilter,true)));
-  }
-
-  function renderCommitteeRoleTable() {
-    const holder=$('committee-role-table');if(!holder)return;
-    const d=state.data;
-    holder.innerHTML='<table><thead><tr><th>流程所載委員會</th><th>主提案／41</th><th>共同提案／58</th><th>連署／1,287</th></tr></thead><tbody>'+list(d.committees).map(c=>'<tr><th>'+esc(c.name)+'</th>'+['primary','joint','cosign'].map(role=>'<td'+(Number(c[role])===0?' class="committee-zero-cell"':'')+'>'+fmt(c[role])+'<small> '+(Number(c[role])/d.totals[role]*100).toFixed(1)+'%</small></td>').join('')+'</tr>').join('')+'</tbody></table>';
-  }
-
-  function renderProcedure() {
-    const source=state.data.procedure||{},rows=scopedBills(),returned=rows.filter(b=>b.returns);
-    const p={...source,count:rows.length,returnedBills:returned.length,returnEvents:returned.reduce((n,b)=>n+b.returns,0),notes:'同案可能多次退回，流程列數不代表完整被擋次數；退回程序不等於否決。'};
-    setText('returned-bills',fmt(p.returnedBills));
-    setText('return-events',fmt(p.returnEvents));
-    setText('procedure-note',`檢查範圍：${fmt(p.count)} 件法律案。${p.notes || '同案可能多次退回，案件數與事件數不同。紀錄未涵蓋的程序不能視為沒有發生。'}`);
-    $('procedure-example')?.remove();
-    const example = p.example || p.exampleEvent;
-    if (example && (!state.scopeRole||state.scopeRole==='primary')) {
-      let holder = $('procedure-example');
-      if (!holder) { holder = document.createElement('div'); holder.id='procedure-example'; holder.className='procedure-example'; $('procedure-note').after(holder); }
-      const description = typeof example === 'string' ? example : example.summary || example.description || example.note || example.title || `${example.date || ''} ${example.meeting || ''}，處理「${example.billTitle || ''}」的${example.kind || '程序'}動議。${example.vote ? `出席 ${example.vote.present}、贊成 ${example.vote.yes}、反對 ${example.vote.no}、棄權 ${example.vote.abstain}。` : ''}${example.result || ''}。${example.scopeNote || ''}`;
-      const url = example.sourceURL || example.sourceUrl || example.url || p.sourceURL;
-      holder.innerHTML = `<strong>流程以外，還有逐次議事證據</strong><p>${esc(description)}</p>${url ? `<a href="${esc(safeUrl(url))}" target="_blank" rel="noopener noreferrer">查閱原始公報 ↗</a>` : ''}`;
-    }
-    $('status-list').innerHTML = [...new Set(rows.map(b=>b.status))].map(name=>({name,count:rows.filter(b=>b.status===name).length})).map(row => `<span class="status-pill">${esc(row.name)}<strong>${fmt(row.count)}</strong></span>`).join('') || '<span class="small-note">目前進度未提供。</span>';
-  }
-
-  function renderAttendance() {
-    const a = state.data.attendance || {};
-    const paragraphs = [a.summary,a.note,a.coverageNote,...list(a.notes)].filter(value => typeof value === 'string' && value);
-    if (a.educationMeetings?.length) {
-      setText('attendance-summary',`目前查得 ${fmt(a.educationIvodCount)} 段以教育及文化委員會為主辦單位的 iVOD；正式議事錄卻至少有 ${fmt(a.educationListedMeetingsAtLeast)} 個單獨教文會議將他列為列席委員，另有 ${fmt(list(a.jointEducationMeetings).length)} 個聯席會議。常設委員會是${a.formalPermanentCommittee || '外交及國防委員會'}。因此「2 段影片」不能改寫成「只到過 2 次」。名冊與多日會議也不能直接推算到場天數。`);
-      const meetingRows = rows => rows.map(row => `<li><div><strong>${list(row.dates).map(esc).join(' ／ ')}</strong><span>${esc(row.title)}</span><p>${esc(row.evidence)}。${esc(row.note || '')}</p></div><a href="${esc(safeUrl(row.url))}" target="_blank" rel="noopener noreferrer">官方議事錄 PDF ↗</a></li>`).join('');
-      const speeches = list(a.educationSpeechTopics).map(row => {
-        const meeting = list(a.educationMeetings).find(meeting => list(meeting.ivodIds).includes(row.ivodId));
-        return `<div class="speech-evidence"><span>${esc(row.date)}</span><p>${esc(row.summary)}</p><small>「中國」字串：${fmt(row.literalChinaCount)} 次</small>${meeting ? `<a href="${esc(safeUrl(meeting.meetingUrl))}" target="_blank" rel="noopener noreferrer">查看會議與公報 ↗</a>` : ''}</div>`;
-      }).join('');
-      $('attendance-links').innerHTML = `<div class="attendance-metrics"><div><strong>${fmt(a.educationIvodCount)}</strong><span>單獨教文影片段數</span></div><div><strong>≥ ${fmt(a.educationListedMeetingsAtLeast)}</strong><span>單獨教文列席會議</span></div><div><strong>${fmt(list(a.jointEducationMeetings).length)}</strong><span>另查得教文聯席會議</span></div></div><h4>四個單獨教文會議的官方名冊證據</h4><ul class="attendance-meetings">${meetingRows(a.educationMeetings)}</ul><details class="joint-attendance"><summary>另看 ${fmt(list(a.jointEducationMeetings).length)} 個聯席會議來源 ＋</summary><ul class="attendance-meetings">${meetingRows(a.jointEducationMeetings)}</ul></details><div class="speech-evidence-grid">${speeches}</div><p class="small-note">兩段教文發言也有高教、城鄉教育資源與個資／資安脈絡，不能改述成「全程只談中國」。字詞次數僅限這兩段已核對發言樣本，非任期總量；多日一會的名冊不分日，未顯示的會議紀錄也不當作零。</p><div class="source-links">${list(a.sources).slice(0,2).map(source => `<a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer">${esc(source.title)} ↗</a>`).join('')}</div>`;
-      $('attendance-links').classList.add('attendance-evidence');
-      return;
-    }
-    if (paragraphs.length) setText('attendance-summary',paragraphs.join(' '));
-    const sources = list(a.sources || a.links);
-    $('attendance-links').innerHTML = sources.map((source,i) => typeof source === 'string' ? `<a href="${esc(safeUrl(source))}" target="_blank" rel="noopener noreferrer">核對來源 ${i+1} ↗</a>` : `<a href="${esc(safeUrl(source.url || source.href))}" target="_blank" rel="noopener noreferrer">${esc(source.label || source.title || `核對來源 ${i+1}`)} ↗</a>`).join('');
   }
 
   function renderPolicy() {
@@ -292,19 +244,18 @@
     if (!window.RecordsQuiz) {
       quizEngineLoading ||= new Promise((resolve,reject) => {
         const script=document.createElement('script');
-        script.src=new URL('./game/quiz-engine.js?v=32',location.href).href;
+        script.src=new URL('./game/quiz-engine.js?v=40',location.href).href;
         script.onload=resolve;script.onerror=()=>reject(new Error('猜題介面暫時無法讀取'));
         document.head.append(script);
       });
       await quizEngineLoading;
     }
-    window.RecordsQuiz.mount(document,{quotes:state.quotes,quoteSourceVersion:state.quoteSourceVersion});
+    window.RecordsQuiz.mount(document,{quotes:state.quotes,quoteSourceVersion:state.quoteSourceVersion,shareCore:state.shareCore});
   }
 
   function bindEvents() {
     $('scope-filter')?.addEventListener('change',e=>setFilter('role',e.target.value,false));
     $('primary-axis')?.addEventListener('change',e=>{state.axis=e.target.value;renderPrimaryTopics();});
-    $('open-advanced')?.addEventListener('click',()=>{$('advanced-information').open=true;});
     document.querySelectorAll('[data-role]').forEach(button=>button.addEventListener('click',()=>setFilter('role',button.dataset.role,true)));
     $('bill-search').addEventListener('input',event=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.search=event.target.value;resetBillWindow();renderBills();},200);});
     [['role-filter','role'],['topic-filter','topic'],['committee-filter','committee'],['status-filter','status'],['sort-select','sort']].forEach(([id,key])=>$(id).addEventListener('change',event=>setFilter(key,event.target.value,false)));

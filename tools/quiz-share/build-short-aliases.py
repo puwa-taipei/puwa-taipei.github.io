@@ -197,7 +197,11 @@ def existing_paths(site: Path) -> set[str]:
         if path.is_symlink():
             raise ValueError("Symlink in alias output")
         if path.is_file():
-            result.add(path.relative_to(site).as_posix())
+            relative = path.relative_to(site).as_posix()
+            # A separate v40 generator owns these exact coexisting outputs.
+            if relative == "q/build-manifest-v40.json" or re.fullmatch(r"q/40[0-9a-z]{2}[0-6][sq]/index\.html", relative):
+                continue
+            result.add(relative)
     return result
 
 

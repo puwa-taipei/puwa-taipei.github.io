@@ -49,6 +49,14 @@ jobs:
         run: python tools/quiz-share/build-short-aliases.py --site-dir _site
       - name: Verify all short aliases against original cards
         run: python tools/quiz-share/build-short-aliases.py --site-dir _site --verify-only
+      - name: Build current v40 cards alongside immutable historical versions
+        run: python tools/quiz-share/new-v40/build-quiz-og.py --site-dir _site --font "$RUNNER_TEMP/quiz-og-font/NotoSansCJKtc-Bold.otf"
+      - name: Verify current v40 source and all generated card metadata
+        run: python tools/quiz-share/new-v40/test-current-og.py --site-dir _site
+      - name: Build and verify current v40 short aliases
+        run: |
+          python tools/quiz-share/new-v40/build-short-aliases.py --site-dir _site
+          python tools/quiz-share/new-v40/build-short-aliases.py --site-dir _site --verify-only
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
