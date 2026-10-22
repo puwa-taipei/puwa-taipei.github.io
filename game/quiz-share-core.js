@@ -50,6 +50,9 @@
   const isQuizEligible = q => !!q && curated.has(q.id) && !withdrawn.has(q.id);
   const curatedRank = q => ranks.get(typeof q === 'string' ? q : q?.id) ?? 9999;
   const ID = /^[a-z0-9-]{1,100}$/, PERIODS = new Set(['pre','post','all']), MODES = new Set(['score','quote']);
+  // v24 source and literal CURATED_IDS order define these compact indices permanently.
+  const COMPACT_VERSION = '24', ALIAS_BASE = '/q/';
+  const PERIOD_CODES = Object.freeze({pre:'p',post:'n',all:'a'}), CODE_PERIODS = Object.freeze({p:'pre',n:'post',a:'all'});
   const own = (value,key) => Object.prototype.hasOwnProperty.call(value,key);
   const error = reason => ({ok:false,reason});
   function dateValue(q) {
@@ -69,11 +72,12 @@
   }
   function readSearch(search) {
     if (typeof search !== 'string' || search.length > 4096) return {present:true,...error('invalid_challenge')};
-    const values = new URLSearchParams(search).getAll('challenge');
-    if (!values.length) return {present:false};
-    return values.length === 1 ? {present:true,token:values[0]} : {present:true,...error('invalid_challenge')};
+    const params = new URLSearchParams(search), compact = params.getAll('r'), legacy = params.getAll('challenge');
+    if (!compact.length && !legacy.length) return {present:false};
+    if (compact.length + legacy.length !== 1) return {present:true,...error('invalid_challenge')};
+    return {present:true,token:compact.length ? compact[0] : legacy[0]};
   }
-  function parseChallenge(token,sourceVersion = SOURCE_VERSION) {
+  function parseLegacyChallenge(token,sourceVersion) {
     if (typeof token !== 'string' || token.length > 1200 || !/^[a-z0-9~,\-]+$/.test(token)) return error('invalid_challenge');
     const parts = token.split('~');
     if (parts.length !== 5 || parts[0] !== VERSION || !/^[a-f0-9]{64}$/.test(parts[1])) return error('invalid_challenge');
@@ -82,6 +86,26 @@
     if (!PERIODS.has(period) || !/^[0-6]$/.test(count) || ids.length !== ROUND_SIZE || ids.some(id => !ID.test(id)) || new Set(ids).size !== ROUND_SIZE) return error('invalid_challenge');
     if (ids.some(id => !curated.has(id) || withdrawn.has(id))) return error('unavailable_question');
     return {ok:true,token,sourceVersion,period,correct:Number(count),total:ROUND_SIZE,ids};
+  }
+  function compactChecksum(payload) {
+    // Detect accidental corruption only. This public checksum does not authenticate a player or score.
+    let hash = 2166136261;
+    for (const char of SOURCE_VERSION + '|' + payload) hash = Math.imul(hash ^ char.charCodeAt(0),16777619);
+    return ((hash >>> 0) % 1679616).toString(36).padStart(4,'0');
+  }
+  function parseCompactChallenge(token,sourceVersion) {
+    const match = typeof token === 'string' && token.match(/^24([pna])([0-6])([0-9a-z]{6})([0-9a-z]{4})$/);
+    if (!match) return error('invalid_challenge');
+    if (sourceVersion !== SOURCE_VERSION) return error('stale_source');
+    const payload = token.slice(0,-4);
+    if (match[4] !== compactChecksum(payload)) return error('invalid_challenge');
+    const ids = [...match[3]].map(index => CURATED_IDS[parseInt(index,36)]);
+    if (ids.some(id => !id || !curated.has(id) || withdrawn.has(id)) || new Set(ids).size !== ROUND_SIZE) return error('unavailable_question');
+    return {ok:true,token,sourceVersion,period:CODE_PERIODS[match[1]],correct:Number(match[2]),total:ROUND_SIZE,ids};
+  }
+  function parseChallenge(token,sourceVersion = SOURCE_VERSION) {
+    if (typeof token !== 'string' || token.length > 1200) return error('invalid_challenge');
+    return token.startsWith(COMPACT_VERSION) ? parseCompactChallenge(token,sourceVersion) : parseLegacyChallenge(token,sourceVersion);
   }
   function resolveChallenge(token,quotes,sourceVersion) {
     if (sourceVersion !== SOURCE_VERSION) return error('source_unverified');
@@ -104,6 +128,11 @@
     const parsed = parseChallenge(token,sourceVersion);
     if (!parsed.ok) throw new Error(parsed.reason);
     return token;
+  }
+  function encodeCompactChallenge(ids,period,correct,sourceVersion = SOURCE_VERSION) {
+    const checked = parseLegacyChallenge(encodeChallenge(ids,period,correct,sourceVersion),sourceVersion);
+    const payload = COMPACT_VERSION + PERIOD_CODES[checked.period] + checked.correct + checked.ids.map(id => CURATED_IDS.indexOf(id).toString(36)).join('');
+    return payload + compactChecksum(payload);
   }
   function https(value) {
     if (typeof value !== 'string' || value.length > 2048) return null;
@@ -145,7 +174,7 @@
   function buildShare(snapshot,period,sourceCatalog,quoteSourceVersion) {
     if (quoteSourceVersion !== SOURCE_VERSION) throw new Error('source_unverified');
     const outcome = result(snapshot), c = catalog(sourceCatalog);
-    const challenge = encodeChallenge(outcome.ids,period,outcome.correct,c.sourceVersion);
+    const challenge = encodeCompactChallenge(outcome.ids,period,outcome.correct,c.sourceVersion);
     const resolved = resolveChallenge(challenge,snapshot.round,c.sourceVersion); if (!resolved.ok) throw new Error(resolved.reason);
     const originals = new Map(snapshot.round.map(q => [q.id,q])), published = new Map(c.quotes.map(q => [q.id,q]));
     for (const id of outcome.ids) {
@@ -156,11 +185,20 @@
     return Object.freeze({...outcome,period,challenge,quote,sourceLabel:sourceLabel({...quote,verificationLevel:chosen.verificationLevel}),sourceVersion:c.sourceVersion,mode:outcome.score >= 80 ? 'score' : 'quote'});
   }
   function shareUrl(model,mode = model.mode) {
-    const u = new URL(cardPath(model.quote.id,model.correct,mode),ORIGIN);
-    u.searchParams.set('challenge',model.challenge); return u.href;
+    const parsed = parseChallenge(model.challenge);
+    if (!parsed.ok || parsed.correct !== model.correct || !parsed.ids.includes(model.quote?.id)) throw new Error('invalid_challenge');
+    const u = new URL(aliasPath(model.quote.id,model.correct,mode),ORIGIN);
+    u.searchParams.set('r',encodeCompactChallenge(parsed.ids,parsed.period,parsed.correct,parsed.sourceVersion)); return u.href;
+  }
+  function aliasPath(id,correct,mode) {
+    cardPath(id,correct,mode);
+    return ALIAS_BASE + COMPACT_VERSION + CURATED_IDS.indexOf(id).toString(36) + correct + (mode === 'score' ? 's' : 'q') + '/';
   }
   function imageUrl(model,mode = model.mode) { return new URL(cardPath(model.quote.id,model.correct,mode,'png'),ORIGIN).href; }
-  function challengeUrl(token) { const u = new URL('/game/quiz/',ORIGIN); u.searchParams.set('challenge',token); u.hash = 'play'; return u.href; }
+  function challengeUrl(token) {
+    const parsed = parseChallenge(token); if (!parsed.ok) throw new Error(parsed.reason);
+    const u = new URL('/game/quiz/',ORIGIN); u.searchParams.set('r',encodeCompactChallenge(parsed.ids,parsed.period,parsed.correct,parsed.sourceVersion)); u.hash = 'play'; return u.href;
+  }
   function challengeComparison(correct,challenge) {
     if (!challenge || !challenge.ok || !Number.isInteger(correct) || correct < 0 || correct > ROUND_SIZE) return '';
     const gap = correct - challenge.correct;
@@ -174,7 +212,7 @@
     try { if (globalThis.crypto?.subtle) sourceVersion = [...new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',bytes))].map(byte => byte.toString(16).padStart(2,'0')).join(''); } catch {}
     return {data,sourceVersion};
   }
-  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,CURATED_IDS,WITHDRAWN_IDS,isQuizEligible,curatedRank,readSearch,parseChallenge,resolveChallenge,encodeChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
+  const api = {VERSION,SUBJECT,ROUND_SIZE,SOURCE_VERSION,ORIGIN,CARD_BASE,CATALOG_URL,COMPACT_VERSION,ALIAS_BASE,CURATED_IDS,WITHDRAWN_IDS,isQuizEligible,curatedRank,readSearch,parseChallenge,resolveChallenge,encodeChallenge,encodeCompactChallenge,inPeriod,catalog,result,selectQuote,sourceLabel,cardPath,aliasPath,buildShare,shareUrl,imageUrl,challengeUrl,challengeComparison,readQuoteResponse};
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (global) global.RecordsQuizShareCore = api;
 })(typeof window === 'undefined' ? null : window);

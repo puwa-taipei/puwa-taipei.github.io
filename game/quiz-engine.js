@@ -125,7 +125,7 @@
     function clearChallenge(keepNotice = false) {
       state.challenge = null; if (!keepNotice) notice('');
       if (profile.subjectId !== 'shen-pao-yang') return;
-      try { const url = new URL(location.href); if (url.searchParams.has('challenge')) { url.searchParams.delete('challenge'); history.replaceState(null,'',url.pathname + url.search + url.hash); } } catch {}
+      try { const url = new URL(location.href); if (url.searchParams.has('challenge') || url.searchParams.has('r')) { url.searchParams.delete('challenge'); url.searchParams.delete('r'); history.replaceState(null,'',url.pathname + url.search + url.hash); } } catch {}
     }
     $('quiz-no').innerHTML = `<span aria-hidden="true">×</span><b>不是${pronoun}</b><small>NO · ←</small>`;
     $('quiz-yes').innerHTML = `<span aria-hidden="true">✓</span><b>是${pronoun}</b><small>YES · →</small>`;
@@ -268,7 +268,7 @@
       if (profile.subjectId !== 'shen-pao-yang') { drawRound(); return; }
       if (!curationReady) { drawRound(false,true); notice('精選清單暫時無法核對，已停止出題；請重新整理，沒有代入朋友的題目或分數。',true); return; }
       let incoming;
-      try { incoming = shareCore ? shareCore.readSearch(location.search) : {present:typeof location.search === 'string' && new URLSearchParams(location.search.slice(0,4096)).has('challenge')}; } catch { incoming = {present:false}; }
+      try { incoming = shareCore ? shareCore.readSearch(location.search) : {present:typeof location.search === 'string' && ['challenge','r'].some(key => new URLSearchParams(location.search.slice(0,4096)).has(key))}; } catch { incoming = {present:false}; }
       if (!incoming.present) { drawRound(); return; }
       const challenge = shareCore?.resolveChallenge(incoming.token,state.quotes,options.quoteSourceVersion);
       if (!challenge?.ok) {

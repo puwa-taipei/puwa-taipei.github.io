@@ -10,7 +10,11 @@
   if (!read.present) { status.textContent = '這張卡沒有附上完整六題，按下按鈕會開始新一輪。分數為玩家自行分享。'; return; }
   const parsed = C.parseChallenge(read.token);
   const total = body.dataset.total, correct = body.dataset.correct, quoteId = body.dataset.quoteId;
-  if (!parsed.ok || body.dataset.sourceVersion !== C.SOURCE_VERSION || total !== '6' || correct !== String(parsed.correct) || !['score','quote'].includes(body.dataset.mode) || !parsed.ids.includes(quoteId)) {
+  let aliasMatches = true;
+  if (Object.prototype.hasOwnProperty.call(body.dataset,'aliasPage')) {
+    try { aliasMatches = body.dataset.aliasPage === 'v32' && location.pathname === C.aliasPath(quoteId,Number(correct),body.dataset.mode); } catch { aliasMatches = false; }
+  }
+  if (!parsed.ok || !aliasMatches || body.dataset.sourceVersion !== C.SOURCE_VERSION || total !== '6' || correct !== String(parsed.correct) || !['score','quote'].includes(body.dataset.mode) || !parsed.ids.includes(quoteId)) {
     status.textContent = '同輪挑戰資料已過期或不完整，未代入對方分數；仍可開始自己的新一輪。'; return;
   }
   status.textContent = '正在核對朋友的六題與資料版本…';
