@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v34",
+  "version": "public-release-v35",
   "date": "2026-10-22",
   "files": [
     {
@@ -335,12 +335,12 @@
     {
       "path": "game/red-notes/index.html",
       "bytes": 2699,
-      "sha256": "3033e579f6c7cae7f09249c4e93691cfb4055a5fcb04c4a03def3238eb9cda81"
+      "sha256": "d11df5985421a7de8920329b800ec54116d21f9814a04e763ec5555f7c9fa7d2"
     },
     {
       "path": "game/share/index.html",
-      "bytes": 2724,
-      "sha256": "e301d5677e47207c3d0614bf04f0f791d0aa944111cf4be3ed2c1c1282d7c27a"
+      "bytes": 2757,
+      "sha256": "8c4688e27b1486b719f8f0941ad6cd7d4fd752f4d7eeba35498bea29a32536fc"
     },
     {
       "path": "game/swipe-ui.css",
@@ -360,7 +360,7 @@
     {
       "path": "index.html",
       "bytes": 28781,
-      "sha256": "d0cb6bf4007edc18057d465c87275cca57e2cbfb9d532cf15ba6329d9b33e583"
+      "sha256": "6acb2546f07bada8ff0435a7c8904dde0bd4f762fcdd7e84962bc7cd08859b6c"
     },
     {
       "path": "leaderboard.css",
@@ -369,8 +369,8 @@
     },
     {
       "path": "leaderboard.js",
-      "bytes": 22295,
-      "sha256": "996a4488b7b2501963ea9b33c22bafa8dcf5c6bb806b19187693d647f2f4616a"
+      "bytes": 22340,
+      "sha256": "a0dae8c63b8f1c4bd9dc6d1e973a361c8d24c86d06b10548781b1900a5faa598"
     },
     {
       "path": "network.css",

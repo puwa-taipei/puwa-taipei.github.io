@@ -27,10 +27,10 @@
   const summary=node('div','arcade-score-summary');
   const recentBox=node('div'),bestBox=node('div');recentBox.append(node('span','','本機最近一局'));const recentValue=node('strong','','—');recentBox.append(recentValue);bestBox.append(node('span','','本機最佳'));const bestValue=node('strong','','—');bestBox.append(bestValue);summary.append(recentBox,bestBox);summary.hidden=isShared;section.append(summary);
   const body=node('div','arcade-score-body'),editor=node('div','arcade-score-editor'),preview=node('div','arcade-score-preview');body.append(editor,preview);section.append(body);
-  const label=node('label','','成績卡暱稱');label.htmlFor='arcade-player-name';const input=node('input');input.id='arcade-player-name';input.type='text';input.maxLength=32;input.autocomplete='nickname';input.value=nickname;input.setAttribute('aria-describedby','arcade-name-hint');editor.append(label,input);
-  const hint=node('p','arcade-score-hint','2–16 個字。暱稱可重複；本機成績不會自動公開。');hint.id='arcade-name-hint';editor.append(hint);
+  const label=node('label','','成績卡暱稱');label.htmlFor='arcade-player-name';const input=node('input');input.id='arcade-player-name';input.type='text';input.maxLength=32;input.autocomplete='off';input.value=nickname;input.setAttribute('aria-describedby','arcade-name-hint');editor.append(label,input);
+  const hint=node('p','arcade-score-hint','2–16 個字。暱稱會放進分享文字、圖片與連結，請用想公開的名稱；本機成績不會自動登錄。');hint.id='arcade-name-hint';editor.append(hint);
   const status=node('p','arcade-score-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');editor.append(status);
-  const buttons=node('div','arcade-score-buttons'),share=node('button','','分享我的成績'),download=node('button','secondary','下載成績圖');share.type=download.type='button';buttons.append(share,download);editor.append(buttons);
+  const buttons=node('div','arcade-score-buttons'),share=node('button','','分享成績連結'),download=node('button','secondary','下載成績圖');share.type=download.type='button';buttons.append(share,download);editor.append(buttons);
   const copy=node('button','arcade-score-copy','複製挑戰連結 ↗');copy.type='button';editor.append(copy);
   const fallback=node('input','arcade-score-link-fallback');fallback.type='text';fallback.readOnly=true;fallback.hidden=true;fallback.setAttribute('aria-label','可複製的挑戰連結');editor.append(fallback);
   const publishBox=node('div','arcade-score-publish'),publish=node('button','','公開登錄這局成績');publish.type='button';publish.disabled=true;
@@ -38,7 +38,7 @@
   const publicStatus=node('p','arcade-score-status');publicStatus.setAttribute('role','status');publicStatus.setAttribute('aria-live','polite');
   publishBox.append(publishNotice,publish,publicStatus);publishBox.hidden=isShared;editor.append(publishBox);
   const canvas=node('canvas','arcade-score-canvas');canvas.width=1200;canvas.height=630;canvas.setAttribute('role','img');canvas.setAttribute('aria-label','紅紙鈔掉面具成績卡');preview.append(canvas);
-  preview.append(node('p','arcade-score-caption','個人成績請分享圖片；連結預覽使用遊戲封面。'));
+  preview.append(node('p','arcade-score-caption','分享只傳文字與連結；成績圖可另外下載，連結預覽使用遊戲封面。'));
   const global=node('div','arcade-score-global-panel'),globalHead=node('div','arcade-score-global-heading'),globalTitle=node('h4','','公開排行榜 Coming soon'),globalBadge=node('span','','尚未連線');globalHead.append(globalTitle,globalBadge);
   const globalNote=node('p','arcade-score-global-note','時間／規則基本檢核，不代表真人或每次 3D 命中都已驗證。暱稱可重複，不是帳號。');
   const refresh=node('button','arcade-score-refresh','重新整理排行榜 ↻');refresh.type='button';refresh.disabled=true;
@@ -76,19 +76,21 @@
   function summaryValues(){recentValue.textContent=stored.recent?stored.recent.score.toLocaleString('zh-TW'):'—';bestValue.textContent=stored.best?stored.best.score.toLocaleString('zh-TW'):'—';}
   function challengeURL(){if(!Share)throw new Error('share_unavailable');return Share.shareUrl(registeredItem?{id:registeredItem.id}:{nickname:cleanName(input.value),score:current.score,maxCombo:current.maxCombo});}
   function saveImage(){if(!blob)return;const objectURL=URL.createObjectURL(blob),a=node('a');a.href=objectURL;a.download='red-notes-'+current.score+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(objectURL),60000);}
-  async function copyChallenge(){const link=challengeURL();try{await navigator.clipboard.writeText(link);status.textContent='挑戰連結已複製。個人成績圖可另外下載或分享。';}catch{fallback.hidden=false;fallback.value=link;fallback.focus();fallback.select();status.textContent='請複製下方挑戰連結。';}}
+  async function copyChallenge(){const link=challengeURL();try{await navigator.clipboard.writeText(link);status.textContent='挑戰連結已複製。成績圖可另外按「下載成績圖」。';}catch{fallback.hidden=false;fallback.value=link;fallback.focus();fallback.select();status.textContent='請複製下方挑戰連結。';}}
   input.addEventListener('input',()=>{const clean=cleanName(input.value);if([...input.value].length>16)input.value=clean;nickname=clean;if(validName(clean)){try{localStorage.setItem(nameKey,clean);}catch{storageAvailable=false;}status.textContent=current?'暱稱已放進圖片，現在可以分享。':'先完成一局，再把成績做成卡片。';}else status.textContent='暱稱需要 2–16 個字，請使用一般文字。';fallback.hidden=true;draw();updatePublic();});
   download.addEventListener('click',()=>{saveImage();status.textContent='已下載成績圖。把圖片傳給朋友即可。';});
   copy.addEventListener('click',copyChallenge);
   share.addEventListener('click',async()=>{
     if(!current||!blob||!validName(cleanName(input.value)))return;
-    const file=new File([blob],'red-notes-'+current.score+'.png',{type:'image/png'}),link=challengeURL();
+    const link=challengeURL();
     try{
-      if(navigator.share&&navigator.canShare?.({files:[file]})){
-        await navigator.share({files:[file],title:'紅紙鈔掉面具｜我的成績',text:`${cleanName(input.value)}撒出 ${current.score} 分、最高 ${current.maxCombo} 連擊。你能超過我嗎？`,url:link});
-        status.textContent='已開啟裝置分享。';
-      }else{saveImage();await copyChallenge();status.textContent=fallback.hidden?'成績圖已下載、挑戰連結已複製。把圖片與連結傳給朋友！':'成績圖已下載。請複製下方連結，一起傳給朋友。';}
-    }catch(error){status.textContent=error?.name==='AbortError'?'已取消這次分享。':'這個裝置暫時無法分享檔案；請下載成績圖，再複製挑戰連結。';}
+      // Native file sharing may expose the browser's temporary file path in
+      // receiving apps. Keep this payload text-only; image download is explicit.
+      if(typeof navigator.share==='function'){
+        await navigator.share({title:'紅紙鈔掉面具｜我的成績',text:`${cleanName(input.value)}撒出 ${current.score} 分、最高 ${current.maxCombo} 連擊。你能超過我嗎？`,url:link});
+        status.textContent='已開啟文字與連結分享；沒有附加圖片檔案。';
+      }else await copyChallenge();
+    }catch(error){status.textContent=error?.name==='AbortError'?'已取消分享，沒有複製或下載檔案。':'裝置未完成分享。請改按「複製挑戰連結」，成績圖可另外下載。';}
   });
   document.addEventListener('arcade:start',e=>{if(isShared||e.detail?.game!=='red-notes')return;activeRun=e.detail.runId;current=null;finishTrace=null;registeredItem=null;input.disabled=false;blob=null;status.textContent='這局進行中。完成 40 秒後，產生新的成績卡。';fallback.hidden=true;draw();if(api?.enabled)api.start(activeRun).catch(publicError);updatePublic();});
   document.addEventListener('arcade:finish',e=>{
@@ -147,7 +149,7 @@
       api=new library.Client({apiUrl:config.apiUrl,onChange:updatePublic});apiConfigured=api.enabled;
       if(!apiConfigured){if(hasSharedId){status.textContent='這筆公開成績需要排行榜連線，目前尚未啟用。仍可直接挑戰新的一局。';shareState.textContent='排行榜尚未啟用，這筆公開成績目前無法核對。';}updatePublic();return;}
       globalTitle.textContent='公開排行榜 · 近 30 日 TOP 20';globalBadge.textContent='連線中';refresh.disabled=false;
-      hint.textContent='2–16 個字，暱稱可重複。按公開登錄才公開暱稱與成績；本機圖片分享可獨立使用。';
+      hint.textContent='2–16 個字。暱稱會放進分享文字、圖片與連結，請用想公開的名稱；按「公開登錄」才會另將暱稱與成績列入排行榜。';
       if(activeRun)api.start(activeRun).catch(publicError);
       updatePublic();loadTop();
       if(hasSharedId){
