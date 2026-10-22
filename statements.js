@@ -1,12 +1,41 @@
 (() => {
  'use strict';
- const root=document.getElementById('statements');
+ const BASE_SOURCE='6423653eb77322ad2d081cbdcdc783a067cff9035b220184a7594ada936763d3';
+ const SUPPLEMENT_IDS=new Set(['energy-electricity-20260526-reviewed-v34','abuse-harm-distinction-154805-reviewed-v34','recall-cannot-silent-july2025-reviewed-v34','traffic-ten-years-20260816-reviewed-v34']);
+ function parseSupplement(value){
+  const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
+  const only=(v,keys)=>{if(!object(v)||Object.keys(v).some(k=>!keys.includes(k)))throw Error('supplement_fields');};
+  const text=(v,max=4000)=>{if(typeof v!=='string'||!v.trim()||v.length>max||/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(v)||/\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/i.test(v)||/[^\s@]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(v))throw Error('supplement_text');};
+  const https=v=>{text(v,2048);const u=new URL(v);if(u.protocol!=='https:'||u.username||u.password||u.port||!u.hostname.includes('.')||/^\d+(?:\.\d+)*$/.test(u.hostname)||/(?:^|\.)(?:localhost|local|internal|test|invalid)$/.test(u.hostname))throw Error('supplement_url');};
+  const day=v=>typeof v==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v)&&!Number.isNaN(Date.parse(v+'T00:00:00Z'))&&new Date(v+'T00:00:00Z').toISOString().slice(0,10)===v;
+  only(value,['version','kind','subjectId','baseSourceVersion','reviewedAt','adoptionStatus','selectionNote','counts','quotes']);
+  if(value.version!=='v34'||value.kind!=='quote-library-supplement'||value.subjectId!=='shen-pao-yang'||value.baseSourceVersion!==BASE_SOURCE||value.adoptionStatus!=='editorially-adopted'||typeof value.reviewedAt!=='string'||!Number.isFinite(Date.parse(value.reviewedAt)))throw Error('supplement_metadata');
+  text(value.selectionNote,1200);only(value.counts,['quotes','events']);
+  if(value.counts.quotes!==4||value.counts.events!==4||!Array.isArray(value.quotes)||value.quotes.length!==4)throw Error('supplement_count');
+  const fields=['id','eventId','title','speaker','quote','date','datePrecision','eventDate','medium','topic','sourceType','verificationLevel','url','videoUrl','videoLabel','context','evidenceLocator','recordingClock','recordingClockNote','videoAvailabilityNote','inferenceLimit','frontContext','libraryRank','displayTier','featuredEligible','adoptionLabel','supportingUrls','meetingInfoUrl'];
+  const required=['id','eventId','title','speaker','quote','date','datePrecision','medium','topic','sourceType','verificationLevel','url','context','evidenceLocator','inferenceLimit','frontContext','adoptionLabel'];
+  for(const q of value.quotes){
+   only(q,fields);for(const key of required)text(q[key]);
+   if(!SUPPLEMENT_IDS.has(q.id)||!/^[a-z0-9][a-z0-9-]{0,120}$/.test(q.eventId)||q.speaker!=='沈伯洋'||!['spoken','written'].includes(q.medium)||!['context','correction'].includes(q.displayTier)||q.featuredEligible!==false||!Number.isInteger(q.libraryRank)||q.libraryRank<1||q.libraryRank>4)throw Error('supplement_record');
+   if(q.datePrecision==='unknown'){if(Object.prototype.hasOwnProperty.call(q,'eventDate'))throw Error('supplement_unknown_date');}
+   else if(q.datePrecision!=='day'||!day(q.eventDate)||q.eventDate!==q.date)throw Error('supplement_date');
+   for(const key of ['url','videoUrl','meetingInfoUrl'])if(q[key]!==undefined)https(q[key]);
+   for(const key of ['videoLabel','recordingClock','recordingClockNote','videoAvailabilityNote'])if(q[key]!==undefined)text(q[key]);
+   if(q.supportingUrls!==undefined){if(!Array.isArray(q.supportingUrls)||q.supportingUrls.length>8)throw Error('supplement_sources');q.supportingUrls.forEach(https);}
+  }
+  for(const key of ['id','eventId','libraryRank'])if(new Set(value.quotes.map(q=>q[key])).size!==4)throw Error('supplement_duplicate');
+  return value;
+ }
+ if(typeof module==='object'&&module.exports)module.exports={parseSupplement};
+ const root=typeof document==='object'?document.getElementById('statements'):null;
  if(!root)return;
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const url=s=>{try{const u=new URL(s,location.href);return u.protocol==='https:'?u.href:'#statements';}catch{return '#statements';}};
  const normalize=s=>String(s??'').normalize('NFKC').toLocaleLowerCase('zh-TW');
  const spoken=q=>q.medium!=='written';
- const before=q=>(q.eventDate||q.date).slice(0,10)<'2026-05-13';
+ const added=q=>SUPPLEMENT_IDS.has(q.id)&&q.featuredEligible===false;
+ const dateKey=q=>added(q)&&q.datePrecision==='unknown'?'':(q.eventDate||q.date).slice(0,10);
+ const before=q=>dateKey(q)<'2026-05-13';
  const curationReady=()=>window.RecordsQuizShareCore?.VERSION==='v24'&&Array.isArray(window.RecordsQuizShareCore.CURATED_IDS)&&window.RecordsQuizShareCore.CURATED_IDS.length>=6;
  const eligible=q=>curationReady()&&window.RecordsQuizShareCore.isQuizEligible(q);
  // Display-only editorial supplement; archival quotes and source-version pins stay unchanged.
@@ -23,16 +52,17 @@
    ]
   }
  };
- let data=null,period='all',topic='all',medium='all',query='',sort='editorial',shown=12;
+ let data=null,supplement=null,supplementLoading=false,supplementFailed=false,collection='featured',period='all',topic='all',medium='all',query='',sort='editorial',shown=12;
  root.innerHTML=`<div class="wrap">
-  <div class="section-heading"><div><p class="section-number">原話檔案 ／ 強烈用語與爭議說法</p><h2>溫和形象之外，<br>回頭看他的原話。</h2></div><p class="section-deck">姓名挖苦、智商批評、強烈反問。<br>按下來源，讀完整前後文。</p></div>
-  <p class="stmt-intro">先看直接辱罵、對人挖苦、強烈反問與具爭議的說法，預設全部時期，與猜題使用同一批精選。完整原話與補充脈絡仍保留於資料下載。</p>
-  <div class="stmt-library-summary"><p id="stmt-total" aria-live="polite">讀取語料總覽…</p><a href="./downloads/quotes.csv" download>下載全部原話 CSV ↓</a></div>
-  <div class="stmt-collection"><strong data-statement-collection aria-live="polite">本期原話閃卡</strong><p id="statement-collection-note">開啟紀錄僅存本機，不代表已觀看或查證。</p></div>
+  <div class="section-heading"><div><p id="stmt-heading-label" class="section-number">原話檔案 ／ 強烈用語與爭議說法</p><h2 id="stmt-heading-title">溫和形象之外，<br>回頭看他的原話。</h2></div><p id="stmt-heading-deck" class="section-deck">姓名挖苦、智商批評、強烈反問。<br>按下來源，讀完整前後文。</p></div>
+  <p id="stmt-intro" class="stmt-intro">先看直接辱罵、對人挖苦、強烈反問與具爭議的說法，預設全部時期，與猜題使用同一批精選。完整原話與補充脈絡仍保留於資料下載。</p>
+  <div class="stmt-library-summary"><p id="stmt-total" aria-live="polite">讀取語料總覽…</p><div class="stmt-downloads"><a href="./downloads/quotes.csv" download>既有原話 CSV ↓</a><a href="./data/quote-library-v34.json?v=34" download>本次核對補充 JSON ↓</a></div></div>
+  <div class="stmt-set-picker"><label for="stmt-set">選集<select id="stmt-set"><option value="featured">反差精選 36</option><option value="supplement">本次核對補充 4</option></select></label><p id="stmt-supplement-status" role="status">正在讀取本次核對補充；既有精選可先閱讀。</p><button id="stmt-supplement-retry" type="button" hidden>重試載入補充</button></div>
+  <div id="stmt-flash-collection" class="stmt-collection"><strong data-statement-collection aria-live="polite">本期原話閃卡</strong><p id="statement-collection-note">開啟紀錄僅存本機，不代表已觀看或查證。</p></div>
   <label class="stmt-search-label" for="stmt-search">搜尋原話、人物或議題</label><input id="stmt-search" class="stmt-search" type="search" placeholder="例如：智商、名字、教育、AI" autocomplete="off">
   <div class="stmt-controls">
    <label>時間<select id="stmt-period"><option value="pre">正式提名前</option><option value="post">正式提名起</option><option value="all" selected>全部時期</option></select></label>
-   <label>材料<select id="stmt-medium"><option value="all">口語與文章</option><option value="spoken">口語發言</option><option value="written">本人文章</option></select></label>
+   <label>材料<select id="stmt-medium"><option value="all">口語與書面</option><option value="spoken">口語發言</option><option value="written">書面文字</option></select></label>
    <label>主題<select id="stmt-topic"><option value="all">所有主題</option></select></label>
    <label>排序<select id="stmt-sort"><option value="editorial">反差精選優先</option><option value="newest">日期：新到舊</option><option value="oldest">日期：舊到新</option></select></label>
   </div>
@@ -51,41 +81,87 @@
  }
  document.getElementById('stmt-search').addEventListener('input',e=>{query=normalize(e.target.value.trim());shown=12;render();});
  document.getElementById('stmt-more').addEventListener('click',()=>{shown+=12;render();});
+ document.getElementById('stmt-set').addEventListener('change',e=>{
+  collection=e.target.value==='supplement'?'supplement':'featured';topic='all';shown=12;updateTopics();render();
+ });
+ document.getElementById('stmt-supplement-retry').addEventListener('click',()=>loadSupplement());
+ function sourceRows(){return collection==='supplement'?(supplement?.quotes||[]):(data?.quotes||[]).filter(eligible);}
+ function updateTopics(){
+  const topics=[...new Set(sourceRows().map(q=>q.topic||'政治言論'))];
+  if(!topics.includes(topic))topic='all';
+  const select=document.getElementById('stmt-topic');
+  select.innerHTML='<option value="all">所有主題</option>'+topics.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('');select.value=topic;
+ }
+ function overview(){
+  if(!data)return;
+  const selected=data.quotes.filter(eligible).length,extra=supplement?.quotes||[],all=[...data.quotes,...extra];
+  document.getElementById('stmt-total').textContent=`全庫 ${all.length} 則（既有 ${data.quotes.length}${supplement?'＋本次核對 '+extra.length:''}） · ${new Set(all.map(q=>q.eventId||q.id)).size} 個事件／文章 · 精選猜題 ${selected} 則`;
+  document.getElementById('stmt-selection').textContent=`目前精選與猜題 ${selected} 則，既有資料共 ${data.quotes.length} 則。一般政策與程序說明保留在既有 CSV 下載，不列入本期題庫；本次核對補充另列選集，不加入現行猜題或閃卡。先前版本的分享卡保留作歷史連結，舊挑戰會重新開局。每輪優先抽出尚未看過、來自不同事件的片段；口語與書面分開標示，未核實的時間點不編造。`;
+ }
+ function selectionHeading(){
+  const supplementView=collection==='supplement';
+  document.getElementById('stmt-heading-label').textContent=supplementView?'原話檔案 ／ 本次核對補充':'原話檔案 ／ 強烈用語與爭議說法';
+  document.getElementById('stmt-heading-title').innerHTML=supplementView?'把投稿說法，<br>回到來源核對。':'溫和形象之外，<br>回頭看他的原話。';
+  document.getElementById('stmt-heading-deck').innerHTML=supplementView?'更正投稿引文，補上政策與公開表述。<br>這 4 則不列入強烈用語精選、猜題或閃卡。':'姓名挖苦、智商批評、強烈反問。<br>按下來源，讀完整前後文。';
+  document.getElementById('stmt-intro').textContent=supplementView?'本次由投稿核對出的更正與一般政策脈絡。媒體引述、官方逐字稿與未確認事項分開標示；原始發表日期待核者，只列在「全部時期」。':'先看直接辱罵、對人挖苦、強烈反問與具爭議的說法，預設全部時期，與猜題使用同一批精選。完整原話與補充脈絡仍保留於資料下載。';
+  document.getElementById('stmt-flash-collection').hidden=supplementView;
+ }
+ async function loadSupplement(){
+  if(supplementLoading)return;
+  supplementLoading=true;supplementFailed=false;
+  const status=document.getElementById('stmt-supplement-status'),retry=document.getElementById('stmt-supplement-retry');
+  status.textContent='正在讀取本次核對補充；既有精選可先閱讀。';retry.hidden=true;
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
+  try{
+   const response=await fetch('./data/quote-library-v34.json?v=34',{cache:'no-cache',credentials:'omit',referrerPolicy:'no-referrer',signal:controller.signal});
+   if(!response.ok)throw Error('supplement_unavailable');const raw=await response.text();if(raw.length>64000)throw Error('supplement_size');
+   const parsed=parseSupplement(JSON.parse(raw));
+   if(data&&parsed.quotes.some(q=>data.quotes.some(old=>old.id===q.id)))throw Error('supplement_overlap');
+   supplement=parsed;status.textContent='本次核對補充 4 則已載入；不加入既有 36 題或閃卡。';
+  }catch{
+   supplementFailed=true;status.textContent='本次補充暫時無法載入，既有精選仍可閱讀。';retry.hidden=false;
+  }finally{
+   clearTimeout(timer);supplementLoading=false;overview();updateTopics();render();
+  }
+ }
  function compare(a,b){
-  const dateA=(a.eventDate||a.date).slice(0,10),dateB=(b.eventDate||b.date).slice(0,10);
+  const dateA=dateKey(a),dateB=dateKey(b);
+  if((sort==='oldest'||sort==='newest')&&(!dateA||!dateB))return dateA?-1:dateB?1:a.id.localeCompare(b.id);
   if(sort==='oldest')return dateA.localeCompare(dateB)||a.id.localeCompare(b.id);
   if(sort==='newest')return dateB.localeCompare(dateA)||a.id.localeCompare(b.id);
-  const rank=q=>eligible(q)?window.RecordsQuizShareCore.curatedRank(q):(q.editorialRank??9999);
+  const rank=q=>added(q)?q.libraryRank:eligible(q)?window.RecordsQuizShareCore.curatedRank(q):(q.editorialRank??9999);
   return rank(a)-rank(b)||dateB.localeCompare(dateA)||a.id.localeCompare(b.id);
  }
  function matches(q){
-  return (period==='all'||(period==='pre'?before(q):!before(q)))&&
+  return (period==='all'||(Boolean(dateKey(q))&&(period==='pre'?before(q):!before(q))))&&
    (medium==='all'||(medium==='spoken'?spoken(q):!spoken(q)))&&
    (topic==='all'||q.topic===topic)&&
    (!query||normalize([q.quote,q.title,q.topic,q.context,q.frontContext,q.venue].join(' ')).includes(query));
  }
  function card(q){
+  const supplementRecord=added(q),material=supplementRecord?(q.verificationLevel==='official-transcript-fulltext'?'官方逐字稿':spoken(q)?'媒體引述口語':'媒體轉引書面'):(spoken(q)?'口語發言':'本人文章');
   const videos=[];
   if(q.videoUrl)videos.push(`<a href="${esc(url(q.videoUrl))}" target="_blank" rel="noopener noreferrer">${esc(q.videoLabel||'看原片')}${q.timecode?' · '+esc(q.timecode):''} ↗</a>`);
   if(q.fullVideoUrl&&q.fullVideoUrl!==q.videoUrl)videos.push(`<a href="${esc(url(q.fullVideoUrl))}" target="_blank" rel="noopener noreferrer">${esc(q.fullVideoLabel||'完整影片')} ↗</a>`);
-  return `<article class="stmt-card" data-quote-id="${esc(q.id)}">
-   <div class="stmt-card-meta"><span>${esc(q.date)}</span><span>${spoken(q)?'口語發言':'本人文章'}</span><span>${esc(q.topic||'政治言論')}</span><span>${'精選 '+String(window.RecordsQuizShareCore.curatedRank(q)).padStart(2,'0')}</span></div>
-   <div class="stmt-card-head"><h3>${esc(q.title)}</h3>${window.RecordsStatementCards?.entry(q)||''}</div>${q.frontContext?`<p class="stmt-front-context">${esc(q.frontContext)}</p>`:''}
+  return `<article class="stmt-card${supplementRecord?' stmt-card-supplement':''}" data-quote-id="${esc(q.id)}">
+   <div class="stmt-card-meta"><span>${esc(q.date)}</span><span>${material}</span><span>${esc(q.topic||'政治言論')}</span><span${supplementRecord?' class="stmt-reviewed-badge"':''}>${supplementRecord?'本次核對':'精選 '+String(window.RecordsQuizShareCore.curatedRank(q)).padStart(2,'0')}</span></div>
+   <div class="stmt-card-head"><h3>${esc(q.title)}</h3>${supplementRecord?'':window.RecordsStatementCards?.entry(q)||''}</div>${supplementRecord?`<p class="stmt-adoption-label">${esc(q.adoptionLabel)} · ${q.displayTier==='correction'?'引文更正':'政策與補充脈絡'}</p>`:''}${q.frontContext?`<p class="stmt-front-context">${esc(q.frontContext)}</p>`:''}${supplementRecord&&q.datePrecision==='unknown'?'<p class="stmt-date-unknown">原始發表日期待核；僅列在全部時期。</p>':''}
    <blockquote>「${esc(q.quote)}」</blockquote>${q.contrastReason?`<p class="stmt-contrast"><span>${esc(q.contrastCriterion||'精選理由')}</span>${esc(q.contrastReason)}</p>`:''}
    <p class="stmt-venue">${esc(q.venue)}</p>
    <details><summary>看完整背景與證據位置 ＋</summary><p>${esc(q.context)}</p><p class="stmt-locator">${esc(q.evidenceLocator)}</p>${q.recordingClock?`<p class="stmt-clock">會議時鐘：${esc(q.recordingClock)}${q.videoDuration?' · 整段 '+esc(q.videoDuration):''}<br>${esc(q.recordingClockNote||'整段發言起訖，不是句內秒數。')}</p>`:''}${q.videoAvailabilityNote?`<p class="stmt-locator">${esc(q.videoAvailabilityNote)}</p>`:''}${q.meetingInfoUrl?`<p><a href="${esc(url(q.meetingInfoUrl))}" target="_blank" rel="noopener noreferrer">官方會議資料 ↗</a></p>`:''}${q.inferenceLimit?`<p class="stmt-limit">判讀範圍：${esc(q.inferenceLimit)}</p>`:''}</details>
-   <div class="stmt-links"><a href="${esc(url(q.url))}" target="_blank" rel="noopener noreferrer">讀原始來源 ↗</a>${videos.join('')}</div><p class="stmt-source">${esc(q.sourceType)}</p>
+   <div class="stmt-links"><a href="${esc(url(q.url))}" target="_blank" rel="noopener noreferrer">${supplementRecord&&q.verificationLevel!=='official-transcript-fulltext'?'讀媒體引述來源':'讀原始來源'} ↗</a>${videos.join('')}${supplementRecord?(q.supportingUrls||[]).map((link,i)=>`<a href="${esc(url(link))}" target="_blank" rel="noopener noreferrer">補充來源 ${i+1} ↗</a>`).join(''):''}</div><p class="stmt-source">${esc(q.sourceType)}</p>
   </article>`;
  }
  function updateMore(id,count,limit){const el=document.getElementById(id);el.hidden=limit>=count;el.textContent=`再顯示 ${Math.min(12,Math.max(0,count-limit))} 則 ↓`;}
  function render(){
-  const rows=data.quotes.filter(matches).sort(compare);
-  const selected=rows.filter(eligible);
+  selectionHeading();
+  const selected=sourceRows().filter(matches).sort(compare);
   const events=new Set(selected.map(q=>q.eventId||q.id));
-  document.getElementById('stmt-count').textContent=`精選 ${selected.length} 則，來自 ${events.size} 個事件／文章；顯示 ${Math.min(shown,selected.length)} 則。${period==='pre'?'均早於正式提名。':period==='post'?'均為正式提名起。':'含提名前後。'}`;
-  document.getElementById('stmt-list').innerHTML=selected.length?selected.slice(0,shown).map(q=>card(q)).join(''):'<p class="empty-state">'+(curationReady()?'精選中沒有符合紀錄；可改條件，或下載完整原話資料核對。':'精選清單暫時無法核對，已停止展示精選；請重新整理，或下載完整原話資料核對。')+'</p>';
+  document.getElementById('stmt-count').textContent=`${collection==='supplement'?'本次核對補充':'精選'} ${selected.length} 則，來自 ${events.size} 個事件／文章；顯示 ${Math.min(shown,selected.length)} 則。${collection==='supplement'?(period==='all'?'原始日期待核者也列於此。':'日期待核者不列入此期間。'):period==='pre'?'均早於正式提名。':period==='post'?'均為正式提名起。':'含提名前後。'}`;
+  const empty=collection==='supplement'?(supplementLoading?'正在讀取本次核對補充…':supplementFailed?'補充資料暫時無法載入，可按「重試載入補充」，或切回反差精選。':'本次補充沒有符合紀錄；可調整條件。日期待核者只列在全部時期。'):(curationReady()?'精選中沒有符合紀錄；可改條件，或下載既有原話資料核對。':'精選清單暫時無法核對，已停止展示精選；請重新整理，或下載既有原話資料核對。');
+  document.getElementById('stmt-list').innerHTML=selected.length?selected.slice(0,shown).map(q=>card(q)).join(''):'<p class="empty-state">'+empty+'</p>';
   updateMore('stmt-more',selected.length,shown);
-  window.RecordsStatementCards?.hydrate(document.getElementById('stmt-list'));
+  if(collection==='featured')window.RecordsStatementCards?.hydrate(document.getElementById('stmt-list'));
  }
  function pairSide(v,i,comparisonId){
   const update=i===1?comparisonEditorialUpdates[comparisonId]:null;
@@ -101,11 +177,9 @@
  fetch('./data/quotes.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('quotes');return r.json();}).then(d=>{
   data=d;
   window.RecordsStatementCards?.register({subjectId:document.body.dataset.subjectId,sourceVersion:window.RecordsQuizShareCore?.SOURCE_VERSION,quotes:d.quotes});
-  const selected=d.quotes.filter(eligible).length;
-  document.getElementById('stmt-total').textContent=`全庫 ${d.quotes.length} 則 · ${new Set(d.quotes.map(q=>q.eventId||q.id)).size} 個事件／文章 · 精選猜題 ${selected} 則 · 完整原文可下載`;
-  document.getElementById('stmt-selection').textContent=`目前精選與猜題 ${selected} 則，完整資料共 ${d.quotes.length} 則。一般政策與程序說明保留在下載資料，不列入本期題庫；先前版本的分享卡保留作歷史連結，舊挑戰會重新開局。原始來源仍保留供查核。每輪優先抽出尚未看過、來自不同事件的片段；口語與書面分開標示，未核實的時間點不編造。`;
-  const topics=[...new Set(d.quotes.filter(eligible).map(q=>q.topic||'政治言論'))];
-  document.getElementById('stmt-topic').innerHTML='<option value="all">所有主題</option>'+topics.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join('');
+  if(supplement&&supplement.quotes.some(q=>d.quotes.some(old=>old.id===q.id))){supplement=null;supplementFailed=true;document.getElementById('stmt-supplement-status').textContent='補充資料與既有檔案重疊，已停止展示補充。';document.getElementById('stmt-supplement-retry').hidden=false;}
+  overview();updateTopics();
   render();pairs();
- }).catch(()=>{document.getElementById('stmt-count').textContent='原話資料暫時無法載入，可重新整理或從下方知識庫查看來源。';}).finally(()=>{document.dispatchEvent(new CustomEvent('records:ready',{detail:'statements'}));});
+ }).catch(()=>{if(collection==='featured')document.getElementById('stmt-count').textContent='既有原話資料暫時無法載入，可重新整理或從下方知識庫查看來源。';}).finally(()=>{document.dispatchEvent(new CustomEvent('records:ready',{detail:'statements'}));});
+ loadSupplement();
 })();

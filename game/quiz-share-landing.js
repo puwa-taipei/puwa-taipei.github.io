@@ -1,3 +1,15 @@
+/* v34 privacy-bounded analytics for existing short aliases only. */
+(() => {
+  'use strict';
+  if (location.protocol !== 'https:' || location.hostname !== 'puwa.taipei' || location.port !== '' || !/^\/q\/24[0-9a-z][0-6][sq]\/$/.test(location.pathname)) return;
+  const body = document.querySelector('[data-quiz-share-landing]');
+  if (!body || body.dataset.aliasPage !== 'v32' || !document.head || document.getElementById('records-analytics-loader-v34')) return;
+  const script = document.createElement('script');
+  script.id = 'records-analytics-loader-v34'; script.src = '/analytics.js?v=34'; script.defer = true;
+  script.setAttribute('data-measurement-id','G-HXGVHCCDCX');
+  document.head.append(script);
+})();
+
 /* Static OG already exists in the HTML; this only verifies the optional six-question challenge. */
 (() => {
   'use strict';
