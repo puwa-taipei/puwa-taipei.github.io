@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v38",
+  "version": "public-release-v39",
   "date": "2026-10-22",
   "files": [
     {
@@ -84,13 +84,13 @@
     },
     {
       "path": "comparison.css",
-      "bytes": 34036,
-      "sha256": "74ae9058b5dcc913ee86a229f2ea01e91d2564259d61a9e6e20eec6e0b209ce7"
+      "bytes": 34885,
+      "sha256": "83ca44924347e3ba04f75c31229bd0b2c0f8effdcf268e58e34338876203abd7"
     },
     {
       "path": "comparison.js",
-      "bytes": 38829,
-      "sha256": "be321341d66c08ef7053346c3ec8734962ae8630634a70d02dc14fb2ca8c75c1"
+      "bytes": 42784,
+      "sha256": "7ec4ab999a4aae14f43380a65f614835b7283b77d5aceb6d451da60de78a2e56"
     },
     {
       "path": "contribute/agent-help.js",
@@ -176,6 +176,11 @@
       "path": "data/quote-library-v34.json",
       "bytes": 7384,
       "sha256": "dfdae024d4ad0afaa68573f409e17f21d15c19ab63517dd0991fb02fcdaa8677"
+    },
+    {
+      "path": "data/quote-library-v39.json",
+      "bytes": 10598,
+      "sha256": "1bdb700b68259a67de8beee75173671c1ad6a02395d1c65b3968c41101630803"
     },
     {
       "path": "data/quotes-v18-archive.json",
@@ -360,7 +365,7 @@
     {
       "path": "index.html",
       "bytes": 28781,
-      "sha256": "123e328b629e90272ed21c56cf515dfa46f562b392b2f240bf77e856375817b1"
+      "sha256": "c1d83466524ac672143d104c11f9cc8fd34a46715a5109b0fdb61c076924a985"
     },
     {
       "path": "leaderboard.css",
@@ -429,8 +434,8 @@
     },
     {
       "path": "statements.js",
-      "bytes": 23489,
-      "sha256": "0568a58b4745893e8f435e6f062a6095d2f0e4b94f16380f466975dd404d022c"
+      "bytes": 24398,
+      "sha256": "90846a2d5a82a8fbcf487d4069a65263d3c12929cb6c5a9fe17cef9e59ad84a9"
     },
     {
       "path": "style.css",

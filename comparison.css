@@ -71,7 +71,9 @@ body .cmp-temporal-card>details{border-top:1px solid var(--line);padding-top:17p
 @media(max-width:760px){.cmp-policy-rings-card{padding:23px}.cmp-rings-heading{grid-template-columns:1fr;gap:14px}.cmp-rings-score{text-align:left;display:flex;gap:12px;align-items:baseline}.cmp-rings-score strong{font-size:40px}.cmp-rings-score>span{font-size:9px}.cmp-rings-heading h3{font-size:20px}.cmp-rings-guide{gap:8px 20px}.cmp-rings-pair{gap:14px}.cmp-rings-panel{padding:16px 13px}.cmp-rings-panel h4{font-size:12px}.cmp-rings-panel-heading p{font-size:8px}.cmp-rings-fill{display:block;min-height:61px}.cmp-rings-fill>span{display:block;font-size:9px}.cmp-rings-fill>strong{display:block;margin-top:4px}.cmp-rings-legend-row{grid-template-columns:minmax(115px,1fr) 64px 64px 64px;gap:9px;font-size:10px}.cmp-rings-legend-row button{font-size:10px}.cmp-rings-legend-head{font-size:9px}.cmp-rings-legend-head small{font-size:7px}}
 @media(max-width:520px){.cmp-policy-rings-card{padding:20px 14px}.cmp-rings-heading h3{font-size:18px}.cmp-rings-pair{gap:9px}.cmp-rings-panel{padding:13px 7px}.cmp-rings-panel-heading{min-height:88px}.cmp-rings-panel h4{font-size:10px}.cmp-rings-panel-heading>span{font-size:8px;letter-spacing:.02em}.cmp-rings-panel-heading p{font-size:8px}.cmp-rings-total{font-size:47px}.cmp-rings-unit{font-size:13px}.cmp-rings-panel-note{font-size:8px;min-height:30px}.cmp-rings-fill>span{font-size:8px}.cmp-rings-fill>strong{font-size:20px}.cmp-rings-caption,.cmp-rings-axis-note{font-size:9px}.cmp-rings-guide p{font-size:9px}.cmp-rings-legend-row{grid-template-columns:minmax(100px,1fr) 46px 46px 50px;gap:7px;font-size:9px}.cmp-rings-legend-row>span:first-child{gap:5px}.cmp-rings-legend-row i{width:7px;height:7px}.cmp-rings-legend-row button{font-size:9px}.cmp-rings-legend-head{font-size:8px}.cmp-rings-legend-head small{font-size:6px}}
 
-/* v38: topic-by-topic proportion stamps. Keep all percentages and delta data visible. */
+/* v39: horizontal proportion stamps. Keep all percentages and delta data visible. */
+body .cmp-chart-with-stamps {overflow-x:clip;overflow-y:visible}
+html.cmp-stamp-impact {overflow-x:clip}
 body .cmp-chart-with-stamps > .cmp-chart-row {
   grid-template-columns: minmax(170px,.95fr) minmax(0,1.25fr) 128px minmax(0,1.25fr) 88px;
   gap: 20px;
@@ -136,7 +138,7 @@ body .cmp-chart-with-stamps .cmp-delta-label {display:none}
 body .cmp-chart-with-stamps .cmp-delta-value {font-size:26px;line-height:1.2;letter-spacing:-.025em;white-space:nowrap}
 body .cmp-chart-with-stamps .cmp-delta small {font-size:14px;line-height:1.5;margin:0;white-space:nowrap}
 
-/* The seal is a CSS impression, with local type and intact, high-contrast glyphs. */
+/* Horizontal CSS impressions use local type; grade rotation stays available to the entry animation. */
 body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal {
   --cmp-seal-ink: #a3322a;
   position: relative;
@@ -144,16 +146,18 @@ body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal {
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 80px;
-  height: 80px;
+  width: 118px;
+  height: 55px;
   padding: 7px;
   border: 3px solid currentColor;
   border-radius: 7% 3% 6% 4% / 4% 8% 3% 6%;
   color: var(--cmp-seal-ink);
   background: rgba(255,253,246,.35);
-  transform: rotate(-5deg);
+  transform: rotate(var(--cmp-seal-rotate));
   vertical-align: middle;
+  --cmp-seal-rotate:-5deg;
 }
+body .cmp-chart-with-stamps .cmp-seal-await{opacity:0}
 body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal::before {
   content: '';
   position: absolute;
@@ -174,24 +178,26 @@ body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal::after {
 }
 body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-text {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-family: 'DFKai-SB','BiauKai','KaiTi','STKaiti','Noto Serif TC','PMingLiU',serif;
-  font-size: 27px;
+  font-size: 28px;
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: .035em;
+  line-height: 1.1;
+  letter-spacing: .02em;
   text-align: center;
   text-shadow: .3px 0 currentColor,-.2px .2px currentColor;
   -webkit-font-smoothing: auto;
+  white-space:nowrap;
 }
 body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-text > span {display:block;white-space:nowrap}
 body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-large {--cmp-seal-ink:#a3322a}
-body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-marked {--cmp-seal-ink:#b65335;transform:rotate(3deg)}
-body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-some {--cmp-seal-ink:#896124;transform:rotate(-3deg)}
-body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-near {--cmp-seal-ink:#38645d;transform:rotate(2deg)}
-body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-none {--cmp-seal-ink:#6c756e;transform:rotate(-1deg)}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-marked {--cmp-seal-ink:#b65335;--cmp-seal-rotate:3deg}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-some {--cmp-seal-ink:#896124;--cmp-seal-rotate:-3deg}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-near {--cmp-seal-ink:#38645d;--cmp-seal-rotate:2deg}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-none {--cmp-seal-ink:#6c756e;--cmp-seal-rotate:-1deg}
+body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal-none .cmp-seal-text{font-size:22px;letter-spacing:.01em}
 
 body .cmp-stamp-guide {
   margin: 24px 0 22px;
@@ -222,9 +228,10 @@ body .cmp-stamp-guide .cmp-stamp-legend > li {
 }
 body .cmp-stamp-guide .cmp-stamp-legend > li > :not(.cmp-seal) {min-width:0;overflow-wrap:anywhere}
 body .cmp-stamp-guide .cmp-stamp-legend strong {display:block;font-size:16px;font-weight:650}
-body .cmp-stamp-guide .cmp-seal-mini {width:54px;height:54px;padding:5px;border-width:2px}
+body .cmp-stamp-guide .cmp-seal-mini {width:84px;height:38px;padding:4px;border-width:2px}
 body .cmp-stamp-guide .cmp-seal-mini::before {inset:3px}
-body .cmp-stamp-guide .cmp-seal-mini .cmp-seal-text {font-size:19px;line-height:1.04;letter-spacing:.02em}
+body .cmp-stamp-guide .cmp-seal-mini .cmp-seal-text {font-size:18px;line-height:1.1;letter-spacing:.01em}
+body .cmp-stamp-guide .cmp-seal-mini.cmp-seal-none .cmp-seal-text{font-size:15px}
 body .cmp-stamp-guide .cmp-stamp-empty-example {
   display: flex;
   align-items: center;
@@ -252,7 +259,7 @@ body .cmp-stamp-guide .cmp-stamp-empty-example > :not(.cmp-seal) {min-width:0}
 @media (max-width:700px) {
   body .cmp-chart-with-stamps {position:relative}
   body .cmp-chart-with-stamps > .cmp-chart-row {
-    grid-template-columns: minmax(0,1fr) 92px minmax(0,1fr);
+    grid-template-columns: minmax(0,1fr) 112px minmax(0,1fr);
     grid-template-areas: 'topic topic topic' 'leg seal policy' 'delta delta delta';
     gap: 14px 12px;
     min-height: 0;
@@ -308,18 +315,23 @@ body .cmp-stamp-guide .cmp-stamp-empty-example > :not(.cmp-seal) {min-width:0}
   body .cmp-chart-with-stamps .cmp-delta-value {font-size:24px;line-height:1.3}
   body .cmp-chart-with-stamps .cmp-delta small {font-size:14px;line-height:1.5}
   body .cmp-stamp-guide {margin-top:20px;padding:20px 0}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal{width:106px;height:50px;padding:6px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal-text{font-size:26px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal-none .cmp-seal-text{font-size:21px}
 }
 @media (max-width:420px) {
   body .cmp-stamp-guide .cmp-stamp-legend {grid-template-columns:minmax(0,1fr);gap:10px}
 }
 @media (max-width:360px) {
-  body .cmp-chart-with-stamps > .cmp-chart-row {grid-template-columns:minmax(0,1fr) 84px minmax(0,1fr);column-gap:9px}
-  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal {width:74px;height:74px;padding:6px}
+  body .cmp-chart-with-stamps > .cmp-chart-row {grid-template-columns:minmax(0,1fr) 106px minmax(0,1fr);column-gap:9px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal {width:100px;height:48px;padding:5px}
   body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal-text {font-size:25px}
   body .cmp-chart-with-stamps .cmp-zero-tag {font-size:14px}
+  body .cmp-chart-with-stamps .cmp-stamp-cell .cmp-seal-none .cmp-seal-text{font-size:20px}
 }
 @media (prefers-reduced-motion:reduce) {
   body .cmp-chart-with-stamps .cmp-bar,
   body .cmp-chart-with-stamps .cmp-topic-button > span {transition:none}
   body :is(.cmp-chart-with-stamps,.cmp-stamp-guide) .cmp-seal {animation:none;transition:none}
+  body .cmp-chart-with-stamps .cmp-seal-await{opacity:1}
 }
