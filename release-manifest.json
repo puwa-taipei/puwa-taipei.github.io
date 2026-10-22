@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v35",
+  "version": "public-release-v36",
   "date": "2026-10-22",
   "files": [
     {
@@ -154,8 +154,8 @@
     },
     {
       "path": "data/game-catalog.json",
-      "bytes": 1995,
-      "sha256": "b7fc2f6d8d6d55071d011ea5f7319706a3f66d900251af8a4ca2e3e9940583d0"
+      "bytes": 2085,
+      "sha256": "28d1ccf27623d625f1500fbb46095c12d38d1cd06ea1deed6e36db9aead721df"
     },
     {
       "path": "data/policy.json",
