@@ -201,6 +201,9 @@ def existing_paths(site: Path) -> set[str]:
             # A separate v40 generator owns these exact coexisting outputs.
             if relative == "q/build-manifest-v40.json" or re.fullmatch(r"q/40[0-9a-z]{2}[0-6][sq]/index\.html", relative):
                 continue
+            # Independent v41 aliases are not inputs or outputs of this generator.
+            if relative == "q/build-manifest-v41.json" or re.fullmatch(r"q/41[0-9a-z]{2}[0-6][sq]/index\.html", relative):
+                continue
             result.add(relative)
     return result
 
