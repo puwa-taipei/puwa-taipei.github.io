@@ -10,3 +10,19 @@
 /* Completed games and prompt-only ideas are separate, explicit submission routes. */
 .game-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:22px 40px 0}.game-mode-switch button{border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);padding:18px;text-align:left}.game-mode-switch strong,.game-mode-switch span{display:block}.game-mode-switch strong{font-size:17px}.game-mode-switch span{font-size:13px;color:var(--muted);margin-top:5px}.game-mode-switch button[aria-pressed=true]{border:2px solid var(--ink);background:var(--sage);padding:17px}.game-mode-switch button:hover{border-color:var(--coral)}
 @media(max-width:580px){.game-mode-switch{padding:18px 20px 0;grid-template-columns:1fr;gap:8px}.game-mode-switch button{padding:14px}.game-mode-switch button[aria-pressed=true]{padding:13px}.game-mode-switch strong{font-size:16px}.game-mode-switch span{font-size:12px}}
+
+/* Agent help stays outside submission forms and is closed until requested. */
+.agent-helper{width:calc(100% - 96px);max-width:784px;margin:0 auto 32px;border-top:1px solid var(--line);color:var(--ink)}
+.agent-helper>summary{display:list-item;cursor:pointer;padding:16px 0;min-height:48px}
+.agent-helper>summary>span{font-size:16px;font-weight:700}
+.agent-helper>summary>small{display:block;margin:4px 0 0 18px;font-size:14px;line-height:1.7;color:var(--muted)}
+.agent-helper-content{padding:4px 0 8px}
+.agent-helper-content>label{display:block;font-size:16px;font-weight:650;margin-bottom:9px}
+.agent-helper-prompt{display:block;width:100%;min-width:0;box-sizing:border-box;resize:vertical;max-height:360px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink);padding:14px;font-family:inherit;font-size:16px;line-height:1.8;overflow:auto}
+.agent-helper-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:12px}
+.agent-helper-actions button{min-height:44px;border:1px solid var(--ink);border-radius:7px;background:transparent;color:var(--ink);padding:9px 15px;font:inherit;font-size:15px;font-weight:650}
+.agent-helper-status,.agent-helper-content>p{font-size:14px;line-height:1.8;color:var(--muted)}
+.agent-helper-content>p{margin:10px 0 0}
+.agent-helper :is(summary,button,textarea):focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+@media(max-width:800px){.agent-helper{width:calc(100% - 60px)}}
+@media(max-width:580px){.agent-helper{width:calc(100% - 40px);margin-bottom:24px}.agent-helper-prompt{max-height:300px}}
