@@ -10,7 +10,7 @@
     return {subjectId,speaker:speakers[subjectId],pronoun:subjectId === 'su-chiao-hui' ? '她' : '他',nominationDate,seenKey:subjectId === 'shen-pao-yang' ? 'record-quiz-seen-v1' : 'record-quiz-seen-v1-' + subjectId};
   }
   function quizCurationReady(profile, core) {
-    return profile.subjectId !== 'shen-pao-yang' || !!(['v24','v40'].includes(core?.VERSION) && Array.isArray(core.CURATED_IDS) && core.CURATED_IDS.length >= 6 && typeof core.isQuizEligible === 'function');
+    return profile.subjectId !== 'shen-pao-yang' || !!(['v24','v40','v41'].includes(core?.VERSION) && Array.isArray(core.CURATED_IDS) && core.CURATED_IDS.length >= 6 && typeof core.isQuizEligible === 'function');
   }
   function quizEligibleForProfile(q, profile, core) {
     return !!q && (profile.subjectId === 'shen-pao-yang' ? quizCurationReady(profile,core) && core.isQuizEligible(q) : q.quizEligible !== false);
@@ -18,7 +18,7 @@
   function quizPeriodAvailability(rows, nominationDate, size = 6) {
     const inPeriod = (q,period) => {
       if (period === 'all') return true;
-      if (!nominationDate) return false;
+      if (!nominationDate || q?.datePrecision === 'unknown') return false;
       const raw = String(q?.eventDate || q?.date || ''), full = raw.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
       if (full && Number.isFinite(Date.parse(full)) && new Date(full).toISOString().slice(0,10) === full) return period === 'pre' ? full < nominationDate : full >= nominationDate;
       const year = raw.match(/^\d{4}/)?.[0];
@@ -178,6 +178,7 @@
       if (primary) links.push(`<a href="${esc(primary)}" target="_blank" rel="noopener noreferrer">讀原文與上下文 ↗</a>`);
       if (video) links.push(`<a href="${esc(video)}" target="_blank" rel="noopener noreferrer">${esc(q.videoLabel || '看官方發言影片')} ↗</a>`);
       if (full && full !== video) links.push(`<a href="${esc(full)}" target="_blank" rel="noopener noreferrer">${esc(q.fullVideoLabel || '看完整會議影片')} ↗</a>`);
+      for (const [index,url] of (Array.isArray(q.sourceEvidenceUrls) ? q.sourceEvidenceUrls : []).slice(0,8).entries()) { const safe = safeUrl(url); if (safe) links.push(`<a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">史料對照${index + 1}（非原話） ↗</a>`); }
       const locator = q.evidenceLocator || q.timecode || '', limit = q.inferenceLimit || q.editorialLimit || q.cannotInfer || '';
       return `<blockquote>「${esc(q.quote)}」</blockquote><p>${esc(q.date)} · ${esc(q.medium === 'written' ? '書面文章' : '口語發言')} · ${esc(q.venue || '公開發言')}</p><p>${esc(q.context || '')}</p><p class="quiz-source-type">${esc(q.sourceType || '來源類型請見原始連結')}</p>${locator ? `<p class="quiz-locator"><b>影片／原文位置</b><br>${esc(locator)}</p>` : ''}<div class="quiz-source-actions">${links.join('')}</div>${limit ? `<p class="quiz-inference-limit"><b>證據範圍：</b>${esc(limit)}</p>` : ''}`;
     }
@@ -325,8 +326,8 @@
   if (document.querySelector('[data-standalone-quiz]')) {
     if (quizProfile({},document.body.dataset).subjectId === 'shen-pao-yang') {
       Promise.resolve().then(() => {
-        if (!window.RecordsQuizSourceV40?.resolve) throw new Error('quiz_source_unavailable');
-        return window.RecordsQuizSourceV40.resolve(location.search);
+        if (!window.RecordsQuizSourceV41?.resolve) throw new Error('quiz_source_unavailable');
+        return window.RecordsQuizSourceV41.resolve(location.search);
       }).then(({core,source}) => mount(document,{quotes:source.data.quotes,quoteSourceVersion:source.sourceVersion,shareCore:core}))
         .catch(() => mount(document,{quotes:[],quoteSourceVersion:null,shareCore:null}));
     } else {
