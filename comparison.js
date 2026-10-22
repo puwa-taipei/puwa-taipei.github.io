@@ -13,12 +13,12 @@
   const roles = {primary:'主提案', joint:'共同提案'};
   // Presentation bands use the raw absolute percentage-point gap, before rounding.
   const sealGrades = [
-    {code:'large', min:20, lines:['差距','很大'], range:'20 百分點以上'},
-    {code:'marked', min:10, lines:['明顯','有差'], range:'10 至未滿 20 百分點'},
-    {code:'some', min:3, lines:['有點','差異'], range:'3 至未滿 10 百分點'},
-    {code:'near', min:0, lines:['比重','相近'], range:'未滿 3 百分點'}
+    {code:'large', min:20, lines:['差很大'], range:'20 百分點以上'},
+    {code:'marked', min:10, lines:['差多多'], range:'10 至未滿 20 百分點'},
+    {code:'some', min:3, lines:['有點差'], range:'3 至未滿 10 百分點'},
+    {code:'near', min:0, lines:['差一點'], range:'未滿 3 百分點'}
   ];
-  const noTopicSeal = {code:'none', lines:['兩邊','未列']};
+  const noTopicSeal = {code:'none', lines:['完全沒有']};
   function comparisonSeal(row) {
     const leg = Number(row.legPct), policy = Number(row.policyPct);
     const gap = Math.abs(Number(row.deltaPp));
@@ -30,6 +30,74 @@
   function sealMarkup(grade, mini = false) {
     return `<span class="cmp-seal cmp-seal-${grade.code}${mini ? ' cmp-seal-mini' : ''}"><span class="cmp-seal-text">${grade.lines.map(line => `<span>${esc(line)}</span>`).join('')}</span></span>`;
   }
+  let stopSealEffects = () => {};
+  function observeComparisonSeals() {
+    stopSealEffects();
+    const cells = [...root.querySelectorAll('.cmp-chart-with-stamps .cmp-stamp-cell')];
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motion.matches || !window.IntersectionObserver || !Element.prototype.animate) return;
+    const timers = new Set(), animations = new Set(), seen = new WeakSet();
+    let active = true, lastImpactAt = -1000, shake = null;
+    const track = animation => {
+      animations.add(animation);
+      animation.finished.catch(() => {}).finally(() => animations.delete(animation));
+      return animation;
+    };
+    const later = (fn, delay) => {
+      const timer = setTimeout(() => {timers.delete(timer); if (active) fn();}, delay);
+      timers.add(timer);
+    };
+    const impact = () => {
+      if (!active || motion.matches || performance.now() - lastImpactAt < 400) return;
+      lastImpactAt = performance.now();
+      shake?.cancel();
+      document.documentElement.classList.add('cmp-stamp-impact');
+      shake = track(document.body.animate([
+        {transform:'translate3d(0,0,0)'}, {transform:'translate3d(-11px,7px,0)'},
+        {transform:'translate3d(9px,-5px,0)'}, {transform:'translate3d(-6px,4px,0)'},
+        {transform:'translate3d(4px,-2px,0)'}, {transform:'translate3d(-2px,1px,0)'},
+        {transform:'translate3d(0,0,0)'}
+      ], {duration:240, easing:'ease-out'}));
+      const currentShake=shake;
+      currentShake.finished.catch(() => {}).finally(() => {
+        if (shake===currentShake) document.documentElement.classList.remove('cmp-stamp-impact');
+      });
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting && entry.intersectionRatio >= .45 && !seen.has(entry.target))
+        .sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        .forEach((entry,index) => {
+          const cell = entry.target, seal = cell.querySelector('.cmp-seal');
+          seen.add(cell); observer.unobserve(cell);
+          later(() => {
+            seal?.classList.remove('cmp-seal-await');
+            if (!seal || motion.matches) return;
+            const rotation = parseFloat(getComputedStyle(seal).getPropertyValue('--cmp-seal-rotate')) || 0;
+            const drop = Math.max(500, cell.getBoundingClientRect().top + 200);
+            track(seal.animate([
+              {transform:`translate3d(60px,-${drop}px,0) scale(3.8) rotate(${rotation-17}deg)`,opacity:0,offset:0},
+              {transform:`translate3d(35px,-${drop*.55}px,0) scale(2.9) rotate(${rotation-10}deg)`,opacity:1,offset:.22},
+              {transform:`translate3d(0,-24px,0) scale(1.35) rotate(${rotation-3}deg)`,opacity:1,offset:.62},
+              {transform:`translate3d(0,3px,0) scale(.86) rotate(${rotation}deg)`,opacity:1,offset:.72},
+              {transform:`translate3d(0,-2px,0) scale(1.055) rotate(${rotation}deg)`,opacity:1,offset:.86},
+              {transform:`translate3d(0,0,0) scale(1) rotate(${rotation}deg)`,opacity:1,offset:1}
+            ], {duration:620,easing:'cubic-bezier(.18,.7,.25,1)'}));
+            later(impact,440);
+          }, index*110);
+        });
+    }, {threshold:.45});
+    cells.forEach(cell => {cell.querySelector('.cmp-seal')?.classList.add('cmp-seal-await'); observer.observe(cell);});
+    const cleanup = () => {
+      active=false; observer.disconnect(); timers.forEach(clearTimeout); timers.clear();
+      animations.forEach(animation => animation.cancel()); animations.clear();
+      document.documentElement.classList.remove('cmp-stamp-impact');
+      cells.forEach(cell => cell.querySelector('.cmp-seal')?.classList.remove('cmp-seal-await'));
+      motion.removeEventListener('change',cleanup);
+    };
+    motion.addEventListener('change',cleanup);
+    stopSealEffects=cleanup;
+  }
+  window.addEventListener('pagehide', () => stopSealEffects());
   const periods = {all:'全期', pre:'正式提名前', post:'正式提名起'};
   const weightings = {document:'每件法案算一件', bundle:'相關修法合併算一組'};
   const codings = {main:'每案選一個主要目的', fractional:'多個主題平均分配'};
@@ -142,7 +210,7 @@
         <div class="cmp-reading"><p class="cmp-kicker">這個數字怎麼讀？</p><p>主題比例重疊 <strong>${pct(view.overlap)}</strong>。<br>數字越低，兩邊關注的議題組合越不同。</p><p class="cmp-note">這不是「有幾件一樣的法案」，也不是政見兌現率。立委與市長的工作不同，仍要搭配具體內容看。</p><details class="cmp-original-score"><summary>原始相異分數與換算 ＋</summary><p>相異 ${fmt(view.score)} 分；同步率 = 100 − 相異分數 = ${pct(view.overlap)}。分類、資料及權重不變。</p></details><p class="cmp-view-label">${esc(roles[state.role])} · ${esc(periods[state.period])} · ${esc(weightings[state.weighting])} · ${esc(codings[state.coding])}</p></div>
       </div>
       <div class="cmp-chart-head"><div><h3>哪些議題多，哪些議題少？</h3><p>${esc(roles[state.role])} ${fmt(view.nDocuments)} 件法律案${state.weighting === 'bundle' ? ` → ${fmt(view.nUnits)} 組套案` : ''}，對照官網 ${fmt(policyUnits)} 個政策套案頁。</p></div><span class="cmp-chart-key"><i class="cmp-leg-key"></i>${esc(roles[state.role])}<i class="cmp-policy-key"></i>競選政策</span></div>
-      <div class="cmp-stamp-guide"><h4>看中間的章，一眼讀懂比重差距。</h4><p>按兩欄比例相差幾個百分點分級；章看的是議題比重，不代表立場是否相同。</p><ul class="cmp-stamp-legend">${sealGrades.map(grade => `<li>${sealMarkup(grade, true)}<span>${grade.range}</span></li>`).join('')}</ul><div class="cmp-stamp-empty-example">${sealMarkup(noTopicSeal, true)}<p>兩邊都是 0% 時，另蓋灰章。單邊為 0% 則在章下註明。</p></div></div>
+      <div class="cmp-stamp-guide"><h4>看中間的章，一眼讀懂比重差距。</h4><p>按兩欄比例相差幾個百分點分級；章看的是議題比重，不代表立場是否相同。</p><ul class="cmp-stamp-legend">${sealGrades.map(grade => `<li>${sealMarkup(grade, true)}<span>${grade.range}</span></li>`).join('')}</ul><div class="cmp-stamp-empty-example">${sealMarkup(noTopicSeal, true)}<p>灰章「完全沒有」只指兩邊在目前分類皆為 0%。單邊為 0% 則在章下註明。</p></div></div>
       <div class="cmp-chart cmp-chart-with-stamps" role="table" aria-label="立法與競選政策主題分布比較">
         <div class="cmp-chart-row cmp-chart-labels" role="row"><span role="columnheader">主題 · 點選查原案</span><span role="columnheader">${esc(roles[state.role])}<small>共 ${fmt(view.nUnits)} ${unitLabel}</small></span><span class="cmp-stamp-heading" role="columnheader">比重差距<small>看中間的章</small></span><span role="columnheader">競選官網政策<small>共 ${fmt(policyUnits)} 頁</small></span><span role="columnheader">差距<small>政策－立法</small></span></div>
         ${rows.map(row => {
@@ -151,6 +219,7 @@
           return `<div class="cmp-chart-row" role="row" data-cmp-grade="${seal?.grade.code || 'unavailable'}" data-gap-pp="${seal?.gap ?? ''}"><div class="cmp-topic-cell" role="cell"><button type="button" class="cmp-topic-button" data-cmp-topic="${esc(row.id)}" title="${esc(category?.definition || '')}">${esc(row.name || topicName(row.id))}<span aria-hidden="true">↗</span></button></div><div class="cmp-bar-cell cmp-leg-cell" role="cell"><span class="cmp-bar-label">${esc(roles[state.role])}</span><div class="cmp-bar-track"><span class="cmp-bar cmp-leg-bar" style="width:${width(row.legPct)}%"></span></div><span class="cmp-bar-value">${pct(row.legPct)}</span></div><div class="cmp-stamp-cell" role="cell">${seal ? sealMarkup(seal.grade) + (seal.zeroLabel ? `<small class="cmp-zero-tag">${esc(seal.zeroLabel)}</small>` : '') : '<span>資料不足</span>'}</div><div class="cmp-bar-cell cmp-policy-cell" role="cell"><span class="cmp-bar-label">競選官網政策</span><div class="cmp-bar-track"><span class="cmp-bar cmp-policy-bar" style="width:${width(row.policyPct)}%"></span></div><span class="cmp-bar-value">${pct(row.policyPct)}</span></div><span class="cmp-delta ${num(row.deltaPp) > 0 ? 'cmp-positive' : num(row.deltaPp) < 0 ? 'cmp-negative' : ''}" role="cell"><span class="cmp-delta-label">差距（政策－立法）</span><span class="cmp-delta-value">${signed(row.deltaPp)}</span><small>百分點</small></span></div>`;
         }).join('')}
       </div><details class="cmp-reading-help"><summary>這張長條圖怎麼分類？ <span aria-hidden="true">＋</span></summary><p class="cmp-chart-foot">兩邊各自加總為 100%。${state.coding === 'fractional' ? '同一案有多個主題時，平均分給這些主題，所以計算件數可能出現小數。' : '每份法案或政策頁只選一個主要目的；其他相關主題仍保留在逐案資料中。'}${state.weighting === 'bundle' ? '相關修法先合併成一組，每組算一次；組內各案再按主題平均。' : ''}四捨五入後，顯示值可能有些微差異。印章按未四捨五入的絕對差分級；分級是閱讀提示，並非統計檢定。此分類將 6 件主提案及 4 件共同提案的職場育兒修法歸勞動類；前面按「法案管什麼」分類時，軍職法案仍歸國防／軍職制度。</p></details><p class="cmp-zero-note">${state.coding === 'fractional' ? '0% 表示依目前分類，沒有比例分配到這個主題；不等於完全沒有相關內容。' : '0% 不代表完全沒碰過這個議題，只代表沒有案件以它作為主要目的。切換「平均分給相關主題」可把次要主題也算進來。'}</p>`;
+    observeComparisonSeals();
     renderSensitivity(view);
     renderTemporal();
     renderPolicyRings();
