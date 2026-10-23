@@ -6,7 +6,7 @@ import json
 from pathlib import Path, PurePosixPath
 import shutil
 
-PUBLIC_DIRS = {"assets", "contribute", "data", "downloads", "game", "review", "village"}
+PUBLIC_DIRS = {"assets", "contribute", "data", "downloads", "game", "review", "village", "v"}
 
 
 def assemble(source: Path, output: Path):
