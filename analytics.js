@@ -3,7 +3,7 @@
    A real ID must be supplied on this classic script's data-measurement-id attribute. */
 (function (global) {
   'use strict';
-  const VERSION = 'v34', STATE_KEY = '__recordsAnalyticsV34';
+  const VERSION = 'v46', STATE_KEY = '__recordsAnalyticsV34';
   const PUWA = 'puwa.taipei', SU = 'huiao-new-taipei.github.io';
   const HOSTS = new Set([PUWA,SU]);
   const ROUTES = Object.freeze({
@@ -32,6 +32,9 @@
     if (!path.endsWith('/')) path += '/';
     if (path === '/') return {path:'/',title:hostname === PUWA ? '沈伯洋｜人物觀測' : '蘇巧慧｜人物觀測'};
     if (Object.prototype.hasOwnProperty.call(ROUTES,path) && (hostname === PUWA || SU_ROUTES.has(path))) return {path,title:ROUTES[path]};
+    if (hostname === PUWA && path === '/village/') return {path,title:'假面紅熊村｜形象之外，打開紀錄'};
+    const island = hostname === PUWA && /^\/v\/(0[1-9]|[12][0-9]|3[0-8])\.html\/$/.exec(path);
+    if (island) return {path:'/v/' + island[1] + '.html',title:'原話島 ' + island[1] + '｜假面紅熊村'};
     // Collapse quote IDs, layout choices and reported scores into one fixed report route.
     if (hostname === PUWA && (/^\/q\/24[0-9a-z][0-6][sq]\/$/.test(path) || /^\/game\/quiz\/cards\/v(?:18|24)\/[a-z0-9-]{1,160}-[0-6]-6-(?:score|quote)\.html\/$/.test(path))) return {path:'/game/quiz/share/',title:'原話挑戰分享｜紀錄遊樂場'};
     return null;
@@ -45,6 +48,30 @@
   function privatePreference(window,navigator) {
     return navigator?.globalPrivacyControl === true || navigator?.doNotTrack === '1' || navigator?.msDoNotTrack === '1' || window?.doNotTrack === '1';
   }
+  function villageEvent(name,input) {
+    if (!input || typeof input !== 'object' || typeof input.island_code !== 'string' || (!/^island_(?:0[1-9]|[12][0-9]|3[0-8])$/.test(input.island_code) && input.island_code !== 'village')) return null;
+    const result = {island_code:input.island_code};
+    if (name === 'village_island_open' && input.island_code !== 'village' && ['map','list','relation','overview','direct','tour_read'].includes(input.open_method)) result.open_method = input.open_method;
+    else if (name === 'village_share_click') { /* The click is intent, not delivery. */ }
+    else if (name === 'village_share_result' && ['native','copied','manual','cancelled'].includes(input.share_result)) result.share_result = input.share_result;
+    else if (name === 'village_source_click' && input.island_code !== 'village' && ['primary','video','response','supporting','archive'].includes(input.source_kind)) result.source_kind = input.source_kind;
+    else return null;
+    return result;
+  }
+  function isVillagePage(page) {
+    const path = page && new URL(page.page_location).pathname;
+    return path === '/village/' || /^\/v\/(?:0[1-9]|[12][0-9]|3[0-8])\.html$/.test(path);
+  }
+  function villageTracker(window,document,navigator,id,page,gtag) {
+    return Object.freeze({track(name,input) {
+      // Fail closed if privacy preferences, host or route change after bootstrap.
+      if (document.hidden === true || privatePreference(window,navigator) || window['ga-disable-' + id] === true) return false;
+      const current = pageContext(window.location,'');
+      if (!current || !isVillagePage(current) || current.page_location !== page.page_location) return false;
+      const parameters = villageEvent(name,input); if (!parameters) return false;
+      try { gtag('event',name,{send_to:id,...page,...parameters}); return true; } catch { return false; }
+    }});
+  }
   function install(environment) {
     const window = environment?.window, document = environment?.document || window?.document, navigator = environment?.navigator || window?.navigator || {};
     if (!window || !document || !document.currentScript || !document.head) return {configured:false,reason:'missing_environment'};
@@ -56,7 +83,7 @@
     // Do not mix this bounded stream with a pre-existing tag/dataLayer destination.
     if (typeof window.gtag === 'function' || (window.dataLayer !== undefined && (!Array.isArray(window.dataLayer) || window.dataLayer.length)) || document.querySelector?.('script[src^="https://www.googletagmanager.com/gtag/js"]')) return {configured:false,reason:'existing_tag'};
     const script = document.createElement('script');
-    script.async = true; script.referrerPolicy = 'origin'; script.id = 'records-ga-v34';
+    script.async = true; script.referrerPolicy = 'origin'; script.id = 'records-ga-v46';
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
     window.dataLayer = window.dataLayer || [];
     const gtag = function () { window.dataLayer.push(arguments); }; window.gtag = gtag;
@@ -74,10 +101,14 @@
     });
     gtag('event','page_view',{send_to:id,...page});
     window[STATE_KEY] = {version:VERSION};
-    try { document.head.append(script); return {configured:true,path:new URL(page.page_location).pathname}; }
+    try {
+      document.head.append(script);
+      if (isVillagePage(page)) window.recordsVillageAnalytics = villageTracker(window,document,navigator,id,page,gtag);
+      return {configured:true,path:new URL(page.page_location).pathname};
+    }
     catch { return {configured:false,reason:'script_insertion_failed'}; }
   }
-  const api = {VERSION,measurementId,referrerOrigin,route,pageContext,privatePreference,install};
+  const api = {VERSION,measurementId,referrerOrigin,route,pageContext,privatePreference,villageEvent,install};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else if (global) install({window:global});
 })(typeof window === 'undefined' ? null : window);
