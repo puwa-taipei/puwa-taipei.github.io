@@ -1,0 +1,1094 @@
+[
+  {
+    "id": "school-urine-2014",
+    "region": "accountability",
+    "title": "噁爛島",
+    "date": "2014-09-01",
+    "quote": "比A政策更噁爛的事",
+    "fact": "2014年9月1日本人文章，用「噁爛」批評當時新北校園驗尿篩選的模式。",
+    "context": "原文質疑以吸煙、中輟等印象挑選學生，篩檢後又導向懲罰。2026教育政策提出SBIRT篩檢、處遇與轉介治療。",
+    "commentary": "早期嚴厲批評與今日篩檢政策可以並讀，但先比較篩選標準和後續處遇。",
+    "limit": "本輪直接核對本人原文；此句與既有社區減害島出自同一篇文章，不能當作兩個獨立事件，亦不等於反對所有反毒篩檢。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "school-urine-2014",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "本人署名文章｜想想論壇",
+      "url": "https://www.thinkingtaiwan.net/content/3055"
+    },
+    "verification": "本輪直接核對本人署名文章；近期政策對照依 puwa 資料",
+    "responseSource": {
+      "label": "沈伯洋競選官網教育政策",
+      "url": "https://puma.taipei/policies/%E6%95%99%E8%82%B2%E6%94%BF%E7%AD%96"
+    },
+    "rank": 1,
+    "name": "噁爛島",
+    "descriptionTitle": "批評當時的校園驗尿方案",
+    "eventId": "article-3055",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "iq-low-20260122",
+    "date": "2026-01-22",
+    "quote": "連智商都可以如此的低落",
+    "fact": "TVBS報導記載，他在聯訪中以智商低落批評國民黨立委。",
+    "context": "爭論起於青鳥、大罷免與台積電布局。他主張國會職權修法可能影響企業機密，藍委則批評其說法。",
+    "commentary": "制度爭點一旦變成智商評分，討論還剩下什麼？",
+    "limit": "本輪已讀TVBS；這段是報導中的發言敘述，未核原聲，不能補入未確認粗口。與「滾出立院」同場。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "iq-low-20260122",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://news.tvbs.com.tw/politics/3107480",
+      "label": "TVBS當日採訪報導（已讀全文，未核原聲）"
+    },
+    "verification": "本輪已讀TVBS報導；屬報導中的發言敘述，未獨立核原聲",
+    "rank": 2,
+    "region": "rhetoric",
+    "name": "智商評分島",
+    "title": "智商評分島",
+    "descriptionTitle": "聯訪批藍委智商低落",
+    "eventId": "iq-criticism-20260122",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "adult-preferences-political-inference-20240628",
+    "region": "media",
+    "title": "看片測政島",
+    "date": "2024-06-28",
+    "quote": "可以猜到你是自由派還是保守派",
+    "fact": "依puwa收錄，2024年6月28日節目談VPN、成人網站與個資時，他將看片偏好與政治分眾推測連在一起。",
+    "context": "語境是資料被蒐集後可能用來投放訊息；原話談自由派、保守派，沒有直接等同台灣特定政黨。",
+    "commentary": "聽起來精準的說法，應追問研究、樣本與可重現程度。",
+    "limit": "媒體直接引述，未核原聲與實驗資料；不加入未核實的準確率，也不宣稱此推測方法已被證實。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "adult-preferences-political-inference-20240628",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "媒體引文出處（puwa提供，本輪未直接核對）",
+      "url": "https://www.nownews.com/news/6460495"
+    },
+    "verification": "依puwa媒體引文整理；本輪未直接核原報導與原聲",
+    "videoUrl": "https://www.youtube.com/watch?v=yHC712vQDU0",
+    "rank": 3,
+    "name": "看片測政島",
+    "descriptionTitle": "以成人影片偏好推測政治傾向",
+    "eventId": "2024-06-28-vpn-adult-sites",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "assistant-law-blind-167396",
+    "region": "rhetoric",
+    "title": "法盲掌聲島",
+    "date": "2026-01-30",
+    "quote": "法盲啊！還鼓掌欸！丟不丟臉啊！",
+    "fact": "2026年1月30日助理費修法辯論，他在批評條文與內控設計後，以這句話挖苦鼓掌者。",
+    "context": "他當時主張薪資與助理費性質不同，並質疑欠缺實報實銷、內控及助理保障。",
+    "commentary": "強烈言語與法律論證可以分開檢驗；原話本身不會替他的法律結論背書。",
+    "limit": "本輪直接核對官方全文；不能由發言認定修法者有犯罪動機或法院必然如何判決。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "assistant-law-blind-167396",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/167396",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/167396",
+    "rank": 4,
+    "name": "法盲掌聲島",
+    "descriptionTitle": "助理費修法辯論中喊法盲",
+    "eventId": "meeting-20260130-plenary-assistant-fees",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "name-retort-20241204",
+    "region": "rhetoric",
+    "title": "缺什麼名字島",
+    "date": "2024-12-04",
+    "quote": "看看你的名字，缺什麼取什麼。",
+    "fact": "2024年12月4日與羅智強交鋒後，聯合報記錄他以姓名挖苦對方。",
+    "context": "雙方先爭執交流與統戰的說法。沈主張交流風險控管與是否交流不同，羅則批評他干擾質詢。",
+    "commentary": "從兩岸交流的風險辯論，走到拿姓名嘲諷。",
+    "limit": "本輪已直接讀同日記者報導；官方逐字稿可證同場前段，但未包含這句下台後對話。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "name-retort-20241204",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "媒體採訪／報導出處（非本輪原聲驗證）",
+      "url": "https://video.udn.com/news/1298045"
+    },
+    "verification": "本輪直接核對聯合報當日採訪引號；未另核聽原聲",
+    "rank": 5,
+    "name": "缺什麼名字島",
+    "descriptionTitle": "與羅智強交鋒後嘲諷名字",
+    "eventId": "meeting-20241204-interior",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "chinese-retort-157804",
+    "date": "2024-12-04",
+    "quote": "你連中文都不會喔？",
+    "fact": "官方逐字稿記錄，他與羅智強交鋒時反問對方中文能力。",
+    "context": "羅以「沈黑熊」等稱呼討論兩岸交流，沈抗議被錯誤轉述，主席多次要求尊重質詢者。",
+    "commentary": "釐清原意，何時變成考對方的中文？",
+    "limit": "本輪已讀官方全文；只說明這次互嗆，對方說的話不能歸給沈。與姓名嘲諷島是同次交鋒。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "chinese-retort-157804",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/157804",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/157804",
+    "rank": 6,
+    "region": "rhetoric",
+    "name": "中文能力島",
+    "title": "中文能力島",
+    "descriptionTitle": "與羅智強互嗆時反問中文能力",
+    "eventId": "meeting-20241204-interior",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "read-first-166377",
+    "region": "parliament",
+    "title": "先學識字島",
+    "date": "2025-12-12",
+    "quote": "作為一個立法委員，第一件事情，要識字啊！",
+    "fact": "2025年12月12日討論總統國情報告時，他用「要識字」挖苦其他立委對規則的理解。",
+    "context": "他當時反對將國防預算付委審查綁定總統報告，並質疑指定內容、即問即答等要求。",
+    "commentary": "當議事攻防變成能力羞辱，讀者仍應回到實際提案與判決。",
+    "limit": "本輪直接核對官方逐字稿；他的違憲指控不等於法院已對當次提案作成判決。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "read-first-166377",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/166377",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/166377",
+    "rank": 7,
+    "name": "先學識字島",
+    "descriptionTitle": "院會上說立委首先要識字",
+    "eventId": "read-first-166377",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "carnation-law-162993",
+    "region": "rhetoric",
+    "title": "康乃馨博士島",
+    "date": "2025-07-04",
+    "quote": "我感覺他是康乃馨法學博士。",
+    "fact": "2025年7月4日院會，他把黃國昌的康乃爾學位諧音改成康乃馨，挖苦對方法律能力。",
+    "context": "後續爭點是國安會受監督範圍，以及立法院是否應介入已由司法機關偵辦的共諜案。",
+    "commentary": "法律攻防裡，花名比法條更容易被記住。",
+    "limit": "本輪直接核對官方全文，未核聽原聲；這是挖苦，不是黃國昌真實學歷名稱。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "carnation-law-162993",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/162993",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/162993",
+    "rank": 8,
+    "name": "康乃馨博士島",
+    "descriptionTitle": "把康乃爾挖苦成康乃馨",
+    "eventId": "carnation-law-162993",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "ai-corridor-retort-20261013",
+    "region": "media",
+    "title": "廊什麼帶島",
+    "date": "2026-10-13",
+    "quote": "是要廊什麼帶？",
+    "fact": "2026年10月13日談科技廊帶，他以這句反問質疑地理串聯的必要性。",
+    "context": "他區分算力、軟體與應用層，主張人才串聯；不能把反問剪成承認不懂AI。",
+    "commentary": "反問可以搶到注意力，AI聚落需要什麼仍是應被回答的產業問題。",
+    "limit": "媒體直接引述，未另核原聲；同場土地說法須保留「連結」條件。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "ai-corridor-retort-20261013",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "聯合報採訪報導（本輪已讀，未核原聲）",
+      "url": "https://udn.com/vote2026/story/124652/9816582"
+    },
+    "verification": "本輪核對媒體引號；未獨立核原聲",
+    "videoUrl": "https://www.youtube.com/watch?v=kB3WDSx7w1o",
+    "rank": 9,
+    "name": "廊什麼帶島",
+    "descriptionTitle": "反問科技廊帶要串什麼",
+    "eventId": "2026-10-13-taipei-unlimited-forum",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "ai-land-linkage-20261013",
+    "date": "2026-10-13",
+    "quote": "商圈才需要土地、要連",
+    "fact": "依puwa收錄的媒體引述，他將商圈土地連結與AI產業串聯作區分。",
+    "context": "他認為軟體公司可藉交通或視訊互動，並強調人才聚落；這裡談的是土地是否需要連成一片。",
+    "commentary": "城市產業布局，土地和人才如何同時說清楚？",
+    "limit": "本輪未獨立核原報導或原聲；不能刪除「要連」，改成其他產業完全不需要土地。與廊帶島同場。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "ai-land-linkage-20261013",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.knews.com.tw/news/9EAF8CCAEE6328F6CCBF643D1E212233",
+      "label": "媒體報導（puwa提供，本輪未獨立核原聲）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://www.youtube.com/watch?v=kB3WDSx7w1o",
+    "rank": 10,
+    "region": "media",
+    "name": "土地串聯島",
+    "title": "土地串聯島",
+    "descriptionTitle": "將商圈用地連結與AI產業串聯作區分",
+    "eventId": "2026-10-13-taipei-unlimited-forum",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "ai-they-understand-20261015",
+    "date": "2026-10-15",
+    "quote": "他們最懂、他們超懂",
+    "fact": "依puwa收錄的中央社採訪，他以「他們最懂、他們超懂」回應批評。",
+    "context": "問題是國民黨指他不懂科技業；反諷之後，他談人才培育與串聯，並表示願接受批評。",
+    "commentary": "這句反諷回應了態度，產業問題仍待具體回答。",
+    "limit": "本輪未獨立核原聲；不能字面解讀為承認不懂AI，也不補寫不同版本的起首。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "ai-they-understand-20261015",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.cna.com.tw/news/aipl/202610150195.aspx",
+      "label": "媒體報導（puwa提供，本輪未獨立核原聲）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://www.dailymotion.com/video/xbnm4qm",
+    "rank": 11,
+    "region": "media",
+    "name": "他們超懂島",
+    "title": "他們超懂島",
+    "descriptionTitle": "回應不懂科技業批評時的反諷",
+    "eventId": "2026-10-15-jiannan-interview",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "death-book-title-2018",
+    "region": "accountability",
+    "title": "詐欺書名島",
+    "date": "2018（原片上架：2018-11-26）",
+    "quote": "原則上算是一個詐欺的一本書名",
+    "fact": "ETtoday在2026年報導中轉引其2018年講座，記錄他對《死刑肯定論》書名作反諷介紹。",
+    "context": "2026年10月7日受訪，他強調作者辯證後支持保留死刑，並稱與目前自身立場接近；官網另稱未提出廢死修法。",
+    "commentary": "同一本書，兩次介紹選擇了什麼重點？書的立場和本人的立場也應分開。",
+    "limit": "本輪直接讀ETtoday報導及官網回應，未核聽2018原片；「詐欺」指書名的諷刺解讀，不可改成承認選舉欺詐。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "death-book-title-2018",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "媒體採訪／報導出處（非本輪原聲驗證）",
+      "url": "https://www.ettoday.net/news/20261007/3250848.htm"
+    },
+    "verification": "本輪直接核對媒體文字轉引；2018影片原聲未獨立核聽",
+    "responseSource": {
+      "label": "沈伯洋競選官網死刑議題回應，2026-10-07",
+      "url": "https://puma.taipei/fact-checks/fact-check-22"
+    },
+    "videoUrl": "https://www.youtube.com/watch?v=ZxGS-DdNt-Q&t=72s",
+    "rank": 12,
+    "name": "詐欺書名島",
+    "descriptionTitle": "介紹《死刑肯定論》時說書名帶諷刺",
+    "eventId": "book-talk-death-penalty-2018",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "cannabis-legalisation-facebook-20140820",
+    "region": "accountability",
+    "title": "大麻合法化島",
+    "date": "2014-08-20",
+    "quote": "真正的問題其實是需要用合法化解決的",
+    "fact": "puwa 收錄其2014年8月20日本人貼文按語，當中提出合法化作為解決大麻相關問題的方向。",
+    "context": "2026年10月7日專訪表示目前不贊成大麻合法化，並說台灣配套與污名等問題尚未解決。",
+    "commentary": "這是值得追問的前後差異：立場是否改變、何時改變、理由是什麼？",
+    "limit": "本輪未直接驗證 Facebook 原貼，按 puwa 核對結果標示；2014原貼未列實施範圍或修法時程，不能推定當選後必定推動。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "cannabis-legalisation-facebook-20140820",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "Facebook原貼（puwa稱已核對，本輪未直接驗證）",
+      "url": "https://www.facebook.com/pumashen/posts/10154472554225654"
+    },
+    "verification": "puwa稱已核對原貼；本輪未直接驗證Facebook或專訪原聲",
+    "responseSource": {
+      "label": "2026-10-07完整專訪，10:06起",
+      "url": "https://www.youtube.com/watch?v=awX7tVlEWxU&t=606s"
+    },
+    "rank": 13,
+    "name": "大麻合法化島",
+    "descriptionTitle": "本人按語提出以合法化解決大麻背後問題",
+    "eventId": "facebook-pumashen-10154472554225654",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "community-drug-support-2014",
+    "region": "accountability",
+    "title": "提供吸毒者毒品島",
+    "date": "2014-09-01",
+    "quote": "提供吸毒者毒品",
+    "fact": "2014年9月1日本人文章，在除罪化難以被接受的條件下，提及社區供應、乾淨針具與社工配套。",
+    "context": "2026年10月6日競選官網說早期文字是在談減害，並以美沙冬治療及針具措施說明。",
+    "commentary": "早期文字和近期解釋可並列追問：藥物、監督及取得程序是否相同？",
+    "limit": "「提供吸毒者毒品島」以原文短摘命名。本輪直接核對原文與競選官網；不可刪掉條件改成鼓勵吸毒，也不能僅憑解釋斷定所有制度完全相同。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "community-drug-support-2014",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "本人署名原文已核對，作者欄明示本名沈伯洋",
+      "url": "https://www.thinkingtaiwan.net/content/3055"
+    },
+    "verification": "本人署名原文已核對，作者欄明示本名沈伯洋",
+    "responseSource": {
+      "label": "沈伯洋競選官網回應，2026-10-06",
+      "url": "https://puma.taipei/fact-checks/fact-check-21"
+    },
+    "rank": 14,
+    "name": "提供吸毒者毒品島",
+    "descriptionTitle": "條件式討論社區減害方案",
+    "eventId": "article-3055",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。",
+    "subtitle": "諷刺島名｜2014條件式減害論述"
+  },
+  {
+    "id": "iq-criticism-20260122",
+    "region": "rhetoric",
+    "title": "滾出立院島",
+    "date": "2026-01-22",
+    "quote": "應該趕快滾出立法院",
+    "fact": "2026年1月22日聯訪，TVBS以直接引號記載，他要求被其批評的立委離開立法院。",
+    "context": "背景是青鳥、大罷免與台積電布局的爭論。他主張國會職權修法可能影響企業機密，因而反擊藍委批評。",
+    "commentary": "反駁對方之後，還需要這一句驅逐式語言嗎？",
+    "limit": "本輪已讀TVBS完整報導，未核原聲；不添加來源未確認的粗口，也不把台積電因果論當成已證實結論。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "iq-criticism-20260122",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "label": "媒體採訪／報導出處（非本輪原聲驗證）",
+      "url": "https://news.tvbs.com.tw/politics/3107480"
+    },
+    "verification": "本輪直接核對 TVBS 當日新聞引號；未另核聽原聲",
+    "rank": 15,
+    "name": "滾出立院島",
+    "descriptionTitle": "回應青鳥與台積電爭議時批評藍委",
+    "eventId": "iq-criticism-20260122",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-bill-explanation-shame-152710",
+    "date": "2024-05-21",
+    "quote": "因為他知道上來做提案說明就是丟臉嘛！",
+    "fact": "依puwa收錄的官方紀錄，他挖苦傅崐萁不作提案說明是怕丟臉。",
+    "context": "發言先談赴中報准案及國會改革程序，結尾質疑傅的提案說明與法案理解。",
+    "commentary": "批評提案品質，是否需要替對方猜心？",
+    "limit": "本輪未獨立核原聲；「知道丟臉」是他的挖苦，不是傅的內心想法已獲證實。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-bill-explanation-shame-152710",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/152710",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/152710",
+    "rank": 16,
+    "region": "parliament",
+    "name": "提案丟臉島",
+    "title": "提案丟臉島",
+    "descriptionTitle": "程序委員會挖苦傅崐萁提案說明丟臉",
+    "eventId": "meeting-20240521-procedure",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-law-cybersecurity-not-understood-151739",
+    "date": "2024-04-25",
+    "quote": "資安搞不清楚的搞不清楚",
+    "fact": "依puwa收錄，他在質詢中以法律、資安都搞不清楚挖苦他人。",
+    "context": "同場涉及散會、調查權、赴中提案與立院資訊分工；秘書長說程序暫緩有前例。",
+    "commentary": "一句全盤否定之後，各項爭點還是要分開查。",
+    "limit": "依puwa官方逐字稿整理；本輪未獨立核原聲，不將其法律見解當成中立裁決。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-law-cybersecurity-not-understood-151739",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/151739",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/151739",
+    "rank": 17,
+    "region": "security",
+    "name": "資安不懂島",
+    "title": "資安不懂島",
+    "descriptionTitle": "質詢中挖苦法律與資安都搞不清楚",
+    "eventId": "meeting-20240425-judiciary",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-daughter-longer-call-152955",
+    "date": "2024-05-24",
+    "quote": "我女兒打電話給我都講得比這個還多！",
+    "fact": "依puwa收錄，他用女兒通話較長，比喻國會改革討論不足。",
+    "context": "他質疑調查權的標準與範圍，並列出自己統計的對手發言時間，主張退回審查。",
+    "commentary": "家常比喻很好記，議事時間仍應以完整紀錄計算。",
+    "limit": "本輪未獨立核原聲；puwa指出原稿數字有不一致，不能用這句推算實際討論總長。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-daughter-longer-call-152955",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/152955",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/152955",
+    "rank": 18,
+    "region": "parliament",
+    "name": "女兒電話島",
+    "title": "女兒電話島",
+    "descriptionTitle": "國會改革辯論用女兒電話比喻討論不足",
+    "eventId": "meeting-20240524-plenary",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-let-assistants-speak-152182",
+    "date": "2024-05-06",
+    "quote": "是不是直接請他的助理來發言",
+    "fact": "依puwa收錄，他建議傅崐萁、黃國昌改由助理發言，以挖苦發言品質。",
+    "context": "他認為兩人的發言欠缺法律論述，前後還爭執公聽會、散會、發言機會與赴中申報。",
+    "commentary": "對手的論證不足，可以用要求助理代打來回應嗎？",
+    "limit": "本輪未獨立核原聲；這是反問，並非真的修改議事規則或把立委職權交給助理。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-let-assistants-speak-152182",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/152182",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/152182",
+    "rank": 19,
+    "region": "parliament",
+    "name": "助理代打島",
+    "title": "助理代打島",
+    "descriptionTitle": "建議傅崐萁與黃國昌改請助理發言",
+    "eventId": "meeting-20240506-judiciary",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "argument-king-20261009",
+    "date": "2026-10-09（報導日期）",
+    "quote": "吵架交給我好了，我吵架王",
+    "fact": "依puwa收錄的民視報導，他自稱吵架王。",
+    "context": "他原先請支持者保持平常心、專心闢謠，表示不必跟人吵架；接著自嘲由自己來吵。",
+    "commentary": "即使是自嘲，也呈現了另一種公開說話風格。",
+    "limit": "本輪未獨立核原聲；不能剪成鼓勵支持者吵架。標示的是報導日期，精確發言日未核。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "argument-king-20261009",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.ftvnews.com.tw/video/detail/IRmAbwPWpfA",
+      "label": "媒體報導（puwa提供，本輪未獨立核原聲）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "rank": 20,
+    "region": "rhetoric",
+    "name": "吵架王島",
+    "title": "吵架王島",
+    "descriptionTitle": "自稱「吵架王」",
+    "eventId": "argument-king-20261009",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "basic-arithmetic-law-161293",
+    "date": "2025-05-13",
+    "quote": "藍白連這種最基本的立法例都不會",
+    "fact": "依puwa收錄，他批評藍白連基本的立法例都不會。",
+    "context": "他當時比較逃脫、具保潛逃等刑法條文的刑度與比例，並談請託、施壓及關說。",
+    "commentary": "立法技術值得質疑，批評能力與證明錯誤是兩件事。",
+    "limit": "本輪未獨立核原聲；所述刑度比較仍是他的論證，不是對全部支持者的智力評價。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "basic-arithmetic-law-161293",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/161293",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/161293",
+    "rank": 21,
+    "region": "parliament",
+    "name": "立法例不會島",
+    "title": "立法例不會島",
+    "descriptionTitle": "批評刑度級距連基本立法例都不會",
+    "eventId": "meeting-20250513-plenary-criminal-escape",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "lu-flight-change-sarcasm-168014",
+    "date": "2026-03-30",
+    "quote": "那個班機上面放什麼電影",
+    "fact": "依puwa收錄，他以班機電影反問盧秀燕軍購態度的變化。",
+    "context": "他把盧受訪支持的金額與在野陣營過去主張並列，但也表示期待轉變及進一步討論。",
+    "commentary": "政治諷刺可以尖銳，前後立場也需要準確對照。",
+    "limit": "本輪未獨立核原聲；沒有證據說某部電影導致態度改變，也應保留他後續的正面期待。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "lu-flight-change-sarcasm-168014",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/168014",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/168014",
+    "rank": 22,
+    "region": "defense",
+    "name": "機上電影島",
+    "title": "機上電影島",
+    "descriptionTitle": "以飛機電影挖苦盧秀燕軍購態度轉變",
+    "eventId": "meeting-20260330-lu-flight-change-sarcasm",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "legislator-iq-satire-2014",
+    "date": "2014-10-14",
+    "quote": "立委的智商比較高",
+    "fact": "依puwa收錄的本人文章，他在討論死刑時以立委智商作反諷。",
+    "context": "文章質疑判斷標準及形式上的法律討論，最後用這句話挖苦政治人物。",
+    "commentary": "智商反諷留下印象，死刑的論證仍要回到全文。",
+    "limit": "本輪未直接驗證原文；不能據此推定所有殺人案皆應免死，或概括他全部時期的死刑立場。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "legislator-iq-satire-2014",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.thinkingtaiwan.net/content/3256",
+      "label": "署名原文（puwa提供，本輪未直接驗證）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "rank": 23,
+    "region": "accountability",
+    "name": "立委高智商島",
+    "title": "立委高智商島",
+    "descriptionTitle": "死刑文章文末挖苦立委",
+    "eventId": "article-3256",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "nationality-law-criticism-167742",
+    "date": "2026-03-20",
+    "quote": "有一群完全不懂法律的人",
+    "fact": "依puwa收錄，他在國籍資格議題上批評部分委員完全不懂法律。",
+    "context": "同場涉及中國國籍、情報義務、立委資格及放棄國籍文件，並爭論新住民保障。",
+    "commentary": "法律爭議需要逐條回答，不能只剩下誰懂誰不懂。",
+    "limit": "本輪未獨立核原聲；不能擴大成貶抑全體新住民，也不把他的解釋當成終局判決。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "nationality-law-criticism-167742",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/167742",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/167742",
+    "rank": 24,
+    "region": "parliament",
+    "name": "不懂法律島",
+    "title": "不懂法律島",
+    "descriptionTitle": "批評院會有一群完全不懂法律的人",
+    "eventId": "meeting-20260320-nationality-law-criticism",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-military-police-comparison-158300",
+    "date": "2024-12-20",
+    "quote": "你們的行徑跟武警有什麼兩樣？",
+    "fact": "依puwa收錄，他在憲法訴訟法辯論中把抬走立委的行為類比武警與解放軍。",
+    "context": "他指控發言遭阻止，並質疑修法影響憲法法庭運作，援引香港經驗談司法獨立。",
+    "commentary": "把議場對手類比軍警，類比本身也值得檢驗。",
+    "limit": "本輪未獨立核原聲；這是他的政治類比，不是本站認定台灣立委與中國軍警性質相同。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-military-police-comparison-158300",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/158300",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/158300",
+    "rank": 25,
+    "region": "parliament",
+    "name": "武警解放軍島",
+    "title": "武警解放軍島",
+    "descriptionTitle": "憲法訴訟法辯論把抬走立委比作武警與解放軍",
+    "eventId": "meeting-20241220-plenary",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "international-laugh-151099",
+    "date": "2024-04-15",
+    "quote": "簡直是笑掉國際的大牙",
+    "fact": "依puwa收錄，他批國會改革法案會笑掉國際大牙。",
+    "context": "前後文談發言機會、公聽會與藐視國會罪，質疑能否直接移植美國的調查制度。",
+    "commentary": "誰代表國際發笑？比較法爭論還是需要具體依據。",
+    "limit": "本輪未獨立核原聲；這是他的修辭，不是國際機構對法案作出的評等。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "international-laugh-151099",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/151099",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/151099",
+    "rank": 26,
+    "region": "parliament",
+    "name": "國際大牙島",
+    "title": "國際大牙島",
+    "descriptionTitle": "國會改革討論中說笑掉國際大牙",
+    "eventId": "meeting-20240415-judiciary-parliament-reform",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2025-166698",
+    "date": "2025-12-26",
+    "quote": "難道我們要變成北韓法學嗎？",
+    "fact": "依puwa收錄，他用北韓法學反問立法院否定憲法法庭判決的作法。",
+    "context": "他比較南北韓制度，主張立法權不應凌駕司法，並質疑憲法法庭開會與迴避門檻。",
+    "commentary": "制度類比越強烈，越需要把相同與不同之處說清楚。",
+    "limit": "本輪未獨立核原聲；這是政治類比，不表示台灣制度已等同北韓。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2025-166698",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/166698",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/166698",
+    "rank": 27,
+    "region": "parliament",
+    "name": "北韓法學島",
+    "title": "北韓法學島",
+    "descriptionTitle": "以北韓法學反問否定憲法法庭判決的決議",
+    "eventId": "meeting-20251226-ivod-166698",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-basic-law-ji-154841",
+    "date": "2024-07-16",
+    "quote": "這個基本法就不知道在「基」什麼東西了",
+    "fact": "依puwa收錄，他以「基什麼」雙關挖苦新住民基本法。",
+    "context": "他質疑例外條款使基本法作用落空，主張回委員會處理；也說國安疑慮不代表不應立法。",
+    "commentary": "雙關詞很有記憶點，條文的例外是否過大才是爭點。",
+    "limit": "本輪未獨立核原聲；官方紀錄作「基」，不能擅自改成粗口。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-basic-law-ji-154841",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/154841",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/154841",
+    "rank": 28,
+    "region": "parliament",
+    "name": "基本法在基島",
+    "title": "基本法在基島",
+    "descriptionTitle": "新住民基本法辯論反問基本法在基什麼",
+    "eventId": "meeting-20240716-plenary",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2025-160381",
+    "date": "2025-04-18",
+    "quote": "在這兩個禮拜突然發現不能夠偽造文書",
+    "fact": "依puwa收錄，他在不在籍投票公投討論中以偽造文書議題挖苦藍白。",
+    "context": "他認為國會多數可直接修法，並將當時罷免連署爭議與公投案並論。",
+    "commentary": "把個案包成整個政黨的諷刺，概括的範圍也應受檢視。",
+    "limit": "本輪未獨立核原聲；不是所有兩黨成員均犯罪的證據，相關個案應以司法資料判讀。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2025-160381",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/160381",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/160381",
+    "rank": 29,
+    "region": "parliament",
+    "name": "忽然懂法島",
+    "title": "忽然懂法島",
+    "descriptionTitle": "以突然發現偽造文書犯法挖苦藍白",
+    "eventId": "voting-contempt-11437",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "china-scam-group-156994",
+    "date": "2024-11-18",
+    "quote": "中國才是最大的詐騙集團",
+    "fact": "依puwa收錄，他在談深偽與資訊操作時稱中國是最大詐騙集團。",
+    "context": "同場涉及假字幕、冒名影片、非財產損害回報與AI防禦；發言前帶有個人判斷的限定。",
+    "commentary": "「最大」是一句政治評語，還是一個有定義的統計結論？",
+    "limit": "本輪未獨立核原聲；不得解釋成全體中國人都是詐騙者，也不是全球詐騙規模排名。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "china-scam-group-156994",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/156994",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/156994",
+    "rank": 30,
+    "region": "security",
+    "name": "最大詐騙島",
+    "title": "最大詐騙島",
+    "descriptionTitle": "談深偽時稱中國是最大詐騙集團",
+    "eventId": "meeting-20241118-defense-ai-deepfake",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2025-158903",
+    "region": "security",
+    "title": "全是中國島",
+    "date": "2025-01-16",
+    "quote": "因為都是中國嘛，全部都是中國做的。",
+    "fact": "2025年1月16日質詢，他列舉歐洲與台灣斷纜事件後，作出這個概括歸因。",
+    "context": "他隨後詢問海巡、海軍協作、預警及船舶監測，重點是海纜防護準備。",
+    "commentary": "強烈歸因需要逐案證據：船籍、肇因與國家指揮，是不同層次的問題。",
+    "limit": "本輪直接核對官方全文；只能證明他這樣說，不能因此認定所提每件斷纜都已證實由中國政府蓄意破壞。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2025-158903",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/158903",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/158903",
+    "rank": 31,
+    "name": "全是中國島",
+    "descriptionTitle": "談歐洲與臺灣斷纜時斷言全部都是中國做的",
+    "eventId": "meeting-20250116-ivod-158903",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "voting-contempt-11437",
+    "date": "2025-04-18",
+    "quote": "只能說真的是可恥啊！",
+    "fact": "依puwa收錄的官方公報，他在移轉投票公投議題上用可恥批評藍白。",
+    "context": "他主張先討論既有修法案，再決定是否交付公投，並批評當時討論方式。",
+    "commentary": "強烈評價過後，公投和修法路徑仍應被具體比較。",
+    "limit": "本輪未直接核公報；原句是政治批評，本身不是髒話，也不能代表日常發言比例。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "voting-contempt-11437",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/114/37/LCIDC01_1143701_00009.pdf",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://www.youtube.com/watch?v=biwX460KDO4",
+    "rank": 32,
+    "region": "parliament",
+    "name": "真可恥島",
+    "title": "真可恥島",
+    "descriptionTitle": "院會上的強烈批評",
+    "eventId": "voting-contempt-11437",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2024-procedure-shouting-disinformation-155044",
+    "date": "2024-10-01",
+    "quote": "而不是像剛剛那樣在下面叫囂和造謠。",
+    "fact": "依puwa收錄，他在程序委員會指控台下叫囂和造謠。",
+    "context": "他要求依序發言，並主張程序委員會應先審形式條件，內容爭點留待委員會辯論。",
+    "commentary": "當對手被稱為造謠者，哪句話錯了仍要逐項指出。",
+    "limit": "本輪未獨立核原聲；不能因為收錄這句，就當作每則台下發言已被查證為假。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2024-procedure-shouting-disinformation-155044",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/155044",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/155044",
+    "rank": 33,
+    "region": "parliament",
+    "name": "叫囂造謠島",
+    "title": "叫囂造謠島",
+    "descriptionTitle": "程序委員會批評台下叫囂造謠",
+    "eventId": "meeting-20241001-procedure",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "official-2025-158952",
+    "date": "2025-02-11",
+    "quote": "你們的手段是赤裸裸的暴力跟傲慢。",
+    "fact": "依puwa收錄，他以赤裸裸的暴力跟傲慢批評選罷法修法手段。",
+    "context": "他在覆議相關發言中質疑連署門檻、逕付二讀與協商程序，並評論條文品質。",
+    "commentary": "程序是否剝奪討論，應該用過程與紀錄來檢驗。",
+    "limit": "本輪未獨立核原聲；此處「暴力」是政治用語，不等於刑事暴力犯罪已成立。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "official-2025-158952",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/158952",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/158952",
+    "rank": 34,
+    "region": "parliament",
+    "name": "暴力傲慢島",
+    "title": "暴力傲慢島",
+    "descriptionTitle": "批選罷法修法手段是暴力傲慢",
+    "eventId": "meeting-20250211-ivod-158952",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "drone-law-committee-route-170532",
+    "date": "2026-07-16",
+    "quote": "所以我覺得整件事情到現在就是在亂搞！",
+    "fact": "依puwa收錄，他把無人機條例的討論描述為亂搞。",
+    "context": "他主張軍購與產業扶植分別處理，並質疑條文重複、預算規定與技術變化的適應性。",
+    "commentary": "一句亂搞之前，具體條文爭點不能被省略。",
+    "limit": "本輪未獨立核原聲；這句不等於法案已被認定違法，更不表示提案人犯罪。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "drone-law-committee-route-170532",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/170532",
+      "label": "立法院原始紀錄（puwa提供）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/170532",
+    "rank": 35,
+    "region": "defense",
+    "name": "無人機亂搞島",
+    "title": "無人機亂搞島",
+    "descriptionTitle": "批評無人機條例討論亂搞",
+    "eventId": "meeting-20260716-drone-law-committee-route",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "temu-defense-bill-167234",
+    "region": "defense",
+    "title": "拼多多軍購島",
+    "date": "2026-01-26",
+    "quote": "不是拼多多的軍購、不是淘寶式的軍購",
+    "fact": "2026年1月26日談軍購條例時，他以購物平台比喻挖苦在野版本。",
+    "context": "他主張國防需求要整體考量，條例內容應交外交及國防委員會審查，不能只挑部分項目。",
+    "commentary": "一句比喻很好記，軍購的項目、金額及審查理由仍要逐項看。",
+    "limit": "本輪直接核對官方逐字稿；不是任何人從購物網站買武器的證據。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "temu-defense-bill-167234",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://ivod.ly.gov.tw/Demand/Speech/167234",
+      "label": "立法院官方逐字稿（本輪已核對文字）"
+    },
+    "verification": "本輪直接核對立法院官方逐字稿；未另核聽原聲",
+    "videoUrl": "https://ivod.ly.gov.tw/Play/Clip/1M/167234",
+    "rank": 36,
+    "name": "拼多多軍購島",
+    "descriptionTitle": "以拼多多與淘寶挖苦在野軍購條例",
+    "eventId": "meeting-20260126-temu-defense-bill",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "drunk-driving-politician-retort-facebook-20130126",
+    "date": "2013-01-26",
+    "quote": "我比較贊成腦殘政客羈押耶！",
+    "fact": "依puwa收錄的Facebook原貼，他用「腦殘政客羈押」挖苦馬英九。",
+    "context": "貼文回應酒駕預防性羈押議題，並仿寫新聞語句，把管制措辭反套到政治人物身上。",
+    "commentary": "用政策語言反過來嘲諷政客，是鮮明但尖刻的修辭。",
+    "limit": "本輪未直接驗證Facebook原貼；這是書面諷刺，不代表支持酒駕。後面的仿寫不能當成馬英九真實引言。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "drunk-driving-politician-retort-facebook-20130126",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.facebook.com/pumashen/posts/130169653817896",
+      "label": "Facebook原貼（puwa提供，本輪未直接驗證）"
+    },
+    "verification": "依puwa資料整理；本輪未獨立核原始出處或原聲",
+    "rank": 37,
+    "region": "rhetoric",
+    "name": "政客羈押島",
+    "title": "政客羈押島",
+    "descriptionTitle": "談酒駕預防性羈押時挖苦馬英九",
+    "eventId": "facebook-pumashen-130169653817896",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。"
+  },
+  {
+    "id": "semiconductor-chang-us-training-history-tiktok-7695493492398673160",
+    "date": "日期待核",
+    "quote": "把一群人送到美國，學半導體的製造，有張忠謀",
+    "fact": "依puwa整理的轉載字幕，影片把張忠謀列入赴美學習半導體製造的敘事。",
+    "context": "puwa另附工研院史料：1976年赴RCA受訓名單與張忠謀1985年來台任院長，是不同歷史段落。",
+    "commentary": "產業故事中的人物與年代，值得逐一對照原始史料。",
+    "limit": "本輪未獨立核影片原聲；發言日期及完整原活動待核。原句沒有說RCA或十九人，不能替他加上這些話。",
+    "source": {
+      "label": "puwa｜國會紀錄觀測・原話檔案",
+      "url": "https://puwa.taipei/#statements",
+      "recordId": "semiconductor-chang-us-training-history-tiktok-7695493492398673160",
+      "dataUrl": "https://puwa.taipei/data/quotes-v41.json"
+    },
+    "primary": {
+      "url": "https://www.tiktok.com/@ankexin11/video/7695493492398673160",
+      "label": "第三方轉載影片（日期待核，未獨立核原聲）"
+    },
+    "verification": "僅據puwa轉載字幕與語音辨識核對報告；本輪未獨立核影片",
+    "videoUrl": "https://www.tiktok.com/@ankexin11/video/7695493492398673160",
+    "rank": 38,
+    "region": "media",
+    "name": "張忠謀赴美島",
+    "title": "張忠謀赴美島",
+    "descriptionTitle": "談赴美學習半導體製造時列入張忠謀",
+    "eventId": "semiconductor-history-tiktok-7695493492398673160",
+    "sourceAttribution": "據puwa現行精選整理；評論為本站觀點。",
+    "pending": true,
+    "supportingSources": [
+      {
+        "label": "工研院歷史資料（puwa附列）",
+        "url": "https://50th.itri.org.tw/history/origin/46/"
+      },
+      {
+        "label": "工研院歷史資料（puwa附列）",
+        "url": "https://50th.itri.org.tw/history/semiconductors/1/"
+      },
+      {
+        "label": "工研院歷史資料（puwa附列）",
+        "url": "https://50th.itri.org.tw/leaders/"
+      },
+      {
+        "label": "工研院歷史資料（puwa附列）",
+        "url": "https://50th.itri.org.tw/history/semiconductors/2/"
+      }
+    ],
+    "subtitle": "發言日期待核｜轉載影片線索"
+  }
+]
