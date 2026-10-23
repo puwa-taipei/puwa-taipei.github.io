@@ -1,0 +1,29 @@
+/* Standalone village entry only. No global game/layout/typography rules. */
+.village-entry{margin:0 0 44px;min-width:0}
+.village-entry .village-entry-card{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr);align-items:center;gap:clamp(20px,4vw,46px);width:100%;min-width:0;padding:clamp(18px,3vw,30px);border:1px solid #bc8e73;border-radius:18px;background:linear-gradient(125deg,#213b3b,#263b35 62%,#384435);color:#edf1e8;text-decoration:none;overflow:hidden;transition:border-color .18s ease,box-shadow .18s ease}
+.village-entry .village-entry-card:hover{border-color:#f0b486;box-shadow:0 12px 34px #020d1844}
+.village-entry .village-entry-card:focus-visible{outline:3px solid #f0b486;outline-offset:5px}
+.village-entry .village-entry-copy{display:block;min-width:0}
+.village-entry .village-entry-kicker{display:block;margin:0 0 10px;font-size:13px;line-height:1.6;letter-spacing:.12em;color:#f0b486}
+.village-entry .village-entry-copy h2{margin:0 0 10px;font-size:clamp(28px,3.5vw,38px);line-height:1.25;letter-spacing:-.03em;color:#edf1e8;overflow-wrap:anywhere}
+.village-entry .village-entry-description{display:block;margin:0;font-size:17px;line-height:1.8;color:#c2d3c7;overflow-wrap:anywhere}
+.village-entry .village-entry-action{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-height:44px;margin-top:18px;padding:8px 17px;border-radius:999px;background:#f0b486;color:#203b33;font-size:16px;font-weight:750;line-height:1.5}
+.village-entry .village-entry-action>span{font-size:22px}
+.village-entry .village-entry-art{position:relative;display:block;min-width:0;height:180px;isolation:isolate}
+.village-entry .village-entry-sun{position:absolute;left:21%;top:2%;width:102px;height:102px;border-radius:50%;background:#e99d73;opacity:.9}
+.village-entry .village-entry-island{position:absolute;inset:44% 1% 0;border:1px solid #b2b99c;border-radius:50%;background:linear-gradient(145deg,#9aaa7a,#657c62);box-shadow:0 14px 0 -2px #152d2d;transform:rotate(-7deg)}
+.village-entry .village-entry-house{position:absolute;bottom:35%;width:43px;height:39px;border-radius:3px;background:#f0d2a5;box-shadow:inset -9px 0 #d6af83;transform:rotate(-5deg)}
+.village-entry .village-entry-house:before{content:'';position:absolute;top:-17px;left:-5px;width:0;height:0;border-left:27px solid transparent;border-right:27px solid transparent;border-bottom:23px solid #be6d56}
+.village-entry .village-entry-house-one{left:12%}
+.village-entry .village-entry-house-two{right:9%;bottom:32%;transform:scale(.8) rotate(8deg)}
+.village-entry .village-entry-bear{position:absolute;left:calc(50% - 31px);top:39%;width:62px;height:53px;border-radius:24px 24px 20px 20px;background:#bd5d50;box-shadow:inset -9px -4px #9e4b43}
+.village-entry .village-entry-bear:before,.village-entry .village-entry-bear:after{content:'';position:absolute;top:-12px;width:24px;height:24px;border:6px solid #bd5d50;border-radius:50%;background:#eab58a;z-index:-1}
+.village-entry .village-entry-bear:before{left:0}
+.village-entry .village-entry-bear:after{right:0}
+.village-entry .village-entry-bear>span{position:absolute;left:19px;top:27px;width:26px;height:18px;border-radius:50%;background:#f0d2a5}
+.village-entry .village-entry-bear>span:before{content:'';position:absolute;left:9px;top:3px;width:8px;height:6px;border-radius:50%;background:#24362f;box-shadow:-12px -10px 0 -1px #24362f,12px -10px 0 -1px #24362f}
+.village-entry .village-entry-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:#eac9a1}
+.village-entry .village-entry-dot-one{right:12%;top:15%}
+.village-entry .village-entry-dot-two{left:8%;top:34%;width:4px;height:4px}
+@media(max-width:600px){.village-entry{margin-bottom:32px}.village-entry .village-entry-card{grid-template-columns:minmax(0,1fr);gap:20px;padding:18px}.village-entry .village-entry-art{height:145px;max-width:340px;width:100%;margin:0 auto}.village-entry .village-entry-description{font-size:16px}.village-entry .village-entry-copy h2{font-size:28px}.village-entry .village-entry-action{margin-top:15px}}
+@media(prefers-reduced-motion:reduce){.village-entry .village-entry-card{transition:none}}
