@@ -1,18 +1,18 @@
 {
-  "release": "red-bear-village-v6-2026-10-23",
+  "release": "red-bear-village-v7-2026-10-24",
   "target_path": "/village/",
   "entrypoint": "index.html",
   "file_count": 13,
   "files": [
     {
       "path": "NOTICE.txt",
-      "bytes": 2956,
-      "sha256": "cfea1f36283daa940c05aa873059c180bbbd0de09b77c036911efdf0fe743b6b"
+      "bytes": 3652,
+      "sha256": "9332991436b811a83523003b0a4020a258d1807c1e98c9053b808402fa674897"
     },
     {
       "path": "app.js",
-      "bytes": 31150,
-      "sha256": "ccbf31c7f4c9e040de048d9020be1750d31bf17d4efaca88fc2fc75dc20da38b"
+      "bytes": 33647,
+      "sha256": "620986ca585662a767121b3abd487bc94c132e30ffb40db7abbd8f44f4f47e96"
     },
     {
       "path": "banknotes.js",
@@ -26,8 +26,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 10141,
-      "sha256": "5a9444d1ef4ea4e25db8d9ba64bf623e329123739bf3f80e626a75427742b03f"
+      "bytes": 10261,
+      "sha256": "4975362ae4405a20106546e3c44b1f8c56bb838807e2aa18732fb6e8903810d7"
     },
     {
       "path": "island-interactions.js",
