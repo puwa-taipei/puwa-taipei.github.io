@@ -154,3 +154,14 @@ dialog h3{font-size:19px}.toast{font-size:15px}
   .brand strong{font-size:18px;letter-spacing:1.5px}
   .masthead nav{gap:0}.header-button{font-size:12px;gap:3px;white-space:nowrap}
 }
+
+/* v45: share the island from the quote, without scrolling to the source footer. */
+.record-quote-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;margin:15px 0 17px}
+.record-quote-header blockquote{margin:0;min-width:0;overflow-wrap:anywhere}
+.share-record.share-record-inline{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;margin:0;padding:10px;border:1px solid #b9bba9;border-radius:10px;background:#e4ded1;color:#8f4333;font-size:14px;font-weight:600;line-height:1.2;white-space:nowrap}
+.share-record-inline .icon{width:18px;height:18px;flex-shrink:0}
+.share-record-inline:hover{background:#d8c8b8;border-color:#a65c43}
+.share-record-inline:active{background:#cfb6a2}
+.share-record-inline:disabled{opacity:.65;cursor:wait}
+@media(max-width:760px){.record-quote-header{gap:10px}.share-record.share-record-inline{padding:10px}.share-record-inline .share-label{display:none}}
+@media(max-width:360px){.record-quote-header{gap:8px}.share-record.share-record-inline{padding:10px}.share-record-inline .share-label{display:none}}
