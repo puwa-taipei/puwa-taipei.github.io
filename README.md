@@ -135,6 +135,23 @@ CSV 的 `currentQuizEligible` 表示本期 36 則題庫，`currentQuizRank` 為�
 
 村落以台灣繁體中文、可鍵盤閱讀、可追溯來源與減少不必要的資料傳送作為介面原則。原話、前後文、核對限制與本站諷刺評論分開呈現；來源名稱與引用原文保留原樣。
 
-38 座島各有固定的 `/v/01.html` 至 `/v/38.html` 分享頁和語錄封面。系統分享提供固定網址、標題與原話摘句；裝置支援時開啟系統分享，其餘情況提供複製網址，使用者也能直接複製。村落不附加圖片檔案，不新增帳號、追蹤碼或遠端資料寫入。
+38 座島各有固定的 `/v/01.html` 至 `/v/38.html` 分享頁和語錄封面。系統分享提供固定網址、標題與原話摘句；裝置支援時開啟系統分享，其餘情況提供複製網址，使用者也能直接複製。v45 當時的村落不附加圖片檔案，也未新增帳號、追蹤碼或遠端資料寫入；v46 的分析設定見下節。
 
 已知程式、設計參考、字型、分享圖與引文的來源分界見 [村落 NOTICE](village/NOTICE.txt)。Three.js r170 保留完整 MIT 授權；Noto 字型的 OFL 適用於字型軟體。村落自訂程式沿用同一使用者交付的 v4 並持續維護，這份來源說明不作全網原創性認證，也不替第三方引文、媒體或未另行授權的素材新增概括授權。`game/dialogue/LICENSE` 仍維持自身目錄的原有範圍。前述版本章節保留各期狀態。
+
+## v46 假面紅熊村：沿用主站 GA 的瀏覽與互動統計
+
+村落入口與 38 個固定短頁沿用主站的 GA4 資料串流。每次實際載入文件只記一次 `page_view`；在同頁切換島嶼以獨立事件記錄，不灌成額外網頁瀏覽。有效參與時間使用 GA 自動的前景／焦點計量，不另外累加計時事件。
+
+| 事件 | 固定參數 | 計數範圍 |
+| --- | --- | --- |
+| `village_island_open` | `island_code`、`open_method` | 主動打開紀錄或由短連結直接進入；自動導覽不計入；同一已開紀錄重複點擊不重計 |
+| `village_share_click` | `island_code` | 接受的分享操作，重複忙碌點擊不重計 |
+| `village_share_result` | `island_code`、`share_result` | `native` 系統分享回應、`copied` 已複製、`manual` 手動複製提示、`cancelled` 取消；不代表朋友已收件 |
+| `village_source_click` | `island_code`、`source_kind` | 原始紀錄、影音、回應、補充來源或檔案入口的左鍵／鍵盤與滑鼠中鍵開啟 |
+
+`island_code` 只使用 `island_01` 至 `island_38`；分享村落入口使用 `village`。`open_method` 只使用 `map`、`list`、`relation`、`overview`、`direct`、`tour_read`。`source_kind` 只使用 `primary`、`video`、`response`、`supporting`、`archive`。不傳送搜尋字詞、玩家暱稱、投稿或聯絡資料、來源完整網址、查詢參數及雜湊內容。Google Analytics 使用第一方分析 Cookie；不宣稱完全匿名。
+
+GA「網頁與畫面」可依 `/village/`、`/v/01.html` 至 `/v/38.html` 篩選實際載入的瀏覽與參與時間。「即時」可檢查事件是否進入；按島與操作細分的正式報表，需要在同一資源登錄事件範圍的 `island_code`、`open_method`、`source_kind`、`share_result` 自訂維度，資料處理通常需 24–48 小時。島號對照保留於 `village/island-share-map.json`。過去未記錄的村落造訪不回填。
+
+沿用既有的 HTTPS 主機與頁面白名單、移除網址查詢與雜湊、DNT／GPC／明確停用分析、停用廣告個人化與跨站串聯設定。主站、遊戲、投稿與私密審核頁的原有路由範圍保持不變；私密備份網域不載入 GA。介面「關於這座村」及 `village/NOTICE.txt` 同步說明分析用途與限制。
