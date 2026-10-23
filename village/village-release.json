@@ -1,13 +1,18 @@
 {
-  "release": "red-bear-village-v5-2026-10-23",
+  "release": "red-bear-village-v6-2026-10-23",
   "target_path": "/village/",
   "entrypoint": "index.html",
-  "file_count": 12,
+  "file_count": 13,
   "files": [
     {
+      "path": "NOTICE.txt",
+      "bytes": 2956,
+      "sha256": "cfea1f36283daa940c05aa873059c180bbbd0de09b77c036911efdf0fe743b6b"
+    },
+    {
       "path": "app.js",
-      "bytes": 29280,
-      "sha256": "2635c39823a91b0698f44154e1be618b37393f4b6812d32f5c17ea9c75a2d6f7"
+      "bytes": 31150,
+      "sha256": "ccbf31c7f4c9e040de048d9020be1750d31bf17d4efaca88fc2fc75dc20da38b"
     },
     {
       "path": "banknotes.js",
@@ -22,7 +27,7 @@
     {
       "path": "index.html",
       "bytes": 10141,
-      "sha256": "12d60db2d57d47d4248dd44338d90fda7cd8895fc847e1fb2ebe094af2315476"
+      "sha256": "5a9444d1ef4ea4e25db8d9ba64bf623e329123739bf3f80e626a75427742b03f"
     },
     {
       "path": "island-interactions.js",
@@ -51,8 +56,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 34544,
-      "sha256": "0ebc1d49c2e05d3e1fadd1812698fd10af222a6ba6baa7582f57ec7b46328e89"
+      "bytes": 35664,
+      "sha256": "bf299a32ca22527a6632a050d833823157c5e02c637bb3b1c7ddb5c466243d73"
     },
     {
       "path": "vendor/THREE-LICENSE.txt",
@@ -72,5 +77,6 @@
     "islands": 38,
     "page_and_image_files": 76,
     "static_og": true
-  }
+  },
+  "rights_notice": "NOTICE.txt"
 }
