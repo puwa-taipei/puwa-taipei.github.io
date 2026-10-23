@@ -1,0 +1,59 @@
+{
+  "release": "red-bear-village-v4-2026-10-23",
+  "target_path": "/village/",
+  "entrypoint": "index.html",
+  "file_count": 10,
+  "files": [
+    {
+      "path": "app.js",
+      "sha256": "8114dda6d67916ebbf494c2c48b77984b5425790ff9cd5125df76a10a714b776",
+      "bytes": 26881
+    },
+    {
+      "path": "banknotes.js",
+      "sha256": "092117fae42286bce3f50ccf7c23c7cc677d4c34ae2ee9f05c33df6b63cb6b0e",
+      "bytes": 10935
+    },
+    {
+      "path": "favicon.svg",
+      "sha256": "d9ef1215e27c37f654981eabfc96db34656c55a550cd50f66ff67e764a432df5",
+      "bytes": 358
+    },
+    {
+      "path": "index.html",
+      "sha256": "fce39b7e8896a92b4a6e733ad265bb1f770b00c6c0f3980ab6898a6188621034",
+      "bytes": 8857
+    },
+    {
+      "path": "island-interactions.js",
+      "sha256": "6d6f5046207a961b2e210b2cc7b4088b18e5d9a9c71191dd3332e1cf63eff939",
+      "bytes": 16841
+    },
+    {
+      "path": "records.json",
+      "sha256": "6bd286bc29a4d97e9a89429f871ed0fe3ec2cdd39b4e6b9b769b4e45bb95ddd3",
+      "bytes": 55508
+    },
+    {
+      "path": "scene.js",
+      "sha256": "0e353de85dec8d7b0971684575b5f09027cf19865241ea3f344d86e995cf09a7",
+      "bytes": 58119
+    },
+    {
+      "path": "style.css",
+      "sha256": "753478f0f1f928623b1b7418c61bc2b40ccc81775f9ed3afbf12f04a8cb49263",
+      "bytes": 28726
+    },
+    {
+      "path": "vendor/THREE-LICENSE.txt",
+      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
+      "bytes": 1081
+    },
+    {
+      "path": "vendor/three.module.js",
+      "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+      "bytes": 1314681
+    }
+  ],
+  "routing": "Redirect /village to /village/; serve all listed assets under /village/ before any root fallback."
+}
