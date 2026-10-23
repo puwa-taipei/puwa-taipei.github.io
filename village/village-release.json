@@ -1,64 +1,76 @@
 {
-  "release": "red-bear-village-v4-2026-10-23",
+  "release": "red-bear-village-v5-2026-10-23",
   "target_path": "/village/",
   "entrypoint": "index.html",
-  "file_count": 11,
+  "file_count": 12,
   "files": [
     {
       "path": "app.js",
-      "sha256": "8114dda6d67916ebbf494c2c48b77984b5425790ff9cd5125df76a10a714b776",
-      "bytes": 26881
+      "bytes": 29280,
+      "sha256": "2635c39823a91b0698f44154e1be618b37393f4b6812d32f5c17ea9c75a2d6f7"
     },
     {
       "path": "banknotes.js",
-      "sha256": "092117fae42286bce3f50ccf7c23c7cc677d4c34ae2ee9f05c33df6b63cb6b0e",
-      "bytes": 10935
+      "bytes": 10935,
+      "sha256": "092117fae42286bce3f50ccf7c23c7cc677d4c34ae2ee9f05c33df6b63cb6b0e"
     },
     {
       "path": "favicon.svg",
-      "sha256": "d9ef1215e27c37f654981eabfc96db34656c55a550cd50f66ff67e764a432df5",
-      "bytes": 358
+      "bytes": 358,
+      "sha256": "d9ef1215e27c37f654981eabfc96db34656c55a550cd50f66ff67e764a432df5"
     },
     {
       "path": "index.html",
-      "sha256": "ef5221c13fb2b22380c7945904bbd33968b0c91599cce0b1508908ac826bdde9",
-      "bytes": 10103
+      "bytes": 10141,
+      "sha256": "12d60db2d57d47d4248dd44338d90fda7cd8895fc847e1fb2ebe094af2315476"
     },
     {
       "path": "island-interactions.js",
-      "sha256": "6d6f5046207a961b2e210b2cc7b4088b18e5d9a9c71191dd3332e1cf63eff939",
-      "bytes": 16841
+      "bytes": 16841,
+      "sha256": "6d6f5046207a961b2e210b2cc7b4088b18e5d9a9c71191dd3332e1cf63eff939"
     },
     {
-      "path": "records.json",
-      "sha256": "6bd286bc29a4d97e9a89429f871ed0fe3ec2cdd39b4e6b9b769b4e45bb95ddd3",
-      "bytes": 55508
-    },
-    {
-      "path": "scene.js",
-      "sha256": "0e353de85dec8d7b0971684575b5f09027cf19865241ea3f344d86e995cf09a7",
-      "bytes": 58119
-    },
-    {
-      "path": "style.css",
-      "sha256": "753478f0f1f928623b1b7418c61bc2b40ccc81775f9ed3afbf12f04a8cb49263",
-      "bytes": 28726
-    },
-    {
-      "path": "vendor/THREE-LICENSE.txt",
-      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454",
-      "bytes": 1081
-    },
-    {
-      "path": "vendor/three.module.js",
-      "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
-      "bytes": 1314681
+      "path": "island-share-map.json",
+      "bytes": 5421,
+      "sha256": "6cc20dc49aee6a56dd631a374e95fbec891dff970109ba562d4650b0d31d2553"
     },
     {
       "path": "og-village-v43.jpg",
-      "sha256": "b43dffc3e7e7b10f85bc625890c5b4cc551e7d04dcda1ed2e13eb728fc137140",
-      "bytes": 56770
+      "bytes": 56770,
+      "sha256": "b43dffc3e7e7b10f85bc625890c5b4cc551e7d04dcda1ed2e13eb728fc137140"
+    },
+    {
+      "path": "records.json",
+      "bytes": 55508,
+      "sha256": "6bd286bc29a4d97e9a89429f871ed0fe3ec2cdd39b4e6b9b769b4e45bb95ddd3"
+    },
+    {
+      "path": "scene.js",
+      "bytes": 58238,
+      "sha256": "feb7b695725030ec320cbf81eec7014f40407853c0322ad1662d2c08164de2e2"
+    },
+    {
+      "path": "style.css",
+      "bytes": 34544,
+      "sha256": "0ebc1d49c2e05d3e1fadd1812698fd10af222a6ba6baa7582f57ec7b46328e89"
+    },
+    {
+      "path": "vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 1314681,
+      "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb"
     }
   ],
-  "routing": "Redirect /village to /village/; serve all listed assets under /village/ before any root fallback."
+  "routing": "Redirect /village to /village/; serve all listed assets under /village/ before any root fallback.",
+  "island_shares": {
+    "mapping": "island-share-map.json",
+    "route_prefix": "/v/",
+    "islands": 38,
+    "page_and_image_files": 76,
+    "static_og": true
+  }
 }

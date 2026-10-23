@@ -172,7 +172,7 @@ export function createVillage(container, { onSelect = () => {}, onReady = () => 
 
   function makeBear(parent, scale = 1, variation = 0) {
     const g = new THREE.Group(); parent.add(g); g.scale.setScalar(scale);
-    const shell = mat(0xe9c8b9, { transparent: true, opacity: .13, roughness: .27, metalness: .08, depthWrite: false });
+    const shell = mat(0xe9c8b9, { transparent: true, opacity: .22, roughness: .27, metalness: .08, depthWrite: false });
     const limbShell = mat(0xc78d7c, { transparent: true, opacity: .62, roughness: .48, depthWrite: false });
     const innerMat = mat(0xa9231b, { roughness: .5, transparent: true });
     const bloodMat = mat(0xff2318, { emissive:0xd51108, emissiveIntensity:.65, metalness: .02, roughness: .24, transparent: true, opacity:.9, depthWrite:false });
@@ -569,7 +569,8 @@ export function createVillage(container, { onSelect = () => {}, onReady = () => 
   let width=1,height=1,frame=0,disposed=false,paused=false,birdView=false,selectedId=null,hoveredId=null;
   let targetMode=0,modeBlend=0,following=false;
   let azimuth=.38,targetAzimuth=.38,polar=.90,targetPolar=.90;
-  let zoomRatio=1,targetZoom=1;
+  function defaultZoom(){return container.clientWidth<600?.88:.92;}
+  let zoomRatio=defaultZoom(),targetZoom=zoomRatio;
   const targetPoint=new THREE.Vector3(0,1.45,0),lookPoint=targetPoint.clone();
   const tempPosition=new THREE.Vector3();
   const projected=new THREE.Vector3();
@@ -587,7 +588,7 @@ export function createVillage(container, { onSelect = () => {}, onReady = () => 
   }
   function updateCamera() {
     const aspect=width/height;
-    // Fit the complete village without cutting off the rear islands on narrow screens.
+    // Start closer on phones; full orbit, zoom and island focus remain available.
     const extent=28.6;
     const viewHeight=(aspect<.8?extent/aspect:aspect<1.25?(extent+.2)/aspect:extent*.81)*zoomRatio;
     camera.left=-viewHeight*aspect/2;camera.right=viewHeight*aspect/2;
@@ -665,7 +666,7 @@ export function createVillage(container, { onSelect = () => {}, onReady = () => 
     if(Math.abs(modeBlend-lastMode)>.0005){
       noteKit.materials.forEach(m=>{m.opacity=1-modeBlend;m.depthWrite=false;});
       for(const b of bears){
-        b.shell.color.copy(xrayColor).lerp(maskColor,modeBlend);b.shell.opacity=.13+.87*modeBlend;
+        b.shell.color.copy(xrayColor).lerp(maskColor,modeBlend);b.shell.opacity=.22+.78*modeBlend;
         b.limbShell.color.copy(limbXray).lerp(limbMask,modeBlend);b.limbShell.opacity=.62+.38*modeBlend;
         b.innerMat.opacity=1-modeBlend;b.bloodMat.opacity=.9*(1-modeBlend);b.internals.visible=modeBlend<.99;
         b.head.rotation.x=-.18+.215*modeBlend;b.head.rotation.z=-.055+.080*modeBlend;
@@ -778,15 +779,15 @@ export function createVillage(container, { onSelect = () => {}, onReady = () => 
       selectedId=islands.some(i=>i.id===id)?id:null;
       islands.forEach(i=>{i.label.classList.toggle('is-selected',i.id===selectedId);i.label.setAttribute('aria-pressed',String(i.id===selectedId));});
       if(selectedId){const island=islands.find(i=>i.id===selectedId);targetPoint.copy(island.group.position);targetPoint.y=1;targetZoom=width<600?.36:.4;}
-      else {targetPoint.set(0,1.05,0);targetZoom=1;}
+      else {targetPoint.set(0,1.05,0);targetZoom=defaultZoom();}
     },
     setBirdView(enabled){birdView=Boolean(enabled);targetPolar=birdView?.24:.90;},
     setConnections(enabled){connections.visible=Boolean(enabled);},
     setPaused(enabled){paused=Boolean(enabled);},
     setTimeOfDay(time){setLighting(time);},
-    setFollowing(enabled){const wasFollowing=following;following=Boolean(enabled);if(following){selectedId=null;targetAzimuth=mainBear.rotation.y+.3;}else if(wasFollowing){targetPoint.set(0,1.45,0);targetZoom=1;}},
+    setFollowing(enabled){const wasFollowing=following;following=Boolean(enabled);if(following){selectedId=null;targetAzimuth=mainBear.rotation.y+.3;}else if(wasFollowing){targetPoint.set(0,1.45,0);targetZoom=defaultZoom();}},
     zoom(delta){targetZoom=THREE.MathUtils.clamp(targetZoom*Math.exp(-delta*.15),.36,1.65);},
-    reset(){following=false;selectedId=null;targetPoint.set(0,1.05,0);targetAzimuth=.38;targetPolar=.9;targetZoom=1;birdView=false;islands.forEach(i=>{i.label.classList.remove('is-selected');i.label.setAttribute('aria-pressed','false');});},
+    reset(){following=false;selectedId=null;targetPoint.set(0,1.05,0);targetAzimuth=.38;targetPolar=.9;targetZoom=defaultZoom();birdView=false;islands.forEach(i=>{i.label.classList.remove('is-selected');i.label.setAttribute('aria-pressed','false');});},
     destroy(){
       if(disposed)return;disposed=true;islandInteractions.destroy();resolveDeparture?.();resolveSettled?.();cancelAnimationFrame(frame);resizeObserver.disconnect();
       events.forEach(([name,fn])=>canvas.removeEventListener(name,fn));
