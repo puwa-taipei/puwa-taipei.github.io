@@ -2,7 +2,7 @@
   "release": "red-bear-village-v4-2026-10-23",
   "target_path": "/village/",
   "entrypoint": "index.html",
-  "file_count": 10,
+  "file_count": 11,
   "files": [
     {
       "path": "app.js",
@@ -21,8 +21,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "fce39b7e8896a92b4a6e733ad265bb1f770b00c6c0f3980ab6898a6188621034",
-      "bytes": 8857
+      "sha256": "ef5221c13fb2b22380c7945904bbd33968b0c91599cce0b1508908ac826bdde9",
+      "bytes": 10103
     },
     {
       "path": "island-interactions.js",
@@ -53,6 +53,11 @@
       "path": "vendor/three.module.js",
       "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
       "bytes": 1314681
+    },
+    {
+      "path": "og-village-v43.jpg",
+      "sha256": "b43dffc3e7e7b10f85bc625890c5b4cc551e7d04dcda1ed2e13eb728fc137140",
+      "bytes": 56770
     }
   ],
   "routing": "Redirect /village to /village/; serve all listed assets under /village/ before any root fallback."

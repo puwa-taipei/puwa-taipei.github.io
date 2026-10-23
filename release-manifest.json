@@ -1,5 +1,5 @@
 {
-  "version": "public-release-v42",
+  "version": "public-release-v43",
   "date": "2026-10-23",
   "files": [
     {
@@ -549,13 +549,18 @@
     },
     {
       "path": "village/index.html",
-      "bytes": 8857,
-      "sha256": "fce39b7e8896a92b4a6e733ad265bb1f770b00c6c0f3980ab6898a6188621034"
+      "bytes": 10103,
+      "sha256": "ef5221c13fb2b22380c7945904bbd33968b0c91599cce0b1508908ac826bdde9"
     },
     {
       "path": "village/island-interactions.js",
       "bytes": 16841,
       "sha256": "6d6f5046207a961b2e210b2cc7b4088b18e5d9a9c71191dd3332e1cf63eff939"
+    },
+    {
+      "path": "village/og-village-v43.jpg",
+      "bytes": 56770,
+      "sha256": "b43dffc3e7e7b10f85bc625890c5b4cc551e7d04dcda1ed2e13eb728fc137140"
     },
     {
       "path": "village/records.json",
@@ -584,8 +589,8 @@
     },
     {
       "path": "village/village-release.json",
-      "bytes": 1755,
-      "sha256": "7af0ee6862b51550b80c8e51d957615a003bbe467be38c3bf07da344e9b636d6"
+      "bytes": 1974,
+      "sha256": "8356c7c357e08f7e75c7ed22513058c4ed3301162ec53c0c63471e4ba2b67fda"
     }
   ],
   "manifestSelfExcluded": true,
@@ -703,11 +708,15 @@
     "targetPath": "/village/",
     "entrypoint": "village/index.html",
     "validationManifest": "village/village-release.json",
-    "fileCount": 10,
+    "fileCount": 11,
     "payloadFilesByteExact": false,
     "catalogIntegration": "independent-entry-not-in-shared-catalog",
     "derivedAssetPaths": [
-      "village/style.css"
+      "village/style.css",
+      "village/index.html"
+    ],
+    "addedAssetPaths": [
+      "village/og-village-v43.jpg"
     ]
   }
 }
